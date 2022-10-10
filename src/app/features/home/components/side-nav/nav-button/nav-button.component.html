@@ -1,0 +1,13 @@
+<div
+  class="btn noselect"
+  [routerLink]="[path]"
+  [routerLinkActive]="'btn-active'"
+  [routerLinkActiveOptions]="{ exact: true }"
+  #router="routerLinkActive"
+>
+  <div *ngIf="router.isActive" class="strip"></div>
+  <div style="width: 24px"></div>
+  <mat-icon aria-hidden="false" aria-label="Menu item" fontIcon="lens" class="icon"></mat-icon>
+  <div style="width: 8px"></div>
+  Menu item
+</div>

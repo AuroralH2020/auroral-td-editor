@@ -1,0 +1,13 @@
+<mat-sidenav-container class="drawer-container" hasBackdrop="false">
+  <mat-sidenav #drawer fixedInViewport="true" mode="side" opened="true" class="drawer">
+    <app-logo></app-logo>
+    <div style="height: 24px"></div>
+    <app-nav-button path="item-1"></app-nav-button>
+    <app-nav-button path="item-2"></app-nav-button>
+    <app-nav-button path="item-3"></app-nav-button>
+    <app-nav-button path="item-4"></app-nav-button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
