@@ -9,6 +9,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { AppComponent } from './app.component';
     CoreModule,
     HttpClientModule,
     LoadingBarRouterModule,
+    FontAwesomeModule,
   ],
   providers: [
     { provide: 'BASE_URL', useValue: environment.baseurl },

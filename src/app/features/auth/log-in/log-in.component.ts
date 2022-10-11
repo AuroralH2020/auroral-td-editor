@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { faFilm } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogInComponent implements OnInit {
 
-  constructor() { }
+  filmIcon = faFilm;
+
+  constructor() {
+    return;
+  }
 
   ngOnInit(): void {
+    return;
   }
 
 }
