@@ -1,0 +1,7 @@
+// @use  '../styles/shared/mixins' as *;
+@import "styles";
+
+.test {
+    @include icon-size(20px);
+    // background-color: $test;
+  }

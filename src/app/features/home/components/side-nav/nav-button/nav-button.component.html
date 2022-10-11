@@ -1,13 +1,19 @@
 <div
-  class="btn noselect"
+  class="btn w-44 h-12 flex items-center cursor-pointer opacity-60 font-normal text-secondary-50 select-none hover:opacity-100 hover:bg-primary-400"
   [routerLink]="[path]"
-  [routerLinkActive]="'btn-active'"
+  [routerLinkActive]="'opacity-100 bg-primary-400'"
   [routerLinkActiveOptions]="{ exact: true }"
   #router="routerLinkActive"
 >
-  <div *ngIf="router.isActive" class="strip"></div>
-  <div style="width: 24px"></div>
-  <mat-icon aria-hidden="false" aria-label="Menu item" fontIcon="lens" class="icon"></mat-icon>
-  <div style="width: 8px"></div>
-  Menu item
+  <div *ngIf="router.isActive" class="w-1 h-12 bg-secondary-500 strip"></div>
+  <div class="flex">
+    <div style="width: 24px"></div>
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Menu item"
+      fontIcon="lens"
+    ></mat-icon>
+    <div style="width: 8px"></div>
+    <div class="flex items-center">Menu item</div>
+  </div>
 </div>

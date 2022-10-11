@@ -16,7 +16,7 @@ export class AppComponent implements OnDestroy {
     // app component broadasting
     this._broadcatser.broadcast('mykey', 'myvalue');
     //set dummy token just to enable auth guard for after-login module
-    localStorage.setItem('token', 'dummy');
+    // localStorage.setItem('token', 'dummy');
 
     /**
      * do this in other page, for e.g I'm doing here only

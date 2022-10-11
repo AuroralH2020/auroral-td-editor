@@ -1,5 +1,11 @@
-<mat-sidenav-container class="drawer-container" hasBackdrop="false">
-  <mat-sidenav #drawer fixedInViewport="true" mode="side" opened="true" class="drawer">
+<mat-sidenav-container class="bg-primary-50" hasBackdrop="false">
+  <mat-sidenav
+    #drawer
+    fixedInViewport="true"
+    mode="side"
+    opened="true"
+    class="bg-primary-500 w-44"
+  >
     <app-logo></app-logo>
     <div style="height: 24px"></div>
     <app-nav-button path="item-1"></app-nav-button>
@@ -8,6 +14,8 @@
     <app-nav-button path="item-4"></app-nav-button>
   </mat-sidenav>
   <mat-sidenav-content>
-    <ng-content></ng-content>
+    <div class="h-screen">
+      <ng-content></ng-content>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
