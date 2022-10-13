@@ -1,0 +1,16 @@
+<button
+  mat-button
+  [ngClass]="type"
+  [color]="theme"
+  [class]="size"
+  [disabled]="disabled || loading"
+  [type]="actionType"
+>
+  <div
+    *ngIf="loading; else elseBlock"
+    class="flex justify-center items-center opacity-60"
+  >
+    <mat-spinner [color]="theme" diameter="24"></mat-spinner>
+  </div>
+  <ng-template #elseBlock>{{ text }}</ng-template>
+</button>

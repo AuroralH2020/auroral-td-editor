@@ -1,28 +1,25 @@
-import { AuthToken, UserDetail } from '@core/models/auth.model';
+import { AuthTokens, UserLoginDetail } from '@core/models/user.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { CONSTANTS } from './constants';
 import { Injectable } from '@angular/core';
+import { CONSTANTS } from '../constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
-  login(userdetails: UserDetail) {
-    const body = new HttpParams()
-      .set(CONSTANTS.USERNAME, userdetails.username)
-      .set(CONSTANTS.PASSWORD, userdetails.password);
-
-    return this._http.post<AuthToken>('<login_URL>', body.toString(), {
+  login(userdetails: UserLoginDetail) {
+    const body = new HttpParams({ fromObject: { ...userdetails } });
+    return this._http.post<AuthTokens>('/users/login', body.toString(), {
       headers: this.headers,
     });
   }
 
   logout() {
     const body = new HttpParams().set(CONSTANTS.REFRESH_TOKEN, this.getRefreshToken()!);
-    this._http.post('<logout_URL>', body.toString(), { headers: this.headers }).subscribe({
+    this._http.post('/users/logout', body.toString(), { headers: this.headers }).subscribe({
       next: () => window.location.reload(),
       complete: () => {
         localStorage.clear();
@@ -38,9 +35,9 @@ export class AuthService {
     return this.getToken() ? true : false;
   }
 
-  storeToken(token: AuthToken) {
-    localStorage.setItem('token', token.access_token);
-    localStorage.setItem(CONSTANTS.REFRESH_TOKEN, token.refresh_token);
+  storeTokens(tokens: AuthTokens) {
+    localStorage.setItem('token', tokens.accessToken);
+    localStorage.setItem(CONSTANTS.REFRESH_TOKEN, tokens.refreshToken);
   }
 
   getToken() {
@@ -49,7 +46,7 @@ export class AuthService {
 
   refreshToken() {
     const body = new HttpParams().set(CONSTANTS.REFRESH_TOKEN, this.getRefreshToken()!);
-    return this._http.post<AuthToken>('<refresh_token_url>', body.toString(), {
+    return this._http.post<AuthTokens>('<refresh_token_url>', body.toString(), {
       headers: this.headers,
     });
   }

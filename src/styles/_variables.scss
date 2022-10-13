@@ -1,12 +1,4 @@
-$primary: #222526;
-$secondary: #535353;
-$turquoise: #5c888b;
-$success: #95c602;
-$danger: #ff1717;
-$yellow: #f2b619;
-$light: #ececec;
-$dark: #000;
-$grey: #3c3d44;
-$white: #fff;
+$primary: theme('colors.primary.500');
+$accent: theme('colors.secondary.500');
 
 $primary-font: 'Montserrat';

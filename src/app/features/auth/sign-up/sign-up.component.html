@@ -1,1 +1,60 @@
-<p>sign-up works!</p>
+<div
+  class="wrapper h-screen text-primary-500"
+  style="background-color: 'white'"
+>
+  <div class="pl-36 pr-6 pt-4">
+    <div class="flex justify-between">
+      <div class="mt-8">
+        <div class="text-lg tracking-widest font-bold text-primary-300 mb-4">
+          Create account
+        </div>
+        <div class="w-48">
+          Join our community and help
+          <app-auroral-hyperlink></app-auroral-hyperlink> grow.
+        </div>
+      </div>
+      <div class="w-32"></div>
+      <mat-icon class="icon text-secondary-500 opacity-20">person_add</mat-icon>
+    </div>
+    <div class="h-11"></div>
+    <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+      <div class="grid gap-0 grid-cols-1 text-center">
+        <app-form-field
+          label="Full name"
+          [leadingSpace]="true"
+        ></app-form-field>
+        <app-form-field
+          label="Email"
+          leadingIcon="alternate_email"
+        ></app-form-field>
+        <div class="h-4"></div>
+        <app-form-field
+          label="Password"
+          [isSecret]="true"
+          leadingIcon="lock"
+        ></app-form-field>
+        <app-form-field
+          label="Repeat password"
+          [isSecret]="true"
+          leadingIcon="lock"
+        ></app-form-field>
+        <div class="buttons-wrapper grid gap-0 grid-cols-1 text-center">
+          <app-button
+            text="Sign up"
+            type="mat-raised-button"
+            theme="accent"
+            size="large"
+            actionType="submit"
+            [loading]="loading"
+            class="pt-6 pb-2"
+          ></app-button>
+          <div>Already have an account?</div>
+          <app-hyperlink
+            text="Log in"
+            [routerLink]="['/auth/login']"
+          ></app-hyperlink>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

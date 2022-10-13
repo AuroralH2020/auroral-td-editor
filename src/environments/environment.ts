@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseurl: 'https://yourapiendpointhere.app',
+  baseurl: 'http://localhost:3000',
 };
 
 /*

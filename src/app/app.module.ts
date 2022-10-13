@@ -10,6 +10,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FakeBackendInterceptor } from '@core/services/fake-backend.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HTTPReqResInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: FakeBackendInterceptor,
       multi: true,
     },
   ],

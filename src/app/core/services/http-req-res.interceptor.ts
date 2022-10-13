@@ -8,12 +8,13 @@ import {
 } from '@angular/common/http';
 
 import { Inject, Injectable } from '@angular/core';
-import { AuthToken } from '@core/models/auth.model';
+import { AuthTokens } from '@core/models/user.model';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, finalize, switchMap, take, tap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
-import { BroadcasterService } from './broadcaster.service';
+import { AuthService } from './auth/auth.service';
+import { BroadcasterService } from './broadcaster/broadcaster.service';
 import { CONSTANTS } from './constants';
+import { SnackBarService } from './snack-bar/snack-bar.service';
 
 @Injectable()
 export class HTTPReqResInterceptor implements HttpInterceptor {
@@ -23,14 +24,16 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
   constructor(
     @Inject('BASE_URL') private _baseUrl: string,
     private _broadcaster: BroadcasterService,
-    private _authservice: AuthService
-  ) {}
+    private _authservice: AuthService,
+    private _snackBar: SnackBarService,
+  ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     this._broadcaster.broadcast(CONSTANTS.SHOW_LOADER, true);
     const newReq = req.clone({
       url: this._baseUrl + req.url,
-      headers: req.headers.set('custom_header', 'value'),
+      // headers: req.headers.set('custom_header', 'value'),
     });
 
     return next.handle(newReq).pipe(
@@ -50,22 +53,23 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
     if (err instanceof HttpErrorResponse && err.status === 401) {
       return this.handle401(newRequest, next);
     } else {
-      this._broadcaster.broadcast(CONSTANTS.ERROR, {
-        error: 'Something went wrong',
-        timeout: 5000,
-      });
+      this._snackBar.showError(err);
     }
-    return throwError(err);
+    return this.error(err);
   }
 
   handleSuccess(body: any) {
-    /* handle success actions here */
+    return body;
   }
 
-  addToken(request: HttpRequest<any>, newToken: AuthToken) {
+  addToken(request: HttpRequest<any>, newToken: AuthTokens) {
     return request.clone({
-      headers: request.headers.set(CONSTANTS.AUTH_HEADER, `Bearer ${newToken.access_token}`),
+      headers: request.headers.set(CONSTANTS.AUTH_HEADER, `Bearer ${newToken.accessToken}`),
     });
+  }
+
+  error(message: string) {
+    return throwError(() => message);
   }
 
   /* Refresh handler referred from https://www.intertech.com/angular-4-tutorial-handling-refresh-token-with-new-httpinterceptor/ */
@@ -76,20 +80,20 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
       // so that new subscribers don't trigger switchmap part and stay in queue till new token received
       this.tokenSubject.next(null);
       return this._authservice.refreshToken().pipe(
-        switchMap((newToken: AuthToken) => {
-          if (newToken) {
+        switchMap((newTokens: AuthTokens) => {
+          if (newTokens) {
             // update token store & publish new token, yay!!
-            this._authservice.storeToken(newToken);
-            this.tokenSubject.next(newToken);
-            return next.handle(this.addToken(request, newToken));
+            this._authservice.storeTokens(newTokens);
+            this.tokenSubject.next(newTokens);
+            return next.handle(this.addToken(request, newTokens));
           }
           // no new token received | something messed up
           this._authservice.logout();
-          return throwError('no refresh token found');
+          return this.error('no refresh token found');
         }),
         catchError((error) => {
           this._authservice.logout();
-          return throwError(error);
+          return this.error(error);
         }),
         finalize(() => (this.isalreadyRefreshing = false))
       );
@@ -101,9 +105,9 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
       }
       // new token ready subscribe -> every skipped request will be retried with fresh token
       return this.tokenSubject.pipe(
-        filter((token: AuthToken) => token != null),
+        filter((token: AuthTokens) => token != null),
         take(1), // complete the stream
-        switchMap((token: AuthToken) => {
+        switchMap((token: AuthTokens) => {
           return next.handle(this.addToken(request, token));
         })
       );

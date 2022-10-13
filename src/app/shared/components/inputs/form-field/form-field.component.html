@@ -1,6 +1,35 @@
-<mat-form-field appearance="fill">
-  <mat-label>Outline form field</mat-label>
-  <input matInput placeholder="Placeholder" />
-  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-  <mat-hint>Hint</mat-hint>
-</mat-form-field>
+<div class="flex items-start">
+  <div *ngIf="leadingIcon" class="leading-icon">
+    <mat-icon
+      class=" {{
+        focused
+          ? 'text-secondary-300 opacity-100'
+          : 'text-primary-500 opacity-60'
+      }}"
+    >
+      {{ leadingIcon }}
+    </mat-icon>
+  </div>
+  <div *ngIf="leadingSpace" class="w-12"></div>
+  <mat-form-field appearance="outline" class="form-field" [hidden]="visible">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      matInput
+      [placeholder]="placeholder ?? ''"
+      [type]="visible ? 'text' : 'password'"
+      [value]="value"
+      (change)="value = $any($event.target).value"
+      (focus)="setFocus(true)"
+      (blur)="setFocus(false)"
+    />
+    <mat-icon
+      *ngIf="isSecret"
+      class="text-primary-500 opacity-60 cursor-pointer"
+      (click)="toggleVisibility()"
+      matSuffix
+      >{{ visible ? "visibility_off" : "visibility" }}</mat-icon
+    >
+    <mat-hint *ngIf="hint"> {{ hint }}</mat-hint>
+    <ng-content></ng-content>
+  </mat-form-field>
+</div>
