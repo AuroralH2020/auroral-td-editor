@@ -12,7 +12,7 @@ export class AuthService {
 
   login(userdetails: UserLoginDetail) {
     const body = new HttpParams({ fromObject: { ...userdetails } });
-    return this._http.post<AuthTokens>('/users/login', body.toString(), {
+    return this._http.post<AuthTokens>('/api/ui/auth', body.toString(), {
       headers: this.headers,
     });
   }
