@@ -21,7 +21,7 @@ export class LogInComponent implements OnInit {
   protected form!: FormGroup;
   protected email: FormControl = new FormControl('', [
     Validators.required,
-    Validators.email
+    // Validators.email
   ]);
   protected password: FormControl = new FormControl('', [
     Validators.required,
