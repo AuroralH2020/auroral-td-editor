@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="6663783128602596673" datatype="html">
+        <source> Sign in </source>
+        <target> Prihlásenie </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/auth/log-in/log-in.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4049599258503089395" datatype="html">
+        <source> Log in to access all features of the <x id="START_TAG_APP_AURORAL_HYPERLINK" ctype="x-app_auroral_hyperlink" equiv-text="&lt;app-auroral-hyperlink&gt;"/><x id="CLOSE_TAG_APP_AURORAL_HYPERLINK" ctype="x-app_auroral_hyperlink" equiv-text="&lt;/app-auroral-hyperlink&gt;"/>. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/auth/log-in/log-in.component.html</context>
+          <context context-type="linenumber">13,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4491329095434259042" datatype="html">
+        <source>Don’t have an account?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/auth/log-in/log-in.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7504752777131062423" datatype="html">
+        <source> Create account </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/auth/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="549811416979663700" datatype="html">
+        <source> Join our community and help <x id="START_TAG_APP_AURORAL_HYPERLINK" ctype="x-app_auroral_hyperlink" equiv-text="&lt;app-auroral-hyperlink&gt;"/><x id="CLOSE_TAG_APP_AURORAL_HYPERLINK" ctype="x-app_auroral_hyperlink" equiv-text="grow."/> grow. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/auth/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">13,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5277739594710154939" datatype="html">
+        <source>Already have an account?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/auth/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ text }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/buttons/button/button.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/inputs/form-field/form-field.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/misc/hyperlink/hyperlink.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="466492426610382126" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ hint }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/inputs/form-field/form-field.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class NavButtonComponent implements OnInit {
 
   @Input() path: string = '';
-
-  public tmp: string = '';
+  @Input() name: string | undefined;
+  @Input() icon: string | undefined;
 
   constructor(protected router: Router) { }
 

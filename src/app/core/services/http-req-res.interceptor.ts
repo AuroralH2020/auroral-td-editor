@@ -10,8 +10,8 @@ import {
 import { Inject, Injectable } from '@angular/core';
 import { AuthTokens } from '@core/models/user.model';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, filter, finalize, switchMap, take, tap } from 'rxjs/operators';
-import { AuthService } from './auth/auth.service';
+import { catchError, filter, finalize, map, switchMap, take, tap } from 'rxjs/operators';
+import { UserService } from './user/user.service';
 import { BroadcasterService } from './broadcaster/broadcaster.service';
 import { CONSTANTS } from './constants';
 import { SnackBarService } from './snack-bar/snack-bar.service';
@@ -24,7 +24,7 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
   constructor(
     @Inject('BASE_URL') private _baseUrl: string,
     private _broadcaster: BroadcasterService,
-    private _authservice: AuthService,
+    private _user: UserService,
     private _snackBar: SnackBarService,
   ) { }
 
@@ -52,24 +52,28 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
   handleError(newRequest: HttpRequest<any>, next: HttpHandler, err: any) {
     if (err instanceof HttpErrorResponse && err.status === 401) {
       return this.handle401(newRequest, next);
-    } else {
-      this._snackBar.showError(err);
     }
     return this.error(err);
   }
 
   handleSuccess(body: any) {
-    return body;
+
   }
 
   addToken(request: HttpRequest<any>, newToken: AuthTokens) {
     return request.clone({
-      headers: request.headers.set(CONSTANTS.AUTH_HEADER, `Bearer ${newToken.accessToken}`),
+      headers: request.headers.set(CONSTANTS.AUTH_HEADER, `Bearer ${newToken.token}`),
     });
   }
 
-  error(message: string) {
-    return throwError(() => message);
+  error(err: any) {
+    if (err instanceof HttpErrorResponse) {
+      this._snackBar.showError(err.message)
+    } else {
+      this._snackBar.showError(err.toString())
+    }
+    console.error(err)
+    return throwError(() => err);
   }
 
   /* Refresh handler referred from https://www.intertech.com/angular-4-tutorial-handling-refresh-token-with-new-httpinterceptor/ */
@@ -79,20 +83,20 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
       this.isalreadyRefreshing = true;
       // so that new subscribers don't trigger switchmap part and stay in queue till new token received
       this.tokenSubject.next(null);
-      return this._authservice.refreshToken().pipe(
+      return this._user.renewToken().pipe(
         switchMap((newTokens: AuthTokens) => {
           if (newTokens) {
             // update token store & publish new token, yay!!
-            this._authservice.storeTokens(newTokens);
+            this._user.storeTokens(newTokens);
             this.tokenSubject.next(newTokens);
             return next.handle(this.addToken(request, newTokens));
           }
           // no new token received | something messed up
-          this._authservice.logout();
-          return this.error('no refresh token found');
+          this._user.logout();
+          return this.error('No refresh token found');
         }),
         catchError((error) => {
-          this._authservice.logout();
+          this._user.logout();
           return this.error(error);
         }),
         finalize(() => (this.isalreadyRefreshing = false))
@@ -101,7 +105,7 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
       /* if tab is kept running and this isalreadyRefreshing is still true, 
       user clicks another menu, req initiated but refresh failed */
       if (this.isalreadyRefreshing && request.url.includes('refresh')) {
-        this._authservice.logout();
+        this._user.logout();
       }
       // new token ready subscribe -> every skipped request will be retried with fresh token
       return this.tokenSubject.pipe(

@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { UserLoginDetail, UserLoginServerResponse, UserSignupDetail } from '@core/models/user.model';
+import { AuthTokens, UserLoginDetail } from '@core/models/user.model';
+import { ServerResponse } from '@core/models/server.model';
 
 interface FakeDbUser {
   login: UserLoginDetail;
-  response: UserLoginServerResponse;
+  response: AuthTokens;
 }
 
 @Injectable()
@@ -15,34 +16,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   static users: FakeDbUser[] = [
     {
       login: {
-        email: 'jonny@cache.com',
+        username: 'jonny@cache.com',
         password: '12345',
       },
       response: {
-        tokens: {
-          accessToken: 'fakeAccessToken',
-          refreshToken: 'fakeRefreshToken',
-        },
-        profile: {
-          name: 'Jonny Cache',
-          email: 'jonny@cache.com'
-        }
-      },
+        token: "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsIm5hbWUiOiJBZG1pbiBCYXZlbmlyIiwiZW1haWwiOiJhZG1pbkBiYXZlbmlyLmV1IiwiYXVkIjoiYXV0aGVudGljYXRpb24iLCJpYXQiOjE2NjYxMDYxMTV9._npT7-xJkHav3o-C7CgIxMo3ZJVR1J0mp9bT0Jzk88R-s9y5OAD72QcNGDpHsSOgIh7nkfqy1297rCbhuSls6A",
+        refreshToken: "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsIm5hbWUiOiJBZG1pbiBCYXZlbmlyIiwiZW1haWwiOiJhZG1pbkBiYXZlbmlyLmV1IiwiYXVkIjoicmVmcmVzaCIsImlhdCI6MTY2NjEwNjExNX0.e6V1dZoICH7QJUjuBAa0wTyxnwj7PSsOteBkxt7gsmZ7edknj70Vyrh8P74o4YUgXlgQNFdU2wOGFoeIN3hjLw"
+      }
     },
     {
       login: {
-        email: 'casual@check.com',
+        username: 'casual@check.com',
         password: '54321',
       },
       response: {
-        tokens: {
-          accessToken: 'fakeAccessToken',
-          refreshToken: 'fakeRefreshToken',
-        },
-        profile: {
-          name: 'Casual Check',
-          email: 'casual@check.com'
-        }
+        token: "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsIm5hbWUiOiJBZG1pbiBCYXZlbmlyIiwiZW1haWwiOiJhZG1pbkBiYXZlbmlyLmV1IiwiYXVkIjoiYXV0aGVudGljYXRpb24iLCJpYXQiOjE2NjYxMDYxMTV9._npT7-xJkHav3o-C7CgIxMo3ZJVR1J0mp9bT0Jzk88R-s9y5OAD72QcNGDpHsSOgIh7nkfqy1297rCbhuSls6A",
+        refreshToken: "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsIm5hbWUiOiJBZG1pbiBCYXZlbmlyIiwiZW1haWwiOiJhZG1pbkBiYXZlbmlyLmV1IiwiYXVkIjoicmVmcmVzaCIsImlhdCI6MTY2NjEwNjExNX0.e6V1dZoICH7QJUjuBAa0wTyxnwj7PSsOteBkxt7gsmZ7edknj70Vyrh8P74o4YUgXlgQNFdU2wOGFoeIN3hjLw"
       },
     },
   ]
@@ -59,10 +48,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function handleRoute() {
       switch (true) {
-        case url.endsWith('/users/login') && method === 'POST':
+        case url.endsWith('/fake/login') && method === 'POST':
           return authenticate();
-        case url.endsWith('/users/signup') && method === 'POST':
-          return register();
         default:
           // pass through any requests not handled above
           return next.handle(request);
@@ -76,47 +63,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const entries = params.entries();
       const obj = Object.fromEntries(entries);
       const login: UserLoginDetail = {
-        email: obj.email,
+        username: obj.username,
         password: obj.password
       };
       for (const user of FakeBackendInterceptor.users) {
-        if (user.login.email === login.email && user.login.password === login.password) {
+        if (user.login.username === login.username && user.login.password === login.password) {
           return ok(user.response);
         }
       }
       return error('Username or password is incorrect');
     }
 
-    function register() {
-      const signup: UserSignupDetail = body;
-      if (FakeBackendInterceptor.users.some((e) => e.login.email === signup.email)) {
-        return error('User with email "' + signup.email + '" already exists');
-      }
-      FakeBackendInterceptor.users.push(
-        {
-          login: {
-            email: signup.email,
-            password: signup.password,
-          },
-          response: {
-            tokens: {
-              accessToken: 'fakeAccessToken',
-              refreshToken: 'fakeRefreshToken',
-            },
-            profile: {
-              name: signup.name,
-              email: signup.email,
-            }
-          }
-        }
-      );
-      return ok();
-    }
-
     // helper functions
-
     function ok(body?: any) {
-      return of(new HttpResponse({ status: 200, body }))
+      return of(new HttpResponse({
+        status: 200, body: {
+          error: false,
+          statusCode: 200,
+          statusCodeReason: "OK",
+          contentType: "application/json",
+          message: body
+        }
+      }))
     }
 
     function error(message: string) {

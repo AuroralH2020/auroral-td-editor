@@ -11,25 +11,31 @@
     </mat-icon>
   </div>
   <div *ngIf="leadingSpace" class="w-12"></div>
-  <mat-form-field appearance="outline" class="form-field" [hidden]="visible">
-    <mat-label>{{ label }}</mat-label>
-    <input
-      matInput
-      [placeholder]="placeholder ?? ''"
-      [type]="visible ? 'text' : 'password'"
-      [value]="value"
-      (change)="value = $any($event.target).value"
-      (focus)="setFocus(true)"
-      (blur)="setFocus(false)"
-    />
-    <mat-icon
-      *ngIf="isSecret"
-      class="text-primary-500 opacity-60 cursor-pointer"
-      (click)="toggleVisibility()"
-      matSuffix
-      >{{ visible ? "visibility_off" : "visibility" }}</mat-icon
-    >
-    <mat-hint *ngIf="hint"> {{ hint }}</mat-hint>
-    <ng-content></ng-content>
-  </mat-form-field>
+  <div class="grid grid-cols-1 gap-0 text-left">
+    <mat-form-field appearance="outline" class="form-field" [hidden]="visible">
+      <mat-label i18n>{{ label }}</mat-label>
+      <input
+        i18n
+        matInput
+        [placeholder]="placeholder ?? ''"
+        [type]="visible ? 'text' : 'password'"
+        [value]="value"
+        (change)="value = $any($event.target).value"
+        (focus)="setFocus(true)"
+        (blur)="setFocus(false)"
+        [required]="required"
+      />
+      <mat-icon
+        *ngIf="isSecret"
+        class="text-primary-500 opacity-60 cursor-pointer"
+        (click)="toggleVisibility()"
+        matSuffix
+        >{{ visible ? "visibility_off" : "visibility" }}</mat-icon
+      >
+      <mat-hint *ngIf="hint" i18n> {{ hint }}</mat-hint>
+    </mat-form-field>
+    <div class="font-regular">
+      <ng-content></ng-content>
+    </div>
+  </div>
 </div>

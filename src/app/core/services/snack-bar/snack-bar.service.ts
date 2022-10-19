@@ -12,13 +12,15 @@ export class SnackBarService {
   }
    showError(message: string) {
     this._snackBar.open(message, 'Dismiss', {
-      duration: 5000,
+      duration: 10000,
+      panelClass: ['snackbar', 'error-snackbar'],
     })
   }
 
   showMessage(message: string) {
     this._snackBar.open(message, 'Dismiss', {
-      duration: 5000,
+      duration: 10000,
+      panelClass: ['snackbar'],
     })
   }
 }

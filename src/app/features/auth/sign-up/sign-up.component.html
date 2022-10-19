@@ -3,10 +3,13 @@
     <div>
       <div class="flex justify-between">
         <div class="mt-8">
-          <div class="text-lg tracking-widest font-bold text-primary-300 mb-4">
+          <div
+            class="text-lg tracking-widest font-bold text-primary-300 mb-4"
+            i18n
+          >
             Create account
           </div>
-          <div class="w-48">
+          <div class="w-48" i18n>
             Join our community and help
             <app-auroral-hyperlink></app-auroral-hyperlink> grow.
           </div>
@@ -18,7 +21,7 @@
       </div>
       <div class="h-11"></div>
       <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
-        <div class="grid gap-0 grid-cols-1 text-center">
+        <div class="grid gap-4 grid-cols-1 text-center">
           <app-form-field
             label="Full name"
             [leadingSpace]="true"
@@ -38,7 +41,7 @@
             [isSecret]="true"
             leadingIcon="lock"
           ></app-form-field>
-          <div class="buttons-wrapper grid gap-0 grid-cols-1 text-center">
+          <div class="buttons-wrapper grid gap-1 grid-cols-1 text-center">
             <app-button
               text="Sign up"
               type="mat-raised-button"
@@ -48,7 +51,7 @@
               [loading]="loading"
               class="pt-6 pb-2"
             ></app-button>
-            <div>Already have an account?</div>
+            <div i18n>Already have an account?</div>
             <app-hyperlink
               text="Log in"
               [routerLink]="['/auth/login']"

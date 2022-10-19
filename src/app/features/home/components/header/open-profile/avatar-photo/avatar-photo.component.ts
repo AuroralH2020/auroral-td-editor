@@ -13,25 +13,20 @@ export class AvatarPhotoComponent implements OnInit {
   @Input()
   public name: string = '';
 
+  @Input()
+  public size: number = 60;
+
+  @Input()
+  public color: string = '#000';
+
   public showInitials = false;
   public initials: string = '';
-  public circleColor: string = '#fff';
-
-  private colors = [
-    '#EB7181', // red
-    '#468547', // green
-    '#FFD558', // yellow
-    '#3670B2', // blue
-  ];
 
   ngOnInit() {
-
+    console.log(this.photoUrl)
     if (!this.photoUrl) {
       this.showInitials = true;
       this.createInititals();
-
-      const randomIndex = Math.floor(Math.random() * Math.floor(this.colors.length));
-      this.circleColor = this.colors[randomIndex];
     }
 
   }

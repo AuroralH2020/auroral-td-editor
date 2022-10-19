@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthTokens } from '@core/models/user.model';
-import { AuthService } from '@core/services/auth/auth.service';
+import { UserService } from '@core/services/user/user.service';
 import { BroadcasterService } from '@core/services/broadcaster/broadcaster.service';
 import { CONSTANTS } from '@core/services/constants';
 import { Subject, switchMap, takeUntil, throwError } from 'rxjs';
@@ -16,39 +16,38 @@ export class LogInComponent implements OnInit {
 
   loading: boolean = false;
 
-  constructor(private _router: Router, private _auth: AuthService, private _fb: FormBuilder) { }
+  constructor(private _router: Router, private _user: UserService, private _fb: FormBuilder) { }
 
   protected form!: FormGroup;
-  protected email: FormControl = new FormControl('', [
-    Validators.required,
-    // Validators.email
-  ]);
+  protected username: FormControl = new FormControl('', {
+    validators: Validators.required,
+    updateOn: 'change'
+  });
   protected password: FormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(4)
   ]);
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: this.email,
+      username: this.username,
       password: this.password,
     });
   }
 
   getEmailErrorMessage() {
-    if (this.email.hasError('required')) {
+    if (this.username.hasError('required')) {
       return 'You must enter a value';
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.username.hasError('email') ? 'Not a valid email' : '';
   }
 
   getPasswordErrorMessage() {
-    if (this.email.hasError('required')) {
+    if (this.username.hasError('required')) {
       return 'You must enter a value';
     }
 
-    return this.email.hasError('minLength') ? 'Password too short' : '';
+    return this.username.hasError('minLength') ? 'Password too short' : '';
   }
 
   onLoginClick() {
@@ -56,26 +55,19 @@ export class LogInComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this._auth.login({
-      email: this.form.value.email,
+    this._user.login({
+      username: this.form.value.username,
       password: this.form.value.password,
-    }).subscribe(
-      {
-        next: (newTokens: AuthTokens) => {
-          if (newTokens) {
-            // update token store
-            this._auth.storeTokens(newTokens);
-            this._router.navigate(['/home']);
-          }
-          this.loading = false;
-          // no token received
-          return throwError(() => 'no refresh token found');
-        },
-        error: (err) => {
-          this.loading = false;
-        }
+    }).then((newTokens) => {
+      if (newTokens) {
+        // update token store
+        this._user.storeTokens(newTokens);
+        this._router.navigate(['/home']);
       }
-    );
+      this.loading = false;
+      // no token received
+      return throwError(() => 'no refresh token found');
+    }, (error) => this.loading = false );
   }
 
 }

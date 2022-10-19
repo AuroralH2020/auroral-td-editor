@@ -21,6 +21,7 @@ export class FormFieldComponent implements OnInit, ControlValueAccessor {
   @Input() isSecret: boolean = false;
   @Input() leadingIcon?: string;
   @Input() leadingSpace: boolean = false;
+  @Input() required: boolean = false;
 
   private _value: string = '';
 

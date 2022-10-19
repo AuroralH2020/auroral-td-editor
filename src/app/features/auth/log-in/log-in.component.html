@@ -7,10 +7,11 @@
           <div class="mt-8">
             <div
               class="text-lg tracking-widest font-bold text-primary-300 mb-4"
+              i18n
             >
               Sign in
             </div>
-            <div class="w-48">
+            <div class="w-48" i18n>
               Log in to access all features of the
               <app-auroral-hyperlink></app-auroral-hyperlink>.
             </div>
@@ -22,33 +23,46 @@
         </div>
         <div class="h-11"></div>
         <form [formGroup]="form">
-          <div class="grid gap-0 grid-cols-1 text-center">
+          <div class="grid gap-4 grid-cols-1 text-center">
             <app-form-field
-              formControlName="email"
-              label="Email"
-              leadingIcon="alternate_email"
+              formControlName="username"
+              label="Username"
+              leadingIcon="person"
+              [required]="true"
             >
+              <mat-error *ngIf="form.controls['username'].hasError('required')"
+                >Please provide username</mat-error
+              >
             </app-form-field>
             <app-form-field
               formControlName="password"
               label="Password"
               [isSecret]="true"
               leadingIcon="lock"
-            ></app-form-field>
-            <app-button
-              text="Log in"
-              type="mat-raised-button"
-              theme="accent"
-              size="large"
-              [loading]="loading"
-              class="pt-6 pb-2"
-              (click)="onLoginClick()"
-            ></app-button>
-            <div>Don’t have an account?</div>
-            <app-hyperlink
-              text="Craete account"
-              [routerLink]="['/auth/signup']"
-            ></app-hyperlink>
+              [required]="true"
+            >
+              <mat-error *ngIf="form.controls['password'].hasError('required')"
+                >Please provide password</mat-error
+              ></app-form-field
+            >
+            <div class="grid grid-cols-1 gap-1">
+              <app-button
+                text="Log in"
+                type="mat-raised-button"
+                theme="accent"
+                size="large"
+                [loading]="loading"
+                class="pt-6 pb-2"
+                [disabled]="form.invalid"
+                (click)="onLoginClick()"
+              >
+              </app-button>
+              <div i18n>Don’t have an account?</div>
+              <app-hyperlink
+                text="Craete account"
+                [routerLink]="['/auth/signup']"
+              ></app-hyperlink>
+            </div>
           </div>
         </form>
       </div>
