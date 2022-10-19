@@ -14,11 +14,9 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { OpenProfileComponent } from './components/header/open-profile/open-profile.component';
 import { NotificationBellComponent } from './components/header/notification-bell/notification-bell.component';
 import { NavButtonComponent } from './components/side-nav/nav-button/nav-button.component';
-import { Item1Component } from './item1/item1.component';
-import { Item2Component } from './item2/item2.component';
-import { Item3Component } from './item3/item3.component';
-import { Item4Component } from './item4/item4.component';
 import { AvatarPhotoComponent } from './components/header/open-profile/avatar-photo/avatar-photo.component';
+import { ItemsComponent } from './sections/items/items.component';
+import { CompaniesComponent } from './sections/companies/companies.component';
 
 
 
@@ -30,11 +28,9 @@ import { AvatarPhotoComponent } from './components/header/open-profile/avatar-ph
     OpenProfileComponent,
     NotificationBellComponent,
     NavButtonComponent,
-    Item1Component,
-    Item2Component,
-    Item3Component,
-    Item4Component,
     AvatarPhotoComponent,
+    ItemsComponent,
+    CompaniesComponent,
   ],
   imports: [
     CommonModule,

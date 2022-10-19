@@ -11,9 +11,8 @@
     <mat-icon
       aria-hidden="false"
       aria-label="Menu item"
-      fontIcon="lens"
-    ></mat-icon>
+    >{{ icon ?? 'lens' }}</mat-icon>
     <div style="width: 8px"></div>
-    <div class="flex items-center">Menu item</div>
+    <div class="flex items-center">{{ name ?? 'Menu item' }}</div>
   </div>
 </div>

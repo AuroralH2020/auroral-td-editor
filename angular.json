@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "ng-new-app": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "sk": "src/locale/messages.sk.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,6 +26,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["en-US"],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -83,7 +90,10 @@
             }
           },
           "defaultConfiguration": "development",
-          "options": { "browserTarget": "ng-new-app:build", "extraWebpackConfig": "./cypress/coverage.webpack.js" }
+          "options": {
+            "browserTarget": "ng-new-app:build",
+            "extraWebpackConfig": "./cypress/coverage.webpack.js"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

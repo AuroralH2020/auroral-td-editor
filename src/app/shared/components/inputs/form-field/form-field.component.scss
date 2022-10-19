@@ -1,4 +1,4 @@
-@import 'styles';
+@import "styles";
 
 ::ng-deep .mat-form-field {
   .mat-input-element {
@@ -16,15 +16,24 @@
   @apply text-secondary-300;
 }
 
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
 .form-field {
-    min-width: 360px;
+  min-width: 360px;
 }
 
 .leading-icon {
-    padding-top: 12px;
-    padding-right: 16px
+  padding-top: 12px;
+  padding-right: 16px;
 }
 
 .leading-icon .mat-icon {
-    @include icon-size(32px);
+  @include icon-size(32px);
 }
