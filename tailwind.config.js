@@ -66,6 +66,9 @@ module.exports = {
       yellow: {
         500: '#f2b619',
       },
+      white: {
+        50: '#fff',
+      },
       success: {
         500: '#277d26',
       },

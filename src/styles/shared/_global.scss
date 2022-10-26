@@ -58,3 +58,9 @@ body {
 ::ng-deep .error-snackbar {
   @apply bg-danger-500;
 }
+
+.custom-shadow {
+  -webkit-box-shadow: 0px 2px 6px -4px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0px 2px 6px -4px rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 2px 6px -4px rgba(0, 0, 0, 0.45);
+}

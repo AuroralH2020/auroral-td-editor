@@ -43,7 +43,7 @@ export class OpenProfileComponent implements OnInit {
   }
 
   get color() {
-    return this._user.color;
+    return this._user.profile?.color ?? 'black';
   }
 
   get photo() {

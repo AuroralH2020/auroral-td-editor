@@ -1,12 +1,11 @@
 <div class="cursor-pointer px-3 py-2" [matMenuTriggerFor]="menu">
   <div *ngIf="isLoggedIn; else elseBlock">
-    <app-avatar-photo
+    <app-avatar
       [photoUrl]="photo"
       [name]="profile?.name ?? ''"
       [size]="32"
       [color]="color"
-      class="font-medium"
-    ></app-avatar-photo>
+    ></app-avatar>
   </div>
   <ng-template #elseBlock
     ><mat-icon class="align-middle opacity-60"
@@ -19,12 +18,13 @@
     class="text-center menu-container text-primary-200 p-4 flex flex-col justify-center items-center"
   >
     <div *ngIf="isLoggedIn; else elseBlock">
-      <app-avatar-photo
+      <app-avatar
         [photoUrl]="photo"
         [name]="profile?.name ?? ''"
         [size]="60"
         [color]="color"
-      ></app-avatar-photo>
+        [showTooltip]="false"
+      ></app-avatar>
     </div>
     <ng-template #elseBlock><mat-icon>account_circle</mat-icon></ng-template>
     <div class="mat-body-1 text-primary-300 mt-1">

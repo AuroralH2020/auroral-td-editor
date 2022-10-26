@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FakeBackendInterceptor } from '@core/services/fake-backend.interceptor';
+import { JwtInterceptor } from '@core/services/jwt.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,11 @@ import { FakeBackendInterceptor } from '@core/services/fake-backend.interceptor'
   ],
   providers: [
     { provide: 'BASE_URL', useValue: environment.baseurl },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HTTPReqResInterceptor,

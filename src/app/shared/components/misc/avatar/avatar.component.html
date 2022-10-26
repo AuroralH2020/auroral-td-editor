@@ -3,6 +3,7 @@
   [style.width.px]="size"
   [style.height.px]="size"
   [style.backgroundColor]="color"
+  [matTooltip]="showTooltip ? name: ''"
 >
   <img *ngIf="!showInitials" src="{{ photoUrl }}" class="rounded-full" />
   <div
@@ -11,6 +12,7 @@
     [style.height]="size"
     [style.fontSize.px]="size / 3"
     [style.lineHeight.px]="size - 1"
+    [ngClass]=" size <= 40 ? 'font-medium': ''"
   >
     {{ initials }}
   </div>

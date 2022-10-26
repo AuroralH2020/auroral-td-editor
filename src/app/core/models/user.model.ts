@@ -14,6 +14,7 @@ export interface DecodedToken {
 export interface UserProfile {
   name: string
   email: string
+  color: string
 }
 
 export interface UserLoginDetail {
