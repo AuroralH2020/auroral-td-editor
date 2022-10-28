@@ -3,8 +3,18 @@
     <mat-spinner [diameter]="32"></mat-spinner>
   </div>
   <div *ngIf="isEmpty" class="flex flex-col justify-center items-center py-20">
-    <div class="text-3xl font-medium opacity-40">(^_^)</div>
-    <div class="font-medium pt-4 opacity-40">No items found</div>
+    <div class="text-3xl font-medium opacity-30">(^_^)</div>
+    <div class="font-medium mt-4 opacity-30 w-60 text-center">
+      {{ emptyMessage ?? "No items found" }}
+    </div>
+    <div *ngIf="emptyAction" class="mt-6 opacity-60">
+      <app-button
+        [text]="emptyAction.buttonMessage"
+        size="medium"
+        theme="primary"
+        type="mat-stroked-button"
+      ></app-button>
+    </div>
   </div>
   <table
     *ngIf="!isLoading && !isEmpty"
@@ -19,15 +29,15 @@
     >
       <th mat-header-cell *matHeaderCellDef>
         <ng-template
-          *ngIf="columnNameRef"
-          [ngTemplateOutlet]="columnNameRef"
+          *ngIf="headerCellRef"
+          [ngTemplateOutlet]="headerCellRef"
           [ngTemplateOutletContext]="{ $implicit: columnName }"
         ></ng-template>
       </th>
       <td mat-cell *matCellDef="let element">
         <ng-template
-          *ngIf="columnDataRef"
-          [ngTemplateOutlet]="columnDataRef"
+          *ngIf="cellRef && element !== expandedElement"
+          [ngTemplateOutlet]="cellRef"
           [ngTemplateOutletContext]="{
             $implicit: element[columnName],
             columnName: columnName
@@ -69,6 +79,7 @@
   </table>
   <mat-paginator
     #paginator
+    *ngIf="!isEmpty"
     [pageIndex]="currentPage"
     [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions"

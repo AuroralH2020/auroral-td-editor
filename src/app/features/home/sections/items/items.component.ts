@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Organisation } from "@core/models/organisation.model";
+import { MAT_TABS_CONFIG } from "@angular/material/tabs";
 import { ItemService } from "@core/services/item/item.service";
 import { UserService } from "@core/services/user/user.service";
 
@@ -7,6 +7,9 @@ import { UserService } from "@core/services/user/user.service";
   selector: "app-items",
   templateUrl: "./items.component.html",
   styleUrls: ["./items.component.scss"],
+  providers: [
+    { provide: MAT_TABS_CONFIG, useValue: { animationDuration: "0ms" }}
+  ]
 })
 export class ItemsComponent implements OnInit {
   myItemsColumns: string[] = ["name", "type", "contractors"];
@@ -23,52 +26,8 @@ export class ItemsComponent implements OnInit {
   fetchAllItems = async (page: number, size: number) => {
     return await this._item.fetchItems(page, size);
   };
+
+  myItemsEmpty() {
+
+  }
 }
-
-// const MY_ITEMS_DUMMY: MyItems[] = [
-//   {
-//     name: "InfluxDB connector 2",
-//   },
-//   {
-//     name: "MyCSVChart",
-//   },
-//   {
-//     name: "MyRoomTemperature_3",
-//   },
-//   {
-//     name: "Aggregator_Service",
-//   },
-//   {
-//     name: "Monitor service",
-//   },
-//   {
-//     name: "Matej_service",
-//   },
-// ];
-
-// const ALL_ITEMS_DUMMY: AllItems[] = [
-//   {
-//     name: "InfluxDB connector 2",
-//     type: "device",
-//     owner: "Lorem ipsum",
-//     contracts: "Lorem ipsum dolor.",
-//   },
-//   {
-//     name: "MyCSVChart",
-//     type: "device",
-//     owner: "Lorem ipsum",
-//     contracts: "Lorem ipsum dolor.",
-//   },
-//   {
-//     name: "MyRoomTemperature_3",
-//     type: "device",
-//     owner: "Lorem ipsum",
-//     contracts: "Lorem ipsum dolor.",
-//   },
-//   {
-//     name: "Aggregator_Service",
-//     type: "device",
-//     owner: "Lorem ipsum",
-//     contracts: "Lorem ipsum dolor.",
-//   },
-// ];

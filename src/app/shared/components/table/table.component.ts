@@ -15,20 +15,18 @@ import {
 } from "@angular/animations";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { FetchTableItems } from "@shared/models/table.modele";
+import { ActionWhenEmpty, FetchTableItems } from "@shared/models/table.modele";
+
 
 @Component({
   selector: "app-table",
   templateUrl: "./table.component.html",
   styleUrls: ["./table.component.scss"],
   animations: [
-    trigger("detailExpand", [
-      state("collapsed", style({ height: "0px", minHeight: "0" })),
-      state("expanded", style({ height: "*" })),
-      transition(
-        "expanded <=> collapsed",
-        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
-      ),
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
@@ -39,9 +37,11 @@ export class TableComponent implements OnInit {
   @Input() fetchData:
     | ((page: number, size: number) => Promise<FetchTableItems>)
     | undefined;
+  @Input() emptyMessage: string | undefined
+  @Input() emptyAction: ActionWhenEmpty | undefined
 
-  @ContentChild("columnNameRef") columnNameRef: TemplateRef<any> | undefined;
-  @ContentChild("columnDataRef") columnDataRef: TemplateRef<any> | undefined;
+  @ContentChild("headerCellRef") headerCellRef: TemplateRef<any> | undefined;
+  @ContentChild("cellRef") cellRef: TemplateRef<any> | undefined;
   @ContentChild("detailRef") detailRef: TemplateRef<any> | undefined;
 
   expandedElement: any | undefined;
@@ -60,6 +60,10 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     //Load initial data
     this.loadData();
+  }
+
+  test(element: any) {
+    console.log(element)
   }
 
   loadData() {

@@ -9,7 +9,6 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FakeBackendInterceptor } from '@core/services/fake-backend.interceptor';
 import { JwtInterceptor } from '@core/services/jwt.interceptor';
 
@@ -22,7 +21,6 @@ import { JwtInterceptor } from '@core/services/jwt.interceptor';
     CoreModule,
     HttpClientModule,
     LoadingBarRouterModule,
-    FontAwesomeModule,
   ],
   providers: [
     { provide: 'BASE_URL', useValue: environment.baseurl },

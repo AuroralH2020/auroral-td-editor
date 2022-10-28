@@ -4,11 +4,13 @@
       <mat-tab label="All Items">
         <mat-card>
           <app-table [columns]="allItemsColumns" [fetchData]="fetchAllItems">
-            <ng-template #columnNameRef let-columnName>
+            <ng-template #headerCellRef let-columnName>
               <div>{{ columnName | titlecase }}</div>
             </ng-template>
-            <ng-template #columnDataRef let-data let-columnName="columnName">
-              <div *ngIf="columnName === 'name'" class="font-medium opacity-50">{{ data }}</div>
+            <ng-template #cellRef let-data let-columnName="columnName">
+              <div *ngIf="columnName === 'name'" class="font-medium opacity-50">
+                {{ data }}
+              </div>
               <div *ngIf="columnName === 'type'" class="opacity-80">
                 <app-item-pictogram [name]="data"></app-item-pictogram>
               </div>
@@ -20,7 +22,9 @@
                     [size]="32"
                     class="py-1"
                   ></app-avatar>
-                  <div class="font-medium text-xs opacity-40">{{ data.name }}</div>
+                  <div class="font-medium text-xs opacity-40">
+                    {{ data.name }}
+                  </div>
                 </div>
               </div>
               <div *ngIf="columnName === 'subsription'" class="opacity-80">
@@ -35,12 +39,22 @@
       </mat-tab>
       <mat-tab label="My Items">
         <mat-card>
-          <app-table [columns]="myItemsColumns" [fetchData]="fetchMyItems">
-            <ng-template #columnNameRef let-columnName>
+          <app-table
+            [columns]="myItemsColumns"
+            [fetchData]="fetchMyItems"
+            emptyMessage="Unfortunately, you do not have any items yet."
+            [emptyAction]="{
+              buttonMessage: 'Add first item',
+              action: myItemsEmpty
+            }"
+          >
+            <ng-template #headerCellRef let-columnName>
               <div>{{ columnName | titlecase }}</div>
             </ng-template>
-            <ng-template #columnDataRef let-data let-columnName="columnName">
-              <div *ngIf="columnName === 'name'" class="font-medium opacity-50">{{ data }}</div>
+            <ng-template #cellRef let-data let-columnName="columnName">
+              <div *ngIf="columnName === 'name'" class="font-medium opacity-50">
+                {{ data }}
+              </div>
               <div *ngIf="columnName === 'type'" class="opacity-80">
                 <app-item-pictogram [name]="data"></app-item-pictogram>
               </div>
