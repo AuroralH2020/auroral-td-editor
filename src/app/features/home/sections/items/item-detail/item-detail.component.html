@@ -1,0 +1,114 @@
+<div
+  *ngIf="!detail"
+  class="flex flex-col items-center justify-center h-32 m-auto"
+>
+  <div class="text-center">Data misssing or corrupt</div>
+</div>
+
+<div *ngIf="detail" class="pb-16">
+  <app-item-pictogram [name]="detail.type"></app-item-pictogram>
+  <div class="h-2"></div>
+  <div class="text-lg font-normal opacity-80">{{ detail.name }}</div>
+  <div class="h-1"></div>
+  <div class="flex flex-row justify-between gap-4">
+    <div class="flex flex-col gap-4">
+      <app-item-online [online]="detail.dataAccess"></app-item-online>
+      <div class="item" *ngIf="detail.description">
+        <div class="label">Description:</div>
+        <div class="content">
+          <div class="opacity-40 font-normal w-64 text-xs">
+            {{ detail.description }}
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">Owned by:</div>
+        <div class="content">
+          <app-item-owner [owner]="detail.owner"></app-item-owner>
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">Subscribed by:</div>
+        <div class="content">
+          <app-item-subscribers
+            [companies]="detail.subscribers"
+          ></app-item-subscribers>
+        </div>
+      </div>
+      <div class="h-2"></div>
+      <div class="item">
+        <div class="label">Available properties:</div>
+        <div class="content">
+          <div *ngIf="detail.noProperties; else elsePropertyBlock">
+            <div class="no-data">
+              This item has no properties you can subscribe to.
+            </div>
+          </div>
+          <ng-template #elsePropertyBlock>
+            <div class="flex flex-col gap-1 mt-2">
+              <div *ngFor="let monitor of detail.properties">
+                <app-item-monitor [monitor]="monitor"></app-item-monitor>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="h-2"></div>
+      <div class="item">
+        <div class="label">Available events:</div>
+        <div class="content">
+          <div *ngIf="detail.noEvents; else elseEventBlock">
+            <div class="no-data">
+              This item has no events you can subscribe to.
+            </div>
+          </div>
+          <ng-template #elseEventBlock>
+            <div class="flex flex-col gap-1 mt-2">
+              <div *ngFor="let monitor of detail.events">
+                <app-item-monitor [monitor]="monitor"></app-item-monitor>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="label">Your active subscriptions:</div>
+      <div class="content">
+        <app-tab-group>
+          <app-tab
+            label="All"
+            [disabled]="detail.noSubscriptions"
+            disabledTooltip="You have no subscriptions with this item."
+          >
+            <app-item-subscriptions
+              [detail]="detail"
+              type="all"
+            ></app-item-subscriptions>
+          </app-tab>
+          <app-tab
+            label="Properties"
+            [disabled]="detail.noPropertySubscriptions"
+            disabledTooltip="You are not subscribed to any item properties."
+          >
+            <app-item-subscriptions
+              [detail]="detail"
+              type="properties"
+            ></app-item-subscriptions>
+          </app-tab>
+          <app-tab
+            label="Events"
+            [disabled]="detail.noEventSubscriptions"
+            disabledTooltip="You are not subscribed to any item events."
+          >
+            <app-item-subscriptions
+              [detail]="detail"
+              type="events"
+            ></app-item-subscriptions>
+          </app-tab>
+        </app-tab-group>
+      </div>
+    </div>
+    <div class="w-80"></div>
+  </div>
+</div>

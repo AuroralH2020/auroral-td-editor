@@ -1,0 +1,104 @@
+<div class="content-wrapper">
+  <div class="mat-elevation-z2 flex flex-col items-end">
+    <div class="table-wrapper">
+      <div
+        *ngIf="
+          detail.noSubscriptions || detail.noMonitors;
+          else showSubscriptions
+        "
+      >
+        <div class="flex flex-col justify-center items-center py-20">
+          <div class="text-3xl font-medium opacity-30">(^_^)</div>
+          <div *ngIf="detail.noMonitors; else elseBlock">
+            <div class="font-medium mt-4 opacity-30 w-60 text-center">
+              This item does not have any properties or events you can subsctibe
+              to.
+            </div>
+          </div>
+          <ng-template #elseBlock>
+            <div class="font-medium mt-4 opacity-30 w-60 text-center">
+              You do not have any active subscriptions to this item.
+            </div>
+            <div class="mt-6 opacity-60">
+              <app-button
+                text="Create first subscription"
+                size="medium"
+                theme="primary"
+                type="mat-stroked-button"
+              ></app-button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <ng-template #showSubscriptions
+        ><table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">
+              <app-item-monitor
+                [monitor]="element.monitor"
+                textStyleClasses="font-medium opacity-60"
+              ></app-item-monitor>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef="let element" class="opacity-60">
+              {{ element.monitor.type }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dataService">
+            <th mat-header-cell *matHeaderCellDef>Data Service</th>
+            <td mat-cell *matCellDef="let element">
+              <app-item-pictogram
+                [name]="element.dataService.name"
+                textStyleClasses="text-xs"
+                class="opacity-60"
+              ></app-item-pictogram>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="created">
+            <th mat-header-cell *matHeaderCellDef>Created</th>
+            <td mat-cell *matCellDef="let element" class="opacity-60">
+              <div
+                [matTooltip]="element.created.toLocaleString()"
+                matTooltipPosition="below"
+              >
+                {{ element.created | date: "mediumDate" }}
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastUpdated">
+            <th mat-header-cell *matHeaderCellDef>Last Updated</th>
+            <td mat-cell *matCellDef="let element" class="opacity-60">
+              <div
+                [matTooltip]="element.lastUpdated.toLocaleString()"
+                matTooltipPosition="below"
+              >
+                {{ element.lastUpdated | date: "mediumDate" }}
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+          ></tr></table
+      ></ng-template>
+    </div>
+    <div class="pt-6"></div>
+    <div class="p-6" *ngIf="!detail.noSubscriptions">
+      <app-button
+        size="medium"
+        theme="accent"
+        type="mat-raised-button"
+        text="Manage subscriptions"
+      ></app-button>
+    </div>
+  </div>
+</div>

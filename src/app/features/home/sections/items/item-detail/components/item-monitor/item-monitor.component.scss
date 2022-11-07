@@ -1,0 +1,14 @@
+@import "styles";
+
+.help-icon .mat-icon {
+  @include icon-size(24px);
+}
+
+.cat-icon .mat-icon {
+  @include icon-size(24px);
+}
+
+.no-cat-icon .mat-icon {
+  @include icon-size(12px);
+  margin: 6px;
+}

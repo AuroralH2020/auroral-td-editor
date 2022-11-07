@@ -1,29 +1,86 @@
-import { Organisation } from "./organisation.model"
+import { Property, Event } from './monitor.model'
+import { Organisation } from './organisation.model'
+import { Subscription } from './subscription.model'
 
-export interface MyItem {
-    oid: string
-    name: string
-    type: string | null
-    contractors: Organisation[]
-    created: Date
-    lastUpdated: Date
+export interface ServerItem {
+  oid: string
+  name: string
+  type: string | null
+  description: string | undefined
+  owner: Organisation
+  subscribers: Organisation[]
+  properties: Property[] | undefined
+  events: Event[] | undefined
+  propertySubscriptions: Subscription[] | undefined
+  eventSubscriptions: Subscription[] | undefined
+  dataAccess: boolean
+  created: Date
+  lastUpdated: Date
 }
 
-export interface MyItems {
-    totalLength: number
-    items: MyItem[]
+export interface ServerItems {
+  totalLength: number
+  items: ServerItem[]
 }
-
-export interface Item {
-    oid: string
-    name: string
-    type: string
-    owner: Organisation
-    created: Date
-    lastUpdated: Date
-}
-
 export interface Items {
-    totalLength: number
-    items: Item[]
+  totalLength: number
+  items: Item[]
+}
+
+export class Item {
+  readonly oid: string
+  readonly name: string
+  readonly type: string | null
+  readonly description: string | undefined
+  readonly owner: Organisation
+  readonly subscribers: Organisation[]
+  readonly properties: Property[] | undefined
+  readonly events: Event[] | undefined
+  readonly propertySubscriptions: Subscription[] | undefined
+  readonly eventSubscriptions: Subscription[] | undefined
+  readonly dataAccess: boolean
+  readonly created: Date
+  readonly lastUpdated: Date
+
+  constructor(data: ServerItem){
+    this.oid = data.oid
+    this.name = data.name
+    this.type = data.type
+    this.description = data.description
+    this.owner = data.owner
+    this.subscribers = data.subscribers
+    this.properties = data.properties
+    this.events = data.events
+    this.propertySubscriptions = data.propertySubscriptions
+    this.eventSubscriptions = data.eventSubscriptions
+    this.dataAccess = data.dataAccess
+    this.created = data.created
+    this.lastUpdated = data.lastUpdated
+  } 
+
+  public get noMonitors(): boolean {
+    return this.noProperties && this.noEvents
+  }
+
+  public get noProperties(): boolean {
+    return this.properties ? this.properties.length <= 0 : true
+  }
+
+  public get noEvents(): boolean {
+    return this.events ? this.events.length <= 0 : true
+  }
+
+  public get noSubscriptions(): boolean {
+    return this.noPropertySubscriptions && this.noEventSubscriptions
+  }
+
+  public get noPropertySubscriptions(): boolean {
+    return this.propertySubscriptions ? this.propertySubscriptions.length <= 0 : true
+  }
+
+  public get noEventSubscriptions(): boolean {
+    return this.eventSubscriptions ? this.eventSubscriptions.length <= 0 : true
+  }
+
+
 }

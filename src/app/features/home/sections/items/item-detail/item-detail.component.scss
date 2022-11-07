@@ -1,0 +1,26 @@
+@import "styles";
+
+.item {
+  @apply text-sm;
+}
+
+.item .label {
+  @apply opacity-60 font-medium text-xs;
+}
+
+.item .content {
+  @apply pl-1 p-0.5;
+}
+
+::ng-deep .mat-card {
+  border-radius: 0 !important;
+  @apply custom-shadow;
+}
+
+.mat-card:not([class*="mat-elevation-z"]) {
+  @apply custom-shadow;
+}
+
+.no-data {
+  @apply text-xs  opacity-30 font-medium w-48;
+}

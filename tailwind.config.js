@@ -61,6 +61,7 @@ module.exports = {
         900: '#30585b',
       },
       grey: {
+        100: '#ECECEC',
         500: '#3c3d44',
       },
       yellow: {

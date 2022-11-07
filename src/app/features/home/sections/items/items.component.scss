@@ -3,16 +3,3 @@
 .table-wrarpper {
   height: 92%;
 }
-
-::ng-deep .mat-card {
-  border-radius: 0 !important;
-  @apply custom-shadow;
-}
-
-.mat-card:not([class*="mat-elevation-z"]) {
-  @apply custom-shadow;
-}
-
-::ng-deep .mat-ink-bar {
-  border-bottom: 2px solid theme('colors.secondary.500');;
-}

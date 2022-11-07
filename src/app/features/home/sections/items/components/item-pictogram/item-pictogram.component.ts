@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ItemPictogramComponent implements OnInit {
 
-  @Input() name: string | undefined;
+  @Input() name: string | null | undefined;
+  @Input() textStyleClasses: string | undefined;
 
 
 icon!: string;

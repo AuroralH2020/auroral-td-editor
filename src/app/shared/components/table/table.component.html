@@ -1,4 +1,4 @@
-<div class="px-6">
+<div class="px-2">
   <div *ngIf="isLoading" class="flex justify-center items-center py-20">
     <mat-spinner [diameter]="32"></mat-spinner>
   </div>
@@ -69,7 +69,7 @@
       *matRowDef="let element; columns: columns"
       class="element-row"
       [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element"
+      (click)="expand(element)"
     ></tr>
     <tr
       mat-row

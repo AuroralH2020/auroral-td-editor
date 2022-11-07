@@ -1,11 +1,16 @@
-<div class="p-4 table-wrarpper flex flex-col">
+<div class="pl-2 pt-2 pb-2 table-wrarpper flex flex-col">
   <div class="grow bg-white-50">
-    <mat-tab-group>
-      <mat-tab label="All Items">
+    <app-tab-group>
+      <app-tab label="All Items">
         <mat-card>
           <app-table [columns]="allItemsColumns" [fetchData]="fetchAllItems">
             <ng-template #headerCellRef let-columnName>
-              <div>{{ columnName | titlecase }}</div>
+              <div *ngIf="columnName === 'dataAccess'; else elseColumnName">
+                Status
+              </div>
+              <ng-template #elseColumnName>
+                <div>{{ columnName | titlecase }}</div>
+              </ng-template>
             </ng-template>
             <ng-template #cellRef let-data let-columnName="columnName">
               <div *ngIf="columnName === 'name'" class="font-medium opacity-50">
@@ -15,29 +20,26 @@
                 <app-item-pictogram [name]="data"></app-item-pictogram>
               </div>
               <div *ngIf="columnName === 'owner'">
-                <div class="flex items-center gap-2 opacity-80">
-                  <app-avatar
-                    [name]="data.name"
-                    color="grey"
-                    [size]="32"
-                    class="py-1"
-                  ></app-avatar>
-                  <div class="font-medium text-xs opacity-40">
-                    {{ data.name }}
-                  </div>
-                </div>
+                <app-item-owner [owner]="data"></app-item-owner>
               </div>
-              <div *ngIf="columnName === 'subsription'" class="opacity-80">
-                <div>Subscription</div>
+              <div *ngIf="columnName === 'subscribers'" class="opacity-80">
+                <app-item-subscribers [companies]="data"></app-item-subscribers>
+              </div>
+              <div *ngIf="columnName === 'dataAccess'" class="opacity-80">
+                <app-item-online [online]="data"></app-item-online>
               </div>
             </ng-template>
             <ng-template #detailRef let-detail>
-              <div class="p-64">{{ detail.name }}</div>
+              <app-item-detail
+                *ngIf="detail"
+                [detail]="detail"
+                class="w-full"
+              ></app-item-detail>
             </ng-template>
           </app-table>
         </mat-card>
-      </mat-tab>
-      <mat-tab label="My Items">
+      </app-tab>
+      <app-tab label="My Items">
         <mat-card>
           <app-table
             [columns]="myItemsColumns"
@@ -49,7 +51,12 @@
             }"
           >
             <ng-template #headerCellRef let-columnName>
-              <div>{{ columnName | titlecase }}</div>
+              <div *ngIf="columnName === 'dataAccess'; else elseColumnName">
+                Status
+              </div>
+              <ng-template #elseColumnName>
+                <div>{{ columnName | titlecase }}</div>
+              </ng-template>
             </ng-template>
             <ng-template #cellRef let-data let-columnName="columnName">
               <div *ngIf="columnName === 'name'" class="font-medium opacity-50">
@@ -58,16 +65,23 @@
               <div *ngIf="columnName === 'type'" class="opacity-80">
                 <app-item-pictogram [name]="data"></app-item-pictogram>
               </div>
-              <div *ngIf="columnName === 'contractors'" class="opacity-80">
-                <app-companies-row [companies]="data"></app-companies-row>
+              <div *ngIf="columnName === 'subscribers'" class="opacity-80">
+                <app-item-subscribers [companies]="data"></app-item-subscribers>
+              </div>
+              <div *ngIf="columnName === 'dataAccess'" class="opacity-80">
+                <app-item-online [online]="data"></app-item-online>
               </div>
             </ng-template>
             <ng-template #detailRef let-detail>
-              <div class="p-64">{{ detail.name }}</div>
+              <app-item-detail
+                *ngIf="detail"
+                [detail]="detail"
+                class="w-full"
+              ></app-item-detail>
             </ng-template>
           </app-table>
         </mat-card>
-      </mat-tab>
-    </mat-tab-group>
+      </app-tab>
+    </app-tab-group>
   </div>
 </div>

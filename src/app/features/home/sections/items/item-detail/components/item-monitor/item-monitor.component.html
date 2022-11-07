@@ -1,0 +1,26 @@
+<div class="flex items-center" *ngIf="monitor">
+  <div *ngIf="hasCategory; else noCategory">
+    <div [ngStyle]="{ color: categoryColor }" class="cat-icon w-8">
+      <mat-icon>{{ categoryIcon }}</mat-icon>
+    </div>
+  </div>
+  <ng-template #noCategory>
+    <div class="no-cat-icon w-8 text-secondary-300">
+      <mat-icon>circle</mat-icon>
+    </div>
+  </ng-template>
+  <div class="w-28">
+    <div
+      [ngClass]="
+        textStyleClasses != undefined && textStyleClasses != null
+          ? textStyleClasses
+          : 'font-medium opacity-40 text-xs leading-tight'
+      "
+    >
+      {{ monitor.name ?? "NA" }}
+    </div>
+  </div>
+  <div class="help-icon text-secondary-500 opacity-60 pl-2">
+    <mat-icon>help_outline</mat-icon>
+  </div>
+</div>

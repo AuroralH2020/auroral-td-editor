@@ -1,33 +1,26 @@
-import { Component, OnInit } from "@angular/core";
-import { MAT_TABS_CONFIG } from "@angular/material/tabs";
-import { ItemService } from "@core/services/item/item.service";
-import { UserService } from "@core/services/user/user.service";
+import { Component, OnInit } from '@angular/core'
+import { ItemService } from '@core/services/item/item.service'
 
 @Component({
-  selector: "app-items",
-  templateUrl: "./items.component.html",
-  styleUrls: ["./items.component.scss"],
-  providers: [
-    { provide: MAT_TABS_CONFIG, useValue: { animationDuration: "0ms" }}
-  ]
+  selector: 'app-items',
+  templateUrl: './items.component.html',
+  styleUrls: ['./items.component.scss'],
 })
 export class ItemsComponent implements OnInit {
-  myItemsColumns: string[] = ["name", "type", "contractors"];
-  allItemsColumns: string[] = ["name", "type", "owner", "subscription"];
+  myItemsColumns: string[] = ['name', 'type', 'dataAccess', 'subscribers']
+  allItemsColumns: string[] = ['name', 'type', 'dataAccess', 'owner', 'subscribers']
 
-  constructor(private _item: ItemService, private _user: UserService) {}
+  constructor(private _item: ItemService) {}
 
   ngOnInit(): void {}
 
   fetchMyItems = async (page: number, size: number) => {
-    return await this._item.fetchMyItems(page, size);
-  };
+    return await this._item.fetchMyItems(page, size)
+  }
 
   fetchAllItems = async (page: number, size: number) => {
-    return await this._item.fetchItems(page, size);
-  };
-
-  myItemsEmpty() {
-
+    return await this._item.fetchItems(page, size)
   }
+
+  myItemsEmpty() {}
 }

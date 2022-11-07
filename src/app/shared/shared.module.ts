@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   declarations: [...shared.components, ...shared.directives, ...shared.pipes],
@@ -26,6 +27,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     MatPaginatorModule,
     MatTableModule,
     MatTooltipModule,
+    MatTabsModule,
   ],
   exports: [...shared.components, ...shared.directives, ...shared.pipes],
 })
