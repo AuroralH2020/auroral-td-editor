@@ -41,8 +41,14 @@ export class UserService {
 
   async login(userdetails: UserLoginDetail): Promise<AuthTokens> {
     const body = new HttpParams({ fromObject: { ...userdetails } })
-    return await firstValueFrom(this._http.post<ServerResponse>(this._loginUrl, body.toString()).pipe(take(1))).then(
-      (res) => res.message
+    return await firstValueFrom(
+      this._http
+        .post<AuthTokens>(this._loginUrl, body.toString(), {
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+          },
+        })
+        .pipe(take(1))
     )
   }
 

@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http'
 
 import { Inject, Injectable } from '@angular/core'
-import { BehaviorSubject, Observable, throwError } from 'rxjs'
+import { Observable, throwError } from 'rxjs'
 import { catchError, finalize, map, tap } from 'rxjs/operators'
 import { BroadcasterService } from './broadcaster/broadcaster.service'
 import { CONSTANTS } from './constants'
@@ -17,7 +17,6 @@ import { SnackBarService } from './snack-bar/snack-bar.service'
 @Injectable()
 export class HTTPReqResInterceptor implements HttpInterceptor {
   isalreadyRefreshing: boolean = false
-  private tokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null)
 
   constructor(
     @Inject('BASE_URL') private _baseUrl: string,
