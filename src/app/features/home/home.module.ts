@@ -10,6 +10,10 @@ import { MatCardModule } from '@angular/material/card'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatSelectModule } from '@angular/material/select'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@shared/shared.module'
 
@@ -24,11 +28,12 @@ import { ItemsComponent } from './sections/items/items.component'
 import { CompaniesComponent } from './sections/companies/companies.component'
 import { ItemDetailComponent } from './sections/items/item-detail/item-detail.component'
 import { ItemSubscribersComponent } from './sections/items/components/item-subscribers/item-subscribers.component'
-import { ItemOnlineComponent } from './sections/items/item-detail/components/item-online/item-online.component'
+import { ItemOnlineComponent } from './sections/items/components/item-online/item-online.component'
 import { ItemOwnerComponent } from './sections/items/components/item-owner/item-owner.component'
-import { ItemInteractionComponent } from './sections/items/item-detail/components/item-monitor/item-monitor.component'
-import { ItemSubscriptionsComponent } from './sections/items/item-detail/components/item-subscriptions/item-subscriptions.component'
+import { ItemInteractionComponent } from './sections/items/components/item-monitor/item-monitor.component'
+import { ItemSubscriptionsComponent } from './sections/items/components/item-subscriptions/item-subscriptions.component'
 import { ItemPictogramComponent } from './sections/items/components/item-pictogram/item-pictogram.component'
+import { ItemManageSubscriptionsComponent } from './sections/items/item-manage-subscriptions/item-manage-subscriptions.component'
 
 @NgModule({
   declarations: [
@@ -47,6 +52,7 @@ import { ItemPictogramComponent } from './sections/items/components/item-pictogr
     ItemInteractionComponent,
     ItemSubscriptionsComponent,
     ItemPictogramComponent,
+    ItemManageSubscriptionsComponent,
   ],
   imports: [
     CommonModule,
@@ -61,6 +67,11 @@ import { ItemPictogramComponent } from './sections/items/components/item-pictogr
     MatPaginatorModule,
     MatTabsModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
 })

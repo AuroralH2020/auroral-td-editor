@@ -15,11 +15,11 @@ export class ItemsComponent implements OnInit {
   ngOnInit(): void {}
 
   fetchMyItems = async (page: number, size: number) => {
-    return await this._item.fetchMyItems(page, size)
+    return await this._item.fetchItems(page, size, true)
   }
 
   fetchAllItems = async (page: number, size: number) => {
-    return await this._item.fetchItems(page, size)
+    return await this._item.fetchItems(page, size, false)
   }
 
   myItemsEmpty() {}

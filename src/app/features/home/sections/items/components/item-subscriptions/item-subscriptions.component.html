@@ -11,7 +11,7 @@
           <div class="text-3xl font-medium opacity-30">(^_^)</div>
           <div *ngIf="detail.noMonitors; else elseBlock">
             <div class="font-medium mt-4 opacity-30 w-60 text-center">
-              This item does not have any properties or events you can subsctibe
+              This item does not have any properties or events you can subscribe
               to.
             </div>
           </div>
@@ -19,12 +19,14 @@
             <div class="font-medium mt-4 opacity-30 w-60 text-center">
               You do not have any active subscriptions to this item.
             </div>
-            <div class="mt-6 opacity-60">
+            <div class="mt-6 opacity-50">
               <app-button
                 text="Create first subscription"
                 size="medium"
                 theme="primary"
                 type="mat-stroked-button"
+                (click)="openManageSubscriptions()"
+                [loading]="loading"
               ></app-button>
             </div>
           </ng-template>
@@ -36,7 +38,12 @@
             <th mat-header-cell *matHeaderCellDef>Name</th>
             <td mat-cell *matCellDef="let element">
               <app-item-monitor
-                [monitor]="element.monitor"
+                [monitor]="{
+                  monitors: element.monitors,
+                  name: element.iid,
+                  pid: element.iid,
+                  measures: element.iid
+                }"
                 textStyleClasses="font-medium opacity-60"
               ></app-item-monitor>
             </td>
@@ -45,29 +52,29 @@
           <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef>Type</th>
             <td mat-cell *matCellDef="let element" class="opacity-60">
-              {{ element.monitor.type }}
+              {{ type(element.type) }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="dataService">
+          <ng-container matColumnDef="service">
             <th mat-header-cell *matHeaderCellDef>Data Service</th>
             <td mat-cell *matCellDef="let element">
               <app-item-pictogram
-                [name]="element.dataService.name"
+                [name]="element.service.name"
                 textStyleClasses="text-xs"
                 class="opacity-60"
               ></app-item-pictogram>
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="created">
+          <!-- <ng-container matColumnDef="created">
             <th mat-header-cell *matHeaderCellDef>Created</th>
             <td mat-cell *matCellDef="let element" class="opacity-60">
               <div
-                [matTooltip]="element.created.toLocaleString()"
+                [matTooltip]="(element.created ?? today).toLocaleString()"
                 matTooltipPosition="below"
               >
-                {{ element.created | date: "mediumDate" }}
+                {{ element.created ?? today | date: "mediumDate" }}
               </div>
             </td>
           </ng-container>
@@ -76,28 +83,32 @@
             <th mat-header-cell *matHeaderCellDef>Last Updated</th>
             <td mat-cell *matCellDef="let element" class="opacity-60">
               <div
-                [matTooltip]="element.lastUpdated.toLocaleString()"
+                [matTooltip]="(element.lastUpdated ?? today).toLocaleString()"
                 matTooltipPosition="below"
               >
-                {{ element.lastUpdated | date: "mediumDate" }}
+                {{ element.lastUpdated ?? today | date: "mediumDate" }}
               </div>
             </td>
-          </ng-container>
+          </ng-container> -->
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"
+          ></tr>
           <tr
             mat-row
             *matRowDef="let row; columns: displayedColumns"
           ></tr></table
       ></ng-template>
     </div>
-    <div class="pt-6"></div>
     <div class="p-6" *ngIf="!detail.noSubscriptions">
       <app-button
         size="medium"
         theme="accent"
         type="mat-raised-button"
         text="Manage subscriptions"
+        (click)="openManageSubscriptions()"
+        [loading]="loading"
       ></app-button>
     </div>
   </div>

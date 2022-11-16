@@ -1,0 +1,110 @@
+<div mat-dialog-title>
+  <app-item-pictogram [name]="data.detail.type"></app-item-pictogram>
+  <div class="opacity-40">{{ data.detail.name }} subscriptions</div>
+</div>
+<div mat-dialog-content>
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">
+          <app-item-monitor
+            [monitor]="element"
+            textStyleClasses="text-xs font-medium opacity-60"
+          ></app-item-monitor>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="opacity-60 text-xs font-normal"
+        >
+          {{ type(element) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="service">
+        <th mat-header-cell *matHeaderCellDef>Data Service</th>
+        <td mat-cell *matCellDef="let element">
+          <div [formGroup]="selectedDataServices">
+            <mat-form-field
+              appearance="standard"
+              (click)="$event.stopPropagation()"
+            >
+              <mat-select
+                placeholder="choose a service..."
+                [formControlName]="getMonitorId(element)"
+                [compareWith]="compareDataServices"
+                (selectionChange)="selectionChanged(element)"
+              >
+                <mat-select-trigger>
+                  <app-item-pictogram
+                    [name]="getSelectedDataService(element)?.name"
+                    textStyleClasses="text-xs font-normal"
+                    class="opacity-80 mt-1"
+                  ></app-item-pictogram>
+                </mat-select-trigger>
+                <mat-option
+                  *ngFor="let service of data.dataServices"
+                  [value]="service"
+                >
+                  <div class="px-2">
+                    <app-item-pictogram
+                      [name]="service.name"
+                      textStyleClasses="text-xs font-normal"
+                      class="opacity-60"
+                    ></app-item-pictogram>
+                  </div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="selected">
+        <th mat-header-cell *matHeaderCellDef>Selected</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox
+            [checked]="isSelected(element)"
+            (click)="$event.stopPropagation()"
+            (change)="$event ? toggle(element) : null"
+          ></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [ngClass]="{ selected: isSelected(row) }"
+        class="element-row"
+        (click)="toggle(row)"
+      ></tr>
+    </table>
+  </div>
+</div>
+<div mat-dialog-actions class="justify-end">
+  <div class="pt-6 flex justify-end">
+    <app-button
+      text="Cancel"
+      theme="warn"
+      size="medium"
+      type="mat-stroked-button"
+      (click)="close()"
+      [disabled]="loading"
+    ></app-button>
+    <div class="w-4"></div>
+    <app-button
+      text="Save changes"
+      theme="accent"
+      size="medium"
+      [disabled]="loading || !changesDetected"
+      [loading]="loading"
+      (click)="saveChanges()"
+    ></app-button>
+  </div>
+</div>

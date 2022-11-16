@@ -1,7 +1,8 @@
 <div class="flex items-center">
   <mat-icon [ngStyle]="{ color: color }">{{ icon }}</mat-icon>
   <div class="w-2"></div>
-  <div
+  <div class="mt-1 leading-tight">
+    <div
     [ngClass]="
       textStyleClasses != undefined && textStyleClasses != null
         ? textStyleClasses
@@ -9,5 +10,6 @@
     "
   >
     {{ name ?? "Device" | titlecase }}
+  </div>
   </div>
 </div>

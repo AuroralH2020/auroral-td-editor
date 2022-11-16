@@ -30,9 +30,11 @@
       <div class="item">
         <div class="label">Subscribed by:</div>
         <div class="content">
-          <app-item-subscribers
-            [companies]="detail.subscribers"
-          ></app-item-subscribers>
+          <div class="py-1">
+            <app-item-subscribers
+              [companies]="detail.subscribers"
+            ></app-item-subscribers>
+          </div>
         </div>
       </div>
       <div class="h-2"></div>
@@ -46,7 +48,7 @@
           </div>
           <ng-template #elsePropertyBlock>
             <div class="flex flex-col gap-1 mt-2">
-              <div *ngFor="let monitor of detail.properties">
+              <div *ngFor="let monitor of detail.properties" class="w-44">
                 <app-item-monitor [monitor]="monitor"></app-item-monitor>
               </div>
             </div>
@@ -79,31 +81,31 @@
           <app-tab
             label="All"
             [disabled]="detail.noSubscriptions"
-            disabledTooltip="You have no subscriptions with this item."
+            disabledTooltip="You have no subscriptions."
           >
             <app-item-subscriptions
               [detail]="detail"
-              type="all"
+              subscriptionType="all"
             ></app-item-subscriptions>
           </app-tab>
           <app-tab
             label="Properties"
             [disabled]="detail.noPropertySubscriptions"
-            disabledTooltip="You are not subscribed to any item properties."
+            disabledTooltip="You have no property subscriptions."
           >
             <app-item-subscriptions
               [detail]="detail"
-              type="properties"
+              subscriptionType="properties"
             ></app-item-subscriptions>
           </app-tab>
           <app-tab
             label="Events"
             [disabled]="detail.noEventSubscriptions"
-            disabledTooltip="You are not subscribed to any item events."
+            disabledTooltip="You have no event subscriptions."
           >
             <app-item-subscriptions
               [detail]="detail"
-              type="events"
+              subscriptionType="events"
             ></app-item-subscriptions>
           </app-tab>
         </app-tab-group>

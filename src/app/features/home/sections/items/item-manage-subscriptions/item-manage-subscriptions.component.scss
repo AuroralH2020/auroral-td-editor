@@ -1,0 +1,51 @@
+@import "styles";
+
+table {
+  width: 100%;
+}
+
+.table-wrapper {
+  height: 400px;
+}
+
+.selected {
+  background-color: $subscriptions-bg;
+}
+
+.element-row td {
+  border-bottom-color: rgba($color: grey, $alpha: 0.15);
+  cursor: pointer;
+}
+
+::ng-deep .mat-column-name {
+  width: 40% !important;
+}
+
+::ng-deep .mat-column-type {
+  width: 15% !important;
+}
+
+::ng-deep .mat-column-service {
+  width: 35% !important;
+}
+
+::ng-deep .mat-column-selected {
+  width: 10% !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  margin-top: -1.25em;
+  margin-bottom: -1.25em;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: transparent;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-select-placeholder {
+  @apply text-xs
+}

@@ -23,3 +23,20 @@
 .mat-stroked-button.mat-primary {
   border: solid 1px $primary;
 }
+
+.mat-stroked-button.mat-warn {
+  border: solid 1px $warn;
+}
+
+.mat-stroked-button.mat-button-disabled.mat-button-disabled {
+  border: solid 1px $disabled;
+}
+
+:host(.disabled) {
+  // Disable click event.
+  pointer-events: none;
+}
+
+:host(.enabled) {
+  pointer-events: all;
+}

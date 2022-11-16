@@ -2,9 +2,8 @@
   <div *ngIf="isLoggedIn; else elseBlock">
     <app-avatar
       [photoUrl]="photo"
-      [name]="profile?.name ?? ''"
+      name="bAvenir"
       [size]="32"
-      [color]="color"
     ></app-avatar>
   </div>
   <ng-template #elseBlock
@@ -20,9 +19,8 @@
     <div *ngIf="isLoggedIn; else elseBlock">
       <app-avatar
         [photoUrl]="photo"
-        [name]="profile?.name ?? ''"
+        name="bAvenir"
         [size]="60"
-        [color]="color"
         [showTooltip]="false"
       ></app-avatar>
     </div>

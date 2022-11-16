@@ -42,10 +42,6 @@ export class OpenProfileComponent implements OnInit {
     return this._user.profile;
   }
 
-  get color() {
-    return this._user.profile?.color ?? 'black';
-  }
-
   get photo() {
     return undefined;
   }

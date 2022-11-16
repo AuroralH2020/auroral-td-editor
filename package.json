@@ -59,6 +59,7 @@
     "@ngx-loading-bar/router": "^5.1.1",
     "angular-code-input": "^1.6.0",
     "jwt-decode": "^3.1.2",
+    "lodash.isequal": "^4.5.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "web-animations-js": "^2.3.2",

@@ -9,18 +9,18 @@
       <mat-icon>circle</mat-icon>
     </div>
   </ng-template>
-  <div class="w-28">
+  <div class="grow">
     <div
-      [ngClass]="
+      class="break-words w-40 {{
         textStyleClasses != undefined && textStyleClasses != null
           ? textStyleClasses
           : 'font-medium opacity-40 text-xs leading-tight'
-      "
+      }}"
     >
-      {{ monitor.name ?? "NA" }}
+      {{ monitor.name ?? "N/A" }}
     </div>
   </div>
-  <div class="help-icon text-secondary-500 opacity-60 pl-2">
+  <!-- <div class="help-icon text-secondary-500 opacity-60 pl-2">
     <mat-icon>help_outline</mat-icon>
-  </div>
+  </div> -->
 </div>

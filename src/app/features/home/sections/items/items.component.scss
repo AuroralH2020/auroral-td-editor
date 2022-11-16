@@ -3,3 +3,16 @@
 .table-wrarpper {
   height: 92%;
 }
+::ng-deep .mat-column-name {
+  width: 20% !important;
+}
+
+::ng-deep .mat-column-subscribers {
+  width: 35% !important;
+}
+
+::ng-deep .mat-column-type,
+::ng-deep .mat-column-dataAccess,
+::ng-deep .mat-column-owner {
+  width: 15% !important;
+}

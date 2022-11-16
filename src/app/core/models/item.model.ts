@@ -9,10 +9,10 @@ export interface ServerItem {
   description: string | undefined
   owner: Organisation
   subscribers: Organisation[]
-  properties: Property[] | undefined
-  events: Event[] | undefined
-  propertySubscriptions: Subscription[] | undefined
-  eventSubscriptions: Subscription[] | undefined
+  properties: Property[]
+  events: Event[]
+  propertySubscriptions: Subscription[]
+  eventSubscriptions: Subscription[]
   dataAccess: boolean
   created: Date
   lastUpdated: Date
@@ -34,10 +34,10 @@ export class Item {
   readonly description: string | undefined
   readonly owner: Organisation
   readonly subscribers: Organisation[]
-  readonly properties: Property[] | undefined
-  readonly events: Event[] | undefined
-  readonly propertySubscriptions: Subscription[] | undefined
-  readonly eventSubscriptions: Subscription[] | undefined
+  readonly properties: Property[]
+  readonly events: Event[]
+  readonly propertySubscriptions: Subscription[]
+  readonly eventSubscriptions: Subscription[]
   readonly dataAccess: boolean
   readonly created: Date
   readonly lastUpdated: Date
