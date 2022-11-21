@@ -1,0 +1,15 @@
+<div
+  class="parent"
+  [matBadge]="count"
+  matBadgeSize="small"
+  matBadgePosition="after"
+  matBadgeOverlap="true"
+  matBadgeColor="accent"
+  [matBadgeHidden]="count <= 0"
+>
+  <div
+    *ngIf="count > 0"
+    class="child"
+    [matTooltip]="count + ' subscriptions'"
+  ></div>
+</div>

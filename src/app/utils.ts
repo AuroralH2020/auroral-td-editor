@@ -20,3 +20,13 @@ export function isProperySubscription(object: any): object is Subscription {
 export function isEventSubscription(object: any): object is Subscription {
   return object.type === 'event'
 }
+
+export function stringSortListOfObjects(array: any[], key: string) {
+  array.sort((e1, e2) => {
+    if (!e1[key]) return -1
+    if (!e2[key]) return 1
+    if (e1[key] > e2[key]) return 1
+    if (e1[key] < e2[key]) return -1
+    return 0
+  })
+}

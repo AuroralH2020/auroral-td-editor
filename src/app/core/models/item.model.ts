@@ -42,7 +42,7 @@ export class Item {
   readonly created: Date
   readonly lastUpdated: Date
 
-  constructor(data: ServerItem){
+  constructor(data: ServerItem) {
     this.oid = data.oid
     this.name = data.name
     this.type = data.type
@@ -56,7 +56,7 @@ export class Item {
     this.dataAccess = data.dataAccess
     this.created = data.created
     this.lastUpdated = data.lastUpdated
-  } 
+  }
 
   public get noMonitors(): boolean {
     return this.noProperties && this.noEvents
@@ -82,5 +82,19 @@ export class Item {
     return this.eventSubscriptions ? this.eventSubscriptions.length <= 0 : true
   }
 
+  public get propertiesCount(): number {
+    return this.properties?.length ?? 0
+  }
 
+  public get eventsCount(): number {
+    return this.events?.length ?? 0
+  }
+
+  public get propertySubscriptionsCount(): number {
+    return this.propertySubscriptions?.length ?? 0
+  }
+
+  public get eventSubscriptionsCount(): number {
+    return this.eventSubscriptions?.length ?? 0
+  }
 }

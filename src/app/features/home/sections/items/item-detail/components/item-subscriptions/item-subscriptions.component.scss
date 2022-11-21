@@ -22,17 +22,9 @@ table {
   justify-content: start;
 }
 
-.mat-column-name {
-  width: 300px !important;
-}
-
-.mat-column-dataService {
-  width: 300px !important;
-}
-
 .table-wrapper {
   width: 600px;
-  height: 370px;
+  max-height: 380px;
   overflow: auto;
   padding-left: 16px;
   padding-right: 16px;
@@ -60,6 +52,9 @@ table {
 // ::ng-deep .mat-column-lastUpdated {
 //   width: 15% !important;
 // }
+
+
+
 
 ::ng-deep .mat-column-name {
   width: 40% !important;

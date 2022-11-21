@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ItemOnlineComponent implements OnInit {
 
   @Input() online: boolean = true;
+  @Input() showLabel: boolean = true;
 
   constructor() { }
 

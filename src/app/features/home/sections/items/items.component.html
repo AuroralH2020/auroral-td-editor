@@ -1,87 +1,25 @@
-<div class="pl-2 pt-2 pb-2 table-wrarpper flex flex-col">
+<div class="pl-2 pt-2 pb-2 content-wrarpper flex flex-col">
   <div class="grow bg-white-50">
     <app-tab-group>
       <app-tab label="All Items">
-        <mat-card>
-          <app-table [columns]="allItemsColumns" [fetchData]="fetchAllItems">
-            <ng-template #headerCellRef let-columnName>
-              <div *ngIf="columnName === 'dataAccess'; else elseColumnName">
-                Status
-              </div>
-              <ng-template #elseColumnName>
-                <div>{{ columnName | titlecase }}</div>
-              </ng-template>
-            </ng-template>
-            <ng-template #cellRef let-data let-columnName="columnName">
-              <div *ngIf="columnName === 'name'" class="font-medium opacity-50">
-                {{ data }}
-              </div>
-              <div *ngIf="columnName === 'type'" class="opacity-80">
-                <app-item-pictogram [name]="data"></app-item-pictogram>
-              </div>
-              <div *ngIf="columnName === 'owner'">
-                <app-item-owner [owner]="data"></app-item-owner>
-              </div>
-              <div *ngIf="columnName === 'subscribers'" class="opacity-80">
-                <app-item-subscribers [companies]="data"></app-item-subscribers>
-              </div>
-              <div *ngIf="columnName === 'dataAccess'" class="opacity-80">
-                <app-item-online [online]="data"></app-item-online>
-              </div>
-            </ng-template>
-            <ng-template #detailRef let-detail>
-              <app-item-detail
-                *ngIf="detail"
-                [detail]="detail"
-                class="w-full"
-              ></app-item-detail>
-            </ng-template>
-          </app-table>
-        </mat-card>
+        <div class="px-4">
+          <app-items-table
+            [columns]="allItemsColumns"
+            [fetchItems]="fetchAllItems"
+          >
+          </app-items-table>
+        </div>
       </app-tab>
       <app-tab label="My Items">
-        <mat-card>
-          <app-table
+        <div class="px-4">
+          <app-items-table
             [columns]="myItemsColumns"
-            [fetchData]="fetchMyItems"
-            emptyMessage="Unfortunately, you do not have any items yet."
-            [emptyAction]="{
-              buttonMessage: 'Add first item',
-              action: myItemsEmpty
-            }"
+            [fetchItems]="fetchMyItems"
           >
-            <ng-template #headerCellRef let-columnName>
-              <div *ngIf="columnName === 'dataAccess'; else elseColumnName">
-                Status
-              </div>
-              <ng-template #elseColumnName>
-                <div>{{ columnName | titlecase }}</div>
-              </ng-template>
-            </ng-template>
-            <ng-template #cellRef let-data let-columnName="columnName">
-              <div *ngIf="columnName === 'name'" class="font-medium opacity-50">
-                {{ data }}
-              </div>
-              <div *ngIf="columnName === 'type'" class="opacity-80">
-                <app-item-pictogram [name]="data"></app-item-pictogram>
-              </div>
-              <div *ngIf="columnName === 'subscribers'" class="opacity-80">
-                <app-item-subscribers [companies]="data"></app-item-subscribers>
-              </div>
-              <div *ngIf="columnName === 'dataAccess'" class="opacity-80">
-                <app-item-online [online]="data"></app-item-online>
-              </div>
-            </ng-template>
-            <ng-template #detailRef let-detail>
-              <app-item-detail
-                *ngIf="detail"
-                [detail]="detail"
-                class="w-full"
-              ></app-item-detail>
-            </ng-template>
-          </app-table>
-        </mat-card>
+          </app-items-table>
+        </div>
       </app-tab>
     </app-tab-group>
   </div>
 </div>
+

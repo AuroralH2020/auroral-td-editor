@@ -6,7 +6,7 @@ import { Monitor, Property, Event } from '@core/models/monitor.model'
 import { Subscription, SubscriptionCreate } from '@core/models/subscription.model'
 import { DataServiceService } from '@core/services/data-service/data-service.service'
 import isEqual from 'lodash.isequal'
-import { isEvent, isPropery, isEventSubscription, isProperySubscription } from 'src/app/utils'
+import { isEvent, isPropery, isEventSubscription, isProperySubscription, stringSortListOfObjects } from 'src/app/utils'
 import { SnackBarService } from '@core/services/snack-bar/snack-bar.service'
 import { FormControl, FormGroup } from '@angular/forms'
 
@@ -45,13 +45,7 @@ export class ItemManageSubscriptionsComponent implements OnInit {
   }
 
   private _sortDataSource() {
-    this.dataSource.sort((e1, e2) => {
-      if (!e1.name) return -1
-      if (!e2.name) return 1
-      if (e1.name > e2.name) return 1
-      if (e1.name < e2.name) return -1
-      return 0
-    })
+    stringSortListOfObjects(this.dataSource, 'name')
   }
 
   private _initDataSources() {
@@ -136,6 +130,7 @@ export class ItemManageSubscriptionsComponent implements OnInit {
   }
 
   private _addLocal(subscription: Subscription) {
+    console.log(this.data.detail)
     if (isProperySubscription(subscription)) {
       this.data.detail.propertySubscriptions.push(subscription)
     } else if (isEventSubscription(subscription)) {
@@ -187,7 +182,7 @@ export class ItemManageSubscriptionsComponent implements OnInit {
         await this._removeCandidates()
         this.loading = false
         this.close()
-        this._snackbar.showMessage('Subscriptions changed.')
+        this._snackbar.showMessage('Subscriptions updated.')
       } catch (error) {
         console.error(error)
         this.loading = false

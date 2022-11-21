@@ -13,7 +13,8 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSelectModule } from '@angular/material/select'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatBadgeModule } from '@angular/material/badge'
 
 import { SharedModule } from '@shared/shared.module'
 
@@ -31,9 +32,13 @@ import { ItemSubscribersComponent } from './sections/items/components/item-subsc
 import { ItemOnlineComponent } from './sections/items/components/item-online/item-online.component'
 import { ItemOwnerComponent } from './sections/items/components/item-owner/item-owner.component'
 import { ItemInteractionComponent } from './sections/items/components/item-monitor/item-monitor.component'
-import { ItemSubscriptionsComponent } from './sections/items/components/item-subscriptions/item-subscriptions.component'
+import { ItemSubscriptionsComponent } from './sections/items/item-detail/components/item-subscriptions/item-subscriptions.component'
 import { ItemPictogramComponent } from './sections/items/components/item-pictogram/item-pictogram.component'
 import { ItemManageSubscriptionsComponent } from './sections/items/item-manage-subscriptions/item-manage-subscriptions.component'
+import { ItemMonitorsComponent } from './sections/items/item-detail/components/item-monitors/item-monitors.component'
+import { ItemMonitorsDialogComponent } from './sections/items/item-detail/components/item-monitors/item-monitors-dialog/item-monitors-dialog.component';
+import { ItemSubcribersBadgeComponent } from './sections/items/components/item-subcribers-badge/item-subcribers-badge.component';
+import { ItemsTableComponent } from './sections/items/components/items-table/items-table.component'
 
 @NgModule({
   declarations: [
@@ -53,6 +58,10 @@ import { ItemManageSubscriptionsComponent } from './sections/items/item-manage-s
     ItemSubscriptionsComponent,
     ItemPictogramComponent,
     ItemManageSubscriptionsComponent,
+    ItemMonitorsComponent,
+    ItemMonitorsDialogComponent,
+    ItemSubcribersBadgeComponent,
+    ItemsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -71,7 +80,8 @@ import { ItemManageSubscriptionsComponent } from './sections/items/item-manage-s
     MatCheckboxModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatBadgeModule,
   ],
   providers: [],
 })

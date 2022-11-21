@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Property, Event } from "@core/models/monitor.model";
+import { Monitor } from "@core/models/monitor.model";
 
 interface Category {
   icon: string;
@@ -12,7 +12,7 @@ interface Category {
   styleUrls: ["./item-monitor.component.scss"],
 })
 export class ItemInteractionComponent implements OnInit {
-  @Input() monitor: Property | Event | undefined;
+  @Input() monitor: Monitor | undefined;
   @Input() textStyleClasses: string | undefined;
 
   categories: Map<string, Category> = new Map<string, Category>();

@@ -1,11 +1,11 @@
 <div class="flex items-center" *ngIf="monitor">
   <div *ngIf="hasCategory; else noCategory">
-    <div [ngStyle]="{ color: categoryColor }" class="cat-icon w-8">
+    <div [ngStyle]="{ color: categoryColor }" class="cat-icon w-8 mt-0.5">
       <mat-icon>{{ categoryIcon }}</mat-icon>
     </div>
   </div>
   <ng-template #noCategory>
-    <div class="no-cat-icon w-8 text-secondary-300">
+    <div class="no-cat-icon w-8 text-secondary-300 mt-0.5">
       <mat-icon>circle</mat-icon>
     </div>
   </ng-template>

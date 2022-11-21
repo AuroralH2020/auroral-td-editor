@@ -11,13 +11,12 @@
           <div class="text-3xl font-medium opacity-30">(^_^)</div>
           <div *ngIf="detail.noMonitors; else elseBlock">
             <div class="font-medium mt-4 opacity-30 w-60 text-center">
-              This item does not have any properties or events you can subscribe
-              to.
+              This item does not have any properties or events available for subscription
             </div>
           </div>
           <ng-template #elseBlock>
             <div class="font-medium mt-4 opacity-30 w-60 text-center">
-              You do not have any active subscriptions to this item.
+              There are no active subscriptions to this item
             </div>
             <div class="mt-6 opacity-50">
               <app-button
@@ -40,9 +39,7 @@
               <app-item-monitor
                 [monitor]="{
                   monitors: element.monitors,
-                  name: element.iid,
-                  pid: element.iid,
-                  measures: element.iid
+                  name: element.iid
                 }"
                 textStyleClasses="font-medium opacity-60"
               ></app-item-monitor>
