@@ -5,8 +5,7 @@ import { Item } from '@core/models/item.model'
 import { Monitor, Property, Event } from '@core/models/monitor.model'
 import { Subscription, SubscriptionCreate } from '@core/models/subscription.model'
 import { DataServiceService } from '@core/services/data-service/data-service.service'
-import isEqual from 'lodash.isequal'
-import { isEvent, isPropery, isEventSubscription, isProperySubscription, stringSortListOfObjects } from 'src/app/utils'
+import { isEvent, isPropery, isEventSubscription, isProperySubscription, stringSortListOfObjects, deepEqual } from 'src/app/utils'
 import { SnackBarService } from '@core/services/snack-bar/snack-bar.service'
 import { FormControl, FormGroup } from '@angular/forms'
 
@@ -113,7 +112,7 @@ export class ItemManageSubscriptionsComponent implements OnInit {
 
   private _candidateForAdd(subscription: SubscriptionCreate): boolean {
     for (let initial of this._initialSubscriptions) {
-      if (isEqual(subscription, initial)) {
+      if (deepEqual(subscription, initial)) {
         return false
       }
     }
@@ -122,7 +121,7 @@ export class ItemManageSubscriptionsComponent implements OnInit {
 
   private _canditateForRemove(subscription: SubscriptionCreate): boolean {
     for (let selected of this._selectedSubscriptions) {
-      if (isEqual(subscription, selected)) {
+      if (deepEqual(subscription, selected)) {
         return false
       }
     }
@@ -241,7 +240,7 @@ export class ItemManageSubscriptionsComponent implements OnInit {
   }
 
   get changesDetected(): boolean {
-    return !isEqual(this._initialSubscriptions, this._selectedSubscriptions)
+    return !deepEqual(this._initialSubscriptions, this._selectedSubscriptions)
   }
 }
 
