@@ -5,7 +5,7 @@
   "projects": {
     "ng-new-app": {
       "i18n": {
-        "sourceLocale": "en-US",
+        "sourceLocale": "en",
         "locales": {
           "sk": "src/locale/messages.sk.xlf"
         }
@@ -26,7 +26,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": ["en-US"],
+            "localize": ["en"],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -58,7 +58,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "3mb",
-                  "maximumError": "4kb"
+                  "maximumError": "200kb"
                 }
               ],
               "fileReplacements": [

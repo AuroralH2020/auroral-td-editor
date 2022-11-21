@@ -1,4 +1,3 @@
-FROM node:16-slim as base
-LABEL version="1.0"
-LABEL maintaner="matej.kokol@bavenir.eu"
-LABEL release-date="21-11-2022"
+FROM nginx:stable
+COPY ./dist/* /usr/share/nginx/html/
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
