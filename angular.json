@@ -5,9 +5,9 @@
   "projects": {
     "ng-new-app": {
       "i18n": {
-        "sourceLocale": "en",
-        "locales": {
-          "sk": "src/locale/messages.sk.xlf"
+        "sourceLocale": {
+          "code": "en",
+          "baseHref": "/en/"
         }
       },
       "projectType": "application",
