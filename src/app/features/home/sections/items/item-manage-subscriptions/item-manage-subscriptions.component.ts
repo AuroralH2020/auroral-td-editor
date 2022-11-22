@@ -129,7 +129,6 @@ export class ItemManageSubscriptionsComponent implements OnInit {
   }
 
   private _addLocal(subscription: Subscription) {
-    console.log(this.data.detail)
     if (isProperySubscription(subscription)) {
       this.data.detail.propertySubscriptions.push(subscription)
     } else if (isEventSubscription(subscription)) {
