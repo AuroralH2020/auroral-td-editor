@@ -24,7 +24,11 @@
       <div class="item">
         <div class="label">Parent node:</div>
         <div class="content">
-          <app-pictogram [name]="detail.node.name" type="node"></app-pictogram>
+          <app-pictogram
+            [name]="detail.node.name"
+            type="node"
+            [extraInfo]="detail.node.base"
+          ></app-pictogram>
         </div>
       </div>
       <div class="item">

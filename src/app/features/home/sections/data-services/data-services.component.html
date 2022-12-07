@@ -68,7 +68,11 @@
           </app-copy-to-clipboard>
         </div>
         <div *ngIf="columnName === 'node'">
-          <app-pictogram [name]="data.node.name" type="node"></app-pictogram>
+          <app-pictogram
+            [name]="data.node.name"
+            type="node"
+            [extraInfo]="data.node.base"
+          ></app-pictogram>
         </div>
       </ng-template>
       <ng-template #detailRef let-detail>

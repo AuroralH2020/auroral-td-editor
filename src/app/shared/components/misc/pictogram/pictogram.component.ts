@@ -10,6 +10,7 @@ export type PictogramType = 'device' | 'service' | 'node'
 export class PictogramComponent implements OnInit {
   @Input() name: string | null | undefined
   @Input() type: PictogramType | null | undefined
+  @Input() extraInfo: string | null | undefined
   @Input() textStyleClasses: string | undefined
 
   icon!: string
