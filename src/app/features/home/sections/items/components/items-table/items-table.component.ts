@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Items } from '@core/models/item.model';
+import { PictogramType } from '@shared/components/misc/pictogram/pictogram.component';
 
 @Component({
   selector: 'app-items-table',

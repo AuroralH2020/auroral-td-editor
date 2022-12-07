@@ -33,7 +33,7 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
     return next.handle(newReq).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          event = event.clone({ body: event.body.message })
+          event = event.clone({ body: event.body?.message })
         }
         return event
       }),
@@ -43,19 +43,14 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
       })
     )
   }
-
   error(err: any) {
     if (err instanceof HttpErrorResponse) {
-      if (err.error instanceof ErrorEvent) {
-        // A client-side or network error occurred. Handle it accordingly.
-        this._snackBar.showError(err.message)
-        console.error('An error occurred:', err.message)
-      } else {
-        // The backend returned an unsuccessful response code.
-        // The response body may contain clues as to what went wrong,
-        this._snackBar.showError(err.message)
-        console.error(`Backend returned code ${err.status}, ` + `body was: ${err.message}`)
-      }
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      const error = err.error
+      this._snackBar.showError(error.statusCodeReason ?? err.message)
+      console.error(`Backend returned code ${err.status}`)
+      console.error(error)
     } else {
       this._snackBar.showError(err.toString())
       console.error(err.toString())

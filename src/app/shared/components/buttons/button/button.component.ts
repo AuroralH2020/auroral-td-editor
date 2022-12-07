@@ -10,13 +10,13 @@ type ButtonSize = 'small' | 'medium' | 'large'
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
-  @Input() text: string = ''
   @Input() disabled: boolean = false
   @Input() loading: boolean = false
   @Input() type: ButtonType = 'mat-flat-button'
   @Input() theme: ButtonTheme = 'primary'
   @Input() size: ButtonSize = 'small'
   @Input() actionType: string = ''
+  @Input() width: number | undefined
 
   constructor() {}
 
@@ -25,5 +25,9 @@ export class ButtonComponent implements OnInit {
   @HostBinding('class')
   get hostClass(): string {
     return this.disabled ? 'disabled' : 'enabled'
+  }
+
+  get style() {
+    return { width: this.width ? `${this.width}px` : '' }
   }
 }

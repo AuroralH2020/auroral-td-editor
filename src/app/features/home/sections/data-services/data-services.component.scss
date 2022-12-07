@@ -1,0 +1,9 @@
+@import "styles";
+
+.icon-plus-small {
+  @include icon-size(16px);
+}
+
+.icon-plus-big {
+  @include icon-size(18px);
+}

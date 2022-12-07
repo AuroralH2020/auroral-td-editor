@@ -59,8 +59,57 @@ body {
   @apply bg-danger-500;
 }
 
+::ng-deep .mat-form-field {
+  .mat-input-element {
+    @apply text-primary-500;
+  }
+}
+
+::ng-deep .mat-form-field-flex {
+  cursor: text;
+}
+
+::ng-deep .mat-select-placeholder {
+  @apply text-xs
+}
+
+::ng-deep .mat-select-panel{
+  margin-top: 24px;
+}
+
+::ng-deep .mat-ink-bar {
+  border-bottom: 2px solid theme("colors.secondary.500");
+}
+
 .custom-shadow {
   -webkit-box-shadow: 0px 2px 6px -4px rgba(0, 0, 0, 0.45);
   -moz-box-shadow: 0px 2px 6px -4px rgba(0, 0, 0, 0.45);
   box-shadow: 0px 2px 6px -4px rgba(0, 0, 0, 0.45);
 }
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.item {
+  @apply text-sm;
+}
+
+.item .label {
+  @apply opacity-60 font-medium text-xs;
+}
+
+.item .content {
+  @apply pl-1 p-0.5;
+}
+
+.no-data {
+  @apply text-xs  opacity-30 font-medium w-48;
+}
+

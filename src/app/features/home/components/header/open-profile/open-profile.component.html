@@ -1,10 +1,6 @@
 <div class="cursor-pointer px-3 py-2" [matMenuTriggerFor]="menu">
   <div *ngIf="isLoggedIn; else elseBlock">
-    <app-avatar
-      [photoUrl]="photo"
-      name="bAvenir"
-      [size]="32"
-    ></app-avatar>
+    <app-avatar [photoUrl]="photo" name="bAvenir" [size]="32"></app-avatar>
   </div>
   <ng-template #elseBlock
     ><mat-icon class="align-middle opacity-60"
@@ -14,7 +10,7 @@
 </div>
 <mat-menu #menu="matMenu" md-prevent-menu-close="md-prevent-menu-close">
   <div
-    class="text-center menu-container text-primary-200 p-4 flex flex-col justify-center items-center"
+    class="text-center menu-container text-primary-200 py-4 px-6 flex flex-col justify-center items-center"
   >
     <div *ngIf="isLoggedIn; else elseBlock">
       <app-avatar
@@ -35,20 +31,20 @@
     <div class="h-4"></div>
     <div class="flex flex-col">
       <app-button
-        text="Profile"
         type="mat-flat-button"
         theme="primary"
         size="medium"
         class="opacity-80"
-      ></app-button>
+        >Profile</app-button
+      >
       <app-button
-        text="Log out"
         type="mat-button"
         theme="accent"
         size="medium"
         [loading]="loading"
         (click)="$event.stopPropagation(); logout()"
-      ></app-button>
+        >Log out</app-button
+      >
     </div>
   </div>
 </mat-menu>

@@ -12,13 +12,26 @@
           [online]="data.dataAccess"
           [showLabel]="false"
         ></app-item-online>
-        <div class="font-medium opacity-50">
-          {{ data.name }}
-        </div>
+        <app-pictogram
+          [name]="data.name"
+          [type]="data.pictogramType"
+        ></app-pictogram>
       </div>
     </div>
-    <div *ngIf="columnName === 'type'" class="opacity-80">
-      <app-item-pictogram [name]="data.type"></app-item-pictogram>
+    <div *ngIf="columnName === 'oid'">
+      <app-copy-to-clipboard
+        message="Oid copied to clipboard"
+        [value]="data.oid"
+      >
+        <div
+          class="text-xs font-medium opacity-30 cursor-pointer"
+        >
+          {{ data.oid }}
+        </div>
+      </app-copy-to-clipboard>
+    </div>
+    <div *ngIf="columnName === 'type'" class="opacity-30 text-xs font-medium">
+      {{ data.type ?? data.pictogramType | titlecase }}
     </div>
     <div *ngIf="columnName === 'owner'">
       <app-item-owner [owner]="data.owner"></app-item-owner>

@@ -7,11 +7,11 @@ import { firstValueFrom, map, take } from 'rxjs'
   providedIn: 'root',
 })
 export class ItemService {
-  private _itemsUrl = '/api/ui/items/items'
+  private _itemsUrl = '/api/ui/items'
 
   constructor(private _http: HttpClient) {}
 
-  async fetchItems(page: number, size: number, myItems: boolean | undefined): Promise<Items> {
+  async getItems(page: number, size: number, myItems: boolean | undefined): Promise<Items> {
     const params = new HttpParams({
       fromObject: {
         offset: page * size,

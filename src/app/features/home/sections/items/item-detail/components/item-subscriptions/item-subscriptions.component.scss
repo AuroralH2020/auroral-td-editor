@@ -36,31 +36,6 @@ table {
   width: 100%;
 }
 
-// ::ng-deep .mat-column-name {
-//   width: 30% !important;
-// }
-
-// ::ng-deep .mat-column-type {
-//   width: 15% !important;
-// }
-
-// ::ng-deep .mat-column-service {
-//   width: 25% !important;
-// }
-
-// ::ng-deep .mat-column-created,
-// ::ng-deep .mat-column-lastUpdated {
-//   width: 15% !important;
-// }
-
-
-
-
-::ng-deep .mat-column-name {
-  width: 40% !important;
-}
-
-::ng-deep .mat-column-type,
-::ng-deep .mat-column-service {
-  width: 30% !important;
+.icon {
+  @include icon-size(18px)
 }

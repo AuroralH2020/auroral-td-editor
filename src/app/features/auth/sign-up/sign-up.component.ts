@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BroadcasterService } from '@core/services/broadcaster/broadcaster.service';
 import { CONSTANTS } from '@core/services/constants';
@@ -16,8 +16,31 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   loading: boolean = false;
 
+  protected form!: FormGroup;
+  protected username: FormControl = new FormControl("", {
+    validators: Validators.required,
+    updateOn: "change",
+  });
+  protected email: FormControl = new FormControl("", {
+    validators: Validators.required,
+    updateOn: "change",
+  });
+  protected password: FormControl = new FormControl("", {
+    validators: Validators.required,
+    updateOn: "change",
+  });
+  protected reapeatPassword: FormControl = new FormControl("", {
+    validators: Validators.required,
+    updateOn: "change",
+  });
+
   ngOnInit(): void {
-    return;
+    this.form = new FormGroup({
+      username: this.username,
+      email: this.email,
+      password: this.password,
+      reapeatPassword: this.reapeatPassword,
+    });
   }
 
   constructor(private _broadcatser: BroadcasterService, private _router: Router) {

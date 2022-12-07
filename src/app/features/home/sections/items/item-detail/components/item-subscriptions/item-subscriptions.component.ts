@@ -28,12 +28,11 @@ export class ItemSubscriptionsComponent {
 
   async openManageSubscriptions(): Promise<void> {
     this.loading = true
-    const dataServices = await this._dataService.fetchAllDataServices()
+    const dataServices = await this._dataService.getDataServices()
     const dialogRef = this._dialog.open(ItemManageSubscriptionsComponent, {
       width: '900px',
       minHeight: '580px',
       maxHeight: '648px',
-      disableClose: true,
       data: { detail: this.detail, dataServices },
     })
     this.loading = false

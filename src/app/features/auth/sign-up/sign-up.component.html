@@ -20,37 +20,42 @@
         >
       </div>
       <div class="h-11"></div>
-      <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+      <form [formGroup]="form">
         <div class="grid gap-4 grid-cols-1 text-center">
-          <app-form-field
-            label="Full name"
-            [leadingSpace]="true"
-          ></app-form-field>
-          <app-form-field
+          <div class="ml-12">
+            <app-text-field
+              [control]="username"
+              label="Full name"
+            ></app-text-field>
+          </div>
+          <app-text-field
+            [control]="email"
             label="Email"
             leadingIcon="alternate_email"
-          ></app-form-field>
+          ></app-text-field>
           <div class="h-4"></div>
-          <app-form-field
+          <app-text-field
+            [control]="password"
             label="Password"
             [isSecret]="true"
             leadingIcon="lock"
-          ></app-form-field>
-          <app-form-field
+          ></app-text-field>
+          <app-text-field
+            [control]="reapeatPassword"
             label="Repeat password"
             [isSecret]="true"
             leadingIcon="lock"
-          ></app-form-field>
+          ></app-text-field>
           <div class="buttons-wrapper grid gap-1 grid-cols-1 text-center">
             <app-button
-              text="Sign up"
               type="mat-raised-button"
               theme="accent"
               size="large"
               actionType="submit"
               [loading]="loading"
               class="pt-6 pb-2"
-            ></app-button>
+              >Sign up</app-button
+            >
             <div i18n>Already have an account?</div>
             <app-hyperlink
               text="Log in"

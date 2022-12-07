@@ -1,4 +1,6 @@
-import { Property, Event } from './monitor.model'
+import { PictogramType } from '@shared/index'
+import { DataService } from './data-service.model'
+import { Property, Event, Monitor } from './monitor.model'
 import { Organisation } from './organisation.model'
 import { Subscription } from './subscription.model'
 
@@ -96,5 +98,29 @@ export class Item {
 
   public get eventSubscriptionsCount(): number {
     return this.eventSubscriptions?.length ?? 0
+  }
+
+  public get pictogramType(): PictogramType {
+    if (this.name?.toLocaleLowerCase()?.includes('service')) {
+      return 'service'
+    } else {
+      return 'device'
+    }
+  }
+
+  public getProperty(pid: string): Monitor | undefined {
+    return this.properties.find((element) => element.pid === pid)
+  }
+
+  public getEvent(eid: string): Monitor | undefined {
+    return this.events.find((element) => element.eid === eid)
+  }
+
+  public getPropertySubscription(pid: string, dataService: DataService): Subscription | undefined {
+    return this.propertySubscriptions.find((element) => element.iid === pid && element.service.oid === dataService.oid)
+  }
+
+  public getEventSubscription(eid: string, dataService: DataService): Subscription | undefined {
+    return this.eventSubscriptions.find((element) => element.iid === eid && element.service.oid === dataService.oid)
   }
 }

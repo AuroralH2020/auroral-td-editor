@@ -14,38 +14,39 @@ table {
 
 .element-row td {
   border-bottom-color: rgba($color: grey, $alpha: 0.15);
+}
+
+mat-flat-button {
+  width: 500px;
+}
+
+.arrow-icon .mat-icon {
+  @include icon-size(12px);
+}
+.mat-column-name {
+  width: 35%;
+}
+
+.mat-column-type {
+  width: 20%;
+}
+
+.mat-column-service {
+  width: 35%;
+}
+
+.mat-column-selected {
+  width: 10%;
+}
+
+.menu-item {
   cursor: pointer;
 }
 
-::ng-deep .mat-column-name {
-  width: 25% !important;
+.menu-item:hover {
+  background: whitesmoke;
 }
 
-::ng-deep .mat-column-type {
-  width: 20% !important;
-}
-
-::ng-deep .mat-column-service {
-  width: 35% !important;
-}
-
-::ng-deep .mat-column-selected {
-  width: 10% !important;
-}
-
-::ng-deep .mat-form-field-wrapper {
-  margin-top: -1.25em;
-  margin-bottom: -1.25em;
-}
-
-::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: transparent;
-}
-
-::ng-deep .mat-form-field-underline {
-  display: none;
-}
-
-::ng-deep .mat-select-placeholder {
-  @apply text-xs
+.menu-item-selected {
+  background: whitesmoke;
 }

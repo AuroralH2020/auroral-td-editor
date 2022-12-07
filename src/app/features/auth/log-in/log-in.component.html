@@ -2,7 +2,7 @@
 <div class="h-4/5 flex items-center justify-center">
   <div class="flex items-center justify-center">
     <mat-card>
-      <div class="pl-10 pr-6 pt-4 pb-40">
+      <div class="px-10 pt-4 pb-40">
         <div class="flex justify-between">
           <div class="mt-8">
             <div
@@ -23,46 +23,56 @@
         </div>
         <div class="h-11"></div>
         <form [formGroup]="form">
-          <div class="grid gap-4 grid-cols-1 text-center">
-            <app-form-field
-              formControlName="username"
+          <div
+            class="flex flex-col gap-4 text-center items-center justify-center text-fields"
+          >
+            <app-text-field
+              [control]="username"
               label="Username"
               leadingIcon="person"
-              [required]="true"
+              placeholder="john.doe@example.com"
             >
-              <mat-error *ngIf="form.controls['username'].hasError('required')"
-                >Please provide username</mat-error
+              <div
+                *ngIf="username.invalid && (username.dirty || username.touched)"
               >
-            </app-form-field>
-            <app-form-field
-              formControlName="password"
+                <mat-error *ngIf="username.hasError('required')"
+                  >Please provide username</mat-error
+                >
+              </div>
+            </app-text-field>
+            <app-text-field
+              [control]="password"
               label="Password"
               [isSecret]="true"
               leadingIcon="lock"
-              [required]="true"
             >
-              <mat-error *ngIf="form.controls['password'].hasError('required')"
-                >Please provide password</mat-error
-              ></app-form-field
-            >
-            <div class="grid grid-cols-1 gap-1">
+              <div
+                *ngIf="password.invalid && (password.dirty || password.touched)"
+              >
+                <mat-error *ngIf="password.hasError('required')"
+                  >Please provide password</mat-error
+                >
+              </div>
+            </app-text-field>
+          </div>
+          <div class="flex flex-col gap-1 text-center">
+            <div class="pt-6 pb-2">
               <app-button
-                text="Log in"
                 type="mat-raised-button"
                 theme="accent"
                 size="large"
                 [loading]="loading"
-                class="pt-6 pb-2"
                 [disabled]="form.invalid"
                 (click)="onLoginClick()"
               >
+                Log in
               </app-button>
-              <div i18n>Don’t have an account?</div>
-              <app-hyperlink
-                text="Craete account"
-                [routerLink]="['/auth/signup']"
-              ></app-hyperlink>
             </div>
+            <div i18n>Don’t have an account?</div>
+            <app-hyperlink
+              text="Craete account"
+              [routerLink]="['/auth/signup']"
+            ></app-hyperlink>
           </div>
         </form>
       </div>

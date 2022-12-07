@@ -1,0 +1,84 @@
+<div class="px-4">
+  <div
+    *ngIf="loadingDataServices; else elseShowTable"
+    class="flex justify-center items-center py-64"
+  >
+    <mat-spinner [diameter]="32"></mat-spinner>
+  </div>
+  <ng-template #elseShowTable>
+    <div class="flex flex-row justify-end mt-6 mr-2">
+      <app-button
+        *ngIf="dataServices.data.length > 0"
+        size="small"
+        type="mat-flat-button"
+        theme="accent"
+        (click)="openCreateDataService()"
+        [loading]="loadingNodes"
+      >
+        <div class="flex flex-row justify-center items-center gap-1">
+          <mat-icon class="icon-plus-small">add_circle_outline</mat-icon>
+          <div>Create</div>
+        </div>
+      </app-button>
+    </div>
+    <app-table
+      [columns]="dataServicesColumns"
+      [data]="dataServices"
+      emptyMessage="No Data Services found"
+    >
+      <ng-template #emptyRef>
+        <app-button
+          size="medium"
+          type="mat-stroked-button"
+          theme="accent"
+          [width]="240"
+          (click)="openCreateDataService()"
+          [loading]="loadingNodes"
+        >
+          <div class="flex flex-row justify-center items-center gap-1">
+            <mat-icon class="icon-plus-big">add_circle_outline</mat-icon>
+            <div>Create First Data Service</div>
+          </div>
+        </app-button>
+      </ng-template>
+      <ng-template #headerCellRef let-columnName>
+        <ng-container [ngSwitch]="true">
+          <div *ngSwitchCase="columnName === 'node'">Parent node</div>
+          <div *ngSwitchDefault>{{ columnName | titlecase }}</div>
+        </ng-container>
+      </ng-template>
+      <ng-template #cellRef let-data let-columnName="columnName">
+        <div *ngIf="columnName === 'name'">
+          <div class="flex flex-row items-center">
+            <app-item-online
+              [online]="data.online"
+              [showLabel]="false"
+            ></app-item-online>
+            <app-pictogram [name]="data.name" type="service"></app-pictogram>
+          </div>
+        </div>
+        <div *ngIf="columnName === 'oid'">
+          <app-copy-to-clipboard
+            message="Oid copied to clipboard"
+            [value]="data.oid"
+          >
+            <div class="text-xs font-medium opacity-30 cursor-pointer">
+              {{ data.oid }}
+            </div>
+          </app-copy-to-clipboard>
+        </div>
+        <div *ngIf="columnName === 'node'">
+          <app-pictogram [name]="data.node.name" type="node"></app-pictogram>
+        </div>
+      </ng-template>
+      <ng-template #detailRef let-detail>
+        <app-data-service-detail
+          *ngIf="detail"
+          [detail]="detail"
+          [deleteCallback]="deleteDataService"
+          class="w-full"
+        ></app-data-service-detail>
+      </ng-template>
+    </app-table>
+  </ng-template>
+</div>

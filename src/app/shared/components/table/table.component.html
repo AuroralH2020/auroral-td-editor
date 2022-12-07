@@ -2,19 +2,16 @@
   <div *ngIf="isLoading" class="flex justify-center items-center py-64">
     <mat-spinner [diameter]="32"></mat-spinner>
   </div>
-  <div *ngIf="isEmpty" class="flex flex-col justify-center items-center py-20">
+  <div
+    *ngIf="!isLoading && isEmpty"
+    class="flex flex-col justify-center items-center py-20"
+  >
     <div class="text-3xl font-medium opacity-30">(^_^)</div>
     <div class="font-medium mt-4 opacity-30 w-60 text-center">
       {{ emptyMessage ?? "No items found" }}
     </div>
-    <div *ngIf="emptyAction" class="mt-6 opacity-60">
-      <app-button
-        [text]="emptyAction.buttonMessage"
-        size="medium"
-        theme="primary"
-        type="mat-stroked-button"
-      ></app-button>
-    </div>
+    <div class="h-8"></div>
+    <ng-template *ngIf="emptyRef" [ngTemplateOutlet]="emptyRef"></ng-template>
   </div>
   <div class="flex flex-col">
     <table
@@ -80,7 +77,7 @@
     </table>
     <mat-paginator
       #paginator
-      *ngIf="!isEmpty"
+      *ngIf="!isEmpty && data === undefined"
       [pageIndex]="currentPage"
       [pageSize]="pageSize"
       [pageSizeOptions]="pageSizeOptions"

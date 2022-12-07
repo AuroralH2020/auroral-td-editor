@@ -32,25 +32,31 @@ export function stringSortListOfObjects(array: any[], key: string) {
 }
 
 export function deepEqual(object1: any, object2: any) {
-  const keys1 = Object.keys(object1);
-  const keys2 = Object.keys(object2);
+  const keys1 = Object.keys(object1)
+  const keys2 = Object.keys(object2)
   if (keys1.length !== keys2.length) {
-    return false;
+    return false
   }
   for (const key of keys1) {
-    const val1 = object1[key];
-    const val2 = object2[key];
-    const areObjects = isObject(val1) && isObject(val2);
-    if (
-      areObjects && !deepEqual(val1, val2) ||
-      !areObjects && val1 !== val2
-    ) {
-      return false;
+    const val1 = object1[key]
+    const val2 = object2[key]
+    const areObjects = isObject(val1) && isObject(val2)
+    if ((areObjects && !deepEqual(val1, val2)) || (!areObjects && val1 !== val2)) {
+      return false
     }
   }
-  return true;
+  return true
 }
 
 export function isObject(object: any) {
-  return object != null && typeof object === 'object';
+  return object != null && typeof object === 'object'
+}
+
+type Protocol = 'http' | 'https'
+
+export function parseURL(str: string, protocol: Protocol | undefined): string {
+  if (str.startsWith('http://') || str.startsWith('https://')) {
+    return str
+  }
+  return protocol ? `${protocol}://${str}` : str
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -24,29 +23,16 @@ export class LogInComponent implements OnInit {
     validators: Validators.required,
     updateOn: "change",
   });
-  protected password: FormControl = new FormControl("", [Validators.required]);
+  protected password: FormControl = new FormControl("", {
+    validators: Validators.required,
+    updateOn: "change",
+  });
 
   ngOnInit(): void {
     this.form = new FormGroup({
       username: this.username,
       password: this.password,
     });
-  }
-
-  getEmailErrorMessage() {
-    if (this.username.hasError("required")) {
-      return "You must enter a value";
-    }
-
-    return this.username.hasError("email") ? "Not a valid email" : "";
-  }
-
-  getPasswordErrorMessage() {
-    if (this.username.hasError("required")) {
-      return "You must enter a value";
-    }
-
-    return this.username.hasError("minLength") ? "Password too short" : "";
   }
 
   onLoginClick() {

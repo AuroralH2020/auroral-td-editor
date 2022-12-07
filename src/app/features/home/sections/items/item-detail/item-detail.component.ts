@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Item } from '@core/models/item.model'
-import { Property, Event } from '@core/models/monitor.model'
-import { Subscription } from '@core/models/subscription.model'
+import { PictogramType } from '@shared/components/misc/pictogram/pictogram.component'
 
 @Component({
   selector: 'app-item-detail',

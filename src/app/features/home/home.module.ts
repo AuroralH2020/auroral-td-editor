@@ -15,6 +15,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSelectModule } from '@angular/material/select'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatBadgeModule } from '@angular/material/badge'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatButtonModule } from '@angular/material/button'
 
 import { SharedModule } from '@shared/shared.module'
 
@@ -26,19 +29,25 @@ import { OpenProfileComponent } from './components/header/open-profile/open-prof
 import { NotificationBellComponent } from './components/header/notification-bell/notification-bell.component'
 import { NavButtonComponent } from './components/side-nav/nav-button/nav-button.component'
 import { ItemsComponent } from './sections/items/items.component'
-import { CompaniesComponent } from './sections/companies/companies.component'
 import { ItemDetailComponent } from './sections/items/item-detail/item-detail.component'
 import { ItemSubscribersComponent } from './sections/items/components/item-subscribers/item-subscribers.component'
 import { ItemOnlineComponent } from './sections/items/components/item-online/item-online.component'
 import { ItemOwnerComponent } from './sections/items/components/item-owner/item-owner.component'
 import { ItemInteractionComponent } from './sections/items/components/item-monitor/item-monitor.component'
 import { ItemSubscriptionsComponent } from './sections/items/item-detail/components/item-subscriptions/item-subscriptions.component'
-import { ItemPictogramComponent } from './sections/items/components/item-pictogram/item-pictogram.component'
 import { ItemManageSubscriptionsComponent } from './sections/items/item-manage-subscriptions/item-manage-subscriptions.component'
 import { ItemMonitorsComponent } from './sections/items/item-detail/components/item-monitors/item-monitors.component'
-import { ItemMonitorsDialogComponent } from './sections/items/item-detail/components/item-monitors/item-monitors-dialog/item-monitors-dialog.component';
-import { ItemSubcribersBadgeComponent } from './sections/items/components/item-subcribers-badge/item-subcribers-badge.component';
+import { ItemMonitorsDialogComponent } from './sections/items/item-detail/components/item-monitors/item-monitors-dialog/item-monitors-dialog.component'
+import { ItemSubcribersBadgeComponent } from './sections/items/components/item-subcribers-badge/item-subcribers-badge.component'
 import { ItemsTableComponent } from './sections/items/components/items-table/items-table.component'
+import { DataServicesComponent } from './sections/data-services/data-services.component'
+import { DataServiceDetailComponent } from './sections/data-services/data-service-detail/data-service-detail.component'
+import { NodesComponent } from './sections/nodes/nodes.component'
+import { NodesDetailComponent } from './sections/nodes/nodes-detail/nodes-detail.component'
+import { DataServiceCreateComponent } from './sections/data-services/data-service-create/data-service-create.component'
+import { NodeRegisterComponent } from './sections/nodes/node-register/node-register.component';
+import { NodeUnregisterComponent } from './sections/nodes/node-unregister/node-unregister.component';
+import { DataServiceDeleteComponent } from './sections/data-services/data-service-delete/data-service-delete.component'
 
 @NgModule({
   declarations: [
@@ -49,19 +58,25 @@ import { ItemsTableComponent } from './sections/items/components/items-table/ite
     NotificationBellComponent,
     NavButtonComponent,
     ItemsComponent,
-    CompaniesComponent,
     ItemDetailComponent,
     ItemSubscribersComponent,
     ItemOnlineComponent,
     ItemOwnerComponent,
     ItemInteractionComponent,
     ItemSubscriptionsComponent,
-    ItemPictogramComponent,
     ItemManageSubscriptionsComponent,
     ItemMonitorsComponent,
     ItemMonitorsDialogComponent,
     ItemSubcribersBadgeComponent,
     ItemsTableComponent,
+    DataServicesComponent,
+    DataServiceDetailComponent,
+    NodesComponent,
+    NodesDetailComponent,
+    DataServiceCreateComponent,
+    NodeRegisterComponent,
+    NodeUnregisterComponent,
+    DataServiceDeleteComponent,
   ],
   imports: [
     CommonModule,
@@ -82,6 +97,9 @@ import { ItemsTableComponent } from './sections/items/components/items-table/ite
     FormsModule,
     ReactiveFormsModule,
     MatBadgeModule,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatButtonModule,
   ],
   providers: [],
 })

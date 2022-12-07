@@ -8,19 +8,19 @@ import { ItemService } from '@core/services/item/item.service'
   styleUrls: ['./items.component.scss'],
 })
 export class ItemsComponent implements OnInit {
-  allItemsColumns: string[] = ['name', 'type', 'monitorsCount', 'owner', 'subscribers']
-  myItemsColumns: string[] = ['name', 'type', 'monitorsCount', 'subscribers']
+  allItemsColumns: string[] = ['name', 'oid', 'type', 'monitorsCount', 'owner', 'subscribers']
+  myItemsColumns: string[] = ['name', 'oid', 'type', 'monitorsCount', 'subscribers']
 
   constructor(private _item: ItemService) {}
 
   ngOnInit(): void {}
 
   fetchAllItems = async (page: number, size: number) => {
-    return await this._item.fetchItems(page, size, false)
+    return await this._item.getItems(page, size, false)
   }
 
   fetchMyItems = async (page: number, size: number) => {
-    return await this._item.fetchItems(page, size, true)
+    return await this._item.getItems(page, size, true)
   }
 
   myItemsEmpty() {}

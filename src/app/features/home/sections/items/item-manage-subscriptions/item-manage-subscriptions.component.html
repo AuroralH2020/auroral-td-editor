@@ -1,110 +1,163 @@
 <div mat-dialog-title>
-  <app-item-pictogram [name]="data.detail.type"></app-item-pictogram>
+  <app-pictogram
+    [name]="data.detail.type"
+    [type]="data.detail.pictogramType"
+  ></app-pictogram>
   <div class="opacity-40">{{ data.detail.name }} subscriptions</div>
 </div>
 <div mat-dialog-content>
   <div class="table-wrapper">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element">
-          <app-item-monitor
-            [monitor]="element"
-            textStyleClasses="text-xs font-medium opacity-60"
-          ></app-item-monitor>
-        </td>
-      </ng-container>
+    <div *ngIf="data.dataServices.length === 0; else elseLoadTable">
+      <div class="flex flex-col justify-center items-center py-20">
+        <div class="text-3xl font-medium opacity-30">(^_^)</div>
+        <div class="font-medium mt-4 opacity-30 w-60 text-center">
+          No Data Services found. Please Create Data Service first.
+        </div>
+        <div class="h-8"></div>
+        <div class="opacity-60">
+          <app-button
+            size="medium"
+            theme="primary"
+            type="mat-stroked-button"
+            (click)="goToDataServices()"
+            [width]="240"
+          >
+            <mat-icon class="icon">cloud</mat-icon>
+            <div>Go to Data Services</div>
+          </app-button>
+        </div>
+      </div>
+    </div>
+    <ng-template #elseLoadTable>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">
+            <app-item-monitor
+              [monitor]="element"
+              textStyleClasses="text-xs font-medium opacity-60"
+            ></app-item-monitor>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef>Type</th>
-        <td
-          mat-cell
-          *matCellDef="let element"
-          class="opacity-60 text-xs font-normal"
-        >
-          {{ type(element) }}
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            class="opacity-60 text-xs font-normal"
+          >
+            {{ type(element) }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="service">
-        <th mat-header-cell *matHeaderCellDef>Data Service</th>
-        <td mat-cell *matCellDef="let element">
-          <div [formGroup]="selectedDataServices">
-            <mat-form-field
-              appearance="standard"
-              (click)="$event.stopPropagation()"
-            >
-              <mat-select
-                placeholder="choose a service..."
-                [formControlName]="getMonitorId(element)"
-                [compareWith]="compareDataServices"
-                (selectionChange)="selectionChanged(element)"
-              >
-                <mat-select-trigger>
-                  <app-item-pictogram
-                    [name]="getSelectedDataService(element)?.name"
-                    textStyleClasses="text-xs font-normal"
-                    class="opacity-80 mt-1"
-                  ></app-item-pictogram>
-                </mat-select-trigger>
-                <mat-option
-                  *ngFor="let service of data.dataServices"
-                  [value]="service"
+        <ng-container matColumnDef="service">
+          <th mat-header-cell *matHeaderCellDef>Data Service</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <div class="px-4 py-2">
+                <div
+                  *ngIf="hasDataServiceSelected(element); else elseNoDsSelected"
                 >
-                  <div class="px-2">
-                    <app-item-pictogram
-                      [name]="service.name"
-                      textStyleClasses="text-xs font-normal"
-                      class="opacity-60"
-                    ></app-item-pictogram>
+                  <div class="flex flex-row items-center gap-1 leading-1">
+                    <app-item-online
+                      [online]="
+                        getSelectedDataService(element)?.online ?? false
+                      "
+                      [showLabel]="false"
+                    ></app-item-online>
+                    <app-pictogram
+                      [name]="getSelectedDataService(element)?.name"
+                      type="service"
+                      textStyleClasses="text-xs font-normal opacity-60  w-16 truncate"
+                    ></app-pictogram>
+                    <div class="w-4"></div>
+                    <mat-icon class="arrow-icon opacity-60"
+                      >arrow_drop_down</mat-icon
+                    >
                   </div>
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </td>
-      </ng-container>
+                </div>
+                <ng-template #elseNoDsSelected>
+                  <div class="flex flex-row items-center gap-1 leading-1 ">
+                    <div class="text-xs font-normal opacity-40 w-32">
+                      Selecet data service...
+                    </div>
+                    <div class="w-2"></div>
+                    <mat-icon class="arrow-icon opacity-60"
+                      >arrow_drop_down</mat-icon
+                    >
+                  </div>
+                </ng-template>
+              </div>
+            </button>
+            <mat-menu #menu="matMenu">
+              <div
+                *ngFor="let dataService of data.dataServices"
+                (click)="changeSelectedDataService(element, dataService)"
+                [class]="'menu-item'"
+              >
+                <div
+                  class="flex flex-row items-center justify-start h-12 leading-1 px-4"
+                >
+                  <app-item-online
+                    [online]="dataService.online"
+                    [showLabel]="false"
+                    class="text-success"
+                  ></app-item-online>
+                  <app-pictogram
+                    [name]="dataService.name"
+                    type="service"
+                    textStyleClasses="text-xs font-normal text-primary-500 w-32 truncate"
+                  ></app-pictogram>
+                </div>
+              </div>
+            </mat-menu>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="selected">
-        <th mat-header-cell *matHeaderCellDef>Selected</th>
-        <td mat-cell *matCellDef="let element">
-          <mat-checkbox
-            [checked]="isSelected(element)"
-            (click)="$event.stopPropagation()"
-            (change)="$event ? toggle(element) : null"
-          ></mat-checkbox>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="selected">
+          <th mat-header-cell *matHeaderCellDef>Selected</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox
+              [checked]="isSelected(element)"
+              (click)="$event.stopPropagation()"
+              (change)="$event ? toggle(element) : null"
+              [disabled]="!hasDataServiceSelected(element)"
+              matTooltip="No Data Service selected"
+              [matTooltipDisabled]="hasDataServiceSelected(element)"
+            ></mat-checkbox>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns"
-        [ngClass]="{ selected: isSelected(row) }"
-        class="element-row"
-        (click)="toggle(row)"
-      ></tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          [ngClass]="{ selected: isSelected(row) }"
+          class="element-row"
+        ></tr>
+      </table>
+    </ng-template>
   </div>
 </div>
 <div mat-dialog-actions class="justify-end">
   <div class="pt-6 flex justify-end">
     <app-button
-      text="Cancel"
       theme="warn"
       size="medium"
       type="mat-stroked-button"
       (click)="close()"
       [disabled]="loading"
-    ></app-button>
+      >Cancel</app-button
+    >
     <div class="w-4"></div>
     <app-button
-      text="Save changes"
       theme="accent"
       size="medium"
       [disabled]="loading || !changesDetected"
       [loading]="loading"
       (click)="saveChanges()"
-    ></app-button>
+      >Save changes</app-button
+    >
   </div>
 </div>

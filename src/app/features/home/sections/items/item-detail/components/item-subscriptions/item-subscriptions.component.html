@@ -11,22 +11,26 @@
           <div class="text-3xl font-medium opacity-30">(^_^)</div>
           <div *ngIf="detail.noMonitors; else elseBlock">
             <div class="font-medium mt-4 opacity-30 w-60 text-center">
-              This item does not have any properties or events available for subscription
+              This item does not have any properties or events available for
+              subscription
             </div>
           </div>
           <ng-template #elseBlock>
             <div class="font-medium mt-4 opacity-30 w-60 text-center">
               There are no active subscriptions to this item
             </div>
-            <div class="mt-6 opacity-50">
+            <div class="mt-6 opacity-80">
               <app-button
-                text="Create first subscription"
                 size="medium"
-                theme="primary"
+                theme="accent"
                 type="mat-stroked-button"
                 (click)="openManageSubscriptions()"
                 [loading]="loading"
-              ></app-button>
+                [width]="240"
+              >
+                <mat-icon class="icon">add_circle_outline</mat-icon>
+                <div>Add first subscription</div>
+              </app-button>
             </div>
           </ng-template>
         </div>
@@ -56,11 +60,18 @@
           <ng-container matColumnDef="service">
             <th mat-header-cell *matHeaderCellDef>Data Service</th>
             <td mat-cell *matCellDef="let element">
-              <app-item-pictogram
-                [name]="element.service.name"
-                textStyleClasses="text-xs"
-                class="opacity-60"
-              ></app-item-pictogram>
+              <div class="flex flex-row items-center">
+                <app-item-online
+                  [online]="element.service.online"
+                  [showLabel]="false"
+                ></app-item-online>
+                <app-pictogram
+                  [name]="element.service.name"
+                  type="service"
+                  textStyleClasses="text-xs"
+                  class="opacity-60"
+                ></app-pictogram>
+              </div>
             </td>
           </ng-container>
 
@@ -103,10 +114,10 @@
         size="medium"
         theme="accent"
         type="mat-raised-button"
-        text="Manage subscriptions"
         (click)="openManageSubscriptions()"
         [loading]="loading"
-      ></app-button>
+        >Edit subscriptions</app-button
+      >
     </div>
   </div>
 </div>

@@ -5,9 +5,17 @@ import { Item } from '@core/models/item.model'
 import { Monitor, Property, Event } from '@core/models/monitor.model'
 import { Subscription, SubscriptionCreate } from '@core/models/subscription.model'
 import { DataServiceService } from '@core/services/data-service/data-service.service'
-import { isEvent, isPropery, isEventSubscription, isProperySubscription, stringSortListOfObjects, deepEqual } from 'src/app/utils'
+import {
+  isEvent,
+  isPropery,
+  isEventSubscription,
+  isProperySubscription,
+  stringSortListOfObjects,
+  deepEqual,
+} from 'src/app/utils'
 import { SnackBarService } from '@core/services/snack-bar/snack-bar.service'
 import { FormControl, FormGroup } from '@angular/forms'
+import { Router } from '@angular/router'
 
 interface DialogData {
   detail: Item
@@ -28,20 +36,15 @@ export class ItemManageSubscriptionsComponent implements OnInit {
   private _initialSubscriptions: SubscriptionCreate[] = []
   private _selectedSubscriptions: SubscriptionCreate[] = []
 
-  selectedDataServices!: FormGroup
+  selectedDataServices = new Map<string, DataService | undefined>()
 
   constructor(
     private _dataService: DataServiceService,
     private _snackbar: SnackBarService,
+    private _router: Router,
     public dialogRef: MatDialogRef<ItemManageSubscriptionsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
-
-  ngOnInit(): void {
-    this._initDataSources()
-    this._initSelectedSubscriptions()
-    this._initDataServices()
-  }
 
   private _sortDataSource() {
     stringSortListOfObjects(this.dataSource, 'name')
@@ -67,21 +70,26 @@ export class ItemManageSubscriptionsComponent implements OnInit {
   }
 
   private _initDataServices() {
-    var services = new Map<string, FormControl>()
     this.dataSource.forEach((element) => {
       const id = _getMonitorId(element as Property | Event)
       if (id) {
         const subscription = this._selectedSubscriptions.find((element) => element.iid == id)
-        services.set(id, new FormControl(subscription?.service ?? ''))
+        this.selectedDataServices.set(id, subscription?.service)
       }
     })
-    this.selectedDataServices = new FormGroup(Object.fromEntries(services))
+  }
+
+  ngOnInit(): void {
+    this._initDataSources()
+    this._initSelectedSubscriptions()
+    this._initDataServices()
   }
 
   private _addSubscriptionToSelection(monitor: Property | Event) {
     const id = _getMonitorId(monitor)
     const type = _type(monitor)
-    if (!id || type === 'Unknown type') {
+    const dataService = this.selectedDataServices.get(id ?? '')
+    if (!id || type === 'Unknown type' || !dataService) {
       return
     }
     this._selectedSubscriptions.push({
@@ -89,14 +97,14 @@ export class ItemManageSubscriptionsComponent implements OnInit {
       oid: this.data.detail.oid,
       iid: id,
       type: type === 'Property' ? 'read' : 'event',
-      service: this.selectedDataServices.get(id)?.value,
+      service: dataService,
     })
   }
 
-  private _resetDataServiceFormConrols(monitor: Property | Event) {
+  private _resetDataService(monitor: Property | Event) {
     const id = _getMonitorId(monitor)
     if (id) {
-      this.selectedDataServices.controls[id].reset()
+      this.selectedDataServices.set(id, undefined)
     }
   }
 
@@ -106,7 +114,7 @@ export class ItemManageSubscriptionsComponent implements OnInit {
     })
     if (index > -1) {
       this._selectedSubscriptions.splice(index, 1)
-      this._resetDataServiceFormConrols(monitor)
+      this._resetDataService(monitor)
     }
   }
 
@@ -155,7 +163,7 @@ export class ItemManageSubscriptionsComponent implements OnInit {
   private async _addCandidates() {
     for (let selected of this._selectedSubscriptions) {
       if (this._candidateForAdd(selected)) {
-        await this._dataService.ctreateSubscription(selected).then((subscription) => {
+        await this._dataService.createSubscription(selected).then((subscription) => {
           this._addLocal(subscription)
         })
       }
@@ -168,6 +176,20 @@ export class ItemManageSubscriptionsComponent implements OnInit {
         await this._dataService.deleteSubscription(initial).then(() => {
           this._removeLocal(initial)
         })
+      }
+    }
+  }
+
+  private _selectDataService(monitor: Property | Event) {
+    if (!this.isSelected(monitor)) {
+      this.toggle(monitor)
+    }
+    const id = _getMonitorId(monitor)
+    if (id) {
+      var subscription = this._selectedSubscriptions.find((element) => element.iid === id)
+      const dataService = this.selectedDataServices.get(id)
+      if (subscription && dataService) {
+        subscription.service = dataService
       }
     }
   }
@@ -212,16 +234,13 @@ export class ItemManageSubscriptionsComponent implements OnInit {
     }
   }
 
-  selectionChanged(monitor: Property | Event) {
-    if (!this.isSelected(monitor)) {
-      this.toggle(monitor)
-    }
+  changeSelectedDataService(monitor: Property | Event, dataService: DataService) {
     const id = _getMonitorId(monitor)
-    if (id) {
-      var subscription = this._selectedSubscriptions.find((element) => element.iid === id)
-      if (subscription) {
-        subscription.service = this.selectedDataServices.get(id)?.value
-      }
+    if (id === null) return
+    const ds = this.selectedDataServices.get(id)
+    if (!ds || ds !== dataService) {
+      this.selectedDataServices.set(id, dataService)
+      this._selectDataService(monitor)
     }
   }
 
@@ -231,11 +250,18 @@ export class ItemManageSubscriptionsComponent implements OnInit {
 
   getSelectedDataService(monitor: Property | Event): DataService | null | undefined {
     const id = _getMonitorId(monitor)
-    return this.selectedDataServices.get(id ?? '')?.value
+    return this.selectedDataServices.get(id ?? '')
   }
 
-  compareDataServices(ds1: DataService | null | undefined, ds2: DataService | null | undefined) {
-    return ds1?.serviceId === ds2?.serviceId
+  hasDataServiceSelected(monitor: Property | Event): boolean {
+    const id = _getMonitorId(monitor)
+    const ds = this.selectedDataServices.get(id ?? '')
+    return ds === undefined || ds === null ? false : true
+  }
+
+  goToDataServices() {
+    this.close()
+    this._router.navigate(['/home/sections/data-services'])
   }
 
   get changesDetected(): boolean {

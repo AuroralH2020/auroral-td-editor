@@ -1,0 +1,15 @@
+<div class="flex items-center">
+  <div class="cursor-text">
+    <ng-content></ng-content>
+  </div>
+  <div class="w-0.5 noselect"></div>
+  <button
+    mat-icon-button
+    class="icon-button-small noselect"
+    (click)="$event.stopPropagation(); notify()"
+    [cdkCopyToClipboard]="value"
+    matTooltip="Copy to clipboard"
+  >
+    <mat-icon class="icon noselect opacity-50" color="accent">content_copy</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,23 @@
+<div *ngIf="control" class="flex items-start">
+  <div class="flex flex-col gap-0 text-left">
+    <mat-form-field
+      appearance="fill"
+      floatLabel="always"
+      class="form-field"
+      color="accent"
+    >
+      <mat-label>{{ label }}</mat-label>
+      <textarea
+        matInput
+        [formControl]="control"
+        [placeholder]="placeholder ?? ''"
+        (focus)="setFocus(true)"
+        (blur)="setFocus(false)"
+        [required]="required"
+      ></textarea>
+    </mat-form-field>
+    <div class="text-xs font-regular">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

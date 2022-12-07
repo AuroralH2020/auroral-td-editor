@@ -1,0 +1,17 @@
+@import "styles";
+
+.icon-danger {
+  @include icon-size(24px);
+}
+
+.icon-delete {
+  @include icon-size(18px);
+}
+
+.preview-card {
+  background-color: $subscriptions-bg;
+}
+
+.mat-card {
+  padding: 16px !important;
+}
