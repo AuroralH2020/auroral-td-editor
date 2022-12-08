@@ -61,6 +61,9 @@ export class TableComponent implements OnInit {
         this.dataSource.data = data.items
         this.paginator.length = data.totalLength
         this.paginator.pageIndex = this.currentPage
+      } catch (err) {
+        this.paginator.length = this.dataSource.data?.length ?? 0
+        this.paginator.pageIndex = this.currentPage
       } finally {
         this.isLoading = false
       }
