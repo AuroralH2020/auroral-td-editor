@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
+import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChild, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
@@ -8,6 +8,7 @@ import { ActionWhenEmpty, FetchTableItems } from '@shared/models/table.modele'
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -62,6 +63,7 @@ export class TableComponent implements OnInit {
         this.paginator.length = data.totalLength
         this.paginator.pageIndex = this.currentPage
       } catch (err) {
+        this.dataSource.data = this.dataSource.data ?? []
         this.paginator.length = this.dataSource.data?.length ?? 0
         this.paginator.pageIndex = this.currentPage
       } finally {

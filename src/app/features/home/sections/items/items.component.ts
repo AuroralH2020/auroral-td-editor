@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { Item } from '@core/models/item.model'
 import { ItemService } from '@core/services/item/item.service'
 
 @Component({
@@ -24,4 +23,8 @@ export class ItemsComponent implements OnInit {
   }
 
   myItemsEmpty() {}
+
+  refresh() {
+    
+  }
 }

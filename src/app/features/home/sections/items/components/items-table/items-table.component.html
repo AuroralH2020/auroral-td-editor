@@ -7,25 +7,17 @@
   </ng-template>
   <ng-template #cellRef let-data let-columnName="columnName">
     <div *ngIf="columnName === 'name'">
-      <div class="flex flex-row items-center">
-        <app-item-online
-          [online]="data.dataAccess"
-          [showLabel]="false"
-        ></app-item-online>
-        <app-pictogram
-          [name]="data.name"
-          [type]="data.pictogramType"
-        ></app-pictogram>
-      </div>
+      <app-pictogram
+        [name]="data.name"
+        [type]="data.pictogramType"
+      ></app-pictogram>
     </div>
     <div *ngIf="columnName === 'oid'">
       <app-copy-to-clipboard
         message="Oid copied to clipboard"
         [value]="data.oid"
       >
-        <div
-          class="text-xs font-medium opacity-30 cursor-pointer"
-        >
+        <div class="text-xs font-medium opacity-30 cursor-pointer">
           {{ data.oid }}
         </div>
       </app-copy-to-clipboard>
