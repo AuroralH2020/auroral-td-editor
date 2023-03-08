@@ -43,6 +43,7 @@ export class NodeRegisterComponent implements OnInit {
     if (this.form.valid) {
       this.loading = true
       try {
+        this.dialogRef.disableClose = true
         const name = this.name.value
         const base = this.url.value
         const node = await this._nodeService.registerNode({

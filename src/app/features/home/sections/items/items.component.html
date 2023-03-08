@@ -1,27 +1,19 @@
-<div class="flex flex-row justify-end mt-6 mr-6">
-  <app-button
-    size="small"
-    type="mat-flat-button"
-    theme="primary"
-    (click)="refresh()"
-  >
-    <div class="flex flex-row justify-center items-center gap-1">
-      <mat-icon class="icon-refresh-small">refresh</mat-icon>
-      <div>Refresh</div>
-    </div>
-  </app-button>
+<div class="mt-4">
+  <app-tab-group>
+    <app-tab label="All Items">
+      <div class="px-4">
+        <app-items-table
+          [columns]="allItemsColumns"
+          [fetchItems]="fetchAllItems"
+        >
+        </app-items-table>
+      </div>
+    </app-tab>
+    <app-tab label="My Items">
+      <div class="px-4">
+        <app-items-table [columns]="myItemsColumns" [fetchItems]="fetchMyItems">
+        </app-items-table>
+      </div>
+    </app-tab>
+  </app-tab-group>
 </div>
-<app-tab-group>
-  <app-tab label="All Items">
-    <div class="px-4">
-      <app-items-table [columns]="allItemsColumns" [fetchItems]="fetchAllItems">
-      </app-items-table>
-    </div>
-  </app-tab>
-  <app-tab label="My Items">
-    <div class="px-4">
-      <app-items-table [columns]="myItemsColumns" [fetchItems]="fetchMyItems">
-      </app-items-table>
-    </div>
-  </app-tab>
-</app-tab-group>

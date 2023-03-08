@@ -48,7 +48,6 @@ import { DataServiceCreateComponent } from './sections/data-services/data-servic
 import { NodeRegisterComponent } from './sections/nodes/node-register/node-register.component';
 import { NodeUnregisterComponent } from './sections/nodes/node-unregister/node-unregister.component';
 import { DataServiceDeleteComponent } from './sections/data-services/data-service-delete/data-service-delete.component';
-import { ReRunDiscoveryComponent } from './components/re-run-discovery/re-run-discovery.component'
 
 @NgModule({
   declarations: [
@@ -78,7 +77,6 @@ import { ReRunDiscoveryComponent } from './components/re-run-discovery/re-run-di
     NodeRegisterComponent,
     NodeUnregisterComponent,
     DataServiceDeleteComponent,
-    ReRunDiscoveryComponent,
   ],
   imports: [
     CommonModule,

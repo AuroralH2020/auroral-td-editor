@@ -26,6 +26,7 @@ export class NodeUnregisterComponent implements OnInit {
   async unregisterNode() {
     this.loading = true
       try {
+        this.dialogRef.disableClose = true;
         await this._nodeService.unregisterNode(this.detail)
         this.loading = false
         this.close(true)

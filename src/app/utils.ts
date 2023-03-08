@@ -60,3 +60,7 @@ export function parseURL(str: string, protocol: Protocol | undefined): string {
   }
   return protocol ? `${protocol}://${str}` : str
 }
+
+export function delay(time: number) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
