@@ -13,7 +13,7 @@ LATEST=0 # If 1 build image with latest tag
 # Default configuration
 ENV=dev
 REGISTRY=registry.bavenir.eu
-IMAGE_NAME=service_admin_ui
+IMAGE_NAME=angular14-boilerplate
 
 # Get configuration
 while getopts 'hd:v:l' OPTION; do

@@ -5,11 +5,10 @@ import { Injectable } from '@angular/core'
 import { CONSTANTS } from '../constants'
 import jwt_decode from 'jwt-decode'
 import { firstValueFrom, take } from 'rxjs'
-import { ServerResponse } from '@core/models/server.model'
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private _loginUrl = '/api/ui/login'
+  private _loginUrl = '/fake/login'
 
   constructor(private _http: HttpClient) {}
 
