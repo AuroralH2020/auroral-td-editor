@@ -1,0 +1,114 @@
+<div class="pb-16">
+  <app-pictogram [name]="detail.type ?? detail.pictogramType" [type]="detail.pictogramType"></app-pictogram>
+  <div class="h-2"></div>
+  <div class="text-md font-normal opacity-80 w-56 break-words">
+    {{ detail.name }}
+  </div>
+  <app-copy-to-clipboard message="Oid copied to clipboard" [value]="detail.oid">
+    <div class="opacity-20 font-medium text-xs">
+      <span class="noselect cursor-default">oid: </span>{{ detail.oid }}
+    </div>
+  </app-copy-to-clipboard>
+  <div class="h-6"></div>
+  <div class="flex flex-row justify-between gap-20">
+    <div class="flex flex-col gap-4">
+      <div class="item" *ngIf="detail.description">
+        <div class="label">Description:</div>
+        <div class="content">
+          <div class="opacity-30 font-medium w-48 text-xs">
+            {{ detail.description }}
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">Owned by:</div>
+        <div class="content">
+          <app-item-owner [owner]="detail.owner"></app-item-owner>
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">Subscribed by:</div>
+        <div class="content">
+          <div [class]="detail.subscribers.length === 0 ? '' : 'py-1'">
+            <app-item-subscribers
+              [companies]="detail.subscribers"
+            ></app-item-subscribers>
+          </div>
+        </div>
+      </div>
+      <div class="h-2"></div>
+      <div class="item">
+        <div class="label">Available properties:</div>
+        <div class="content">
+          <div *ngIf="detail.noProperties; else elsePropertyBlock">
+            <div class="no-data">
+              This item has no properties available for subscription
+            </div>
+          </div>
+          <ng-template #elsePropertyBlock>
+            <div class="mt-2">
+              <app-item-monitors [monitors]="detail.properties">
+              </app-item-monitors>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="h-1"></div>
+      <div class="item">
+        <div class="label">Available events:</div>
+        <div class="content">
+          <div *ngIf="detail.noEvents; else elseEventBlock">
+            <div class="no-data">
+              This item has no events available for subscription
+            </div>
+          </div>
+          <ng-template #elseEventBlock>
+            <div class="mt-2">
+              <app-item-monitors [monitors]="detail.events">
+              </app-item-monitors>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="label">Active subscriptions:</div>
+      <div class="content">
+        <app-tab-group>
+          <app-tab
+            label="All"
+            [disabled]="detail.noSubscriptions"
+            disabledTooltip="No subscriptions."
+          >
+            <app-item-subscriptions
+              [detail]="detail"
+              subscriptionType="all"
+            ></app-item-subscriptions>
+          </app-tab>
+          <app-tab
+            label="Properties"
+            [disabled]="detail.noPropertySubscriptions"
+            disabledTooltip="No property subscriptions."
+          >
+            <app-item-subscriptions
+              [detail]="detail"
+              subscriptionType="properties"
+            ></app-item-subscriptions>
+          </app-tab>
+          <app-tab
+            label="Events"
+            [disabled]="detail.noEventSubscriptions"
+            disabledTooltip="No event subscriptions."
+          >
+            <app-item-subscriptions
+              [detail]="detail"
+              subscriptionType="events"
+            ></app-item-subscriptions>
+          </app-tab>
+        </app-tab-group>
+      </div>
+    </div>
+    <div class="w-80"></div>
+  </div>
+  <div class="h-16"></div>
+</div>

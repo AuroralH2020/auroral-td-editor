@@ -1,27 +1,66 @@
-export function  generateRandomColor() {
-    const colors = [
-        '#EB7181', // red
-        '#468547', // green
-        '#FFD558', // yellow
-        '#3670B2', // blue
-    ];
-    const randomIndex = Math.floor(Math.random() * Math.floor(colors.length));
-    const randomHue = -1 * Math.random();
-    var base: string = colors[randomIndex];
+import { Property, Event } from '@core/models/monitor.model'
+import { Subscription } from '@core/models/subscription.model'
 
-    // validate hex string
-    base = String(base).replace(/[^0-9a-f]/gi, '');
-    if (base.length < 6) {
-      base = base[0]+base[0]+base[1]+base[1]+base[2]+base[2];
-    }
-  
-    // convert to decimal and change luminosity
-    var rgb = "#", c, i;
-    for (i = 0; i < 3; i++) {
-      c = parseInt(base.substr(i*2,2), 16);
-      c = Math.round(Math.min(Math.max(0, c + (c * randomHue)), 255)).toString(16);
-      rgb += ("00"+c).substr(c.length);
-    }
+export type JsonType<T = any> = {
+  [x: string]: T
+}
 
-    return rgb;
+export function isPropery(object: any): object is Property {
+  return 'pid' in object
+}
+
+export function isEvent(object: any): object is Event {
+  return 'eid' in object
+}
+
+export function isProperySubscription(object: any): object is Subscription {
+  return object.type === 'read' || object.type === 'write'
+}
+
+export function isEventSubscription(object: any): object is Subscription {
+  return object.type === 'event'
+}
+
+export function stringSortListOfObjects(array: any[], key: string) {
+  array.sort((e1, e2) => {
+    if (!e1[key]) return -1
+    if (!e2[key]) return 1
+    if (e1[key] > e2[key]) return 1
+    if (e1[key] < e2[key]) return -1
+    return 0
+  })
+}
+
+export function deepEqual(object1: any, object2: any) {
+  const keys1 = Object.keys(object1)
+  const keys2 = Object.keys(object2)
+  if (keys1.length !== keys2.length) {
+    return false
+  }
+  for (const key of keys1) {
+    const val1 = object1[key]
+    const val2 = object2[key]
+    const areObjects = isObject(val1) && isObject(val2)
+    if ((areObjects && !deepEqual(val1, val2)) || (!areObjects && val1 !== val2)) {
+      return false
+    }
+  }
+  return true
+}
+
+export function isObject(object: any) {
+  return object != null && typeof object === 'object'
+}
+
+type Protocol = 'http' | 'https'
+
+export function parseURL(str: string, protocol: Protocol | undefined): string {
+  if (str.startsWith('http://') || str.startsWith('https://')) {
+    return str
+  }
+  return protocol ? `${protocol}://${str}` : str
+}
+
+export function delay(time: number) {
+  return new Promise(resolve => setTimeout(resolve, time));
 }

@@ -17,7 +17,6 @@ import { AuroralHyperlinkComponent } from './components/auroral-hyperlink/aurora
 
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({

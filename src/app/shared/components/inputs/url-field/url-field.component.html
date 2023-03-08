@@ -1,0 +1,28 @@
+<div class="flex flex-row gap-2 items-start">
+    <app-text-field
+      [control]="control"
+      label="Url"
+      [prefix]="hidePrefix ? undefined : selectedProtocol + '://'"
+    >
+      <div *ngIf="control && control.invalid && (control.dirty || control.touched)">
+        <mat-error *ngIf="control.hasError('required')"
+          >Please provide the url</mat-error
+        >
+      </div>
+    </app-text-field>
+    <mat-button-toggle-group
+      name="protocol"
+      aria-label="Protocol"
+      class="protocol-toggle text-xs font-medium opacity-60"
+      #group="matButtonToggleGroup"
+      [value]="selectedProtocol"
+      (change)="selectProtocol(group.value)"
+    >
+      <mat-button-toggle value="http" class="w-16 pt-0.5"
+        >http</mat-button-toggle
+      >
+      <mat-button-toggle value="https" class="w-16 pt-0.5"
+        >https</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div>

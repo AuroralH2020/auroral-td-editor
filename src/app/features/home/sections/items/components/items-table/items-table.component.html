@@ -1,0 +1,77 @@
+<app-table [columns]="columns" [fetchData]="fetchItems">
+  <ng-template #headerCellRef let-columnName>
+    <ng-container [ngSwitch]="true">
+      <div *ngSwitchCase="columnName === 'monitorsCount'">Monitors</div>
+      <div *ngSwitchDefault>{{ columnName | titlecase }}</div>
+    </ng-container>
+  </ng-template>
+  <ng-template #cellRef let-data let-columnName="columnName">
+    <div *ngIf="columnName === 'name'">
+      <app-pictogram
+        [name]="data.name"
+        [type]="data.pictogramType"
+      ></app-pictogram>
+    </div>
+    <div *ngIf="columnName === 'oid'">
+      <app-copy-to-clipboard
+        message="Oid copied to clipboard"
+        [value]="data.oid"
+      >
+        <div class="text-xs font-medium opacity-30 cursor-pointer">
+          {{ data.oid }}
+        </div>
+      </app-copy-to-clipboard>
+    </div>
+    <div *ngIf="columnName === 'type'" class="opacity-30 text-xs font-medium">
+      {{ data.type ?? data.pictogramType | titlecase }}
+    </div>
+    <div *ngIf="columnName === 'owner'">
+      <app-item-owner [owner]="data.owner"></app-item-owner>
+    </div>
+    <div *ngIf="columnName === 'subscribers'" class="opacity-80">
+      <app-item-subscribers
+        [companies]="data.subscribers"
+      ></app-item-subscribers>
+    </div>
+    <div
+      *ngIf="columnName === 'monitorsCount'"
+      class="opacity-30 text-xs font-medium"
+    >
+      <div
+        *ngIf="data.propertiesCount <= 0; else elsePropsCount"
+        class="opacity-70"
+      >
+        no properties
+      </div>
+      <ng-template #elsePropsCount>
+        <div class="flex flex-row gap-1">
+          <div class="font-bold">{{ data.propertiesCount }}</div>
+          properties
+          <app-item-subcribers-badge [count]="data.propertySubscriptionsCount">
+          </app-item-subcribers-badge>
+        </div>
+      </ng-template>
+      <div
+        *ngIf="data.eventsCount <= 0; else elseEventsCount"
+        class="opacity-70"
+      >
+        no events
+      </div>
+      <ng-template #elseEventsCount>
+        <div class="flex flex-row gap-1">
+          <div class="font-bold">{{ data.eventsCount }}</div>
+          events
+          <app-item-subcribers-badge [count]="data.eventSubscriptionsCount">
+          </app-item-subcribers-badge>
+        </div>
+      </ng-template>
+    </div>
+  </ng-template>
+  <ng-template #detailRef let-detail>
+    <app-item-detail
+      *ngIf="detail"
+      [detail]="detail"
+      class="w-full"
+    ></app-item-detail>
+  </ng-template>
+</app-table>

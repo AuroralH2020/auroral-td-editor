@@ -5,12 +5,20 @@
   [class]="size"
   [disabled]="disabled || loading"
   [type]="actionType"
+  [ngStyle]="style"
 >
   <div
     *ngIf="loading; else elseBlock"
     class="flex justify-center items-center opacity-60"
   >
-    <mat-spinner [color]="theme" diameter="24"></mat-spinner>
+    <mat-spinner
+      [color]="theme"
+      [diameter]="size === 'small' ? 20 : 24"
+    ></mat-spinner>
   </div>
-  <ng-template #elseBlock i18n>{{ text }}</ng-template>
+  <ng-template #elseBlock i18n>
+    <div class="flex flex-row justify-center items-center gap-1 leading-1 px-4">
+      <ng-content></ng-content>
+    </div>
+  </ng-template>
 </button>

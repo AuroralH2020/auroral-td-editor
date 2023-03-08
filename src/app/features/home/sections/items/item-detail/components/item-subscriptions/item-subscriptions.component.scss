@@ -1,0 +1,41 @@
+@import "styles";
+
+table {
+  width: 100%;
+  border-collapse: separate;
+}
+
+.mat-row {
+  background-color: $subscriptions-bg;
+}
+
+.mat-header-row {
+  background-color: $subscriptions-bg;
+  border: 1px solid black;
+  height: 48px;
+}
+
+.mat-cell {
+  @apply font-normal text-xs;
+  width: 192px !important;
+  text-align: start;
+  justify-content: start;
+}
+
+.table-wrapper {
+  width: 600px;
+  max-height: 380px;
+  overflow: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.content-wrapper {
+  padding: 0px 1px 4px 1px;
+  background-color: $subscriptions-bg;
+  width: 100%;
+}
+
+.icon {
+  @include icon-size(18px)
+}

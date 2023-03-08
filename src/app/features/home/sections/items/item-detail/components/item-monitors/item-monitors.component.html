@@ -1,0 +1,18 @@
+<div class="flex flex-col">
+  <div *ngIf="isTooLong; else elseDisplayAll">
+    <div *ngFor="let monitor of first4Monitors">
+      <app-item-monitor [monitor]="monitor"></app-item-monitor>
+    </div>
+    <div
+      class="ml-4 py-1 w-24 text-sm font-medium text-secondary-500 cursor-pointer flex justify-center"
+      (click)="openDialog()"
+    >
+      +{{ numberOfHiddenMonitors }} more
+    </div>
+  </div>
+  <ng-template #elseDisplayAll>
+    <div *ngFor="let monitor of monitors">
+      <app-item-monitor [monitor]="monitor"></app-item-monitor>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,18 @@
+<div class="flex gap-1">
+  <ng-container *ngIf="companies.length == 0; then empty; else notEmpty">
+  </ng-container>
+
+  <ng-template #empty>
+    <div class="text-xs font-medium opacity-30">
+      No subscribers
+    </div>
+  </ng-template>
+  <ng-template #notEmpty>
+    <div *ngFor="let item of companies">
+      <app-avatar
+        [name]="item.name"
+        [size]="32"
+      ></app-avatar>
+    </div>
+  </ng-template>
+</div>

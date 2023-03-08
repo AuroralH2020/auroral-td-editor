@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
-let service: AuthService;
+let service: UserService;
 
 beforeEach(() => {
-  TestBed.configureTestingModule({ providers: [AuthService], imports: [HttpClientTestingModule] });
+  TestBed.configureTestingModule({ providers: [UserService], imports: [HttpClientTestingModule] });
 });
 
 it('should create', () => {
-  service = TestBed.inject(AuthService);
+  service = TestBed.inject(UserService);
   expect(service).toBeTruthy();
 });

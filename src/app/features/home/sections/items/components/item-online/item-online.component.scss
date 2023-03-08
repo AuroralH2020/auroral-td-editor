@@ -1,0 +1,5 @@
+@import 'styles';
+
+.mat-icon {
+    @include icon-size(12px);
+}

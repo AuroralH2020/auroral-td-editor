@@ -1,0 +1,52 @@
+@import "styles";
+
+table {
+  width: 100%;
+}
+
+.table-wrapper {
+  height: 400px;
+}
+
+.selected {
+  background-color: $subscriptions-bg;
+}
+
+.element-row td {
+  border-bottom-color: rgba($color: grey, $alpha: 0.15);
+}
+
+mat-flat-button {
+  width: 500px;
+}
+
+.arrow-icon .mat-icon {
+  @include icon-size(12px);
+}
+.mat-column-name {
+  width: 35%;
+}
+
+.mat-column-type {
+  width: 20%;
+}
+
+.mat-column-service {
+  width: 35%;
+}
+
+.mat-column-selected {
+  width: 10%;
+}
+
+.menu-item {
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: whitesmoke;
+}
+
+.menu-item-selected {
+  background: whitesmoke;
+}

@@ -5,9 +5,9 @@
   "projects": {
     "ng-new-app": {
       "i18n": {
-        "sourceLocale": "en-US",
-        "locales": {
-          "sk": "src/locale/messages.sk.xlf"
+        "sourceLocale": {
+          "code": "en",
+          "baseHref": "/en/"
         }
       },
       "projectType": "application",
@@ -26,17 +26,26 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": ["en-US"],
+            "localize": [
+              "en"
+            ],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles"]
+              "includePaths": [
+                "src/styles"
+              ]
             },
             "scripts": []
           },
@@ -58,7 +67,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "3mb",
-                  "maximumError": "4kb"
+                  "maximumError": "200kb"
                 }
               ],
               "fileReplacements": [
@@ -91,8 +100,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "browserTarget": "ng-new-app:build",
-            "extraWebpackConfig": "./cypress/coverage.webpack.js"
+            "browserTarget": "ng-new-app:build"
           }
         },
         "extract-i18n": {
@@ -105,16 +113,26 @@
           "builder": "@angular-builders/jest:run",
           "options": {
             "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": ["scss"],
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "inlineStyleLanguage": [
+              "scss"
+            ],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         },
         "cypress-run": {
@@ -124,21 +142,15 @@
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ng-new-app:production"
+              "devServerTarget": "ng-new-app:serve:production"
             }
           }
         },
         "cypress-open": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "ng-new-app:serve",
             "watch": true,
             "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ng-new-app:serve:production"
-            }
           }
         },
         "e2e": {
@@ -156,9 +168,5 @@
         }
       }
     }
-  },
-  "defaultProject": "ng-new-app",
-  "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
   }
 }

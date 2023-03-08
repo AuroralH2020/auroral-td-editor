@@ -1,0 +1,20 @@
+<div class="flex items-center justify-start">
+  <mat-icon [ngStyle]="{ color: color }">{{ icon }}</mat-icon>
+  <div class="w-2"></div>
+  <div class="leading-tight">
+    <div class="flex-col">
+      <div
+        [ngClass]="
+          textStyleClasses != undefined && textStyleClasses != null
+            ? textStyleClasses
+            : 'font-medium text-xs opacity-40'
+        "
+      >
+        {{ name ?? "Device" }}
+      </div>
+      <div *ngIf="extraInfo" class="text-xs font-medium opacity-20">
+        {{ extraInfo }}
+      </div>
+    </div>
+  </div>
+</div>
