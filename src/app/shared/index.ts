@@ -12,6 +12,7 @@ import { SingleSelectComponent } from './components/inputs/single-select/single-
 import { CopyToClipboardComponent } from './components/buttons/copy-to-clipboard/copy-to-clipboard.component'
 import { UrlFieldComponent } from './components/inputs/url-field/url-field.component'
 import { OpenUrlComponent } from './components/buttons/open-url/open-url.component'
+import { SadFaceComponent } from './components/misc/sad-face/sad-face.component';
 
 export const components: any[] = [
   ButtonComponent,
@@ -28,6 +29,7 @@ export const components: any[] = [
   CopyToClipboardComponent,
   UrlFieldComponent,
   OpenUrlComponent,
+  SadFaceComponent,
 ]
 
 export const directives: any[] = []
@@ -48,3 +50,4 @@ export * from './components/misc/avatar/avatar.component'
 export * from './components/misc/pictogram/pictogram.component'
 export * from './components/buttons/copy-to-clipboard/copy-to-clipboard.component'
 export * from './components/buttons/open-url/open-url.component'
+export * from './components/misc/sad-face/sad-face.component';

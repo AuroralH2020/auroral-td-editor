@@ -102,7 +102,7 @@ body {
 }
 
 .item .label {
-  @apply opacity-60 font-medium text-xs;
+  @apply font-medium text-xs;
 }
 
 .item .content {
@@ -110,6 +110,6 @@ body {
 }
 
 .no-data {
-  @apply text-xs  opacity-30 font-medium w-48;
+  @apply text-xs font-medium w-48;
 }
 

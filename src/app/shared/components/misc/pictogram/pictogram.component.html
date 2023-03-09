@@ -7,12 +7,12 @@
         [ngClass]="
           textStyleClasses != undefined && textStyleClasses != null
             ? textStyleClasses
-            : 'font-medium text-xs opacity-40'
+            : 'font-medium text-xs'
         "
       >
         {{ name ?? "Device" }}
       </div>
-      <div *ngIf="extraInfo" class="text-xs font-medium opacity-20">
+      <div *ngIf="extraInfo" class="text-xs font-medium">
         {{ extraInfo }}
       </div>
     </div>

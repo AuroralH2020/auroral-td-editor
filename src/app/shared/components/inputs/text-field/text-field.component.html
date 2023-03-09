@@ -3,8 +3,8 @@
     <mat-icon
       class=" {{
         focused
-          ? 'text-secondary-300 opacity-100'
-          : 'text-primary-500 opacity-60'
+          ? 'text-secondary-300'
+          : 'text-primary-500'
       }}"
     >
       {{ leadingIcon }}
@@ -19,7 +19,7 @@
     >
       <mat-label>{{ label }}</mat-label>
       <div class="flex flex-row gap-1">
-        <span *ngIf="prefix" matTextPrefix class="opacity-40">{{
+        <span *ngIf="prefix" matTextPrefix>{{
           prefix
         }}</span>
         <input
@@ -34,7 +34,7 @@
       </div>
       <mat-icon
         *ngIf="isSecret"
-        class="text-primary-500 opacity-60 cursor-pointer"
+        class="text-primary-500 cursor-pointer"
         (click)="toggleVisibility()"
         matSuffix
         >{{ visible ? "visibility_off" : "visibility" }}</mat-icon

@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FakeBackendInterceptor } from '@core/services/fake-backend.interceptor';
 import { JwtInterceptor } from '@core/services/jwt.interceptor';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { JwtInterceptor } from '@core/services/jwt.interceptor';
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
+    MaterialModule,
   ],
   providers: [
     { provide: 'BASE_URL', useValue: environment.baseurl },
