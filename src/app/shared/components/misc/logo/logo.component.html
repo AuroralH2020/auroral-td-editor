@@ -1,3 +1,12 @@
-<div class="w-44 h-12 flex items-center justify-center bg-transparent">
-  <img src="assets/images/auroral-logo-{{iconTheme}}.png" alt="" width="126" height="30" />
-</div>
+<a href="https://auroral.eu/"
+  ><div
+    [ngClass]="['flex', 'items-center', 'justify-center', 'bg-transparent', 'h-12', size === 'small' ? 'w-12' : 'w-36']"
+  >
+    <img
+      src="assets/images/auroral-logo-{{ theme }}{{ size === 'small' ? '-small' : '' }}.png"
+      alt=""
+      [width]="size === 'small' ? 32 : 126"
+      [height]="size === 'small' ? 32 : 46"
+    />
+  </div>
+</a>

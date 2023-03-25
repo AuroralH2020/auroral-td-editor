@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { FakeBackendInterceptor } from '@core/services/fake-backend.interceptor';
 import { JwtInterceptor } from '@core/services/jwt.interceptor';
 import { MaterialModule } from './material/material.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { MaterialModule } from './material/material.module';
     CoreModule,
     HttpClientModule,
     MaterialModule,
+    NgbModule,
   ],
   providers: [
     { provide: 'BASE_URL', useValue: environment.baseurl },

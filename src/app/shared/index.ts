@@ -13,6 +13,7 @@ import { CopyToClipboardComponent } from './components/buttons/copy-to-clipboard
 import { UrlFieldComponent } from './components/inputs/url-field/url-field.component'
 import { OpenUrlComponent } from './components/buttons/open-url/open-url.component'
 import { SadFaceComponent } from './components/misc/sad-face/sad-face.component';
+import { MultiSelectDialogComponent } from './components/inputs/multi-select-dialog/multi-select-dialog.component';
 
 export const components: any[] = [
   ButtonComponent,
@@ -30,6 +31,7 @@ export const components: any[] = [
   UrlFieldComponent,
   OpenUrlComponent,
   SadFaceComponent,
+  MultiSelectDialogComponent,
 ]
 
 export const directives: any[] = []
@@ -51,3 +53,4 @@ export * from './components/misc/pictogram/pictogram.component'
 export * from './components/buttons/copy-to-clipboard/copy-to-clipboard.component'
 export * from './components/buttons/open-url/open-url.component'
 export * from './components/misc/sad-face/sad-face.component';
+export * from './components/inputs/multi-select-dialog/multi-select-dialog.component';

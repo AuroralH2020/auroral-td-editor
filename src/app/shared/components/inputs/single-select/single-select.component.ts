@@ -17,7 +17,11 @@ export class SingleSelectComponent implements OnInit {
 
   protected focused: boolean = false;
 
-  constructor() {}
+  constructor() {
+    if (!this.control) {
+      this.control = new FormControl('')
+    }
+  }
 
   ngOnInit(): void {
   }

@@ -1,9 +1,9 @@
-<div *ngIf="control" class="flex items-start">
+<div class="flex items-center">
   <div *ngIf="leadingIcon" class="leading-icon">
     <mat-icon
       class=" {{
         focused
-          ? 'text-secondary-300'
+          ? 'text-secondary-500'
           : 'text-primary-500'
       }}"
     >
@@ -19,7 +19,7 @@
     >
       <mat-label *ngIf="label">{{ label }}</mat-label>
       <mat-select
-        [formControl]="control"
+        [formControl]="control!"
         [placeholder]="placeholder ?? ''"
         (focus)="setFocus(true)"
         (blur)="setFocus(false)"
@@ -28,9 +28,9 @@
       >
         <mat-select-trigger>
           <ng-template
-            *ngIf="detailRef && control.value"
+            *ngIf="detailRef && control!.value"
             [ngTemplateOutlet]="detailRef"
-            [ngTemplateOutletContext]="{ $implicit: control.value }"
+            [ngTemplateOutletContext]="{ $implicit: control!.value }"
           ></ng-template>
         </mat-select-trigger>
         <mat-option *ngFor="let element of options" [value]="element">

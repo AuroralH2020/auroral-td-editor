@@ -11,10 +11,10 @@ input:-webkit-autofill {
 }
 
 .leading-icon {
-  padding-top: 12px;
-  padding-right: 16px;
+  // margin-top: 16px;
+  margin-right: 4px;
 }
 
 .leading-icon .mat-icon {
-  @include icon-size(32px);
+  @include icon-size(24px);
 }

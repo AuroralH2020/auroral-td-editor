@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core'
 import { MaterialModule } from '../material/material.module'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { SadFaceComponent } from './components/misc/sad-face/sad-face.component';
 
 @NgModule({
   declarations: [...shared.components, ...shared.directives, ...shared.pipes],

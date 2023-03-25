@@ -15,6 +15,9 @@ export class TextAreaComponent implements OnInit {
   protected focused: boolean = false
 
   constructor() {
+    if (!this.control) {
+      this.control = new FormControl('')
+    }
     return
   }
   ngOnInit(): void {}

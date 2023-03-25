@@ -1,12 +1,10 @@
 import {
   Component,
   ContentChildren,
-  Input,
   OnInit,
   QueryList,
   ViewChild,
 } from "@angular/core";
-import { ThemePalette } from "@angular/material/core";
 import { MatTab, MatTabGroup, MAT_TABS_CONFIG } from "@angular/material/tabs";
 import { TabComponent } from "../tab/tab.component";
 

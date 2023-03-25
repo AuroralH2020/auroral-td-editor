@@ -5,4 +5,5 @@ export abstract class CONSTANTS {
   static readonly REFRESH_TOKEN = 'refresh_token';
   static readonly USERNAME = 'username';
   static readonly PASSWORD = 'password';
+  static readonly MENU_FOLDED = 'menu-folded';
 }

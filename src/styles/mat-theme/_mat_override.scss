@@ -1,1 +1,103 @@
 /* override material component's css here if globally needed */
+
+body {
+    @apply font-primary text-text-500 text-sm not-italic font-light bg-primary-50;
+    // line-height: 1.3;
+
+    /* scrollbar theme overridden with below theme */
+
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+
+    /* Handle, default i.e will not go below this dimensions */
+    ::-webkit-scrollbar-thumb {
+        @apply bg-grey;
+        width: 100px;
+        height: 100px;
+    }
+
+    ::-webkit-scrollbar-corner {
+        @apply bg-transparent;
+    }
+
+    /* Thumb on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-grey;
+    }
+
+    /* For mobile taps, remove blue tap */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Snackbar */
+
+::ng-deep .snackbar {
+    @apply text-primary-50 font-normal;
+}
+
+::ng-deep .snackbar .mat-simple-snackbar-action {
+    @apply text-primary-50;
+}
+
+::ng-deep .error-snackbar {
+    @apply bg-danger;
+}
+
+/* Form field */
+
+::ng-deep .mat-form-field-flex {
+    cursor: text;
+    border-radius: 8px 8px 0px 0px !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill {
+    border-radius: 8px 8px 0px 0px !important;
+}
+
+/* Select */
+
+::ng-deep .mat-select-placeholder {
+    line-height: 18px;
+}
+
+::ng-deep .mat-select-panel {
+    margin-top: 24px;
+}
+
+/* Tabs */
+
+::ng-deep .mat-ink-bar {
+    border-bottom: 2px solid theme("colors.secondary.500");
+}
+
+/* Buttons */
+
+.mat-raised-button,
+.mat-stroked-button,
+.mat-flat-button {
+    padding: 0 1.15em;
+    margin: 0 .65em;
+    min-width: 3em;
+    line-height: 36.4px
+}
+
+.mat-standard-chip {
+    padding: .5em .85em;
+    min-height: 2.5em;
+}
+
+.material-icons {
+    font-size: 24px;
+    font-family: 'Material Icons Round', 'Material Icons';
+
+    .mat-badge-content {
+        font-family: 'Open Sans';
+    }
+}

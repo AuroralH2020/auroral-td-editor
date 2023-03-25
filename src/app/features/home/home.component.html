@@ -1,8 +1,16 @@
-<app-side-nav>
-  <app-header></app-header>
-  <div class="pl-2 pt-2 pb-2 content-wrarpper flex flex-col">
-    <div class="grow bg-white-50">
-      <router-outlet></router-outlet>
+<div class="w-screen h-screen">
+  <app-side-nav></app-side-nav>
+  <div class="w-screen h-full">
+    <app-header></app-header>
+    <div class="content-wrapper">
+      <div [ngClass]="['pt-12', folded ? 'pl-12' : 'pl-36']">
+        <div class="px-6 pt-6">
+          <div class="rounded-sm bg-white px-6">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        <app-footer></app-footer>
+      </div>
     </div>
   </div>
-</app-side-nav>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BroadcasterService } from '@core/services/broadcaster/broadcaster.service';
+import { CONSTANTS } from '@core/services/constants';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  folded: boolean = false;
+
+  constructor(private _broadcaster: BroadcasterService) { }
 
   ngOnInit(): void {
-    return;
+    this._broadcaster.listen(CONSTANTS.MENU_FOLDED).subscribe((value: any) => {
+      this.folded = value
+    })
   }
 
 }

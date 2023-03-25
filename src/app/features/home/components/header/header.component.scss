@@ -10,3 +10,9 @@
 .mat-toolbar-single-row {
   padding: 0px;
 }
+
+.mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 900;
+}

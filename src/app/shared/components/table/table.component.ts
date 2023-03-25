@@ -1,4 +1,14 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChild, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core'
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
@@ -35,6 +45,7 @@ export class TableComponent implements OnInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource()
 
   isLoading = false
+  isEmpty = true
 
   totalLength = 40
   pageSize = 20
@@ -47,13 +58,6 @@ export class TableComponent implements OnInit {
     this.loadData()
   }
 
-  get isEmpty(): boolean {
-    if (this.fetchData) {
-      return this.paginator && this.paginator.length === 0
-    }
-    return this.dataSource.data.length === 0
-  }
-
   async loadData() {
     if (this.fetchData) {
       this.isLoading = true
@@ -63,9 +67,11 @@ export class TableComponent implements OnInit {
         this.paginator.length = data.totalLength
         this.paginator.pageIndex = this.currentPage
       } catch (err) {
-        this.dataSource.data = this.dataSource.data ?? []
-        this.paginator.length = this.dataSource.data?.length ?? 0
-        this.paginator.pageIndex = this.currentPage
+        if (this.dataSource && this.paginator) {
+          this.dataSource.data = this.dataSource.data ?? []
+          this.paginator.length = this.dataSource.data?.length ?? 0
+          this.paginator.pageIndex = this.currentPage
+        }
       } finally {
         this.isLoading = false
       }
@@ -76,6 +82,7 @@ export class TableComponent implements OnInit {
         this.dataSource.data = this.data
       }
     }
+    this._checkIfEmpty()
   }
 
   pageChanged(event: PageEvent) {
@@ -86,5 +93,13 @@ export class TableComponent implements OnInit {
 
   expand(element: any) {
     this.expandedElement = this.expandedElement === element ? null : element
+  }
+
+  private _checkIfEmpty(): void {
+    if (this.fetchData) {
+      this.isEmpty = this.paginator && this.paginator.length === 0
+    } else {
+      this.isEmpty = this.dataSource.data.length === 0
+    }
   }
 }
