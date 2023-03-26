@@ -46,16 +46,19 @@
 .card {
   @apply bg-lightGrey;
   @apply rounded-sm;
+  border: 1px solid #DEE2E6;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .card-dense {
   @apply card;
-  @apply px-4 py-2;
+  @apply py-2;
 }
 
 .card-loose {
   @apply card;
-  @apply px-4 py-4;
+  @apply py-4;
 }
 
 .icon-xs {
@@ -68,4 +71,13 @@
 
 .icon-md {
   @include icon-size(32px);
+}
+
+.section {
+  @apply rounded-sm bg-white p-6;
+  border: 1px solid #DEE2E6;
+}
+
+.p-fieldset-legend {
+  margin-left: 1.25rem;
 }

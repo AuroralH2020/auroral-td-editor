@@ -15,6 +15,7 @@ import { NavButtonComponent } from './components/side-nav/nav-button/nav-button.
 import { MenuItemComponent } from './sections/menu-item/menu-item.component';
 import { ComponentsLibraryComponent } from './sections/components-library/components-library.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { PrimeNgModule } from 'src/app/prime-ng/prime-ng.module'
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FooterComponent } from './components/footer/footer.component';
     SharedModule,
     HomeRoutingModule,
     MaterialModule,
+    PrimeNgModule,
     FormsModule,
     ReactiveFormsModule
   ],

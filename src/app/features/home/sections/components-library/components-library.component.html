@@ -10,148 +10,10 @@
   </div>
 </div> -->
 
-<!---------------------- TEXT FIELD ---------------------->
-<div class="pt-6">
-  <div class="card-dense">
-    <div class="font-normal">Text field</div>
-  </div>
-  <div class="m-4">
-    <div class="container">
-      <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4"><app-text-field label="Basic:"></app-text-field></div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-text-field [control]="textFieldWithError" label="With error:">
-            <div *ngIf="textFieldWithError.invalid && (textFieldWithError.dirty || textFieldWithError.touched)">
-              <mat-error *ngIf="textFieldWithError.hasError('required')">Field can't be empty</mat-error>
-            </div>
-          </app-text-field>
-        </div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-text-field label="With placeholder:" placeholder="This is placeholder"></app-text-field>
-        </div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-text-field label="With prefix:" prefix="prefix"></app-text-field>
-        </div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-text-field label="With leading icon:" leadingIcon="person"></app-text-field>
-        </div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-text-field label="With secret:" [isSecret]="true"></app-text-field>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!---------------------- TEXT AREA ---------------------->
-<div class="pt-12">
-  <div class="card-dense">
-    <div class="font-normal">Text area</div>
-  </div>
-  <div class="m-4">
-    <div class="container">
-      <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4"><app-text-area label="Basic:"></app-text-area></div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-text-area [control]="textAreaWithError" label="With error:">
-            <div *ngIf="textAreaWithError.invalid && (textAreaWithError.dirty || textAreaWithError.touched)">
-              <mat-error *ngIf="textAreaWithError.hasError('required')">Field can't be empty</mat-error>
-            </div>
-          </app-text-area>
-        </div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-text-area label="With placeholder:" placeholder="This is placeholder"></app-text-area>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!---------------------- SELECT ---------------------->
-<div class="pt-12">
-  <div class="card-dense">
-    <div class="font-normal">Select</div>
-  </div>
-  <div class="m-4">
-    <div class="mb-4">Single select:</div>
-
-    <div class="container">
-      <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-single-select label="Basic:" [options]="['Option 1', 'Option 2', 'Option 3']">
-            <ng-template #detailRef let-data>{{ data }}</ng-template>
-          </app-single-select>
-        </div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-single-select label="With multiple data types:" [options]="['Option 1', 2, 3.333]">
-            <ng-template #detailRef let-data>{{ data }}</ng-template>
-          </app-single-select>
-        </div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-single-select
-            [control]="singleSelectWithError"
-            label="With error:"
-            [options]="['Option 1', 'Option 2', 'Option 3']"
-          >
-            <ng-template #detailRef let-data>{{ data }}</ng-template>
-            <div
-              *ngIf="singleSelectWithError.invalid && (singleSelectWithError.dirty || singleSelectWithError.touched)"
-            >
-              <mat-error *ngIf="singleSelectWithError.hasError('required')">Field can't be empty</mat-error>
-            </div>
-          </app-single-select>
-        </div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-single-select
-            label="With placeholder:"
-            placeholder="placeholder"
-            [options]="['Option 1', 'Option 2', 'Option 3']"
-          >
-            <ng-template #detailRef let-data>{{ data }}</ng-template>
-          </app-single-select>
-        </div>
-
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-single-select
-            label="With leading icon:"
-            leadingIcon="person"
-            [options]="['Option 1', 'Option 2', 'Option 3']"
-          >
-            <ng-template #detailRef let-data>{{ data }}</ng-template>
-          </app-single-select>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-8 mb-4">Muti select dialog:</div>
-
-    <div class="container">
-      <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-          <app-multi-select-dialog></app-multi-select-dialog>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!---------------------- TABLE ---------------------->
-<div class="pt-12">
-  <div class="card-dense">
-    <div class="font-normal">Table</div>
-  </div>
-  <div class="m-4">
-    <div class="mb-4">Basic table:</div>
+<p-fieldset legend="Table">
+  <div class="card-dense mb-4">Basic table</div>
+  <div class="px-4">
     <app-table
       [columns]="['name', 'type', 'owner']"
       [data]="[
@@ -177,7 +39,14 @@
       >
       <ng-template #cellRef let-data let-columnName="columnName">
         <div>
-          {{ columnName }} is {{ columnName == 'name' ? data.name : columnName == 'type' ? data.type : data.owner }}
+          {{ columnName }} is
+          {{
+            columnName == "name"
+              ? data.name
+              : columnName == "type"
+              ? data.type
+              : data.owner
+          }}
         </div></ng-template
       >
       <ng-template #detailRef let-detail>
@@ -188,17 +57,27 @@
     </app-table>
   </div>
 
-  <div class="h-4"></div>
+  <div class="h-16"></div>
 
-  <div class="m-4">
-    <div class="mb-4">Remote fetch table:</div>
-    <app-table [columns]="['name', 'type', 'owner']" [fetchData]="getItemsForFetchTable">
+  <div class="card-dense mb-4">Remote fetch table</div>
+  <div class="px-4">
+    <app-table
+      [columns]="['name', 'type', 'owner']"
+      [fetchData]="getItemsForFetchTable"
+    >
       <ng-template #headerCellRef let-columnName
         ><div class="text-sm">{{ columnName }}</div></ng-template
       >
       <ng-template #cellRef let-data let-columnName="columnName">
         <div>
-          {{ columnName }} is {{ columnName == 'name' ? data.name : columnName == 'type' ? data.type : data.owner }}
+          {{ columnName }} is
+          {{
+            columnName == "name"
+              ? data.name
+              : columnName == "type"
+              ? data.type
+              : data.owner
+          }}
         </div></ng-template
       >
       <ng-template #detailRef let-detail>
@@ -208,45 +87,32 @@
       </ng-template>
     </app-table>
   </div>
-</div>
 
-<div class="h-4"></div>
+  <div class="h-16"></div>
 
-<div class="m-4">
-  <div class="mb-4">Empty table:</div>
-  <app-table [columns]="['name', 'type', 'owner']" [data]="[]">
-    <ng-template #headerCellRef let-columnName
-      ><div class="text-sm">{{ columnName }}</div></ng-template
-    >
-    <ng-template #cellRef let-data let-columnName="columnName">
-      <div>
-        {{ columnName }} is {{ columnName == 'name' ? data.name : columnName == 'type' ? data.type : data.owner }}
-      </div></ng-template
-    >
-    <ng-template #detailRef let-detail>
-      <div>Name: {{ detail.name }}</div>
-      <div>Type: {{ detail.type }}</div>
-      <div>Owner: {{ detail.owner }}</div>
-    </ng-template>
-  </app-table>
-</div>
-
-<!---------------------- TABS ---------------------->
-<div class="pt-12">
-  <div class="card-dense">
-    <div class="font-normal">Tabs</div>
+  <div class="card-dense mb-4">Empty table</div>
+  <div class="px-4">
+    <app-table [columns]="['name', 'type', 'owner']" [data]="[]">
+      <ng-template #headerCellRef let-columnName
+        ><div class="text-sm">{{ columnName }}</div></ng-template
+      >
+      <ng-template #cellRef let-data let-columnName="columnName">
+        <div>
+          {{ columnName }} is
+          {{
+            columnName == "name"
+              ? data.name
+              : columnName == "type"
+              ? data.type
+              : data.owner
+          }}
+        </div></ng-template
+      >
+      <ng-template #detailRef let-detail>
+        <div>Name: {{ detail.name }}</div>
+        <div>Type: {{ detail.type }}</div>
+        <div>Owner: {{ detail.owner }}</div>
+      </ng-template>
+    </app-table>
   </div>
-  <div class="m-4">
-    <div class="mb-4">Version 1:</div>
-    <app-tab-group>
-      <app-tab label="Tab 1">
-        This is tab 1
-      </app-tab>
-      <app-tab label="Tab 2">
-        This is tab 2
-      </app-tab>
-    </app-tab-group>
-  </div>
-</div>
-
-<div class="h-16"></div>
+</p-fieldset>

@@ -1,56 +1,66 @@
 <div class="wrapper h-screen" style="background-color: 'white'">
-  <div class="h-4/5 text-primary-500 flex justify-center items-center">
+  <div class="h-4/5 flex justify-center items-center">
     <div>
-      <div class="flex justify-between">
-        <div class="mt-8">
-          <div
-            class="text-lg tracking-widest font-bold text-primary-300 mb-4"
-            i18n
-          >
-            Create account
-          </div>
-          <div class="w-48" i18n>
-            Join our community and help
-            <app-auroral-hyperlink></app-auroral-hyperlink> grow.
-          </div>
-        </div>
-        <div class="w-32"></div>
-        <mat-icon class="icon text-secondary-500"
-          >person_add</mat-icon
-        >
+      <div class="flex justify-end">
+        <mat-icon class="icon text-primary-100">person_add_alt</mat-icon>
       </div>
-      <div class="h-11"></div>
+      <div class="mt-8">
+        <div class="text-md tracking-widest font-bold mb-4" i18n>
+          Create account
+        </div>
+        <div class="w-48" i18n>
+          Join Auroral community and help the platform grow.
+        </div>
+      </div>
+      <div class="h-10"></div>
       <form [formGroup]="form">
-        <div class="grid gap-4 grid-cols-1 text-center">
-          <div class="ml-12">
-            <app-text-field
-              [control]="username"
-              label="Full name"
-            ></app-text-field>
+        <div class="grid gap-8 grid-cols-1">
+          <div class="grid grid-cols-1 gap-2">
+            <label htmlFor="email">Email</label>
+            <div class="flex items-center gap-2">
+              <i class="pi pi-at"></i>
+              <input
+                pInputText
+                id="email"
+                [formControl]="email!"
+                placeholder="john@doe.com"
+              />
+            </div>
           </div>
-          <app-text-field
-            [control]="email"
-            label="Email"
-            leadingIcon="alternate_email"
-          ></app-text-field>
-          <div class="h-4"></div>
-          <app-text-field
-            [control]="password"
-            label="Password"
-            [isSecret]="true"
-            leadingIcon="lock"
-          ></app-text-field>
-          <app-text-field
-            [control]="reapeatPassword"
-            label="Repeat password"
-            [isSecret]="true"
-            leadingIcon="lock"
-          ></app-text-field>
+          <div class="grid grid-cols-1 gap-2">
+            <label htmlFor="password">Password</label>
+            <small id="password-help">Create password.</small>
+            <div>
+              <div class="flex items-center gap-2">
+                <i class="pi pi-lock"></i>
+                <input
+                  pInputText
+                  id="password"
+                  aria-describedby="password-help"
+                  [formControl]="password!"
+                  placeholder="Password"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-2">
+                <i class="pi pi-lock"></i>
+                <input
+                  pInputText
+                  id="repeat-password"
+                  aria-describedby="password-help"
+                  [formControl]="reapeatPassword!"
+                  placeholder="Repeat password"
+                />
+              </div>
+            </div>
+          </div>
           <div class="buttons-wrapper grid gap-1 grid-cols-1 text-center">
             <app-button
               type="mat-raised-button"
-              theme="accent"
-              size="large"
+              theme="primary"
+              size="medium"
               actionType="submit"
               [loading]="loading"
               class="pt-6 pb-2"

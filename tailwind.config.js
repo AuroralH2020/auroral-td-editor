@@ -5,8 +5,8 @@ module.exports = {
   darkMode: 'media',
   theme: {
     fontFamily: {
-      primary: ['Open Sans'],
-      secondary: ['Roboto'],
+      primary: ['sans-serif'],
+      secondary: ['Open Sans'],
     },
     borderRadius: {
       none: '0',
@@ -37,7 +37,7 @@ module.exports = {
       transparent: 'transparent',
       white: '#fff',
       grey: '#494949',
-      lightGrey: '#F8F8F8',
+      lightGrey: '#F8F9FA',
       dialogGrey: '#f5f5f5',
       yellow:'#f2b619',
       success: '#277d26',
