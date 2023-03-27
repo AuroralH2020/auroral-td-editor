@@ -39,7 +39,8 @@ module.exports = {
       grey: '#494949',
       lightGrey: '#F8F9FA',
       dialogGrey: '#f5f5f5',
-      yellow:'#f2b619',
+      whitesmoke: '#f3f3f3',
+      yellow: '#f2b619',
       success: '#277d26',
       danger: '#ff3a3a',
       primary: {
@@ -74,9 +75,9 @@ module.exports = {
         400: '#818181',
         500: '#666666',
         600: '#515151',
-        700: '#434343',
+        700: '#484848',
         800: '#383838',
-        900: '#333333',
+        900: '#313131',
       },
     },
     extend: {

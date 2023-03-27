@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core'
 
-export type PictogramType = 'device' | 'service' | 'node'
+export type Size = 'normal' | 'small'
 
 @Component({
   selector: 'app-pictogram',
@@ -8,34 +8,13 @@ export type PictogramType = 'device' | 'service' | 'node'
   styleUrls: ['./pictogram.component.scss'],
 })
 export class PictogramComponent implements OnInit {
-  @Input() name: string | null | undefined
-  @Input() type: PictogramType | null | undefined
-  @Input() extraInfo: string | null | undefined
-  @Input() textStyleClasses: string | undefined
 
-  icon!: string
-  color!: string
+  @ContentChild('pictogramRef') pictogramRef: TemplateRef<any> | undefined
 
-  constructor() {}
-
-  private _determineType() {
-    switch (this.type) {
-      case 'service':
-        this.icon = 'cloud'
-        this.color = '#E5B38E'
-        break
-      case 'node':
-        this.icon = 'device_hub'
-        this.color = '#54d6d6'
-        break
-      default:
-        this.icon = 'router'
-        this.color = '#00B6EB'
-        break
-    }
-  }
+  @Input() size: Size = 'normal'
+  @Input() pictogramColor: string | undefined
+  @Input() contentColor: string | undefined
 
   ngOnInit(): void {
-    this._determineType()
   }
 }

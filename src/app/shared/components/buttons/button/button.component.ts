@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, HostBinding } from '@angular/core'
 
-type ButtonType = 'mat-button' | 'mat-flat-button' | 'mat-raised-button' | 'mat-stroked-button'
-type ButtonTheme = 'basic' | 'primary' | 'accent' | 'warn'
-type ButtonSize = 'small' | 'medium' | 'large'
+type Type = 'mat-button' | 'mat-flat-button' | 'mat-raised-button' | 'mat-stroked-button'
+type Theme = 'basic' | 'primary' | 'accent' | 'warn'
+type Size = 'small' | 'medium' | 'large'
 
 @Component({
   selector: 'app-button',
@@ -12,9 +12,9 @@ type ButtonSize = 'small' | 'medium' | 'large'
 export class ButtonComponent implements OnInit {
   @Input() disabled: boolean = false
   @Input() loading: boolean = false
-  @Input() type: ButtonType = 'mat-flat-button'
-  @Input() theme: ButtonTheme = 'primary'
-  @Input() size: ButtonSize = 'small'
+  @Input() type: Type = 'mat-flat-button'
+  @Input() theme: Theme = 'primary'
+  @Input() size: Size = 'small'
   @Input() actionType: string = ''
   @Input() width: number | undefined
 

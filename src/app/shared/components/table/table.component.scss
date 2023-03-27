@@ -30,7 +30,7 @@ tr.element-row:not(.example-expanded-row):active {
 }
 
 .mat-row:nth-child(even) {
-  @apply border-b border-grey border-opacity-10
+  @apply border-b border-grey border-opacity-10;
 }
 
 .element-row-arrow {

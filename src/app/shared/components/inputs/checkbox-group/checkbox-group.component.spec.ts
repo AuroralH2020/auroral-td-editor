@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TabComponent } from './tab.component';
+import { CheckboxGroupComponent } from './checkbox-group.component';
 
-describe('TabComponent', () => {
-  let component: TabComponent;
-  let fixture: ComponentFixture<TabComponent>;
+describe('CheckboxGroupComponent', () => {
+  let component: CheckboxGroupComponent;
+  let fixture: ComponentFixture<CheckboxGroupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TabComponent ]
+      declarations: [ CheckboxGroupComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TabComponent);
+    fixture = TestBed.createComponent(CheckboxGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

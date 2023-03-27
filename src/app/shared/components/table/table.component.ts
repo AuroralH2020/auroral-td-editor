@@ -1,7 +1,4 @@
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   Input,
@@ -12,7 +9,7 @@ import {
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
-import { ActionWhenEmpty, FetchTableItems } from '@shared/models/table.modele'
+import { FetchTableItems } from '@shared/models/table.modele'
 
 @Component({
   selector: 'app-table',

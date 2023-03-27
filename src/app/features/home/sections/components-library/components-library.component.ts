@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
 import { FetchTableItems } from '@shared/models/table.modele'
 
+interface City {
+  name: string
+  code: string
+}
+
 @Component({
   selector: 'app-components-library',
   templateUrl: './components-library.component.html',
@@ -23,9 +28,21 @@ export class ComponentsLibraryComponent implements OnInit {
     updateOn: 'change',
   })
 
+  cities!: City[]
+
+  selectedCities: City[] | undefined
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cities = [
+      { name: 'New York', code: 'NY' },
+      { name: 'Rome', code: 'RM' },
+      { name: 'London', code: 'LDN' },
+      { name: 'Istanbul', code: 'IST' },
+      { name: 'Paris', code: 'PRS' },
+    ]
+  }
 
   getItemsForFetchTable(page: number, size: number): Promise<FetchTableItems> {
     const items = [...Array(20).keys()].map((x) => {
