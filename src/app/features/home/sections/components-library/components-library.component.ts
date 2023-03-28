@@ -57,6 +57,7 @@ export class ComponentsLibraryComponent implements OnInit {
   selectedCheckboxItemsBasic: CheckboxGroupItem[] = [];
   selectedCheckboxItemsSearch: CheckboxGroupItem[] = [];
   selectedCheckboxItemsSelect: CheckboxGroupItem[] = [];
+  selectedCheckboxItemsCustom: CheckboxGroupItem[] = [];
 
   searchInCheckboxes = (value: string) => {
     return this.checkboxItems.filter((element) =>

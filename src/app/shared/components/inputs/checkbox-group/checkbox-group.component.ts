@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from "@angular/core";
 import { CheckboxGroupItem } from "@shared/models/checkbox-group.modele";
 import { inflect } from "src/app/utils";
 
@@ -15,6 +15,8 @@ export class CheckboxGroupComponent implements OnInit {
   @Input() selectedItems!: CheckboxGroupItem[];
   @Output() selectedItemsChange: EventEmitter<CheckboxGroupItem[]> = new EventEmitter<CheckboxGroupItem[]>();
   @Input() showStatus: boolean = false;
+
+  @ContentChild('labelRef') labelRef: TemplateRef<any> | undefined
 
   allSelected: boolean = false;
 
@@ -51,6 +53,11 @@ export class CheckboxGroupComponent implements OnInit {
     if (this.search) {
       this.displayedItems = this.search(this.searchText);
     }
+  }
+
+  isSelected(item: CheckboxGroupItem): boolean {
+    if (!this.selectedItems) return false;
+    return this.selectedItems.some((element) => element.key === item.key)
   }
 
   get itemsSelected() {
