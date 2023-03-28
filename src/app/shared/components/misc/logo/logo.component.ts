@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-type IconTheme = 'dark' | 'light';
+type Theme = 'dark' | 'light';
+type Size = 'normal' | 'small';
 
 @Component({
   selector: 'app-logo',
@@ -9,7 +10,8 @@ type IconTheme = 'dark' | 'light';
 })
 export class LogoComponent implements OnInit {
 
-  @Input() iconTheme: IconTheme = 'light';
+  @Input() theme: Theme = 'dark';
+  @Input() size: Size = 'normal';
 
   constructor() { }
 

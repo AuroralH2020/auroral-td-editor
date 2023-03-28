@@ -13,6 +13,9 @@ import { OpenProfileComponent } from './components/header/open-profile/open-prof
 import { NotificationBellComponent } from './components/header/notification-bell/notification-bell.component'
 import { NavButtonComponent } from './components/side-nav/nav-button/nav-button.component'
 import { MenuItemComponent } from './sections/menu-item/menu-item.component';
+import { ComponentsLibraryComponent } from './sections/components-library/components-library.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { PrimeNgModule } from 'src/app/prime-ng/prime-ng.module'
 
 @NgModule({
   declarations: [
@@ -23,14 +26,17 @@ import { MenuItemComponent } from './sections/menu-item/menu-item.component';
     NotificationBellComponent,
     NavButtonComponent,
     MenuItemComponent,
+    ComponentsLibraryComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     HomeRoutingModule,
     MaterialModule,
+    PrimeNgModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
 })

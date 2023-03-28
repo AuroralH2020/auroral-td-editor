@@ -1,1 +1,37 @@
 /* override material component's css here if globally needed */
+
+/* Snackbar */
+
+::ng-deep .snackbar {
+    @apply text-primary-50 font-normal;
+}
+
+::ng-deep .snackbar .mat-simple-snackbar-action {
+    @apply text-primary-50;
+}
+
+::ng-deep .error-snackbar {
+    @apply bg-danger;
+}
+
+/* Buttons */
+
+.mat-raised-button,
+.mat-stroked-button,
+.mat-flat-button {
+    padding: 0 1.15em;
+    margin: 0 .65em;
+    min-width: 3em;
+    line-height: 36.4px
+}
+
+/* Icons */
+
+.material-icons {
+    font-size: 24px;
+    font-family: 'Material Icons Round', 'Material Icons';
+
+    .mat-badge-content {
+        font-family: 'sans-serif';
+    }
+}

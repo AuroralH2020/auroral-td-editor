@@ -1,9 +1,5 @@
 @import 'styles';
 
 .icon {
-    @include icon-size(126px);
-}
-
-.text-fields {
-    margin-right: 48px;
+    @include icon-size(72px);
 }

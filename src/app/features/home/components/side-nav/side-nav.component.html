@@ -1,18 +1,25 @@
-<mat-sidenav-container class="bg-primary-50" hasBackdrop="false">
-  <mat-sidenav
-    #drawer
-    fixedInViewport="true"
-    mode="side"
-    opened="true"
-    class="bg-primary-500 w-44"
-  >
-    <app-logo></app-logo>
-    <div style="height: 24px"></div>
-    <app-nav-button path="menu-item-1" name="Menu Item 1" icon="list"></app-nav-button>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="h-screen">
-      <ng-content></ng-content>
+<div class="content-wrapper flex z-50 grow h-full">
+  <div [ngClass]="['bg-primary-600', folded ? 'w-12' : 'w-36']">
+    <div class="bg-primary-50">
+      <app-logo [size]="folded ? 'small' : 'normal'"></app-logo>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <div style="height: 24px"></div>
+    <app-nav-button path="components-library" name="Components" icon="space_dashboard"></app-nav-button>
+    <app-nav-button path="menu-item-1" name="Menu Item 1" icon="list"></app-nav-button>
+  </div>
+  <div
+    [ngClass]="[
+      'bg-primary-50',
+      'rounded-r-full',
+      'flex',
+      'items-center',
+      'justify-center',
+      'cursor-pointer',
+      'h-12',
+      folded ? 'pr-2': 'w-12',
+    ]"
+    (click)="toggleMenu()"
+  >
+    <mat-icon>menu</mat-icon>
+  </div>
+</div>

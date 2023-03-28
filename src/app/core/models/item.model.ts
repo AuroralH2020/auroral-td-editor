@@ -1,4 +1,3 @@
-import { PictogramType } from '@shared/index'
 import { DataService } from './data-service.model'
 import { Property, Event, Monitor } from './monitor.model'
 import { Organisation } from './organisation.model'
@@ -98,14 +97,6 @@ export class Item {
 
   public get eventSubscriptionsCount(): number {
     return this.eventSubscriptions?.length ?? 0
-  }
-
-  public get pictogramType(): PictogramType {
-    if (this.name?.toLocaleLowerCase()?.includes('service')) {
-      return 'service'
-    } else {
-      return 'device'
-    }
   }
 
   public getProperty(pid: string): Monitor | undefined {

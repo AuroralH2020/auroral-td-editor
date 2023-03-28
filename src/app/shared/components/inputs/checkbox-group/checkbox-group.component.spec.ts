@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TextAreaComponent } from './text-area.component';
+import { CheckboxGroupComponent } from './checkbox-group.component';
 
-describe('TextAreaComponent', () => {
-  let component: TextAreaComponent;
-  let fixture: ComponentFixture<TextAreaComponent>;
+describe('CheckboxGroupComponent', () => {
+  let component: CheckboxGroupComponent;
+  let fixture: ComponentFixture<CheckboxGroupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TextAreaComponent ]
+      declarations: [ CheckboxGroupComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TextAreaComponent);
+    fixture = TestBed.createComponent(CheckboxGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

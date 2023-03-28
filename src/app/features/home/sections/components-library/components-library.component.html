@@ -1,0 +1,254 @@
+<!-- GRID EXAMPLE -->
+<!-- <div class="container">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 lg:col-span-6 xl:col-span-4"></div>
+    <div class="col-span-12 lg:col-span-6 xl:col-span-4"></div>
+    <div class="col-span-12 lg:col-span-6 xl:col-span-4"></div>
+    <div class="col-span-12 lg:col-span-6 xl:col-span-4"></div>
+    <div class="col-span-12 lg:col-span-6 xl:col-span-4"></div>
+    <div class="col-span-12 lg:col-span-6 xl:col-span-4"></div>
+  </div>
+</div> -->
+
+<!---------------------- TABLE ---------------------->
+<p-fieldset legend="Table">
+  <div class="card-dense mb-4">Basic table</div>
+  <div class="px-6">
+    <app-table
+      [columns]="['Name', 'Type', 'Owner']"
+      [data]="[
+        {
+          name: 'Name 1',
+          type: 'Type 1',
+          owner: 'Owner 1'
+        },
+        {
+          name: 'Name 2',
+          type: 'Type 2',
+          owner: 'Owner 2'
+        },
+        {
+          name: 'Name 3',
+          type: 'Type 3',
+          owner: 'Owner 3'
+        }
+      ]"
+    >
+      <ng-template #headerCellRef let-columnName
+        ><div class="text-sm">{{ columnName }}</div></ng-template
+      >
+      <ng-template #cellRef let-data let-columnName="columnName">
+        <div>
+          {{ columnName }} is
+          {{
+            columnName == "Name"
+              ? data.name
+              : columnName == "Type"
+              ? data.type
+              : data.owner
+          }}
+        </div></ng-template
+      >
+      <ng-template #detailRef let-detail>
+        <div>Name: {{ detail.name }}</div>
+        <div>Type: {{ detail.type }}</div>
+        <div>Owner: {{ detail.owner }}</div>
+      </ng-template>
+    </app-table>
+  </div>
+
+  <div class="h-16"></div>
+
+  <div class="card-dense mb-4">Remote fetch table</div>
+  <div class="px-6">
+    <app-table
+      [columns]="['Name', 'Type', 'Owner']"
+      [fetchData]="getItemsForFetchTable"
+    >
+      <ng-template #headerCellRef let-columnName
+        ><div class="text-sm">{{ columnName }}</div></ng-template
+      >
+      <ng-template #cellRef let-data let-columnName="columnName">
+        <div>
+          {{ columnName }} is
+          {{
+            columnName == "Name"
+              ? data.name
+              : columnName == "Type"
+              ? data.type
+              : data.owner
+          }}
+        </div></ng-template
+      >
+      <ng-template #detailRef let-detail>
+        <div>Name: {{ detail.name }}</div>
+        <div>Type: {{ detail.type }}</div>
+        <div>Owner: {{ detail.owner }}</div>
+      </ng-template>
+    </app-table>
+  </div>
+
+  <div class="h-16"></div>
+
+  <div class="card-dense mb-4">Empty table</div>
+  <div class="px-6">
+    <app-table [columns]="['Name', 'Type', 'Owner']" [data]="[]">
+      <ng-template #headerCellRef let-columnName
+        ><div class="text-sm">{{ columnName }}</div></ng-template
+      >
+      <ng-template #cellRef let-data let-columnName="columnName">
+        <div>
+          {{ columnName }} is
+          {{
+            columnName == "Name"
+              ? data.name
+              : columnName == "Type"
+              ? data.type
+              : data.owner
+          }}
+        </div></ng-template
+      >
+      <ng-template #detailRef let-detail>
+        <div>Name: {{ detail.name }}</div>
+        <div>Type: {{ detail.type }}</div>
+        <div>Owner: {{ detail.owner }}</div>
+      </ng-template>
+    </app-table>
+  </div>
+</p-fieldset>
+
+<div class="h-6"></div>
+
+<!---------------------- MENU ---------------------->
+<p-fieldset legend="Menu">
+  <div class="container">
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-12 2xl:col-span-8">
+        <div class="card-dense mb-4">Horizontal</div>
+        <div class="px-6">
+          <app-menu
+            [options]="[
+              { label: 'Menu label 1', content: 'Menu content 1' },
+              { label: 'Menu label 2', content: 'Menu content 2' },
+              { label: 'Menu label 3', content: 'Menu content 3' }
+            ]"
+          >
+            <ng-template #labelRef let-item>
+              {{ item.label }}
+            </ng-template>
+            <ng-template #contentRef let-item>
+              {{ item.content }}
+            </ng-template>
+          </app-menu>
+        </div>
+      </div>
+      <div class="col-span-12 2xl:col-span-4">
+        <div class="card-dense mb-4">Vertical</div>
+        <div class="px-6">
+          <app-menu
+            type="vertical"
+            [options]="[
+              { label: 'Menu label 1', content: 'Menu content 1' },
+              { label: 'Menu label 2', content: 'Menu content 2' },
+              { label: 'Menu label 3', content: 'Menu content 3' }
+            ]"
+          >
+            <ng-template #labelRef let-item>
+              {{ item.label }}
+            </ng-template>
+            <ng-template #contentRef let-item>
+              {{ item.content }}
+            </ng-template>
+          </app-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-fieldset>
+
+<div class="h-6"></div>
+
+<!---------------------- CHECKBOX GROUP ---------------------->
+<p-fieldset legend="Checkbox group">
+  <div class="container">
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-12 lg:col-span-4 xl:col-span-2">
+        <div class="card-dense mb-4">Basic</div>
+        <div class="px-6">
+          <app-checkbox-group
+            [(selectedItems)]="selectedCheckboxItemsBasic"
+            [items]="checkboxItems"
+          ></app-checkbox-group>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-5 xl:col-span-3">
+        <div class="card-dense mb-4">With search</div>
+        <div class="px-6">
+          <app-checkbox-group
+            [items]="checkboxItems"
+            [(selectedItems)]="selectedCheckboxItemsSearch"
+            [search]="searchInCheckboxes"
+          ></app-checkbox-group>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-6 xl:col-span-4">
+        <div class="card-dense mb-4">With select status</div>
+        <div class="px-6">
+          <app-checkbox-group
+            [items]="checkboxItems"
+            [(selectedItems)]="selectedCheckboxItemsSelect"
+            [showStatus]="true"
+          ></app-checkbox-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-fieldset>
+
+<div class="h-6"></div>
+
+<!---------------------- MISC ---------------------->
+<p-fieldset legend="Misc">
+  <div class="card-dense mb-4">Pictogram</div>
+  <div class="px-6">
+    <div class="container">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12 lg:col-span-4 xl:col-span-2">
+          <app-pictogram>
+            <ng-template #pictogramRef>
+              <mat-icon> router </mat-icon>
+            </ng-template>
+            <div>Basic</div>
+          </app-pictogram>
+        </div>
+        <div class="col-span-12 lg:col-span-4 xl:col-span-2">
+          <app-pictogram>
+            <ng-template #pictogramRef>
+              <mat-icon> router </mat-icon>
+            </ng-template>
+            <div>With looooooooooooooooong content</div>
+          </app-pictogram>
+        </div>
+        <div class="col-span-12 lg:col-span-4 xl:col-span-2">
+          <app-pictogram size="small">
+            <ng-template #pictogramRef>
+              <mat-icon> router </mat-icon>
+            </ng-template>
+            <div>Small</div>
+          </app-pictogram>
+        </div>
+        <div class="col-span-12 lg:col-span-4 xl:col-span-2">
+          <app-pictogram
+            pictogramColor="rgb(0, 182, 235)"
+            contentColor="rgba(0, 182, 235, 0.2)"
+          >
+            <ng-template #pictogramRef>
+              <mat-icon class="text-white"> router </mat-icon>
+            </ng-template>
+            With custom colors
+          </app-pictogram>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-fieldset>

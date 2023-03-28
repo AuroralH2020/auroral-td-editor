@@ -2,65 +2,48 @@
 <div class="h-4/5 flex items-center justify-center">
   <div class="flex items-center justify-center">
     <mat-card>
-      <div class="px-10 pt-4 pb-40">
-        <div class="flex justify-between">
-          <div class="mt-8">
-            <div
-              class="text-lg tracking-widest font-bold text-primary-300 mb-4"
-              i18n
-            >
-              Sign in
-            </div>
-            <div class="w-48" i18n>
-              Log in to access all features of the
-              <app-auroral-hyperlink></app-auroral-hyperlink>.
-            </div>
-          </div>
-          <div class="w-32"></div>
-          <mat-icon class="icon text-primary-100"
-            >lock_open</mat-icon
-          >
+      <div class="px-4 pt-4 pb-20">
+        <div class="flex justify-end pb-4 items-center">
+          <mat-icon class="icon text-primary-100">lock_open</mat-icon>
         </div>
-        <div class="h-11"></div>
         <form [formGroup]="form">
           <div
-            class="flex flex-col gap-4 text-center items-center justify-center text-fields"
+            class="flex flex-col gap-4 items-center justify-center px-16"
           >
-            <app-text-field
-              [control]="username"
-              label="Username"
-              leadingIcon="person"
-              placeholder="john.doe@example.com"
-            >
-              <div
-                *ngIf="username.invalid && (username.dirty || username.touched)"
-              >
-                <mat-error *ngIf="username.hasError('required')"
-                  >Please provide username</mat-error
-                >
-              </div>
-            </app-text-field>
-            <app-text-field
-              [control]="password"
-              label="Password"
-              [isSecret]="true"
-              leadingIcon="lock"
-            >
-              <div
-                *ngIf="password.invalid && (password.dirty || password.touched)"
-              >
-                <mat-error *ngIf="password.hasError('required')"
-                  >Please provide password</mat-error
-                >
-              </div>
-            </app-text-field>
+          <div class="text-md tracking-widest font-bold pb-4">
+            Application Name
+          </div>
+            <div>
+              <span class="p-input-icon-left">
+                <i class="pi pi-user"></i>
+                <input
+                  type="text"
+                  pInputText
+                  [formControl]="username!"
+                  placeholder="Username"
+                  style="width: 256px;"
+                />
+              </span>
+            </div>
+            <div>
+              <span class="p-input-icon-left">
+                <i class="pi pi-lock"></i>
+                <input
+                  type="password"
+                  pInputText
+                  [formControl]="password!"
+                  placeholder="Password"
+                  style="width: 256px;"
+                />
+              </span>
+            </div>
           </div>
           <div class="flex flex-col gap-1 text-center">
-            <div class="pt-6 pb-2">
+            <div class="pt-8 pb-2">
               <app-button
                 type="mat-raised-button"
-                theme="accent"
-                size="large"
+                theme="primary"
+                size="medium"
                 [loading]="loading"
                 [disabled]="form.invalid"
                 (click)="onLoginClick()"

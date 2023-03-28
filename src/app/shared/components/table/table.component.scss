@@ -1,3 +1,5 @@
+@import "styles";
+
 table {
   width: 100%;
 }
@@ -21,5 +23,47 @@ tr.element-row:not(.example-expanded-row):active {
 
 .element-detail {
   overflow: hidden;
-  display: flex;
+}
+
+.mat-row {
+  position: relative;
+}
+
+.mat-row:nth-child(even) {
+  @apply border-b border-grey border-opacity-10;
+}
+
+.element-row-arrow {
+  position: absolute;
+  top: -32px;
+  right: 24px;
+  z-index: 100;
+}
+
+td.mat-cell {
+  border-bottom-style: none;
+}
+
+.mat-table {
+
+  th {
+    @apply bg-lightGrey;
+    @apply text-sm text-text-400;
+  }
+
+  th:first-child {
+    @apply rounded-l-sm;
+  }
+
+  th:last-child {
+    @apply rounded-r-sm;
+  }
+
+  tr.mat-header-row {
+    @apply h-10;
+  }
+
+  tr:first-child th {
+    border-bottom: none;
+  }
 }

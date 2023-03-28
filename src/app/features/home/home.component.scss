@@ -1,3 +1,6 @@
-.content-wrarpper {
-  height: 96.4%;
+.content-wrapper {
+  position: fixed;
+  overflow-y: scroll;
+  width: 100vw;
+  height: 100vh;
 }
