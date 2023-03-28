@@ -201,6 +201,20 @@
           ></app-checkbox-group>
         </div>
       </div>
+      <div class="col-span-12 lg:col-span-6 xl:col-span-4">
+        <div class="card-dense mb-4">Custom label</div>
+        <div class="px-6">
+          <app-checkbox-group
+            [items]="checkboxItems"
+            [(selectedItems)]="selectedCheckboxItemsCustom"
+          >
+            <ng-template #labelRef let-item let-selected="selected">
+              This is custom template of: {{ item.key }}, {{ item.value }} and
+              is {{ selected }}
+            </ng-template>
+          </app-checkbox-group>
+        </div>
+      </div>
     </div>
   </div>
 </p-fieldset>

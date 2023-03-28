@@ -42,7 +42,21 @@
               [inputId]="item.key"
               (onChange)="selectionChanged()"
             ></p-checkbox>
-            <label [for]="item.key" class="break-words">{{ item.value }}</label>
+            <label [for]="item.key" class="break-words">
+              <ng-template
+                *ngIf="labelRef; else elseLabelBlock"
+                [ngTemplateOutlet]="labelRef"
+                [ngTemplateOutletContext]="{
+                  $implicit: item,
+                  selected: isSelected(item)
+                }"
+              >
+                {{ item.value }}
+              </ng-template>
+              <ng-template #elseLabelBlock>
+                {{ item.value }}
+              </ng-template>
+            </label>
           </div>
         </div>
         <ng-template #elseEmptyBlock>
