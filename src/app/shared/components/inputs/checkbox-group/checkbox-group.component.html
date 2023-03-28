@@ -1,17 +1,57 @@
-<h5>Multiple</h5>
-<div class="field-checkbox">
-  <p-checkbox name="group1" value="New York" [(ngModel)]="selectedCities" inputId="ny"></p-checkbox>
-  <label for="ny">New York</label>
-</div>
-<div class="field-checkbox">
-  <p-checkbox name="group1" value="San Francisco" [(ngModel)]="selectedCities" inputId="sf"></p-checkbox>
-  <label for="sf">San Francisco</label>
-</div>
-<div class="field-checkbox">
-  <p-checkbox name="group1" value="Los Angeles" [(ngModel)]="selectedCities" inputId="la"></p-checkbox>
-  <label for="la">Los Angeles</label>
-</div>
-<div class="field-checkbox">
-  <p-checkbox name="group1" value="Chicago" [(ngModel)]="selectedCities" inputId="ch"></p-checkbox>
-  <label for="ch">Chicago</label>
+<div class="w-fit">
+  <div
+    class="field-checkbox flex gap-2 bg-lightGrey px-5 py-2 rounded-sm w-full items-center"
+  >
+    <p-checkbox
+      [(ngModel)]="allSelected"
+      [binary]="true"
+      inputId="binary"
+      (onChange)="toggleAll()"
+    ></p-checkbox>
+    <div class="flex items-center gap-8 w-full justify-between">
+      <span *ngIf="search; else elseAllBlock" class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input
+          [(ngModel)]="searchText"
+          type="text"
+          pInputText
+          class="w-48"
+          (ngModelChange)="searchChanged()"
+        />
+      </span>
+      <ng-template #elseAllBlock>All</ng-template>
+      <div *ngIf="showStatus">
+        <p-tag severity="info" [value]="itemsSelected"></p-tag>
+      </div>
+    </div>
+  </div>
+  <div class="mt-2">
+    <div class="flex items-stretch">
+      <div class="w-1 bg-lightGrey rounded-sm my-4"></div>
+      <div class="ml-4 pr-5">
+        <div *ngIf="displayedItems.length !== 0; else elseEmptyBlock">
+          <div
+            *ngFor="let item of displayedItems"
+            class="field-checkbox flex gap-2 py-3"
+          >
+            <p-checkbox
+              name="group"
+              value="item"
+              [value]="item"
+              [(ngModel)]="selectedItems"
+              [inputId]="item.key"
+              (onChange)="selectionChanged()"
+            ></p-checkbox>
+            <label [for]="item.key" class="break-words">{{ item.value }}</label>
+          </div>
+        </div>
+        <ng-template #elseEmptyBlock>
+          <div class="ml-5 text-center w-full">
+            <app-sad-face></app-sad-face>
+            No items found
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
 </div>

@@ -40,7 +40,13 @@
       <ng-template #cellRef let-data let-columnName="columnName">
         <div>
           {{ columnName }} is
-          {{ columnName == 'Name' ? data.name : columnName == 'Type' ? data.type : data.owner }}
+          {{
+            columnName == "Name"
+              ? data.name
+              : columnName == "Type"
+              ? data.type
+              : data.owner
+          }}
         </div></ng-template
       >
       <ng-template #detailRef let-detail>
@@ -55,14 +61,23 @@
 
   <div class="card-dense mb-4">Remote fetch table</div>
   <div class="px-6">
-    <app-table [columns]="['Name', 'Type', 'Owner']" [fetchData]="getItemsForFetchTable">
+    <app-table
+      [columns]="['Name', 'Type', 'Owner']"
+      [fetchData]="getItemsForFetchTable"
+    >
       <ng-template #headerCellRef let-columnName
         ><div class="text-sm">{{ columnName }}</div></ng-template
       >
       <ng-template #cellRef let-data let-columnName="columnName">
         <div>
           {{ columnName }} is
-          {{ columnName == 'Name' ? data.name : columnName == 'Type' ? data.type : data.owner }}
+          {{
+            columnName == "Name"
+              ? data.name
+              : columnName == "Type"
+              ? data.type
+              : data.owner
+          }}
         </div></ng-template
       >
       <ng-template #detailRef let-detail>
@@ -84,7 +99,13 @@
       <ng-template #cellRef let-data let-columnName="columnName">
         <div>
           {{ columnName }} is
-          {{ columnName == 'Name' ? data.name : columnName == 'Type' ? data.type : data.owner }}
+          {{
+            columnName == "Name"
+              ? data.name
+              : columnName == "Type"
+              ? data.type
+              : data.owner
+          }}
         </div></ng-template
       >
       <ng-template #detailRef let-detail>
@@ -149,9 +170,38 @@
 
 <!---------------------- CHECKBOX GROUP ---------------------->
 <p-fieldset legend="Checkbox group">
-  <div class="card-dense mb-4">Basic</div>
-  <div class="px-6">
-    <app-checkbox-group></app-checkbox-group>
+  <div class="container">
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-12 lg:col-span-4 xl:col-span-2">
+        <div class="card-dense mb-4">Basic</div>
+        <div class="px-6">
+          <app-checkbox-group
+            [(selectedItems)]="selectedCheckboxItemsBasic"
+            [items]="checkboxItems"
+          ></app-checkbox-group>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-5 xl:col-span-3">
+        <div class="card-dense mb-4">With search</div>
+        <div class="px-6">
+          <app-checkbox-group
+            [items]="checkboxItems"
+            [(selectedItems)]="selectedCheckboxItemsSearch"
+            [search]="searchInCheckboxes"
+          ></app-checkbox-group>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-6 xl:col-span-4">
+        <div class="card-dense mb-4">With select status</div>
+        <div class="px-6">
+          <app-checkbox-group
+            [items]="checkboxItems"
+            [(selectedItems)]="selectedCheckboxItemsSelect"
+            [showStatus]="true"
+          ></app-checkbox-group>
+        </div>
+      </div>
+    </div>
   </div>
 </p-fieldset>
 
@@ -188,7 +238,10 @@
           </app-pictogram>
         </div>
         <div class="col-span-12 lg:col-span-4 xl:col-span-2">
-          <app-pictogram pictogramColor="rgb(0, 182, 235)" contentColor="rgba(0, 182, 235, 0.2)">
+          <app-pictogram
+            pictogramColor="rgb(0, 182, 235)"
+            contentColor="rgba(0, 182, 235, 0.2)"
+          >
             <ng-template #pictogramRef>
               <mat-icon class="text-white"> router </mat-icon>
             </ng-template>
@@ -199,14 +252,3 @@
     </div>
   </div>
 </p-fieldset>
-
-<div class="mt-8">
-  <p-multiSelect
-    [options]="cities"
-    [(ngModel)]="selectedCities"
-    defaultLabel="Select a City"
-    optionLabel="name"
-    display="chip"
-    [style]="{ width: '300px' }"
-  ></p-multiSelect>
-</div>

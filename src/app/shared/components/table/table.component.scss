@@ -1,4 +1,4 @@
-@import 'styles';
+@import "styles";
 
 table {
   width: 100%;
@@ -40,28 +40,30 @@ tr.element-row:not(.example-expanded-row):active {
   z-index: 100;
 }
 
-td.mat-cell{
+td.mat-cell {
   border-bottom-style: none;
 }
 
 .mat-table {
+
   th {
-      @apply bg-lightGrey;
+    @apply bg-lightGrey;
+    @apply text-sm text-text-400;
   }
 
   th:first-child {
-      @apply rounded-l-sm;
+    @apply rounded-l-sm;
   }
 
   th:last-child {
-      @apply rounded-r-sm;
+    @apply rounded-r-sm;
   }
 
   tr.mat-header-row {
-      @apply h-10;
+    @apply h-10;
   }
 
   tr:first-child th {
-      border-bottom: none;
+    border-bottom: none;
   }
 }

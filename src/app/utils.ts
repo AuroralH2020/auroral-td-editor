@@ -64,3 +64,14 @@ export function parseURL(str: string, protocol: Protocol | undefined): string {
 export function delay(time: number) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
+
+export function inflect(num: number, zero: string, one: string, many: string) {
+  switch(num) {
+    case 0:
+      return zero;
+    case 1:
+      return one;
+    default:
+      return many;
+  }
+}

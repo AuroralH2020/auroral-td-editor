@@ -85,6 +85,7 @@ body {
 .card {
   @apply bg-lightGrey;
   @apply rounded-sm;
+  @apply text-sm text-text-400;
   border: 1px solid #DEE2E6;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
