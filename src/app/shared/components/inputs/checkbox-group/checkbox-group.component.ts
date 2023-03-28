@@ -1,4 +1,12 @@
-import { Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from "@angular/core";
+import {
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from "@angular/core";
 import { CheckboxGroupItem } from "@shared/models/checkbox-group.modele";
 import { inflect } from "src/app/utils";
 
@@ -13,10 +21,13 @@ export class CheckboxGroupComponent implements OnInit {
   @Input() items: CheckboxGroupItem[] = [];
   @Input() search: ((search: any) => CheckboxGroupItem[]) | undefined;
   @Input() selectedItems!: CheckboxGroupItem[];
-  @Output() selectedItemsChange: EventEmitter<CheckboxGroupItem[]> = new EventEmitter<CheckboxGroupItem[]>();
+  @Output() selectedItemsChange: EventEmitter<CheckboxGroupItem[]> =
+    new EventEmitter<CheckboxGroupItem[]>();
   @Input() showStatus: boolean = false;
+  @Input() highlightColor: string | undefined;
+  @Input() dividerColor: string | undefined;
 
-  @ContentChild('labelRef') labelRef: TemplateRef<any> | undefined
+  @ContentChild("labelRef") labelRef: TemplateRef<any> | undefined;
 
   allSelected: boolean = false;
 
@@ -26,6 +37,9 @@ export class CheckboxGroupComponent implements OnInit {
 
   ngOnInit() {
     this.displayedItems = this.items.slice(0, this.items.length);
+    this.allSelected = this.items.every((e1) =>
+      this.selectedItems.find((e2) => e1.key === e2.key)
+    );
   }
 
   toggleAll(): void {
@@ -57,15 +71,20 @@ export class CheckboxGroupComponent implements OnInit {
 
   isSelected(item: CheckboxGroupItem): boolean {
     if (!this.selectedItems) return false;
-    return this.selectedItems.some((element) => element.key === item.key)
+    return this.selectedItems.some((element) => element.key === item.key);
   }
 
   get itemsSelected() {
-    const num = this.selectedItems.length
-    const n = this.items.length
+    const num = this.selectedItems.length;
+    const n = this.items.length;
     if (num === n) {
-      return 'All items selected';
+      return "All items selected";
     }
-    return inflect(num, 'No items selected', `${num} of ${n} item selected`, `${num} of ${n} items selected`);
+    return inflect(
+      num,
+      "No items selected",
+      `${num} of ${n} item selected`,
+      `${num} of ${n} items selected`
+    );
   }
 }

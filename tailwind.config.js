@@ -43,6 +43,7 @@ module.exports = {
       yellow: '#f2b619',
       success: '#277d26',
       danger: '#ff3a3a',
+      node: '#4D8A8C',
       primary: {
         50: '#f3faf9',
         100: '#d6f1ee',

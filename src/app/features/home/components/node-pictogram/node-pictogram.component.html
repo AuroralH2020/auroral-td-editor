@@ -1,0 +1,51 @@
+<div [ngClass]="[hidden ? 'relative h-12' : '']">
+  <div [ngClass]="['z-40', hidden ? 'absolute' : '']">
+    <app-pictogram>
+      <ng-template #pictogramRef>
+        <i
+          class="pi pi-share-alt"
+          style="font-size: 1.5rem; color: #4d8a8c"
+        ></i>
+      </ng-template>
+      <div [ngClass]="['', hidden ? 'h-8 overflow-hidden' : '']">
+        f3ade82a-4ff2-4f63-a2cf-d9e92cbf89d8
+      </div>
+      <div
+        *ngIf="!hidden"
+        class="flex items-center justify-end mr-1 text-primary-500"
+      >
+        <div
+          class="h-8 w-8 flex items-center justify-center cursor-pointer"
+          (click)="toggleVisibility()"
+        >
+          <mat-icon>visibility_off</mat-icon>
+        </div>
+        <div
+          class="h-8 w-8 ml-0.5 flex items-center justify-center cursor-pointer"
+          (click)="copyToClipboard()"
+        >
+          <mat-icon>content_copy</mat-icon>
+        </div>
+      </div>
+    </app-pictogram>
+  </div>
+  <div
+    *ngIf="hidden"
+    [ngClass]="['z-50 right-0 actions mr-1', hidden ? 'absolute' : '']"
+  >
+    <div class="flex items-center justify-end h-12 w-32 text-primary-500">
+      <div
+        class="h-8 w-8 flex items-center justify-center cursor-pointer"
+        (click)="toggleVisibility()"
+      >
+        <mat-icon>visibility</mat-icon>
+      </div>
+      <div
+        class="h-8 w-8 ml-0.5 flex items-center justify-center cursor-pointer"
+        (click)="copyToClipboard()"
+      >
+        <mat-icon>content_copy</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

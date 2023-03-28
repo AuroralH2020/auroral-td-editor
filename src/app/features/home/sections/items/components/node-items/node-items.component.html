@@ -1,0 +1,184 @@
+<div class="flex gap-4">
+  <div class="w-56">
+    <app-node-pictogram></app-node-pictogram>
+    <div class="card-dense mt-4">
+      Filter by type:
+      <div class="mt-4">
+        <app-checkbox-group
+          [(selectedItems)]="selectedFilterItems"
+          [items]="filterItems"
+          highlightColor="white"
+        >
+          <ng-template #labelRef let-item>
+            <div class="flex items-center gap-2">
+              <mat-icon [ngStyle]="{ color: item.value.color }">{{
+                item.value.icon
+              }}</mat-icon>
+              <div>{{ item.value.label }}</div>
+            </div>
+          </ng-template>
+        </app-checkbox-group>
+      </div>
+    </div>
+  </div>
+  <div class="grow">
+    <span class="p-input-icon-right">
+      <i class="pi pi-search"></i>
+      <input
+        [(ngModel)]="searchText"
+        type="text"
+        pInputText
+        (ngModelChange)="searchChanged()"
+        style="width: 256px"
+      />
+    </span>
+    <div class="mt-4">
+      <app-table
+        [columns]="['Name', 'Access level', 'Enabled']"
+        [data]="[
+          {
+            name: 'Name 1',
+            accessLevel: 'private',
+            enabled: true
+          },
+          {
+            name: 'Name 2',
+            accessLevel: 'partners',
+            enabled: true
+          },
+          {
+            name: 'Name 3',
+            accessLevel: 'public',
+            enabled: false
+          },
+          {
+            name: 'Name 1',
+            accessLevel: 'private',
+            enabled: true
+          },
+          {
+            name: 'Name 2',
+            accessLevel: 'partners',
+            enabled: true
+          },
+          {
+            name: 'Name 3',
+            accessLevel: 'public',
+            enabled: false
+          },
+          {
+            name: 'Name 1',
+            accessLevel: 'private',
+            enabled: true
+          },
+          {
+            name: 'Name 2',
+            accessLevel: 'partners',
+            enabled: true
+          },
+          {
+            name: 'Name 3',
+            accessLevel: 'public',
+            enabled: false
+          },
+          {
+            name: 'Name 1',
+            accessLevel: 'private',
+            enabled: true
+          },
+          {
+            name: 'Name 2',
+            accessLevel: 'partners',
+            enabled: true
+          },
+          {
+            name: 'Name 3',
+            accessLevel: 'public',
+            enabled: false
+          },
+          {
+            name: 'Name 1',
+            accessLevel: 'private',
+            enabled: true
+          },
+          {
+            name: 'Name 2',
+            accessLevel: 'partners',
+            enabled: true
+          },
+          {
+            name: 'Name 3',
+            accessLevel: 'public',
+            enabled: false
+          },
+          {
+            name: 'Name 1',
+            accessLevel: 'private',
+            enabled: true
+          },
+          {
+            name: 'Name 2',
+            accessLevel: 'partners',
+            enabled: true
+          },
+          {
+            name: 'Name 3',
+            accessLevel: 'public',
+            enabled: false
+          },
+          {
+            name: 'Name 1',
+            accessLevel: 'private',
+            enabled: true
+          },
+          {
+            name: 'Name 2',
+            accessLevel: 'partners',
+            enabled: true
+          },
+          {
+            name: 'Name 3',
+            accessLevel: 'public',
+            enabled: false
+          },
+          {
+            name: 'Name 1',
+            accessLevel: 'private',
+            enabled: true
+          },
+          {
+            name: 'Name 2',
+            accessLevel: 'partners',
+            enabled: true
+          },
+          {
+            name: 'Name 3',
+            accessLevel: 'public',
+            enabled: false
+          },
+        ]"
+      >
+        <ng-template #headerCellRef let-columnName
+          ><div class="text-sm">{{ columnName }}</div></ng-template
+        >
+        <ng-template #cellRef let-data let-columnName="columnName">
+          <div>
+            {{ columnName }} is
+            {{
+              columnName == "Name"
+                ? data.name
+                : columnName == "Type"
+                ? data.type
+                : data.owner
+            }}
+          </div></ng-template
+        >
+        <ng-template #detailRef let-detail>
+          <div>Name: {{ detail.name }}</div>
+          <div>Type: {{ detail.type }}</div>
+          <div>Owner: {{ detail.owner }}</div>
+        </ng-template>
+      </app-table>
+    </div>
+  </div>
+</div>

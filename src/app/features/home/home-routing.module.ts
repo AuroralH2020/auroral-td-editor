@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth.guard';
 import { HomeComponent } from './home.component';
 import { ComponentsLibraryComponent } from './sections/components-library/components-library.component';
-import { MenuItemComponent } from './sections/menu-item/menu-item.component';
+import { ItemsComponent } from './sections/items/items.component';
 
 const sections: any = [
-  { path: 'components-library', component: ComponentsLibraryComponent },
-  { path: 'menu-item-1', component: MenuItemComponent },
+  // { path: 'components-library', component: ComponentsLibraryComponent },
+  { path: 'items', component: ItemsComponent },
 ]
 
 const routes: Routes = [
