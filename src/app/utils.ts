@@ -1,24 +1,5 @@
-import { Property, Event } from '@core/models/monitor.model'
-import { Subscription } from '@core/models/subscription.model'
-
 export type JsonType<T = any> = {
   [x: string]: T
-}
-
-export function isPropery(object: any): object is Property {
-  return 'pid' in object
-}
-
-export function isEvent(object: any): object is Event {
-  return 'eid' in object
-}
-
-export function isProperySubscription(object: any): object is Subscription {
-  return object.type === 'read' || object.type === 'write'
-}
-
-export function isEventSubscription(object: any): object is Subscription {
-  return object.type === 'event'
 }
 
 export function stringSortListOfObjects(array: any[], key: string) {
@@ -52,26 +33,17 @@ export function isObject(object: any) {
   return object != null && typeof object === 'object'
 }
 
-type Protocol = 'http' | 'https'
-
-export function parseURL(str: string, protocol: Protocol | undefined): string {
-  if (str.startsWith('http://') || str.startsWith('https://')) {
-    return str
-  }
-  return protocol ? `${protocol}://${str}` : str
-}
-
 export function delay(time: number) {
-  return new Promise(resolve => setTimeout(resolve, time));
+  return new Promise((resolve) => setTimeout(resolve, time))
 }
 
 export function inflect(num: number, zero: string, one: string, many: string) {
-  switch(num) {
+  switch (num) {
     case 0:
-      return zero;
+      return zero
     case 1:
-      return one;
+      return one
     default:
-      return many;
+      return many
   }
 }
