@@ -8,6 +8,9 @@
     {{ item.label }}
   </ng-template>
   <ng-template #contentRef let-item>
-    {{ item.content }}
+    <app-from-communities *ngIf="item.content === 'communities'">
+    </app-from-communities>
+    <app-from-partnerships *ngIf="item.content === 'partnerships'">
+    </app-from-partnerships>
   </ng-template>
 </app-menu>

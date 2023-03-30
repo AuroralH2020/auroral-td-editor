@@ -1,2 +1,9 @@
-<!-- <ngx-loading-bar [includeSpinner]="true" color="red"></ngx-loading-bar> -->
-<router-outlet></router-outlet>
+<div *ngIf="!loading">
+    <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="loading">
+    <div class="w-screen h-screen grid place-items-center">
+        <mat-spinner [diameter]="48"></mat-spinner>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 md:col-span-12 lg:col-span-3">
+      <app-item-icon [item]="item"></app-item-icon>
+      <div class="text-medium text-text-500 text-md">{{ item.itemname }}</div>
+    </div>
+    <div class="col-span-12 md:col-span-12 lg:col-span-9">
+      <div class="grow">
+        <p-fieldset legend="Properties">
+          <p-table
+            [value]="item.properties ?? []"
+            dataKey="pid"
+            [filterDelay]="0"
+            [scrollable]="true"
+            scrollHeight="480px"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Data Type</th>
+                <th>Data Units</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-prop>
+              <tr>
+                <td>
+                  {{ prop.propname }}
+                </td>
+                <td>
+                  {{ prop.type }}
+                </td>
+                <td>
+                  {{ prop.desc }}
+                </td>
+                <td>
+                  {{ prop.units }}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <div
+                class="flex flex-col px-4 py-2 justify-start w-36 text-center"
+              >
+                <app-sad-face></app-sad-face>
+                No properties found
+              </div>
+            </ng-template>
+          </p-table>
+        </p-fieldset>
+      </div>
+    </div>
+  </div>
+</div>

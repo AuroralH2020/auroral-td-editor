@@ -1,0 +1,10 @@
+<app-pictogram
+  size="small"
+  [pictogramColor]="pictogramColor"
+  [contentColor]="contentColor"
+>
+  <ng-template #pictogramRef>
+    <mat-icon class="text-white"> {{ itemIcon }} </mat-icon>
+  </ng-template>
+  {{ item.itemname }}
+</app-pictogram>

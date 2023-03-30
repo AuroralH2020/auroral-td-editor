@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NodesService } from '@core/services/nodes/nodes.service';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor() {
+  loading: boolean = false
+
+  constructor(private _nodesService: NodesService) {
     return;
   }
   
   ngOnInit(): void {
-    return;
+    this.initApp()
+  }
+
+  async initApp() {
+    this.loading = true
+    await this._nodesService.initNode()
+    this.loading = false
   }
 }

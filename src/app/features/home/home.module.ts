@@ -17,8 +17,14 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PrimeNgModule } from 'src/app/prime-ng/prime-ng.module';
 import { ItemsComponent } from './sections/items/items.component';
 import { NodePictogramComponent } from './components/node-pictogram/node-pictogram.component';
-import { NodeItemsComponent } from './sections/items/components/node-items/node-items.component';
-import { ForeignItemsComponent } from './sections/items/components/foreign-items/foreign-items.component'
+import { NodeItemsComponent } from './sections/items/item-types/node-items/node-items.component';
+import { ForeignItemsComponent } from './sections/items/item-types/foreign-items/foreign-items.component';
+import { ItemPictogramComponent } from './components/item-pictogram/item-pictogram.component';
+import { ItemAccessLevelComponent } from './components/item-access-level/item-access-level.component';
+import { NodeItemDetailComponent } from './sections/items/item-types/node-items/node-item-detail/node-item-detail.component';
+import { ItemIconComponent } from './sections/items/components/item-icon/item-icon.component';
+import { FromCommunitiesComponent } from './sections/items/item-types/foreign-items/from-communities/from-communities.component';
+import { FromPartnershipsComponent } from './sections/items/item-types/foreign-items/from-partnerships/from-partnerships.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +40,12 @@ import { ForeignItemsComponent } from './sections/items/components/foreign-items
     NodePictogramComponent,
     NodeItemsComponent,
     ForeignItemsComponent,
+    ItemPictogramComponent,
+    ItemAccessLevelComponent,
+    NodeItemDetailComponent,
+    ItemIconComponent,
+    FromCommunitiesComponent,
+    FromPartnershipsComponent,
   ],
   imports: [
     CommonModule,

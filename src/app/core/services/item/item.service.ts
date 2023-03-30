@@ -4,11 +4,12 @@ import { Items } from '@core/models/item.model'
 import { firstValueFrom, take } from 'rxjs'
 import { itemsQuery } from 'src/app/misc/node-queries'
 
+const _itemsQueryUrl = '/api/discovery/remote/semantic'
+
 @Injectable({
   providedIn: 'root',
 })
 export class ItemsService {
-  private _itemsQueryUrl = '/api/discovery/remote/semantic'
 
   constructor(private _http: HttpClient) {}
 
@@ -17,7 +18,7 @@ export class ItemsService {
     params = params.append('agids', agids.join(','))
     return await firstValueFrom(
       this._http
-        .post<Items>(this._itemsQueryUrl, itemsQuery, {
+        .post<Items>(_itemsQueryUrl, itemsQuery, {
           params,
           headers: {
             accept: 'application/json',

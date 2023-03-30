@@ -6,9 +6,10 @@ import { CONSTANTS } from '../constants'
 import jwt_decode from 'jwt-decode'
 import { firstValueFrom, take } from 'rxjs'
 
+const _loginUrl = '/fake/login'
+
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private _loginUrl = '/fake/login'
 
   constructor(private _http: HttpClient) {}
 
@@ -42,7 +43,7 @@ export class UserService {
     const body = new HttpParams({ fromObject: { ...userdetails } })
     return await firstValueFrom(
       this._http
-        .post<AuthTokens>(this._loginUrl, body.toString(), {
+        .post<AuthTokens>(_loginUrl, body.toString(), {
           headers: {
             'content-type': 'application/x-www-form-urlencoded',
           },

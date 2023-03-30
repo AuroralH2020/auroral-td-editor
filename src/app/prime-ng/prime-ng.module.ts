@@ -8,6 +8,12 @@ import { PasswordModule } from "primeng/password";
 import { MultiSelectModule } from "primeng/multiselect";
 import { CheckboxModule } from "primeng/checkbox";
 import { TagModule } from "primeng/tag";
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { DialogModule } from 'primeng/dialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [],
@@ -20,6 +26,12 @@ import { TagModule } from "primeng/tag";
     MultiSelectModule,
     CheckboxModule,
     TagModule,
+    InputSwitchModule,
+    TableModule,
+    ButtonModule,
+    RadioButtonModule,
+    DialogModule,
+    DynamicDialogModule
   ],
   exports: [
     InputTextModule,
@@ -29,6 +41,12 @@ import { TagModule } from "primeng/tag";
     MultiSelectModule,
     CheckboxModule,
     TagModule,
+    InputSwitchModule,
+    TableModule,
+    ButtonModule,
+    RadioButtonModule,
+    DialogModule,
+    DynamicDialogModule
   ],
 })
 export class PrimeNgModule {}
