@@ -45,8 +45,8 @@ export class NodeItemsComponent implements OnInit, OnDestroy {
       data: {
         item,
       },
-      width: "80%",
-      height: "80%",
+      width: "90%",
+      height: "90%",
       contentStyle: { overflow: "auto" },
       baseZIndex: 10000,
       closeOnEscape: true,
@@ -55,14 +55,14 @@ export class NodeItemsComponent implements OnInit, OnDestroy {
 
   search(event: Event) {
     const searchValue = (event.target as HTMLInputElement).value;
-    this.dt.filter(searchValue, "itemname", "startsWith");
+    this.dt.filter(searchValue, "name", "startsWith");
   }
 
   filter() {
     if (this.selectedFilter === 'All') {
       this.dt.reset()
     } else {
-      this.dt.filter(this.selectedFilter, "itemtype", "equals");
+      this.dt.filter(this.selectedFilter, "type", "equals");
     }
   }
 

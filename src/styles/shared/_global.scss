@@ -66,16 +66,13 @@ body {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-.item {
-  @apply text-sm;
-}
-
 .item .label {
-  @apply font-medium text-xs;
+  @apply font-medium text-text-400;
 }
 
 .item .content {
-  @apply pl-1 p-0.5;
+  @apply pl-2;
+  @apply text-text-500;
 }
 
 .no-data {

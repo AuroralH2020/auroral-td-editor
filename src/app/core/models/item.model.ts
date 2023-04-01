@@ -17,12 +17,13 @@ export interface ItemServer {
   oid?: Data
   itemname?: Data
   itemtype?: Data
-  propname?: Data
+  itemdesc?:   Data;
   pid?: Data
+  propname?: Data
   proptype?: Data
+  propdesc?: Data
   datatype?: Data
-  units?: Data
-  desc?: Data
+  dataunits?: Data
 }
 
 export interface Data {
@@ -35,18 +36,19 @@ export interface Data {
 
 export interface ItemUI {
   oid: string
-  itemtype: string
-  itemname?: string
+  name?: string
+  type: string
+  desc?: string
   properties?: PropertyUI[]
 }
 
 export interface PropertyUI {
   pid: string
   type?: string
-  propname?: string
-  datatype?: string
-  units?: string
+  name?: string
   desc?: string
+  datatype?: string
+  dataunits?: string
 }
 
 export class ItemConvert {
@@ -76,8 +78,9 @@ export class ItemConvert {
     const property = ItemConvert.toPropertyUI(item)
     return {
       oid: item.oid.value,
-      itemtype: item.itemtype?.value ?? 'Device',
-      itemname: item.itemname?.value,
+      name: item.itemname?.value,
+      type: item.itemtype?.value ?? 'Device',
+      desc: item.itemdesc?.value,
       properties: property ? [property] : undefined,
     }
   }
@@ -87,11 +90,11 @@ export class ItemConvert {
     if (!item.pid.value) return null
     return {
       pid: item.pid.value,
+      name: item.propname?.value,
       type: item.proptype?.value,
-      propname: item.propname?.value,
+      desc: item.propdesc?.value,
       datatype: item.datatype?.value,
-      units: item.units?.value,
-      desc: item.desc?.value,
+      dataunits: item.dataunits?.value,
     }
   }
 }

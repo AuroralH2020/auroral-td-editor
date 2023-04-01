@@ -1,3 +1,5 @@
+import { ItemUI } from '@core/models/item.model'
+
 export type JsonType<T = any> = {
   [x: string]: T
 }
@@ -45,5 +47,16 @@ export function inflect(num: number, zero: string, one: string, many: string) {
       return one
     default:
       return many
+  }
+}
+
+export function valueBasedOnItemType(item: ItemUI, whenDevice: any, whenService: any, whenOther: any): any {
+  switch (item.type.toLowerCase()) {
+    case 'device':
+      return whenDevice
+    case 'service':
+      return whenService
+    default:
+      return whenOther
   }
 }

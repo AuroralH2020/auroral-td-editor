@@ -5,3 +5,7 @@ th {
 tr {
     @apply cursor-pointer
 }
+
+.p-datatable .p-datatable-thead > tr > th {
+    border: none !important;
+}

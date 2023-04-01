@@ -32,13 +32,12 @@ export class NodesService {
   }
 
   private async _initMyOrgNodes(): Promise<void> {
-    const nodes = await firstValueFrom(
+    this.myOrgNodes = await firstValueFrom(
       this._http
         .get<MyOrgNode[]>(_orgNodesUrl, {
           headers: { accept: "application/json" },
         })
         .pipe(take(1))
     );
-    this.myOrgNodes = nodes.filter((element) => element.agid !== this.myNode.agid)
   }
 }
