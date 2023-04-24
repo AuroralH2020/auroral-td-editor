@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CollaborationService } from '@core/services/collaboration/collaboration.service';
+import { ItemsService } from '@core/services/item/item.service';
 import { NodesService } from '@core/services/nodes/nodes.service';
 
 @Component({
@@ -10,7 +12,7 @@ export class AppComponent implements OnInit {
 
   loading: boolean = false
 
-  constructor(private _nodesService: NodesService) {
+  constructor(private _nodesService: NodesService, private _itemsService: ItemsService, private _collaborationService: CollaborationService) {
     return;
   }
   
@@ -21,6 +23,8 @@ export class AppComponent implements OnInit {
   async initApp() {
     this.loading = true
     await this._nodesService.initNode()
+    await this._itemsService.initItems()
+    await this._collaborationService.initCollaboration()
     this.loading = false
   }
 }

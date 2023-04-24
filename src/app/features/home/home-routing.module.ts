@@ -13,7 +13,7 @@ const sections: any = [
 const routes: Routes = [
   { path: '', redirectTo: `sections/${sections[0].path}`, pathMatch: 'full' },
   {
-    path: 'sections', component: HomeComponent, canActivate: [AuthGuard],
+    path: 'sections', component: HomeComponent,
     children: sections
   },
 ];

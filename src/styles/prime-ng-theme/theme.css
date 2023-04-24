@@ -2753,13 +2753,16 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-datatable .p-datatable-thead > tr > th {
   text-align: left;
-  padding: 1rem 1rem;
+  padding: 1rem 1.5rem;
   border: none;
   border-width: 0 0 1px 0;
   font-weight: 700;
-  color: #343a40;
+  color: #818181;
+  font-size: 14px;
+  text-transform: capitalize;
   background: #f8f9fa;
   transition: box-shadow 0.2s;
+  opacity: 0.8
 }
 .p-datatable .p-datatable-thead > tr > th:first-child {
   border-radius: 8px 0px 0px 8px;
@@ -2821,7 +2824,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-datatable .p-datatable-tbody > tr > td {
   text-align: left;
-  padding: 1rem 1rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid rgba(222, 226, 230, 0.6);
 }
 .p-datatable .p-datatable-tbody > tr > td:first-child {
@@ -4226,6 +4229,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   background: #f8f9fa;
   font-weight: 700;
   border-radius: 8px;
+  margin-left: 1.25rem;
 }
 .p-fieldset.p-fieldset-toggleable .p-fieldset-legend {
   padding: 0;
@@ -4567,6 +4571,10 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #495057;
   border: 0 none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  z-index: 5000;
+}
+.p-sidebar-mask {
+  z-index: 10 !important;
 }
 .p-sidebar .p-sidebar-header {
   padding: 1.25rem;

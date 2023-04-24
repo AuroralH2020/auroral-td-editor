@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { NodesService } from '@core/services/nodes/nodes.service';
 import { SnackBarService } from '@core/services/snack-bar/snack-bar.service';
+import { Size } from '@shared/components/misc/pictogram/pictogram.component';
 
 @Component({
   selector: 'app-node-pictogram',
@@ -8,9 +10,12 @@ import { SnackBarService } from '@core/services/snack-bar/snack-bar.service';
 })
 export class NodePictogramComponent implements OnInit {
 
+  @Input() showIcon: boolean = true
+  @Input() size: Size = 'normal'
+
   hidden: boolean = true
 
-  constructor(private _snackbar: SnackBarService) { }
+  constructor(private _snackbar: SnackBarService, private _nodeService: NodesService) { }
 
   ngOnInit(): void {
   }
@@ -20,8 +25,12 @@ export class NodePictogramComponent implements OnInit {
   }
 
   copyToClipboard() {
-    navigator.clipboard.writeText('f3ade82a-4ff2-4f63-a2cf-d9e92cbf89d8')
+    navigator.clipboard.writeText(this.agid)
     this._snackbar.showMessage('Agid coppied to clipboard')
+  }
+
+  get agid(): string {
+    return this._nodeService.myNode.agid
   }
 
 }

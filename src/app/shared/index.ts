@@ -9,6 +9,7 @@ import { OpenUrlComponent } from './components/buttons/open-url/open-url.compone
 import { SadFaceComponent } from './components/misc/sad-face/sad-face.component'
 import { MenuComponent } from './components/menu/menu/menu.component'
 import { CheckboxGroupComponent } from './components/inputs/checkbox-group/checkbox-group.component'
+import { ItemIconComponent } from './components/misc/item-icon/item-icon.component'
 
 export const components: any[] = [
   ButtonComponent,
@@ -22,6 +23,7 @@ export const components: any[] = [
   SadFaceComponent,
   MenuComponent,
   CheckboxGroupComponent,
+  ItemIconComponent,
 ]
 
 export const directives: any[] = []
@@ -39,3 +41,4 @@ export * from './components/buttons/open-url/open-url.component'
 export * from './components/misc/sad-face/sad-face.component'
 export * from './components/menu/menu/menu.component'
 export * from './components/inputs/checkbox-group/checkbox-group.component'
+export * from './components/misc/item-icon/item-icon.component'

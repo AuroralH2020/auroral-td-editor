@@ -21,7 +21,7 @@
 >
   <div *ngIf="router.isActive" class="w-1 h-12 bg-secondary-400 strip"></div>
   <div class="flex items-center px-4">
-    <mat-icon aria-hidden="false" aria-label="Menu item" class="icon-xs text-white">{{ icon ?? 'lens' }}</mat-icon>
-    <div *ngIf="!folded" class="pl-2 text-white text-xs  font-medium">{{ name ?? 'Menu item' }}</div>
+    <mat-icon aria-hidden="false" aria-label="Menu item" class="text-white">{{ icon ?? 'lens' }}</mat-icon>
+    <div *ngIf="!folded" class="pl-2 text-white text-base  font-medium">{{ name ?? 'Menu item' }}</div>
   </div>
 </div>

@@ -8,8 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ClipboardModule } from '@angular/cdk/clipboard'
 import { PrimeNgModule } from '../prime-ng/prime-ng.module'
 
-
-
 @NgModule({
   declarations: [...shared.components, ...shared.directives, ...shared.pipes],
   imports: [MaterialModule, PrimeNgModule, CommonModule, FormsModule, ReactiveFormsModule, ClipboardModule],

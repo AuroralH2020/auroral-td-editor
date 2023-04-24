@@ -66,13 +66,8 @@ body {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-.item .label {
-  @apply font-medium text-text-400;
-}
-
-.item .content {
-  @apply pl-2;
-  @apply text-text-500;
+.item-label {
+  @apply text-text-500 text-sm capitalize font-bold;
 }
 
 .no-data {
@@ -88,6 +83,12 @@ body {
   padding-right: 1.25rem;
 }
 
+.card-action {
+  @apply card;
+  @apply rounded-sm;
+  border: 2px solid #379593;
+}
+
 .card-dense {
   @apply card;
   @apply py-2;
@@ -96,6 +97,13 @@ body {
 .card-loose {
   @apply card;
   @apply py-4;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.card-loose-primary {
+  @apply card-loose;
+  @apply bg-primary-50;
 }
 
 .icon-xs {
@@ -115,6 +123,6 @@ body {
   border: 1px solid #DEE2E6;
 }
 
-.p-fieldset-legend {
-  margin-left: 1.25rem;
+p-table {
+  width: 100%;
 }

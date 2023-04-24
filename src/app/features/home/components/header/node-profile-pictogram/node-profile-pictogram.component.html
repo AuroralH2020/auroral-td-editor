@@ -1,0 +1,22 @@
+<div [ngClass]="['relative ', size === 'small' ? 'w-11 h-11' : 'w-20 h-20']">
+  <div class="absolute">
+    <div
+      [ngClass]="[
+        'rounded-full bg-whitesmoke flex items-center justify-center',
+        size === 'small' ? 'w-11 h-11' : 'w-20 h-20'
+      ]"
+    >
+      <i class="pi pi-share-alt" [ngStyle]="{ 'font-size': size === 'small' ? '1.5rem' : '3rem', color: '#4d8a8c' }"></i>
+    </div>
+  </div>
+  <div [ngClass]="['absolute', size === 'small' ? '-bottom-1 -right-2' : '-bottom-2 -right-4']">
+    <div
+      [ngClass]="[
+        'rounded-full bg-whitesmoke border-4 border-white flex items-center justify-center',
+        size === 'small' ? 'w-7 h-7' : 'w-11 h-11'
+      ]"
+    >
+      <i class="pi pi-user text-text-500" [ngStyle]="{ 'font-size': size === 'small' ? '1rem' : '1.5rem' }"></i>
+    </div>
+  </div>
+</div>
