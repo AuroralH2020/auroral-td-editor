@@ -47,6 +47,9 @@
 * {
   box-sizing: border-box;
 }
+p-table {
+  width: 100%;
+}
 .p-component {
   font-family: sans-serif;
   font-size: 1rem;
@@ -2762,7 +2765,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   text-transform: capitalize;
   background: #f8f9fa;
   transition: box-shadow 0.2s;
-  opacity: 0.8
+  opacity: 0.8;
 }
 .p-datatable .p-datatable-thead > tr > th:first-child {
   border-radius: 8px 0px 0px 8px;
@@ -5907,6 +5910,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
   margin: 0 0 0 1rem;
+  overflow-wrap: break-word;
+  max-width: 17.5rem;
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-message-icon {
   font-size: 2rem;

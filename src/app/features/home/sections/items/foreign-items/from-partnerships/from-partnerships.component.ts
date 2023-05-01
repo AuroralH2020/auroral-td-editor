@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { PartnerUI } from '@core/models/collaboration.model';
-import { ItemConvert, ItemUI } from '@core/models/item.model';
-import { ItemsService } from '@core/services/item/item.service';
-import { NodesService } from '@core/services/nodes/nodes.service';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Table } from 'primeng/table';
-import { SelectPartnerDialogComponent } from './select-partner-dialog/select-partner-dialog.component';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { ContractServer, PartnerUI } from '@core/models/collaboration.model'
+import { ItemConvert, ItemUI } from '@core/models/item.model'
+import { ItemsService } from '@core/services/item/item.service'
+import { NodesService } from '@core/services/nodes/nodes.service'
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
+import { Table } from 'primeng/table'
+import { SelectPartnerDialogComponent } from './select-partner-dialog/select-partner-dialog.component'
+import { CollaborationService } from '@core/services/collaboration/collaboration.service'
 
 @Component({
   selector: 'app-from-partnerships',
@@ -13,7 +14,6 @@ import { SelectPartnerDialogComponent } from './select-partner-dialog/select-par
   styleUrls: ['./from-partnerships.component.scss'],
   providers: [DialogService],
 })
-
 export class FromPartnershipsComponent implements OnInit, OnDestroy {
   @ViewChild('dt') dt!: Table
 
@@ -21,7 +21,9 @@ export class FromPartnershipsComponent implements OnInit, OnDestroy {
 
   selectedFilter: string = 'All'
 
-  itemsUI: ItemUI[] = []
+  partnerItemsUI: ItemUI[] = []
+
+  contractInfo: ContractServer | undefined
 
   selectedPartner: PartnerUI | undefined
 
@@ -30,6 +32,7 @@ export class FromPartnershipsComponent implements OnInit, OnDestroy {
   constructor(
     private _nodesService: NodesService,
     private _itemsService: ItemsService,
+    private _collaborationService: CollaborationService,
     private _dialogService: DialogService
   ) {}
 
@@ -42,21 +45,6 @@ export class FromPartnershipsComponent implements OnInit, OnDestroy {
       this.detailDialogRef.close()
     }
   }
-
-  // showDetailDialog(item: ItemUI) {
-  //   this.detailDialogRef = this._dialogService.open(PartnerItemDetailComponent, {
-  //     data: {
-  //       item,
-  //       selectedPartner: this.selectedPartner,
-  //     },
-  //     width: "1400px",
-  //     height: "800px",
-  //     contentStyle: { overflow: "auto" },
-  //     baseZIndex: 10000,
-  //     closeOnEscape: true,
-  //     dismissableMask: true,
-  //   });
-  // }
 
   openSelectPartnerDialog() {
     this.detailDialogRef = this._dialogService.open(SelectPartnerDialogComponent, {
@@ -86,22 +74,28 @@ export class FromPartnershipsComponent implements OnInit, OnDestroy {
     }
   }
 
-  private async _getData(partner: PartnerUI | undefined | null): Promise<void> {
+  private async _getData(partner: PartnerUI | undefined | null) {
     if (partner) {
       this.selectedPartner = partner
       this.loading = true
-      console.log(partner)
-      const nodes = await this._nodesService.getNodesFromPartnership(partner.cid)
-      let agids = nodes.map((element) => element.agid)
-      if (agids.length == 0) {
-        this.itemsUI = []
-        this.loading = false
-        return
-      }
-      const itemsServer = await this._itemsService.getItems(agids)
-      this.itemsUI = ItemConvert.toItemsUI(itemsServer)
+      await this._getPartnerItems()
+      await this._getContractInfo()
       this.loading = false
     }
   }
-}
 
+  private async _getPartnerItems(): Promise<void> {
+    const nodes = await this._nodesService.getNodesFromPartnership(this.selectedPartner!.cid)
+    let agids = nodes.map((element) => element.agid)
+    if (agids.length == 0) {
+      this.partnerItemsUI = []
+      return
+    }
+    const itemsServer = await this._itemsService.getItems(agids)
+    this.partnerItemsUI = ItemConvert.toItemsUI(itemsServer)
+  }
+
+  private async _getContractInfo(): Promise<void> {
+    this.contractInfo = await this._collaborationService.getContractInfo(this.selectedPartner!.cid)
+  }
+}

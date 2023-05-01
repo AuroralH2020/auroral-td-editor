@@ -1,18 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { ItemConvert, ItemUI, Items } from '@core/models/item.model'
-import { MyNode } from '@core/models/node.model'
 import { firstValueFrom, take } from 'rxjs'
 import { itemsQuery } from 'src/app/misc/node-queries'
 
 const _itemsRemoteQueryUrl = '/api/discovery/remote/semantic'
 const _itemsLocalQueryUrl = '/api/discovery/local/semantic'
 
+const _itemsReadPropertyUrl = '/api/properties'
+
 @Injectable({
   providedIn: 'root',
 })
 export class ItemsService {
-
   constructor(private _http: HttpClient) {}
 
   myItems: ItemUI[] | undefined
@@ -32,7 +32,7 @@ export class ItemsService {
         })
         .pipe(take(1))
     )
-    this.myItems = ItemConvert.toItemsUI(itemsServer);
+    this.myItems = ItemConvert.toItemsUI(itemsServer)
   }
 
   async getItems(agids: string[]): Promise<Items> {
@@ -42,6 +42,19 @@ export class ItemsService {
       this._http
         .post<Items>(_itemsRemoteQueryUrl, itemsQuery, {
           params,
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'text/plain',
+          },
+        })
+        .pipe(take(1))
+    )
+  }
+
+  async getDataFromProperty(oid: string, remoteOid: string, pid: string): Promise<any> {
+    return await firstValueFrom(
+      this._http
+        .get<Items>(_itemsReadPropertyUrl + `/${oid}/${remoteOid}/${pid}`, {
           headers: {
             accept: 'application/json',
             'Content-Type': 'text/plain',

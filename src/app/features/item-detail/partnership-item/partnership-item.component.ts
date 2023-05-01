@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { PartnerUI } from '@core/models/collaboration.model'
+import { ContractServer, PartnerUI } from '@core/models/collaboration.model'
 import { ItemUI } from '@core/models/item.model'
 import { map } from 'rxjs'
 
@@ -12,6 +12,7 @@ import { map } from 'rxjs'
 export class PartnershipItemComponent implements OnInit {
   item!: ItemUI
   selectedPartner!: PartnerUI
+  contractInfo!: ContractServer
 
   constructor(private _activatedRoute: ActivatedRoute, private _router: Router) {}
 
@@ -19,11 +20,18 @@ export class PartnershipItemComponent implements OnInit {
     this._activatedRoute.paramMap.pipe(map(() => window.history.state)).subscribe((res) => {
       this.item = res.item
       this.selectedPartner = res.selectedPartner
-      if (!res.item || !res.selectedPartner) this._router.navigate(['/'])
+      this.contractInfo = res.contractInfo
+      if (!res.item || !res.selectedPartner || !res.contractInfo) this._router.navigate(['/'])
     })
   }
 
   get organisation(): string {
     return this.selectedPartner.name
+  }
+
+  get oidOfmyFirstItemInContract(): string | undefined {
+    const items = this.contractInfo.items
+    if (items.length <= 0) return
+    return this.contractInfo.items[0]?.oid
   }
 }

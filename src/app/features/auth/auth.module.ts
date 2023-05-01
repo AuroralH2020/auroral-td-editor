@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { SharedModule } from '@shared/shared.module'
-import { MaterialModule } from 'src/app/material/material.module'
 
 import { AuthRoutingModule } from './auth-routing.module'
 import { AuthComponent } from './auth.component'
@@ -22,7 +21,6 @@ import { PrimeNgModule } from 'src/app/prime-ng/prime-ng.module'
     CodeInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     PrimeNgModule,
   ],
 })

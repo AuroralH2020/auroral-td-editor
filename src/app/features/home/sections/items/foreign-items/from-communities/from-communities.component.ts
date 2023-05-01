@@ -6,7 +6,6 @@ import { NodesService } from '@core/services/nodes/nodes.service'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { Table } from 'primeng/table'
 import { SelectCommunityDialogComponent } from './select-community-dialog/select-community-dialog.component'
-
 @Component({
   selector: 'app-from-communities',
   templateUrl: './from-communities.component.html',

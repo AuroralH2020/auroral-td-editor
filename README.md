@@ -12,3 +12,8 @@ Generate shared component:
 ```
 ng g component shared/{component_path}  --module shared/shared.module.ts
 ```
+
+Generate core component:
+```
+ng g component core/components/{component_name}  --module core/core.module.ts
+```

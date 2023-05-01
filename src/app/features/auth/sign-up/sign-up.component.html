@@ -2,7 +2,7 @@
   <div class="h-4/5 flex justify-center items-center">
     <div>
       <div class="flex justify-end">
-        <mat-icon class="icon text-primary-100">person_add_alt</mat-icon>
+        <i class="pi pi-user-plus" style="font-size: 2.5rem"></i>
       </div>
       <div class="mt-8">
         <div class="text-md tracking-widest font-bold mb-4" i18n>
@@ -60,15 +60,7 @@
             </div>
           </div>
           <div class="buttons-wrapper grid gap-1 grid-cols-1 text-center">
-            <app-button
-              type="mat-raised-button"
-              theme="primary"
-              size="medium"
-              actionType="submit"
-              [loading]="loading"
-              class="pt-6 pb-2"
-              >Sign up</app-button
-            >
+            <p-button label="Sign up" [loading]="loading"></p-button>
             <div i18n>Already have an account?</div>
             <app-hyperlink
               text="Log in"

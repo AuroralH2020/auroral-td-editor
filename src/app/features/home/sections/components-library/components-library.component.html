@@ -10,117 +10,8 @@
   </div>
 </div> -->
 
-<!---------------------- TABLE ---------------------->
-<p-fieldset legend="Table">
-  <div class="card-dense mb-4">Basic table</div>
-  <div class="px-6">
-    <app-table
-      [columns]="['Name', 'Type', 'Owner']"
-      [data]="[
-        {
-          name: 'Name 1',
-          type: 'Type 1',
-          owner: 'Owner 1'
-        },
-        {
-          name: 'Name 2',
-          type: 'Type 2',
-          owner: 'Owner 2'
-        },
-        {
-          name: 'Name 3',
-          type: 'Type 3',
-          owner: 'Owner 3'
-        }
-      ]"
-    >
-      <ng-template #headerCellRef let-columnName
-        ><div class="text-sm">{{ columnName }}</div></ng-template
-      >
-      <ng-template #cellRef let-data let-columnName="columnName">
-        <div>
-          {{ columnName }} is
-          {{
-            columnName == "Name"
-              ? data.name
-              : columnName == "Type"
-              ? data.type
-              : data.owner
-          }}
-        </div></ng-template
-      >
-      <ng-template #detailRef let-detail>
-        <div>Name: {{ detail.name }}</div>
-        <div>Type: {{ detail.type }}</div>
-        <div>Owner: {{ detail.owner }}</div>
-      </ng-template>
-    </app-table>
-  </div>
-
-  <div class="h-16"></div>
-
-  <div class="card-dense mb-4">Remote fetch table</div>
-  <div class="px-6">
-    <app-table
-      [columns]="['Name', 'Type', 'Owner']"
-      [fetchData]="getItemsForFetchTable"
-    >
-      <ng-template #headerCellRef let-columnName
-        ><div class="text-sm">{{ columnName }}</div></ng-template
-      >
-      <ng-template #cellRef let-data let-columnName="columnName">
-        <div>
-          {{ columnName }} is
-          {{
-            columnName == "Name"
-              ? data.name
-              : columnName == "Type"
-              ? data.type
-              : data.owner
-          }}
-        </div></ng-template
-      >
-      <ng-template #detailRef let-detail>
-        <div>Name: {{ detail.name }}</div>
-        <div>Type: {{ detail.type }}</div>
-        <div>Owner: {{ detail.owner }}</div>
-      </ng-template>
-    </app-table>
-  </div>
-
-  <div class="h-16"></div>
-
-  <div class="card-dense mb-4">Empty table</div>
-  <div class="px-6">
-    <app-table [columns]="['Name', 'Type', 'Owner']" [data]="[]">
-      <ng-template #headerCellRef let-columnName
-        ><div class="text-sm">{{ columnName }}</div></ng-template
-      >
-      <ng-template #cellRef let-data let-columnName="columnName">
-        <div>
-          {{ columnName }} is
-          {{
-            columnName == "Name"
-              ? data.name
-              : columnName == "Type"
-              ? data.type
-              : data.owner
-          }}
-        </div></ng-template
-      >
-      <ng-template #detailRef let-detail>
-        <div>Name: {{ detail.name }}</div>
-        <div>Type: {{ detail.type }}</div>
-        <div>Owner: {{ detail.owner }}</div>
-      </ng-template>
-    </app-table>
-  </div>
-</p-fieldset>
-
-<div class="h-6"></div>
-
 <!---------------------- MENU ---------------------->
-<p-fieldset legend="Menu">
+<!-- <p-fieldset legend="Menu">
   <div class="container">
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-12 2xl:col-span-8">
@@ -166,7 +57,7 @@
   </div>
 </p-fieldset>
 
-<div class="h-6"></div>
+<div class="h-6"></div> -->
 
 <!---------------------- CHECKBOX GROUP ---------------------->
 <p-fieldset legend="Checkbox group">
@@ -230,7 +121,8 @@
         <div class="col-span-12 lg:col-span-4 xl:col-span-2">
           <app-pictogram>
             <ng-template #pictogramRef>
-              <mat-icon> router </mat-icon>
+              <fa-icon [ngStyle]="{ color: 'white' }" icon="satellite-dish"></fa-icon>
+              <i class="pi pi-times" style="font-size: 1.5rem"></i>
             </ng-template>
             <div>Basic</div>
           </app-pictogram>
@@ -238,7 +130,7 @@
         <div class="col-span-12 lg:col-span-4 xl:col-span-2">
           <app-pictogram>
             <ng-template #pictogramRef>
-              <mat-icon> router </mat-icon>
+              <fa-icon [ngStyle]="{ color: 'white' }" icon="satellite-dish"></fa-icon>
             </ng-template>
             <div>With looooooooooooooooong content</div>
           </app-pictogram>
@@ -246,7 +138,7 @@
         <div class="col-span-12 lg:col-span-4 xl:col-span-2">
           <app-pictogram size="small">
             <ng-template #pictogramRef>
-              <mat-icon> router </mat-icon>
+              <fa-icon [ngStyle]="{ color: 'white' }" icon="satellite-dish"></fa-icon>
             </ng-template>
             <div>Small</div>
           </app-pictogram>
@@ -257,7 +149,7 @@
             contentColor="rgba(0, 182, 235, 0.2)"
           >
             <ng-template #pictogramRef>
-              <mat-icon class="text-white"> router </mat-icon>
+              <fa-icon [ngStyle]="{ color: 'white' }" icon="satellite-dish"></fa-icon>
             </ng-template>
             With custom colors
           </app-pictogram>

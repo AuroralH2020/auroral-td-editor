@@ -106,23 +106,79 @@ body {
   @apply bg-primary-50;
 }
 
-.icon-xs {
-  @include icon-size(20px);
-}
-
-.icon-sm {
-  @include icon-size(24px);
-}
-
-.icon-md {
-  @include icon-size(32px);
-}
-
 .section {
   @apply rounded-sm bg-white p-6;
   border: 1px solid #DEE2E6;
 }
 
-p-table {
-  width: 100%;
+button, [type='button'], [type='reset'], [type='submit'] {
+  background-color: none;
 }
+
+.selectable-table {
+  th {
+    @apply cursor-default
+  }
+  
+  tr {
+    @apply cursor-pointer
+  }
+}
+
+// <-- Arrow
+
+.bounce {
+	-moz-animation: bounce 3s infinite;
+	-webkit-animation: bounce 3s infinite;
+	animation: bounce 3s infinite;
+}
+@-moz-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateX(0);
+    transform: translateX(0);
+  }
+  40% {
+    -moz-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  60% {
+    -moz-transform: translateX(8px);
+    transform: translateX(8px);
+  }
+}
+@-webkit-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  40% {
+    -webkit-transform: translateX(8px);
+    transform: translateX(10px);
+  }
+  60% {
+    -webkit-transform: translateX(8px);
+    transform: translateX(8px);
+  }
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  40% {
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  60% {
+    -moz-transform: translateX(8px);
+    -ms-transform: translateX(8px);
+    -webkit-transform: translateX(8px);
+    transform: translateX(8px);
+  }
+}
+
+// Arrow -->

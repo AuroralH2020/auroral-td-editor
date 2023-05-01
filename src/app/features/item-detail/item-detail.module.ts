@@ -11,6 +11,8 @@ import { ItemDetailRoutingModule } from './item-detail-routing.module';
 import { ItemDetailComponent } from './item-detail.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DetailComponent } from './components/detail/detail.component';
+import { ReadPropComponent } from './components/read-prop/read-prop.component';
+import { DetailDialogComponent } from './components/read-prop/detail-dialog/detail-dialog.component';
 
 
 
@@ -22,6 +24,8 @@ import { DetailComponent } from './components/detail/detail.component';
     ItemDetailComponent,
     HeaderComponent,
     DetailComponent,
+    ReadPropComponent,
+    DetailDialogComponent,
   ],
   imports: [
     CommonModule,

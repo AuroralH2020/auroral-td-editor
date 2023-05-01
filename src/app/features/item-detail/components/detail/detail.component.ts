@@ -10,6 +10,7 @@ export class DetailComponent implements OnInit {
 
   @Input() item!: ItemUI
   @ContentChild('descriptionRef') descriptionRef: TemplateRef<any> | undefined
+  @ContentChild('propsInfoRef') propsInfoRef: TemplateRef<any> | undefined
   @ContentChild('propsHeaderRef') propsHeaderRef: TemplateRef<any> | undefined
   @ContentChild('propsBodyRef') propsBodyRef: TemplateRef<any> | undefined
 

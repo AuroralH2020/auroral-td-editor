@@ -28,7 +28,7 @@
       <th>Type</th>
       <th>Data Type</th>
       <th>Data Units</th>
-      <th>Get Data</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template #propsBodyRef let-prop>
@@ -66,9 +66,7 @@
         </div>
       </td>
       <td style="width: 20%">
-        <div>
-          <p-button label="Primary"></p-button>
-        </div>
+       <app-read-prop [oid]="item.oid" [item]="item" [prop]="prop"></app-read-prop>
       </td>
     </tr>
   </ng-template>

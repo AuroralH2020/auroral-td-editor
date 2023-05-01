@@ -1,16 +1,14 @@
-<app-menu
-  [options]="[
-    { label: 'From communities', content: 'communities' },
-    { label: 'From partnerships', content: 'partnerships' }
-  ]"
->
-  <ng-template #labelRef let-item>
-    {{ item.label }}
-  </ng-template>
-  <ng-template #contentRef let-item>
-    <app-from-communities [hidden]="item.content !== 'communities'">
-    </app-from-communities>
-    <app-from-partnerships [hidden]="item.content !== 'partnerships'">
-    </app-from-partnerships>
-  </ng-template>
+<app-menu>
+  <app-menu-item>
+    <app-menu-label>From communities</app-menu-label>
+    <app-menu-content>
+      <app-from-communities></app-from-communities>
+    </app-menu-content>
+  </app-menu-item>
+  <app-menu-item>
+    <app-menu-label>From partnerships</app-menu-label>
+    <app-menu-content>
+      <app-from-partnerships></app-from-partnerships>
+    </app-menu-content>
+  </app-menu-item>
 </app-menu>

@@ -1,28 +1,18 @@
 <app-logo iconTheme="dark"></app-logo>
 <div class="h-4/5 flex items-center justify-center">
   <div class="flex items-center justify-center">
-    <mat-card>
+    <p-card>
       <div class="px-4 pt-4 pb-20">
         <div class="flex justify-end pb-4 items-center">
-          <mat-icon class="icon text-primary-100">lock_open</mat-icon>
+          <i class="pi pi-lock-open" style="font-size: 2.5rem"></i>
         </div>
         <form [formGroup]="form">
-          <div
-            class="flex flex-col gap-4 items-center justify-center px-16"
-          >
-          <div class="text-md tracking-widest font-bold pb-4">
-            Application Name
-          </div>
+          <div class="flex flex-col gap-4 items-center justify-center px-16">
+            <div class="text-md tracking-widest font-bold pb-4">Application Name</div>
             <div>
               <span class="p-input-icon-left">
                 <i class="pi pi-user"></i>
-                <input
-                  type="text"
-                  pInputText
-                  [formControl]="username!"
-                  placeholder="Username"
-                  style="width: 256px;"
-                />
+                <input type="text" pInputText [formControl]="username!" placeholder="Username" style="width: 256px" />
               </span>
             </div>
             <div>
@@ -33,32 +23,20 @@
                   pInputText
                   [formControl]="password!"
                   placeholder="Password"
-                  style="width: 256px;"
+                  style="width: 256px"
                 />
               </span>
             </div>
           </div>
           <div class="flex flex-col gap-1 text-center">
             <div class="pt-8 pb-2">
-              <app-button
-                type="mat-raised-button"
-                theme="primary"
-                size="medium"
-                [loading]="loading"
-                [disabled]="form.invalid"
-                (click)="onLoginClick()"
-              >
-                Log in
-              </app-button>
+              <p-button label="Log in" [loading]="loading" (click)="onLoginClick()"></p-button>
             </div>
             <div i18n>Don’t have an account?</div>
-            <app-hyperlink
-              text="Craete account"
-              [routerLink]="['/auth/signup']"
-            ></app-hyperlink>
+            <app-hyperlink text="Craete account" [routerLink]="['/auth/signup']"></app-hyperlink>
           </div>
         </form>
       </div>
-    </mat-card>
+    </p-card>
   </div>
 </div>

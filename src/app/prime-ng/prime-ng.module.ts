@@ -16,6 +16,14 @@ import { DialogModule } from 'primeng/dialog'
 import { DynamicDialogModule } from 'primeng/dynamicdialog'
 import { AvatarModule } from 'primeng/avatar'
 import { SidebarModule } from 'primeng/sidebar'
+import { CardModule } from 'primeng/card'
+import { ProgressSpinnerModule } from 'primeng/progressspinner'
+import { ToastModule } from 'primeng/toast'
+import { MessagesModule } from 'primeng/messages'
+import { MessageModule } from 'primeng/message'
+import { TooltipModule } from 'primeng/tooltip'
+import { InputTextareaModule } from 'primeng/inputtextarea'
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 @NgModule({
   declarations: [],
@@ -36,6 +44,14 @@ import { SidebarModule } from 'primeng/sidebar'
     DynamicDialogModule,
     AvatarModule,
     SidebarModule,
+    CardModule,
+    ProgressSpinnerModule,
+    ToastModule,
+    MessagesModule,
+    MessageModule,
+    TooltipModule,
+    InputTextareaModule,
+    ScrollTopModule,
   ],
   exports: [
     InputTextModule,
@@ -53,6 +69,14 @@ import { SidebarModule } from 'primeng/sidebar'
     DynamicDialogModule,
     AvatarModule,
     SidebarModule,
+    CardModule,
+    ProgressSpinnerModule,
+    ToastModule,
+    MessagesModule,
+    MessageModule,
+    TooltipModule,
+    InputTextareaModule,
+    ScrollTopModule,
   ],
 })
 export class PrimeNgModule {}

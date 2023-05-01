@@ -1,0 +1,17 @@
+<div *ngIf="loading; else elseBlock" class="flex items-center justify-center">
+  <app-spinner></app-spinner>
+</div>
+
+<ng-template #elseBlock>
+  <div class="relative">
+    <div class="absolute right-3 top-10">
+      <p-button icon="pi pi-copy" styleClass="p-button-rounded p-button-text"></p-button>
+    </div>
+    <div>
+      <p-fieldset [legend]="prop.name ?? 'Property'">
+        <pre>{{ data | json }}</pre>
+      </p-fieldset>
+    </div>
+  </div>
+  <div class="h-8"></div>
+</ng-template>

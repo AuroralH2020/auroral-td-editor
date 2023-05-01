@@ -38,8 +38,8 @@
             ></p-radioButton>
             <label for="devices" class="ml-2 cursor-pointer"
               ><div class="flex items-center gap-2">
-                <mat-icon [ngStyle]="{ color: '#4D8A8C' }">router</mat-icon>
-                <div>Devices</div>
+                <fa-icon [ngStyle]="{ color: '#4D8A8C' }" icon="satellite-dish"></fa-icon>
+                <div class="leading-none">Devices</div>
               </div></label
             >
           </div>
@@ -54,8 +54,8 @@
             ></p-radioButton>
             <label for="services" class="ml-2 cursor-pointer"
               ><div class="flex items-center gap-2">
-                <mat-icon [ngStyle]="{ color: '#E5B38E' }">cloud</mat-icon>
-                <div>Services</div>
+                <fa-icon [ngStyle]="{ color: '#E5B38E' }" icon="cloud"></fa-icon>
+                <div class="leading-none">Services</div>
               </div></label
             >
           </div>
@@ -70,7 +70,7 @@
     <div *ngIf="selectedPartner">
       <div *ngIf="loading; else elseTableBlock">
         <div class="flex justify-center items-center h-64">
-          <mat-spinner [diameter]="48"></mat-spinner>
+          <app-spinner></app-spinner>
         </div>
       </div>
       <ng-template #elseTableBlock>
@@ -87,7 +87,7 @@
           </span>
         </div>
 
-        <p-table #dt [value]="itemsUI" selectionMode="single" dataKey="oid" [filterDelay]="0">
+        <p-table #dt [value]="partnerItemsUI" selectionMode="single" dataKey="oid" [filterDelay]="0" class="selectable-table">
           <ng-template pTemplate="header">
             <tr>
               <th>Name</th>
@@ -97,7 +97,7 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-item>
-            <tr routerLink="/item-detail/partnership" [state]="{item, selectedPartner}">
+            <tr routerLink="/item-detail/partnership" [state]="{item, selectedPartner, contractInfo}">
               <td>
                 <div class="w-fit">
                   <app-item-pictogram [item]="item"></app-item-pictogram>
@@ -111,7 +111,7 @@
                   </td> -->
               <td>
                 <div class="flex justify-end mr-4">
-                  <i class="pi pi-chevron-down" style="font-size: 1rem"></i>
+                  <i class="pi pi-chevron-right text-primary-500" style="font-size: 1rem"></i>
                 </div>
               </td>
             </tr>

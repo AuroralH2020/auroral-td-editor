@@ -40,6 +40,7 @@ module.exports = {
       grey: '#494949',
       lightGrey: '#F8F9FA',
       dialogGrey: '#f5f5f5',
+      borderGrey: '#DEE2E6',
       whitesmoke: '#f3f3f3',
       yellow: '#f2b619',
       success: '#277d26',

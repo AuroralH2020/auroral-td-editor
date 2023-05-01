@@ -14,6 +14,17 @@ export interface PartnerUI {
   cid:  string;
 }
 
+export interface ContractServer {
+  cid:   string;
+  ctid:  string;
+  items: ContractItemServer[];
+}
+
+export interface ContractItemServer {
+  oid: string;
+  rw:  boolean;
+}
+
 export class PartnerConvert {
   public static toPartnerUI(partner: PartnerServer, cid: string): PartnerUI {
     return {

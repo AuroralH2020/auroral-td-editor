@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Community, PartnerConvert, PartnerServer, PartnerUI } from '@core/models/collaboration.model'
-import { MyOrgNode } from '@core/models/node.model'
+import { Community, ContractServer, PartnerConvert, PartnerServer, PartnerUI } from '@core/models/collaboration.model'
 import { firstValueFrom, take } from 'rxjs'
 
-const _nodeCommunitiesUrl = '/api/collaboration/communities'
-const _nodePartnersCidUrl = '/api/collaboration/partners'
-const _nodePartnersInfoUrl = '/api/collaboration/partners'
+const _communitiesUrl = '/api/collaboration/communities'
+const _partnersCidsUrl = '/api/collaboration/partners'
+const _partnersInfoUrl = '/api/collaboration/partners'
+
+const _contractsInfoUrl = '/api/collaboration/contracts'
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class CollaborationService {
   private async _initNodeCommunities(): Promise<void> {
     this.communities = await firstValueFrom(
       this._http
-        .get<Community[]>(_nodeCommunitiesUrl, {
+        .get<Community[]>(_communitiesUrl, {
           headers: { accept: 'application/json' },
         })
         .pipe(take(1))
@@ -34,7 +35,7 @@ export class CollaborationService {
   private async _initNodePartnerships(): Promise<void> {
     const cids = await firstValueFrom(
       this._http
-        .get<string[]>(_nodePartnersCidUrl, {
+        .get<string[]>(_partnersCidsUrl, {
           headers: { accept: 'application/json' },
         })
         .pipe(take(1))
@@ -46,11 +47,21 @@ export class CollaborationService {
   private async _initNodePartnership(cid: string): Promise<void> {
     const partnerServer = await firstValueFrom(
       this._http
-        .get<PartnerServer>(_nodePartnersInfoUrl + `/${cid}`, {
+        .get<PartnerServer>(_partnersInfoUrl + `/${cid}`, {
           headers: { accept: 'application/json' },
         })
         .pipe(take(1))
     )
     this.partnerships!.push(PartnerConvert.toPartnerUI(partnerServer, cid))
+  }
+
+  public async getContractInfo(cid: string): Promise<ContractServer> {
+    return await firstValueFrom(
+      this._http
+        .get<ContractServer>(_contractsInfoUrl + `/${cid}`, {
+          headers: { accept: 'application/json' },
+        })
+        .pipe(take(1))
+    )
   }
 }

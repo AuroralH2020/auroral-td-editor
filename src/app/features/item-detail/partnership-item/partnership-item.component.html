@@ -7,7 +7,7 @@
     <div class="item w-72 mt-4">
       <div class="item-label">Owner:</div>
       <div class="mt-1">
-        <app-pictogram shape="square">
+        <app-pictogram shape="square" contentColor="white">
           <ng-template #pictogramRef>
             <div>{{ organisation.charAt(0).toUpperCase() }}</div>
           </ng-template>
@@ -22,17 +22,26 @@
       </div>
     </div>
   </ng-template>
+  <ng-template *ngIf="!oidOfmyFirstItemInContract" #propsInfoRef>
+    <div class="py-6">
+      <p-message
+        severity="warn"
+        [text]="'Unable to get data - you don\'t have any items in a contract with ' + selectedPartner.name"
+      ></p-message>
+    </div>
+  </ng-template>
   <ng-template #propsHeaderRef>
     <tr>
       <th>Name</th>
       <th>Type</th>
       <th>Data Type</th>
       <th>Data Units</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template #propsBodyRef let-prop>
     <tr>
-      <td style="width: 25%">
+      <td style="width: 20%">
         <div *ngIf="prop.name">
           {{ prop.name }}
         </div>
@@ -40,7 +49,7 @@
           <i class="pi pi-minus text-text-300" style="font-size: 0.8rem"></i>
         </div>
       </td>
-      <td style="width: 25%">
+      <td style="width: 20%">
         <div *ngIf="prop.type">
           {{ prop.type }}
         </div>
@@ -48,7 +57,7 @@
           <i class="pi pi-minus text-text-300" style="font-size: 0.8rem"></i>
         </div>
       </td>
-      <td style="width: 25%">
+      <td style="width: 20%">
         <div *ngIf="prop.datatype">
           {{ prop.datatype }}
         </div>
@@ -56,13 +65,16 @@
           <i class="pi pi-minus text-text-300" style="font-size: 0.8rem"></i>
         </div>
       </td>
-      <td style="width: 25%">
+      <td style="width: 20%">
         <div *ngIf="prop.dataunits">
           {{ prop.dataunits }}
         </div>
         <div *ngIf="!prop.dataunits">
           <i class="pi pi-minus text-text-300" style="font-size: 0.8rem"></i>
         </div>
+      </td>
+      <td style="width: 20%">
+        <app-read-prop [oid]="oidOfmyFirstItemInContract" [item]="item" [prop]="prop"></app-read-prop>
       </td>
     </tr>
   </ng-template>
