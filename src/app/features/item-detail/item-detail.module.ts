@@ -12,7 +12,7 @@ import { ItemDetailComponent } from './item-detail.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { ReadPropComponent } from './components/read-prop/read-prop.component';
-import { DetailDialogComponent } from './components/read-prop/detail-dialog/detail-dialog.component';
+import { ReadPropDialogComponent } from './components/read-prop/read-prop-dialog/read-prop-dialog.component';
 
 
 
@@ -25,7 +25,7 @@ import { DetailDialogComponent } from './components/read-prop/detail-dialog/deta
     HeaderComponent,
     DetailComponent,
     ReadPropComponent,
-    DetailDialogComponent,
+    ReadPropDialogComponent,
   ],
   imports: [
     CommonModule,

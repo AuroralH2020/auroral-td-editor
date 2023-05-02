@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailDialogComponent } from './detail-dialog.component';
+import { ReadPropDialogComponent } from './read-prop-dialog.component';
 
-describe('DetailDialogComponent', () => {
-  let component: DetailDialogComponent;
-  let fixture: ComponentFixture<DetailDialogComponent>;
+describe('ReadPropDialogComponent', () => {
+  let component: ReadPropDialogComponent;
+  let fixture: ComponentFixture<ReadPropDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DetailDialogComponent ]
+      declarations: [ ReadPropDialogComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DetailDialogComponent);
+    fixture = TestBed.createComponent(ReadPropDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { ItemsService } from '@core/services/item/item.service'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
-import { DetailDialogComponent } from './detail-dialog/detail-dialog.component'
+import { ReadPropDialogComponent } from './read-prop-dialog/read-prop-dialog.component'
 import { ItemUI, PropertyUI } from '@core/models/item.model'
 
 @Component({
@@ -23,7 +22,7 @@ export class ReadPropComponent implements OnInit {
 
   openDetailDialog() {
     if (this.oid) {
-      this._ref = this._dialogService.open(DetailDialogComponent, {
+      this._ref = this._dialogService.open(ReadPropDialogComponent, {
         data: {
           oid: this.oid,
           item: this.item,

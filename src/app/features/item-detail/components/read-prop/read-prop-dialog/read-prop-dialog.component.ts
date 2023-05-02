@@ -4,11 +4,11 @@ import { ItemsService } from '@core/services/item/item.service'
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog'
 
 @Component({
-  selector: 'app-detail-dialog',
-  templateUrl: './detail-dialog.component.html',
-  styleUrls: ['./detail-dialog.component.scss'],
+  selector: 'app-read-prop-dialog',
+  templateUrl: './read-prop-dialog.component.html',
+  styleUrls: ['./read-prop-dialog.component.scss'],
 })
-export class DetailDialogComponent implements OnInit {
+export class ReadPropDialogComponent implements OnInit {
   @Input() oid!: string
   @Input() item!: ItemUI
   @Input() prop!: PropertyUI
