@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core'
+import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, OnInit, forwardRef } from '@angular/core'
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms'
 
 @Component({
@@ -13,13 +13,24 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms'
     },
   ],
 })
-export class SparqlEditorComponent implements OnInit, ControlValueAccessor {
+export class SparqlEditorComponent implements OnInit, ControlValueAccessor, AfterViewChecked {
   private _value: string = ''
 
   protected focused: boolean = false
 
+  autoResize: boolean = false
+
   constructor() {
     return
+  }
+
+  // Workaround to fix https://github.com/primefaces/primeng/issues/9890
+  ngAfterViewChecked(): void {
+    if (!this.autoResize) {
+      setTimeout(()=> {
+        this.autoResize = true
+    }, 0);
+    }
   }
 
   set value(value: string) {

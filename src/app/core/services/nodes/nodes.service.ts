@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { MyNode, MyOrgNode } from '@core/models/node.model'
+import { MyNode, RemoteNode } from '@core/models/node.model'
 import { firstValueFrom, take } from 'rxjs'
 
 const _orgNodesUrl = '/api/discovery/nodes/organisation'
@@ -16,7 +16,7 @@ const _nodeLocalQueryUrl = '/api/discovery/local/semantic'
 })
 export class NodesService {
   public myNode!: MyNode
-  public myOrgNodes: MyOrgNode[] = []
+  public myOrgNodes: RemoteNode[] = []
 
   constructor(private _http: HttpClient) {}
 
@@ -37,27 +37,27 @@ export class NodesService {
   private async _initMyOrgNodes(): Promise<void> {
     this.myOrgNodes = await firstValueFrom(
       this._http
-        .get<MyOrgNode[]>(_orgNodesUrl, {
+        .get<RemoteNode[]>(_orgNodesUrl, {
           headers: { accept: 'application/json' },
         })
         .pipe(take(1))
     )
   }
 
-  async getNodesFromCommunity(ctid: string): Promise<MyOrgNode[]> {
+  async getNodesFromCommunity(commid: string): Promise<RemoteNode[]> {
     return await firstValueFrom(
       this._http
-        .get<MyOrgNode[]>(_communitiesNodesUrl + `/${ctid}`, {
+        .get<RemoteNode[]>(_communitiesNodesUrl + `/${commid}`, {
           headers: { accept: 'application/json' },
         })
         .pipe(take(1))
     )
   }
 
-  async getNodesFromPartnership(cid: string): Promise<MyOrgNode[]> {
+  async getNodesFromPartnership(cid: string): Promise<RemoteNode[]> {
     return await firstValueFrom(
       this._http
-        .get<MyOrgNode[]>(_orgNodesUrl + `/${cid}`, {
+        .get<RemoteNode[]>(_orgNodesUrl + `/${cid}`, {
           headers: { accept: 'application/json' },
         })
         .pipe(take(1))

@@ -10,7 +10,7 @@ export interface MyNode {
   agid: string;
 }
 
-export interface MyOrgNode {
+export interface RemoteNode {
   cid: string;
   agid: string;
   company: string;

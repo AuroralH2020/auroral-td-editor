@@ -5,8 +5,8 @@ import { ItemsService } from '@core/services/item/item.service'
 import { NodesService } from '@core/services/nodes/nodes.service'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { Table } from 'primeng/table'
-import { SelectPartnerDialogComponent } from './select-partner-dialog/select-partner-dialog.component'
 import { CollaborationService } from '@core/services/collaboration/collaboration.service'
+import { SelectPartnerDialogComponent } from '@features/home/components/select-partner-dialog/select-partner-dialog.component'
 
 @Component({
   selector: 'app-from-partnerships',

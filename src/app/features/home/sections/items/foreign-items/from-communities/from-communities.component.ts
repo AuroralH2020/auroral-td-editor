@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { Community } from '@core/models/collaboration.model'
-import { ItemConvert, Items, ItemUI } from '@core/models/item.model'
+import { ItemConvert, ItemUI } from '@core/models/item.model'
 import { ItemsService } from '@core/services/item/item.service'
 import { NodesService } from '@core/services/nodes/nodes.service'
+import { SelectCommunityDialogComponent } from '@features/home/components/select-community-dialog/select-community-dialog.component'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { Table } from 'primeng/table'
-import { SelectCommunityDialogComponent } from './select-community-dialog/select-community-dialog.component'
 @Component({
   selector: 'app-from-communities',
   templateUrl: './from-communities.component.html',

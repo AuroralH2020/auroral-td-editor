@@ -10,7 +10,7 @@ import { MenuComponent } from './components/menu/menu/menu.component'
 import { MenuLabelComponent } from './components/menu/menu-label/menu-label.component'
 import { MenuContentComponent } from './components/menu/menu-content/menu-content.component'
 import { MenuItemComponent } from './components/menu/menu-item/menu-item.component'
-import { SparqlEditorComponent } from './components/inputs/sparql-editor/sparql-editor.component';
+import { SparqlEditorComponent } from './components/inputs/sparql-editor/sparql-editor.component'
 
 export const components: any[] = [
   HyperlinkComponent,
@@ -44,4 +44,4 @@ export * from './components/menu/menu/menu.component'
 export * from './components/menu/menu-label/menu-label.component'
 export * from './components/menu/menu-content/menu-content.component'
 export * from './components/menu/menu-item/menu-item.component'
-export * from './components/inputs/sparql-editor/sparql-editor.component';
+export * from './components/inputs/sparql-editor/sparql-editor.component'

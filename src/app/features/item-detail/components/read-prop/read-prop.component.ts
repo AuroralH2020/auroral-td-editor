@@ -30,7 +30,6 @@ export class ReadPropComponent implements OnInit {
           prop: this.prop,
         },
         header: this.item.name,
-        contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
         maximizable: true,
       })
