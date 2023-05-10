@@ -1,22 +1,10 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { HomeComponent } from './home.component'
-import { ItemsComponent } from './sections/items/items.component'
-import { QueryComponent } from './sections/query/query.component'
+import { ComponentsLibraryComponent } from './sections/components-library/components-library.component'
 
 const sections: any = [
-  // { path: 'components-library', component: ComponentsLibraryComponent },
-  {
-    path: 'items',
-    component: ItemsComponent,
-    data: {
-      saveComponent: true,
-    },
-  },
-  {
-    path: 'query',
-    component: QueryComponent,
-  },
+  { path: 'components-library', component: ComponentsLibraryComponent },
 ]
 
 const routes: Routes = [
