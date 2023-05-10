@@ -1,28 +1,21 @@
 <div class="h-screen">
   <app-logo iconTheme="dark"></app-logo>
   <div class="flex items-center justify-center m-t">
-    <mat-card>
+    <p-card>
       <div class="pl-10 pr-6 pt-4 pb-40">
         <div class="flex justify-between">
           <div class="mt-8">
-            <div
-              class="text-lg tracking-widest font-bold text-primary-300 mb-4"
-            >
-              Verify email
-            </div>
+            <div class="text-lg tracking-widest font-bold text-primary-300 mb-4">Verify email</div>
             <div class="w-48">
-              Plasase log into your email accout <span>todo@email.com</span> and
-              paste verification code below:
+              Plasase log into your email accout <span>todo@email.com</span> and paste verification code below:
             </div>
           </div>
           <div class="w-32"></div>
-          <mat-icon class="icon text-primary-100"
-            >lock_open</mat-icon
-          >
+          <i class="pi pi-lock-open" style="font-size: 2.5rem"></i>
         </div>
         <div class="h-11"></div>
         <code-input [isCodeHidden]="true" [codeLength]="5"> </code-input>
       </div>
-    </mat-card>
+    </p-card>
   </div>
 </div>

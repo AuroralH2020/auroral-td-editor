@@ -1,0 +1,24 @@
+<div class="flex gap-4">
+  <div class="w-56">
+    <div class="h-12">
+      <div
+        [ngClass]="[
+          'flex justify-between h-12 items-center cursor-pointer',
+          selectedCommunity ? 'card' : 'card-action'
+        ]"
+        (click)="openSelectCommunityDialog()"
+      >
+        <div [ngClass]="[selectedCommunity ? 'text-black' : 'text-text-400', 'overflow-hidden']">
+          {{ selectedCommunity?.name ?? 'Select a community...' }}
+        </div>
+        <div class="mt-1.5">
+          <i class="pi pi-chevron-down" style="font-size: 1rem"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!selectedCommunity" class="flex gap-4 items-center">
+    <img src="assets/images/arrow-left.png" class="bounce" alt="" width="80" />
+  </div>
+</div>
+<app-run-query [runQuery]="runQuery" title="Query Community"> </app-run-query>

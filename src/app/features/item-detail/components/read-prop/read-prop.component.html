@@ -1,0 +1,22 @@
+<div>
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Get Data"
+    icon="pi pi-database"
+    class="p-button-outlined p-button-sm"
+    [disabled]="!oid"
+    (click)="openDetailDialog()"
+  ></button>
+</div>
+<div *ngIf="oid">
+  <p-sidebar [(visible)]="showDetail" position="bottom" [style]="{ height: '100%', width: '100%' }">
+    <!-- <ng-template pTemplate="header"> Get data from property </ng-template> -->
+    <ng-template pTemplate="content">
+      <div class="whitespace-normal h-full justify-center">
+        <app-read-prop-dialog [oid]="oid" [item]="item" [prop]="prop"> </app-read-prop-dialog>
+      </div>
+    </ng-template>
+  </p-sidebar>
+</div>

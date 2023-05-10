@@ -1,13 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss/components';
 @import 'tailwindcss/base';
+@import 'tailwindcss/utilities';
+@import './prime-ng-theme/theme';
 @import './shared//mixins';
 @import './shared/mixins';
 @import './shared/global';
 @import './shared//animations';
 @import './shared/animations';
 @import './variables';
-@import './mat-theme/mat_core';
-@import './mat-theme/mat_override';
-@import './prime-ng-theme/theme';
-@import 'tailwindcss/utilities';

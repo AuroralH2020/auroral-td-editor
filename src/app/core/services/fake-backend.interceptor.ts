@@ -9,7 +9,6 @@ import {
 import { Observable, of, throwError } from "rxjs";
 import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
 import { AuthTokens, UserLoginDetail } from "@core/models/user.model";
-import { ServerResponse } from "@core/models/server.model";
 
 interface FakeDbUser {
   login: UserLoginDetail;

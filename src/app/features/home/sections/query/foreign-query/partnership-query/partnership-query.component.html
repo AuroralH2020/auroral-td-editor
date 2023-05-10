@@ -1,0 +1,21 @@
+<div class="flex gap-4">
+  <div class="w-56">
+    <div class="h-12">
+      <div
+        [ngClass]="['flex justify-between h-12 items-center cursor-pointer', selectedPartner ? 'card' : 'card-action']"
+        (click)="openSelectPartnerDialog()"
+      >
+        <div [ngClass]="[selectedPartner ? 'text-black' : 'text-text-400', 'overflow-hidden']">
+          {{ selectedPartner?.name ?? 'Select a partner...' }}
+        </div>
+        <div class="mt-1.5">
+          <i class="pi pi-chevron-down" style="font-size: 1rem"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!selectedPartner" class="flex gap-4 items-center">
+    <img src="assets/images/arrow-left.png" class="bounce" alt="" width="80" />
+  </div>
+</div>
+<app-run-query [runQuery]="runQuery" title="Query Partnership"> </app-run-query>

@@ -1,0 +1,30 @@
+<div [ngClass]="[hidden ? 'relative h-12' : '']">
+  <div [ngClass]="['z-40', hidden ? 'absolute' : '']">
+    <app-pictogram [size]="size">
+      <ng-template *ngIf="showIcon" #pictogramRef>
+        <i class="pi pi-share-alt" style="font-size: 1.5rem; color: #4d8a8c"></i>
+      </ng-template>
+      <div [ngClass]="['', hidden ? 'h-8 overflow-hidden' : '']">
+        {{ agid }}
+      </div>
+      <div *ngIf="!hidden" class="flex items-center justify-end mr-1 text-primary-500">
+        <div class="h-8 w-8 flex items-center justify-center cursor-pointer" (click)="toggleVisibility()">
+          <i class="pi pi-eye-slash" style="font-size: 1.5rem"></i>
+        </div>
+        <div class="h-8 w-8 ml-0.5 flex items-center justify-center cursor-pointer" (click)="copyToClipboard()">
+          <i class="pi pi-copy" style="font-size: 1.5rem"></i>
+        </div>
+      </div>
+    </app-pictogram>
+  </div>
+  <div *ngIf="hidden" [ngClass]="['z-50 right-0 actions mr-1', hidden ? 'absolute' : '']">
+    <div [ngClass]="['flex items-center justify-end w-32 text-primary-500', size === 'small' ? 'h-10' : 'h-12']">
+      <div class="h-8 w-8 flex items-center justify-center cursor-pointer" (click)="toggleVisibility()">
+        <i class="pi pi-eye-slash" style="font-size: 1.5rem"></i>
+      </div>
+      <div class="h-8 w-8 ml-0.5 flex items-center justify-center cursor-pointer" (click)="copyToClipboard()">
+        <i class="pi pi-copy" style="font-size: 1.5rem"></i>
+      </div>
+    </div>
+  </div>
+</div>

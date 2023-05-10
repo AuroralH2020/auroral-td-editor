@@ -1,26 +1,16 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Injectable, OnDestroy } from '@angular/core'
+import { MessageService } from 'primeng/api'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SnackBarService {
-
-
-  constructor(private _snackBar: MatSnackBar) {
-
-  }
-   showError(message: string) {
-    this._snackBar.open(message, 'Dismiss', {
-      duration: 10000,
-      panelClass: ['snackbar', 'error-snackbar'],
-    })
+  constructor(private _snackBar: MessageService) {}
+  showError(message: string) {
+    this._snackBar.add({ key: 'toast', severity: 'error', summary: 'Error', detail: message })
   }
 
   showMessage(message: string) {
-    this._snackBar.open(message, 'Dismiss', {
-      duration: 10000,
-      panelClass: ['snackbar'],
-    })
+    this._snackBar.add({ key: 'toast', severity: 'info', summary: 'Info', detail: message })
   }
 }

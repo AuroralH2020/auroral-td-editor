@@ -1,37 +1,32 @@
-<div class="wrapper">
-  <div class="pictogram">
-    <div
-      [ngClass]="[
-        'rounded-full',
-        'bg-lightGrey',
-        'border-2',
-        'border-white',
-        'flex',
-        'items-center',
-        'justify-center',
-        size === 'small' ? 'w-10' : 'w-12',
-        size === 'small' ? 'h-10' : 'h-12'
-      ]"
-      [style.background]="pictogramColor ? pictogramColor : ''"
-    >
-      <ng-template *ngIf="pictogramRef" [ngTemplateOutlet]="pictogramRef"> </ng-template>
+<div class="w-fit">
+  <div class="wrapper">
+    <div *ngIf="pictogramRef" class="pictogram">
+      <div
+        [ngClass]="[
+          'bg-dialogGrey border-4 border-white flex items-center justify-center leading-none',
+          shape === 'rounded' ? 'rounded-full': 'rounded-sm',
+          size === 'small' ? 'w-11' : 'w-12',
+          size === 'small' ? 'h-11' : 'h-12'
+        ]"
+        [style.background]="pictogramColor ? pictogramColor : ''"
+      >
+        <ng-template *ngIf="pictogramRef" [ngTemplateOutlet]="pictogramRef"> </ng-template>
+      </div>
     </div>
-  </div>
-  <div class="content">
-    <div
-      [ngClass]="[
-        'bg-lightGrey',
-        'rounded-sm',
-        'break-words',
-        'leading-loose',
-        size === 'small' ? 'pl-8' : 'pl-10',
-        size === 'small' ? 'pr-2' : 'pr-4',
-        size === 'small' ? 'py-1' : 'py-2',
-        'ml-4'
-      ]"
-      [style.background]="contentColor ? contentColor : ''"
-    >
-      <ng-content></ng-content>
+    <div class="content">
+      <div
+        [ngClass]="[
+          'bg-lightGrey rounded-sm break-words leading-loose whitespace-normal',
+          size === 'small' ? 'pr-2' : 'pr-4',
+          size === 'small' ? 'py-1' : 'py-2',
+          pictogramRef ? (size === 'small' ? 'pl-8' : 'pl-10') : '',
+          pictogramRef ? 'ml-4' : ''
+        ]"
+        [style.background]="contentColor ? contentColor : ''"
+        style="min-width: 96px"
+      >
+        <ng-content></ng-content>
+      </div>
     </div>
   </div>
 </div>

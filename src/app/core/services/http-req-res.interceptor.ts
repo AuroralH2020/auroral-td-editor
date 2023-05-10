@@ -28,6 +28,7 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
     this._broadcaster.broadcast(CONSTANTS.SHOW_LOADER, true)
     const newReq = req.clone({
       url: this._baseUrl + req.url,
+      setHeaders: {},
     })
 
     return next.handle(newReq).pipe(

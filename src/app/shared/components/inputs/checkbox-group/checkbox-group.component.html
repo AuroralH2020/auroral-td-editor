@@ -1,6 +1,7 @@
 <div class="w-fit">
   <div
     class="field-checkbox flex gap-2 bg-lightGrey px-5 py-2 rounded-sm w-full items-center"
+    [style.background-color]="highlightColor"
   >
     <p-checkbox
       [(ngModel)]="allSelected"
@@ -21,13 +22,18 @@
       </span>
       <ng-template #elseAllBlock>All</ng-template>
       <div *ngIf="showStatus">
-        <p-tag severity="info" [value]="itemsSelected"></p-tag>
+        <p-tag severity="info" [value]="itemsSelected" [rounded]="true"></p-tag>
       </div>
     </div>
   </div>
   <div class="mt-2">
     <div class="flex items-stretch">
-      <div class="w-1 bg-lightGrey rounded-sm my-4"></div>
+      <div
+        class="w-1 bg-lightGrey rounded-sm my-4"
+        [ngStyle]="{
+          'background-color': dividerColor
+        }"
+      ></div>
       <div class="ml-4 pr-5">
         <div *ngIf="displayedItems.length !== 0; else elseEmptyBlock">
           <div
