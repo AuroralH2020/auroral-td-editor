@@ -25,7 +25,7 @@ export const components: any[] = [
   MenuLabelComponent,
   MenuContentComponent,
   MenuItemComponent,
-  SparqlEditorComponent
+  SparqlEditorComponent,
 ]
 
 export const directives: any[] = []

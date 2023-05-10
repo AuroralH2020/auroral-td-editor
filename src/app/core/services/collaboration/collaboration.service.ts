@@ -4,7 +4,6 @@ import { Community, ContractServer, PartnerConvert, PartnerServer, PartnerUI } f
 import { firstValueFrom, take } from 'rxjs'
 
 const _communitiesUrl = '/api/collaboration/communities'
-const _partnersCidsUrl = '/api/collaboration/partners'
 const _partnersInfoUrl = '/api/collaboration/partners'
 
 const _contractsInfoUrl = '/api/collaboration/contracts'
@@ -35,7 +34,7 @@ export class CollaborationService {
   private async _initNodePartnerships(): Promise<void> {
     const cids = await firstValueFrom(
       this._http
-        .get<string[]>(_partnersCidsUrl, {
+        .get<string[]>(_partnersInfoUrl, {
           headers: { accept: 'application/json' },
         })
         .pipe(take(1))

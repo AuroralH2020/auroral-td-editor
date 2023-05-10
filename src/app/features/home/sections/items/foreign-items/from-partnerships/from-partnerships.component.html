@@ -87,7 +87,15 @@
           </span>
         </div>
 
-        <p-table #dt [value]="partnerItemsUI" selectionMode="single" dataKey="oid" [filterDelay]="0" class="selectable-table">
+        <p-table
+          #dt
+          [value]="partnerItemsUI"
+          selectionMode="single"
+          dataKey="oid"
+          [filterDelay]="0"
+          class="selectable-table"
+          styleClass="p-datatable-sm"
+        >
           <ng-template pTemplate="header">
             <tr>
               <th>Name</th>

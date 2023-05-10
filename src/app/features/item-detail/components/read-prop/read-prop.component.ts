@@ -7,37 +7,23 @@ import { ItemUI, PropertyUI } from '@core/models/item.model'
   selector: 'app-read-prop',
   templateUrl: './read-prop.component.html',
   styleUrls: ['./read-prop.component.scss'],
-  providers: [DialogService],
 })
 export class ReadPropComponent implements OnInit {
   @Input() oid?: string
   @Input() item!: ItemUI
   @Input() prop!: PropertyUI
 
-  private _ref?: DynamicDialogRef
+  showDetail: boolean = false
 
-  constructor(private _dialogService: DialogService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
   openDetailDialog() {
     if (this.oid) {
-      this._ref = this._dialogService.open(ReadPropDialogComponent, {
-        data: {
-          oid: this.oid,
-          item: this.item,
-          prop: this.prop,
-        },
-        header: this.item.name,
-        baseZIndex: 10000,
-        maximizable: true,
-      })
+      this.showDetail = true
     }
   }
 
-  ngOnDestroy() {
-    if (this._ref) {
-      this._ref.close()
-    }
-  }
+  ngOnDestroy() {}
 }

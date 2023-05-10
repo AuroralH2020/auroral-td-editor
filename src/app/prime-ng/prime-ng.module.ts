@@ -24,6 +24,7 @@ import { MessageModule } from 'primeng/message'
 import { TooltipModule } from 'primeng/tooltip'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [],
@@ -52,6 +53,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     TooltipModule,
     InputTextareaModule,
     ScrollTopModule,
+    KeyFilterModule,
   ],
   exports: [
     InputTextModule,
@@ -77,6 +79,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     TooltipModule,
     InputTextareaModule,
     ScrollTopModule,
+    KeyFilterModule
   ],
 })
 export class PrimeNgModule {}
