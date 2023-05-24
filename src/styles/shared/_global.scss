@@ -7,6 +7,10 @@
   outline: none !important;
 }
 
+html, body {
+	font-size: 14px;
+}
+
 body {
   @apply font-primary not-italic font-light bg-primary-50;
   // line-height: 1.3;
@@ -67,7 +71,7 @@ body {
 }
 
 .item-label {
-  @apply text-text-300 text-sm capitalize font-bold;
+  @apply text-text-300 text-sm capitalize font-medium;
 }
 
 .no-data {
@@ -106,13 +110,18 @@ body {
 }
 
 .section {
-  @apply rounded-sm bg-white p-6;
+  @apply rounded-sm bg-white p-3;
   border: 1px solid #DEE2E6;
 }
 
 .section-pt-0 {
   @apply section;
   @apply pt-0;
+}
+
+.section-pt-1 {
+  @apply section;
+  @apply pt-1;
 }
 
 button, [type='button'], [type='reset'], [type='submit'] {

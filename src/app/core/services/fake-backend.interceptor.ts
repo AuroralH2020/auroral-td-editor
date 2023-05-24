@@ -72,7 +72,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function authenticate() {
       const params = new URLSearchParams(body);
       const entries = params.entries();
-      const obj = Object.fromEntries(entries);
+      const obj = Object.fromEntries(params);
       const login: UserLoginDetail = {
         username: obj.username,
         password: obj.password,

@@ -3,8 +3,8 @@
   <div class="w-screen h-full">
     <app-header></app-header>
     <div class="content-wrapper">
-      <div [ngClass]="['pt-14', folded ? 'pl-12' : 'pl-36']">
-        <div class="px-6 pt-6">
+      <div [ngClass]="['h-full', folded ? 'pl-12' : 'pl-56']">
+        <div class="px-3 pt-3 h-[calc(100%-70px)]">
           <router-outlet></router-outlet>
         </div>
         <app-footer></app-footer>

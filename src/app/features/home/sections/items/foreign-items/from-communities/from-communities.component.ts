@@ -13,13 +13,9 @@ import { Table } from 'primeng/table'
   providers: [DialogService],
 })
 export class FromCommunitiesComponent implements OnInit, OnDestroy {
-  @ViewChild('dt') dt!: Table
-
   loading: boolean = false
 
-  selectedFilter: string = 'All'
-
-  itemsUI: ItemUI[] = []
+  communityItemsUI: ItemUI[] = []
 
   selectedCommunity: Community | undefined
 
@@ -31,9 +27,7 @@ export class FromCommunitiesComponent implements OnInit, OnDestroy {
     private _dialogService: DialogService
   ) {}
 
-  ngOnInit(): void {
-    // this._getData();
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy() {
     if (this.detailDialogRef) {
@@ -56,19 +50,6 @@ export class FromCommunitiesComponent implements OnInit, OnDestroy {
     })
   }
 
-  search(event: Event) {
-    const searchValue = (event.target as HTMLInputElement).value
-    this.dt.filter(searchValue, 'name', 'contains')
-  }
-
-  filter() {
-    if (this.selectedFilter === 'All') {
-      this.dt.reset()
-    } else {
-      this.dt.filter(this.selectedFilter, 'type', 'equals')
-    }
-  }
-
   private async _getData(community: Community | undefined | null): Promise<void> {
     if (community) {
       this.selectedCommunity = community
@@ -76,28 +57,13 @@ export class FromCommunitiesComponent implements OnInit, OnDestroy {
       const nodes = await this._nodesService.getNodesFromCommunity(community.commId)
       let agids = nodes.map((element) => element.agid)
       if (agids.length == 0) {
-        this.itemsUI = []
+        this.communityItemsUI = []
         this.loading = false
         return
       }
       const itemsServer = await this._itemsService.getItems(agids)
-      this.itemsUI = ItemConvert.toItemsUI(itemsServer)
+      this.communityItemsUI = ItemConvert.toItemsUI(itemsServer)
       this.loading = false
     }
   }
-
-  // private async _getData(): Promise<void> {
-  //   this.loading = true;
-  //   const nodes = this._nodesService.myOrgNodes;
-  //   let agids = nodes.map((element) => element.agid);
-  //   const itemsServer = await this._getMyOrgItems(agids);
-  //   console.log(itemsServer)
-  //   this.itemsUI = ItemConvert.toItemsUI(itemsServer);
-  //   console.log(this.itemsUI)
-  //   this.loading = false;
-  // }
-
-  // private async _getMyOrgItems(agids: string[]): Promise<Items> {
-  //   return await this._itemsService.getItems(agids);
-  // }
 }

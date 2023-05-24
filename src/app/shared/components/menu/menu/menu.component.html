@@ -1,5 +1,5 @@
 <div [ngClass]="[type === 'vertical' ? 'flex' : '']">
-  <div class="bg-lightGrey rounded-sm max-w-fit overflow-x-hidden p-1">
+  <div class="bg-lightGrey rounded-sm max-w-fit overflow-x-hidden p-0.5">
     <div [ngClass]="[type === 'horizontal' ? 'overflow-x-auto gap-1' : 'flex-col', 'flex gap-1 px-1 py-1']">
       <div *ngFor="let item of menuItems$ | async">
         <div class="w-52 text-center">

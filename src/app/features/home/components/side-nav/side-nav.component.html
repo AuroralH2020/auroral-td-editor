@@ -1,12 +1,14 @@
 <div class="content-wrapper flex z-50 grow h-full">
-  <div [ngClass]="['bg-primary-600', folded ? 'w-12' : 'w-36']">
+  <div [ngClass]="['bg-primary-600', folded ? 'w-12' : 'w-56']">
     <div class="bg-primary-50">
-      <app-logo [size]="folded ? 'small' : 'normal'"></app-logo>
+      <div class="pb-2">
+        <app-logo [size]="folded ? 'small' : 'normal'"></app-logo>
+      </div>
     </div>
-    <div style="height: 24px"></div>
+    <div style="height: 12px"></div>
     <!-- <app-nav-button path="components-library" name="Components" icon="space_dashboard"></app-nav-button> -->
     <app-nav-button path="items" name="Items" icon="pi-list"></app-nav-button>
-    <app-nav-button path="query" name="Query" icon="pi-database"></app-nav-button>
+    <app-nav-button path="query" name="Run Query" icon="pi-database"></app-nav-button>
   </div>
   <div
     [ngClass]="[
@@ -16,8 +18,8 @@
       'items-center',
       'justify-center',
       'cursor-pointer',
-      'h-14',
-      folded ? 'pr-2' : 'w-12'
+      'h-16',
+      folded ? 'pr-4 pl-2' : 'w-12'
     ]"
     (click)="toggleMenu()"
   >

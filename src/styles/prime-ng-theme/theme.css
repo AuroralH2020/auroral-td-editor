@@ -2759,7 +2759,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   padding: 1rem 1.5rem;
   border: none;
   border-width: 0 0 1px 0;
-  font-weight: 700;
+  font-weight: 500;
   color: #818181;
   font-size: 14px;
   text-transform: capitalize;
@@ -2988,19 +2988,19 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #358886;
 }
 .p-datatable.p-datatable-sm .p-datatable-header {
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 1.5rem;
 }
 .p-datatable.p-datatable-sm .p-datatable-thead > tr > th {
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 1.5rem;
 }
 .p-datatable.p-datatable-sm .p-datatable-tbody > tr > td {
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 1.5rem;
 }
 .p-datatable.p-datatable-sm .p-datatable-tfoot > tr > td {
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 1.5rem;
 }
 .p-datatable.p-datatable-sm .p-datatable-footer {
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 1.5rem;
 }
 .p-datatable.p-datatable-lg .p-datatable-header {
   padding: 1.25rem 1.25rem;
@@ -4342,6 +4342,9 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-splitter .p-splitter-gutter-resizing {
   background: #dee2e6;
 }
+.p-tabview {
+  height: 100%;
+}
 .p-tabview .p-tabview-nav {
   background: #fff;
   border: 1px solid #dee2e6;
@@ -4406,6 +4409,10 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #495057;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
+  height: calc(100% - 51px);
+}
+.p-tabview .p-tabview-panel {
+  height: calc(100% - 51px);
 }
 .p-toolbar {
   background: #f8f9fa;
@@ -5762,7 +5769,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   padding-right: 0.5rem;
 }
 .p-inline-message {
-  padding: 0.75rem 0.75rem;
+  padding: 0.75rem 1.5rem;
   margin: 0;
   border-radius: 8px;
 }

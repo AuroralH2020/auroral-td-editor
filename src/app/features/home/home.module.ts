@@ -32,6 +32,7 @@ import { PartnershipQueryComponent } from './sections/query/foreign-query/partne
 import { ForeignQueryComponent } from './sections/query/foreign-query/foreign-query.component';
 import { MyOrgQueryComponent } from './sections/query/my-org-query/my-org-query.component';
 import { RunQueryComponent } from './sections/query/components/run-query/run-query.component';
+import { ItemTableComponent } from './sections/items/components/item-table/item-table.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { RunQueryComponent } from './sections/query/components/run-query/run-que
     ForeignQueryComponent,
     MyOrgQueryComponent,
     RunQueryComponent,
+    ItemTableComponent,
   ],
   imports: [
     CommonModule,

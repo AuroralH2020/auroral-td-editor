@@ -15,11 +15,7 @@ import { SelectPartnerDialogComponent } from '@features/home/components/select-p
   providers: [DialogService],
 })
 export class FromPartnershipsComponent implements OnInit, OnDestroy {
-  @ViewChild('dt') dt!: Table
-
   loading: boolean = false
-
-  selectedFilter: string = 'All'
 
   partnerItemsUI: ItemUI[] = []
 
@@ -36,9 +32,7 @@ export class FromPartnershipsComponent implements OnInit, OnDestroy {
     private _dialogService: DialogService
   ) {}
 
-  ngOnInit(): void {
-    // this._getData();
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy() {
     if (this.detailDialogRef) {
@@ -59,19 +53,6 @@ export class FromPartnershipsComponent implements OnInit, OnDestroy {
     this.detailDialogRef.onClose.subscribe((partner: PartnerUI) => {
       this._getData(partner)
     })
-  }
-
-  search(event: Event) {
-    const searchValue = (event.target as HTMLInputElement).value
-    this.dt.filter(searchValue, 'name', 'contains')
-  }
-
-  filter() {
-    if (this.selectedFilter === 'All') {
-      this.dt.reset()
-    } else {
-      this.dt.filter(this.selectedFilter, 'type', 'equals')
-    }
   }
 
   private async _getData(partner: PartnerUI | undefined | null) {

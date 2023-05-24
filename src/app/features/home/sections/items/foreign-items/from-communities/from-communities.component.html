@@ -1,147 +1,31 @@
-<div class="flex gap-4">
-  <div class="w-56">
-    <div class="h-12">
-      <div
-        [ngClass]="[
-          'flex justify-between h-12 items-center cursor-pointer',
-          selectedCommunity ? 'card' : 'card-action'
-        ]"
-        (click)="openSelectCommunityDialog()"
-      >
-        <div [ngClass]="[selectedCommunity ? 'text-black' : 'text-text-400', 'overflow-hidden']">
-          {{ selectedCommunity?.name ?? 'Select a community...' }}
-        </div>
-        <div class="mt-1.5">
-          <i class="pi pi-chevron-down" style="font-size: 1rem"></i>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="selectedCommunity && !loading" class="card-loose mt-4">
-      <div class="item-label">Filter by type:</div>
-      <div class="mt-4">
-        <div class="flex flex-col gap-4 pb-4">
-          <div class="flex align-items-center">
-            <p-radioButton
-              name="type-filter"
-              value="All"
-              [(ngModel)]="selectedFilter"
-              (onClick)="filter()"
-              inputId="all"
-            ></p-radioButton>
-            <label for="all" class="ml-2 cursor-pointer w-24"> All </label>
-          </div>
-
-          <div class="flex align-items-center">
-            <p-radioButton
-              name="type-filter"
-              value="Device"
-              [(ngModel)]="selectedFilter"
-              (onClick)="filter()"
-              inputId="devices"
-            ></p-radioButton>
-            <label for="devices" class="ml-2 cursor-pointer"
-              ><div class="flex items-center gap-2">
-                <fa-icon [ngStyle]="{ color: '#4D8A8C' }" icon="satellite-dish"></fa-icon>
-                <div class="leading-none">Devices</div>
-              </div></label
-            >
-          </div>
-
-          <div class="flex align-items-center">
-            <p-radioButton
-              name="type-filter"
-              value="Service"
-              [(ngModel)]="selectedFilter"
-              (onClick)="filter()"
-              inputId="services"
-            ></p-radioButton>
-            <label for="services" class="ml-2 cursor-pointer"
-              ><div class="flex items-center gap-2">
-                <fa-icon [ngStyle]="{ color: '#E5B38E' }" icon="cloud"></fa-icon>
-                <div class="leading-none">Services</div>
-              </div></label
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="grow">
-    <div *ngIf="!selectedCommunity" class="flex gap-4 items-center">
-      <img src="assets/images/arrow-left.png" class="bounce" alt="" width="80" />
-    </div>
-    <div *ngIf="selectedCommunity">
-      <div *ngIf="loading; else elseTableBlock">
-        <div class="flex justify-center items-center h-64">
-          <app-spinner></app-spinner>
-        </div>
-      </div>
-      <ng-template #elseTableBlock>
-        <div class="pb-4">
-          <span class="p-input-icon-left ml-auto">
-            <i class="pi pi-search"></i>
-            <input
-              pInputText
-              type="text"
-              (input)="search($event)"
-              placeholder="Search for item..."
-              style="width: 256px"
-            />
-          </span>
-        </div>
-
-        <p-table
-          #dt
-          [value]="itemsUI"
-          selectionMode="single"
-          dataKey="oid"
-          [filterDelay]="0"
-          class="selectable-table"
-          styleClass="p-datatable-sm"
+<app-item-table
+  [itemsUI]="communityItemsUI"
+  [showSearch]="selectedCommunity !== undefined && !loading"
+  [showTable]="selectedCommunity !== undefined"
+  [loadingData]="loading"
+  linkToDetail="/item-detail/community"
+>
+  <ng-template #tableControlRef>
+    <div class="flex gap-4 items-center">
+      <div class="w-56">
+        <div
+          [ngClass]="[
+            'flex justify-between h-12 items-center cursor-pointer',
+            selectedCommunity ? 'card' : 'card-action'
+          ]"
+          (click)="openSelectCommunityDialog()"
         >
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Name</th>
-              <!-- <th>Access level</th>
-                <th>Enabled</th> -->
-              <th></th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-item>
-            <tr routerLink="/item-detail/community" [state]="{item}">
-              <td>
-                <div class="w-fit">
-                  <app-item-pictogram [item]="item"></app-item-pictogram>
-                </div>
-              </td>
-              <!-- <td>
-                  <app-item-access-level [item]="item"></app-item-access-level>
-                </td>
-                <td>
-                  <p-inputSwitch></p-inputSwitch>
-                </td> -->
-              <td>
-                <div class="flex justify-end mr-4">
-                  <i class="pi pi-chevron-right text-primary-500" style="font-size: 1rem"></i>
-                </div>
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage" let-columns>
-            <tr>
-              <td>
-                <div class="flex flex-col justify-start w-36 text-center">
-                  <app-sad-face></app-sad-face>
-                  No items found
-                </div>
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </ng-template>
+          <div [ngClass]="[selectedCommunity ? 'text-black' : 'text-text-400', 'overflow-hidden']">
+            {{ selectedCommunity?.name ?? 'Select community...' }}
+          </div>
+          <div class="mt-1.5">
+            <i class="pi pi-chevron-down" style="font-size: 1rem"></i>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!selectedCommunity">
+        <img src="assets/images/arrow-left.png" class="bounce" alt="" width="80" />
+      </div>
     </div>
-  </div>
-</div>
+  </ng-template>
+</app-item-table>

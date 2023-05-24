@@ -20,6 +20,6 @@ export class ItemIconComponent implements OnInit {
   }
 
   get icon(): IconProp {
-    return valueBasedOnItemType(this.item, 'satellite-dish', 'cloud', 'circle')
+    return valueBasedOnItemType(this.item, 'rss', 'cloud', 'circle')
   }
 }

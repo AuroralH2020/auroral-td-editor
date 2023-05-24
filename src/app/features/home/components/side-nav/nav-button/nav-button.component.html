@@ -9,7 +9,7 @@
     'select-none',
     'h-12',
     'tracking-wider',
-    folded ? 'w-12': 'w-36'
+    folded ? 'w-12': 'w-56'
   ]"
   [routerLink]="[path]"
   [routerLinkActive]="'bg-primary-500'"
@@ -19,6 +19,6 @@
   <div *ngIf="router.isActive" class="w-1 h-12 bg-secondary-400 strip"></div>
   <div class="flex items-center px-4">
     <i *ngIf="icon" [ngClass]="['pi', icon]" style="font-size: 1rem"></i>
-    <div *ngIf="!folded" class="pl-2 text-white text-base  font-medium">{{ name ?? 'Menu item' }}</div>
+    <div *ngIf="!folded" class="pl-2 text-white text-sm font-medium">{{ name ?? 'Menu item' }}</div>
   </div>
 </div>

@@ -22,7 +22,7 @@ export class ReadPropDialogComponent implements OnInit {
   data: any
   loading = false
 
-  blockSpace: RegExp = /[^s]/
+  blockSpace: string = '/[^s]/'
 
   requestParams: RequestParam[] = []
 

@@ -5,8 +5,8 @@
         [ngClass]="[
           'bg-dialogGrey border-4 border-white flex items-center justify-center leading-none',
           shape === 'rounded' ? 'rounded-full': 'rounded-sm',
-          size === 'small' ? 'w-11' : 'w-12',
-          size === 'small' ? 'h-11' : 'h-12'
+          size === 'small' ? 'small-w' : 'normal-w',
+          size === 'small' ? 'small-h' : 'normal-h'
         ]"
         [style.background]="pictogramColor ? pictogramColor : ''"
       >
@@ -18,9 +18,9 @@
         [ngClass]="[
           'bg-lightGrey rounded-sm break-words leading-loose whitespace-normal',
           size === 'small' ? 'pr-2' : 'pr-4',
-          size === 'small' ? 'py-1' : 'py-2',
+          size === 'small' ? 'small-h' : 'normal-h',
           pictogramRef ? (size === 'small' ? 'pl-8' : 'pl-10') : '',
-          pictogramRef ? 'ml-4' : ''
+          pictogramRef ? ( size === 'small' ? 'ml-4 pt-1 pb-0.5': 'ml-5 py-2.5') : ''
         ]"
         [style.background]="contentColor ? contentColor : ''"
         style="min-width: 96px"

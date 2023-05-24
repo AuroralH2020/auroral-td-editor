@@ -10,7 +10,7 @@ import { Table } from "primeng/table";
   styleUrls: ["./node-items.component.scss"],
   providers: [DialogService],
 })
-export class NodeItemsComponent implements OnInit, OnDestroy {
+export class NodeItemsComponent implements OnInit {
 
   @ViewChild('dt') dt!: Table;
 
@@ -18,20 +18,12 @@ export class NodeItemsComponent implements OnInit, OnDestroy {
 
   itemsUI: ItemUI[] = [];
 
-  detailDialogRef!: DynamicDialogRef;
-
   constructor(
     private _itemsService: ItemsService,
   ) {}
 
   ngOnInit(): void {
     this.itemsUI = this._itemsService.myItems ?? []
-  }
-
-  ngOnDestroy() {
-    if (this.detailDialogRef) {
-      this.detailDialogRef.close();
-    }
   }
 
   search(event: Event) {

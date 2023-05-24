@@ -19,6 +19,10 @@ export class ItemPictogramComponent implements OnInit {
     return valueBasedOnItemType(this.item, 'rgb(0, 182, 235)', 'rgb(229, 179, 142)', 'rgb(150, 150, 150)')
   }
 
+  get padding(): object {
+    return valueBasedOnItemType(this.item, { 'padding-left': '2px', 'padding-bottom': '1px' }, {}, {})
+  }
+
   get contentColor(): string {
     return valueBasedOnItemType(
       this.item,
@@ -29,6 +33,6 @@ export class ItemPictogramComponent implements OnInit {
   }
 
   get itemIcon(): IconProp {
-    return valueBasedOnItemType(this.item, 'satellite-dish', 'cloud', 'circle')
+    return valueBasedOnItemType(this.item, 'rss', 'cloud', 'circle')
   }
 }
