@@ -11,7 +11,6 @@ import { AppComponent } from './app.component'
 import { FakeBackendInterceptor } from '@core/services/fake-backend.interceptor'
 import { JwtInterceptor } from '@core/services/jwt.interceptor'
 import { PrimeNgModule } from './prime-ng/prime-ng.module'
-import { ItemDetailModule } from './features/item-detail/item-detail.module'
 import { MessageService } from 'primeng/api'
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -29,7 +28,6 @@ import { CacheRouteReuseStrategy } from '@core/route-strategy/cache-route-reuse.
     CoreModule,
     HttpClientModule,
     PrimeNgModule,
-    ItemDetailModule,
     FontAwesomeModule,
     SharedModule,
   ],
