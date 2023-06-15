@@ -1,0 +1,57 @@
+<div class="flex-col card-loose h-full">
+  <div class="text-text-600 text-md pb-4">
+    {{ prop.name }}
+  </div>
+  <div class="grid grid-cols-12 gap-4 min-h-[calc(100%-2rem)]">
+    <div class="col-span-12 md:col-span-3">
+      <div class="section">
+        <div class="pb-2">
+          <div class="item-label">Description:</div>
+          <div class="text-sm text-text-500">
+            {{ prop.desc ?? '-' }}
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <div class="item-label">Type:</div>
+          <div class="text-sm text-text-500">
+            {{ prop.type ?? '-' }}
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <div class="item-label">Data Type:</div>
+          <div class="text-sm text-text-500">
+            {{ prop.datatype ?? '-' }}
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <div class="item-label">Data Units:</div>
+          <div class="text-sm text-text-500">
+            {{ prop.dataunits ?? '-' }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-12 md:col-span-9">
+      <div class="section">
+        <app-menu>
+          <app-menu-item>
+            <app-menu-label>
+              <div class="get">GET</div>
+            </app-menu-label>
+            <app-menu-content>
+              <app-request-builder requestType="get" [oid]="oid" [item]="item" [prop]="prop"></app-request-builder>
+            </app-menu-content>
+          </app-menu-item>
+          <app-menu-item>
+            <app-menu-label>
+              <div class="put">PUT</div>
+            </app-menu-label>
+            <app-menu-content>
+              <app-request-builder requestType="put" [oid]="oid" [item]="item" [prop]="prop"></app-request-builder>
+            </app-menu-content>
+          </app-menu-item>
+        </app-menu>
+      </div>
+    </div>
+  </div>
+</div>

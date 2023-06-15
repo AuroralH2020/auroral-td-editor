@@ -1,0 +1,18 @@
+<div class="flex justify-center">
+  <app-node-profile-pictogram size="large"></app-node-profile-pictogram>
+</div>
+<div class="card-loose mt-8 text-base pb-8">
+  <div>
+    <div class="leading-none item-label">agid:</div>
+    <div class="w-60">
+      <app-node-pictogram [showIcon]="false" size="small" class=""></app-node-pictogram>
+    </div>
+  </div>
+  <div>
+    <div class="mt-2 pb-1 item-label">organisation:</div>
+    <div class="flex gap-2 items-center">
+      <p-avatar [label]="organisation.charAt(0).toUpperCase()"></p-avatar>
+      {{ organisation }}
+    </div>
+  </div>
+</div>

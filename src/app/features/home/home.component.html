@@ -1,14 +1,30 @@
-<div class="w-screen h-screen">
-  <app-side-nav></app-side-nav>
-  <div class="w-screen h-full">
-    <app-header></app-header>
+<div class="w-full h-full">
+  <app-home-nav [folded]="folded"></app-home-nav>
+  <div class="w-full h-full">
     <div class="content-wrapper">
       <div [ngClass]="['h-full', folded ? 'pl-12' : 'pl-56']">
         <div class="px-3 pt-3 h-[calc(100%-70px)]">
           <router-outlet></router-outlet>
         </div>
-        <app-footer></app-footer>
+        <app-eu-contrib></app-eu-contrib>
       </div>
+    </div>
+  </div>
+  <div class="fixed pl-56 top-0 left-0 -z-10">
+    <div
+      [ngClass]="[
+        'bg-primary-50',
+        'rounded-r-full',
+        'flex',
+        'items-center',
+        'justify-center',
+        'cursor-pointer',
+        'h-16',
+        'w-12'
+      ]"
+      (click)="toggleMenu()"
+    >
+      <i class="pi pi-bars" style="font-size: 1rem"></i>
     </div>
   </div>
 </div>

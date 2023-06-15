@@ -1,0 +1,14 @@
+<div class="ml-4 margin">
+  <app-item-table [itemsUI]="itemsUI" linkToDetail="/item-detail/myorg">
+    <ng-template #tableControlRef>
+      <div class="w-56">
+        <app-pictogram shape="square">
+          <ng-template #pictogramRef>
+            {{ organisation.charAt(0).toUpperCase() }}
+          </ng-template>
+          <div class="w-36">{{ organisation }}</div>
+        </app-pictogram>
+      </div>
+    </ng-template>
+  </app-item-table>
+</div>

@@ -4581,10 +4581,9 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #495057;
   border: 0 none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  z-index: 5000;
 }
 .p-sidebar-mask {
-  z-index: 10 !important;
+  z-index: 300 !important;
 }
 .p-sidebar .p-sidebar-header {
   padding: 1.25rem;

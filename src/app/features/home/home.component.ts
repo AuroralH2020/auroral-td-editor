@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { BroadcasterService } from '@core/services/broadcaster/broadcaster.service';
-import { CONSTANTS } from '@core/services/constants';
+import { Component, OnInit } from '@angular/core'
+import { BroadcasterService } from '@core/services/broadcaster/broadcaster.service'
+import { CONSTANTS } from '@core/services/constants'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  folded: boolean = false
 
-  folded: boolean = false;
-
-  constructor(private _broadcaster: BroadcasterService) { }
+  constructor() {}
 
   ngOnInit(): void {
-    this._broadcaster.listen(CONSTANTS.MENU_FOLDED).subscribe((value: any) => {
-      this.folded = value
-    })
+    this.folded = JSON.parse(sessionStorage.getItem(CONSTANTS.MENU_FOLDED) ?? 'false')
   }
 
+  toggleMenu = () => {
+    this.folded = !this.folded
+    sessionStorage.setItem(CONSTANTS.MENU_FOLDED, JSON.stringify(this.folded))
+  }
 }

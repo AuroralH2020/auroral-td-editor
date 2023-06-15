@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CollaborationService } from '@core/services/collaboration/collaboration.service';
-import { ItemsService } from '@core/services/item/item.service';
-import { NodesService } from '@core/services/nodes/nodes.service';
+import { Component, OnInit } from '@angular/core'
+import { CollaborationService } from '@core/services/collaboration/collaboration.service'
+import { ItemsService } from '@core/services/item/item.service'
+import { NodesService } from '@core/services/nodes/nodes.service'
 
 @Component({
   selector: 'app-root',
@@ -9,21 +9,27 @@ import { NodesService } from '@core/services/nodes/nodes.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
   loading: boolean = false
 
-  constructor(private _nodesService: NodesService, private _itemsService: ItemsService, private _collaborationService: CollaborationService) {
-    return;
+  constructor(
+    private _nodesService: NodesService,
+    private _itemsService: ItemsService,
+    private _collaborationService: CollaborationService
+  ) {
+    return
   }
-  
+
   ngOnInit(): void {
     this.initApp()
   }
 
   async initApp() {
     this.loading = true
-    await this._nodesService.initNode()
-    await this._itemsService.initItems()
+    await this._nodesService.initNodes()
+    const myOrgAgids = this._nodesService.myOrgNodes.map((element) => {
+      return element.agid;
+    })
+    await this._itemsService.initItems(myOrgAgids)
     await this._collaborationService.initCollaboration()
     this.loading = false
   }

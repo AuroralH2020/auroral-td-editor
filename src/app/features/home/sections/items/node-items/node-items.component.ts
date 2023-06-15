@@ -1,41 +1,59 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import {  ItemUI } from "@core/models/item.model";
-import { ItemsService } from "@core/services/item/item.service";
-import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
-import { Table } from "primeng/table";
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { ItemUI } from '@core/models/item.model'
+import { ItemsService } from '@core/services/item/item.service'
+import { MenuItem } from 'primeng/api/menuitem'
+import { DialogService } from 'primeng/dynamicdialog'
+import { Menu } from 'primeng/menu'
 
 @Component({
-  selector: "app-node-items",
-  templateUrl: "./node-items.component.html",
-  styleUrls: ["./node-items.component.scss"],
+  selector: 'app-node-items',
+  templateUrl: './node-items.component.html',
+  styleUrls: ['./node-items.component.scss'],
   providers: [DialogService],
 })
 export class NodeItemsComponent implements OnInit {
+  @ViewChild('menu') menu!: Menu
+  itemsUI: ItemUI[] = []
+  addItemMenuOptions: MenuItem[] = [
+    {
+      label: 'Upload TD',
+      icon: 'pi pi-code',
+      command: () => {
+        this.openUploadTdDialog()
+      },
+    },
+    {
+      label: 'Use Editor',
+      icon: 'pi pi-file-edit',
+      command: () => {
+        this.openUploadTdDialog()
+      },
+    },
+  ]
 
-  @ViewChild('dt') dt!: Table;
+  showUploadTdDialog: boolean = false
 
-  selectedFilter: string = "All";
-
-  itemsUI: ItemUI[] = [];
-
-  constructor(
-    private _itemsService: ItemsService,
-  ) {}
+  constructor(private _itemsService: ItemsService) {}
 
   ngOnInit(): void {
     this.itemsUI = this._itemsService.myItems ?? []
+    document.body.addEventListener('click', this._hideMenu)
   }
 
-  search(event: Event) {
-    const searchValue = (event.target as HTMLInputElement).value;
-    this.dt.filter(searchValue, "name", "contains");
-  }
-
-  filter() {
-    if (this.selectedFilter === 'All') {
-      this.dt.reset()
-    } else {
-      this.dt.filter(this.selectedFilter, "type", "equals");
+  toogleMenu(event: MouseEvent) {
+    if (!this.menu.visible) {
+      this.menu.show(event)
+      event.stopPropagation()
     }
+  }
+
+  private _hideMenu = () => {
+    if (this.menu.visible) {
+      this.menu.hide()
+    }
+  }
+
+  openUploadTdDialog() {
+    this.showUploadTdDialog = true
   }
 }

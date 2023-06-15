@@ -1,0 +1,19 @@
+<div class="toolbar flex justify-between w-full items-center  -z-20">
+  <div class="flex">
+    <div class="bg-primary-50">
+      <div class="pb-2">
+        <app-logo size="normal"></app-logo>
+      </div>
+    </div>
+    <div [ngClass]="['bg-primary-50', 'rounded-r-full', 'h-16', 'w-12']"></div>
+  </div>
+  <div>
+    <div (click)="openProfile()" class="cursor-pointer pr-4">
+      <app-node-profile-pictogram size="small"></app-node-profile-pictogram>
+    </div>
+    <div class="w-3"></div>
+  </div>
+</div>
+<p-sidebar [(visible)]="opened" position="right">
+  <app-node-profile></app-node-profile>
+</p-sidebar>

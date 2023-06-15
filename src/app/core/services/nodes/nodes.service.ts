@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { MyNode, RemoteNode } from '@core/models/node.model'
-import { firstValueFrom, take } from 'rxjs'
+import { filter, firstValueFrom, take } from 'rxjs'
 
 const _orgNodesUrl = '/api/discovery/nodes/organisation'
 const _myNodeUrl = '/api/agent/info'
@@ -20,7 +20,7 @@ export class NodesService {
 
   constructor(private _http: HttpClient) {}
 
-  async initNode() {
+  async initNodes() {
     await Promise.all([this._initMyNode(), this._initMyOrgNodes()])
   }
 
@@ -35,13 +35,15 @@ export class NodesService {
   }
 
   private async _initMyOrgNodes(): Promise<void> {
-    this.myOrgNodes = await firstValueFrom(
-      this._http
-        .get<RemoteNode[]>(_orgNodesUrl, {
-          headers: { accept: 'application/json' },
-        })
-        .pipe(take(1))
-    )
+    this.myOrgNodes = (
+      await firstValueFrom(
+        this._http
+          .get<RemoteNode[]>(_orgNodesUrl, {
+            headers: { accept: 'application/json' },
+          })
+          .pipe(take(1))
+      )
+    ).filter((element) => element.agid !== this.myNode.agid)
   }
 
   async getNodesFromCommunity(commid: string): Promise<RemoteNode[]> {

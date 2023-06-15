@@ -16,9 +16,10 @@ export class ItemsService {
   constructor(private _http: HttpClient) {}
 
   myItems: ItemUI[] | undefined
+  myOrgItems: ItemUI[] | undefined
 
-  public async initItems() {
-    await this._initMyItems()
+  public async initItems(orgAgids: string[]) {
+    await Promise.all([await this._initMyItems(), await this._initMyOrgItems(orgAgids)])
   }
 
   private async _initMyItems(): Promise<void> {
@@ -33,6 +34,11 @@ export class ItemsService {
         .pipe(take(1))
     )
     this.myItems = ItemConvert.toItemsUI(itemsServer)
+  }
+
+  private async _initMyOrgItems(orgAgids: string[]): Promise<void> {
+    const itemsServer = await this.getItems(orgAgids)
+    this.myOrgItems = ItemConvert.toItemsUI(itemsServer)
   }
 
   async getItems(agids: string[]): Promise<Items> {
@@ -51,10 +57,36 @@ export class ItemsService {
     )
   }
 
-  async getDataFromProperty(oid: string, remoteOid: string, pid: string): Promise<any> {
+  async getDataFromProperty(
+    oid: string,
+    remoteOid: string,
+    pid: string,
+    params?: Record<string, string>
+  ): Promise<any> {
     return await firstValueFrom(
       this._http
-        .get<Items>(_itemsReadPropertyUrl + `/${oid}/${remoteOid}/${pid}`, {
+        .get<any>(_itemsReadPropertyUrl + `/${oid}/${remoteOid}/${pid}`, {
+          params,
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'text/plain',
+          },
+        })
+        .pipe(take(1))
+    )
+  }
+
+  async updateProperty(
+    oid: string,
+    remoteOid: string,
+    pid: string,
+    params?: Record<string, string>,
+    body?: string
+  ): Promise<any> {
+    return await firstValueFrom(
+      this._http
+        .put<any>(_itemsReadPropertyUrl + `/${oid}/${remoteOid}/${pid}`, body, {
+          params,
           headers: {
             accept: 'application/json',
             'Content-Type': 'text/plain',

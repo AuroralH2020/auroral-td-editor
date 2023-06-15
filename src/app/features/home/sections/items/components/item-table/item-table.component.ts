@@ -1,24 +1,23 @@
-import { Component, ContentChild, Input, TemplateRef, ViewChild } from '@angular/core';
-import { ItemUI } from '@core/models/item.model';
-import { Table } from 'primeng/table';
+import { Component, ContentChild, Input, TemplateRef, ViewChild } from '@angular/core'
+import { ItemUI } from '@core/models/item.model'
+import { Table } from 'primeng/table'
 
 @Component({
   selector: 'app-item-table',
   templateUrl: './item-table.component.html',
-  styleUrls: ['./item-table.component.scss']
+  styleUrls: ['./item-table.component.scss'],
 })
 export class ItemTableComponent {
-
   @ViewChild('dt') dt!: Table
   selectedFilter: string = 'All'
 
   @ContentChild('tableControlRef') tableControlRef: TemplateRef<any> | undefined
   @Input() itemsUI: ItemUI[] = []
-  @Input() showSearch: boolean = true;
-  @Input() showTable: boolean = true;
-  @Input() loadingData: boolean = false;
-  @Input() linkToDetail!: string;
-  @Input() state: any;
+  @Input() showSearch: boolean = true
+  @Input() showTable: boolean = true
+  @Input() loadingData: boolean = false
+  @Input() linkToDetail!: string
+  @Input() state: any
 
   search(event: Event) {
     const searchValue = (event.target as HTMLInputElement).value
@@ -34,7 +33,6 @@ export class ItemTableComponent {
   }
 
   combineState(item: ItemUI) {
-    return {item, ...this.state}
+    return { item, ...this.state }
   }
-
 }

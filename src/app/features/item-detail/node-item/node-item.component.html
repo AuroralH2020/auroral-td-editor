@@ -1,4 +1,4 @@
-<app-detail [item]="item">
+<app-detail [item]="item" back="My Node items">
   <ng-template #descriptionRef>
     <div class="w-72">
       <div class="item-label">Description:</div>
@@ -15,7 +15,7 @@
             <div class="leading-none">{{ organisation }}</div>
             <div class="flex gap-1 items-center mt-1">
               <i class="pi pi-user" style="font-size: 0.9rem"></i>
-              <div class="text-sm leading-none">(you)</div>
+              <div class="text-sm leading-none">(your org)</div>
             </div>
           </div>
         </app-pictogram>
@@ -66,7 +66,7 @@
         </div>
       </td>
       <td style="width: 20%">
-       <app-read-prop [oid]="item.oid" [item]="item" [prop]="prop"></app-read-prop>
+       <app-consume-prop [oid]="item.oid" [item]="item" [prop]="prop"></app-consume-prop>
       </td>
     </tr>
   </ng-template>

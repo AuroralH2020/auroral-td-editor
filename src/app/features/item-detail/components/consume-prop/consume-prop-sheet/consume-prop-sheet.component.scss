@@ -1,0 +1,16 @@
+@import 'styles';
+
+.req-wrapper {
+    @apply w-16 text-white font-bold m-auto;
+    border-radius: 4px;
+}
+
+.get {
+    @apply req-wrapper;
+    background-color: rgba(79, 153, 247, 0.8)
+}
+
+.put {
+    @apply req-wrapper;
+    background-color: rgba(249, 143, 37, 0.8)
+}

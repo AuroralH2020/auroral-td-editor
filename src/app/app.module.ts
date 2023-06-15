@@ -31,7 +31,7 @@ import { CacheRouteReuseStrategy } from '@core/route-strategy/cache-route-reuse.
     PrimeNgModule,
     ItemDetailModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     { provide: 'BASE_URL', useValue: environment.baseurl },
@@ -52,7 +52,7 @@ import { CacheRouteReuseStrategy } from '@core/route-strategy/cache-route-reuse.
     },
     {
       provide: RouteReuseStrategy,
-      useClass: CacheRouteReuseStrategy
+      useClass: CacheRouteReuseStrategy,
     },
     MessageService,
   ],
