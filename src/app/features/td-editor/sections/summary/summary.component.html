@@ -1,0 +1,53 @@
+<div class="w-full flex flex-col items-center pt-3">
+  <div [ngClass]="['container']">
+    <div>
+      <h1 class="text-md text-text-500 font-bold">Summary</h1>
+      <div class="text-text-300 pb-6" style="width: 400px">
+        Check that everything is correct with the
+        <span class="font-bold">{{ (type$ | async)?.title ?? 'item' }}</span> you have defined and then you can generate
+        the Thing Description.
+      </div>
+    </div>
+    <div class="fade-bottom">
+      <div class="h-[calc(100vh-377px)] w-full overflow-y-auto">
+        <app-your-item [summaryMode]="true"></app-your-item>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <p-button label="Generate TD" (click)="onGenerate()"></p-button>
+      <p-button  icon="pi pi-replay" label="Generate New Item" styleClass="p-button-text" (click)="onCreateNew()"></p-button>
+    </div>
+  </div>
+</div>
+<p-dialog
+  [header]="((type$ | async)?.title ?? 'Item') + '\'s Thing Desctiption'"
+  [(visible)]="showTD"
+  [modal]="true"
+  [style]="{ width: '900px' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div>
+    <pre>{{ td | json }}</pre>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex gap-2 justify-end">
+      <p-button label="Close" (click)="showTD = false" styleClass="p-button-outlined"></p-button>
+      <p-button (click)="onCopy()">
+        <div class="flex items-center justify-center gap-2">
+          <fa-icon icon="copy"></fa-icon>
+          <div class="font-bold">Copy TD</div>
+        </div>
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+<p-confirmDialog #cd [style]="{ width: '800px' }">
+  <ng-template pTemplate="header">
+    <h3 class="font-bold text-md">Generate new item</h3>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button type="button" pButton label="Do nothing" (click)="cd.reject()"></button>
+    <p-button styleClass="p-button-outlined" icon="pi pi-replay" label="Generate new item" (click)="cd.accept()"></p-button>
+  </ng-template>
+</p-confirmDialog>

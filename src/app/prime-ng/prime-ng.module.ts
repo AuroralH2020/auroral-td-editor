@@ -26,6 +26,15 @@ import { InputTextareaModule } from 'primeng/inputtextarea'
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { MenuModule } from 'primeng/menu';
+import { StepsModule } from 'primeng/steps';
+import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TimelineModule } from 'primeng/timeline';
+
 
 @NgModule({
   declarations: [],
@@ -56,6 +65,14 @@ import { MenuModule } from 'primeng/menu';
     ScrollTopModule,
     KeyFilterModule,
     MenuModule,
+    StepsModule,
+    DividerModule,
+    DropdownModule,
+    AutoCompleteModule,
+    OverlayPanelModule,
+    ConfirmPopupModule,
+    ConfirmDialogModule,
+    TimelineModule,
   ],
   exports: [
     InputTextModule,
@@ -82,7 +99,15 @@ import { MenuModule } from 'primeng/menu';
     InputTextareaModule,
     ScrollTopModule,
     KeyFilterModule,
-    MenuModule
+    MenuModule,
+    StepsModule,
+    DividerModule,
+    DropdownModule,
+    AutoCompleteModule,
+    OverlayPanelModule,
+    ConfirmPopupModule,
+    ConfirmDialogModule,
+    TimelineModule,
   ],
 })
 export class PrimeNgModule {}

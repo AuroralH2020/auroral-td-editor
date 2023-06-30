@@ -1,0 +1,153 @@
+<div class="w-full flex flex-col items-center pt-3">
+  <div [ngClass]="['container']">
+    <div class="grid grid-cols-12 gap-10">
+      <div class="col-span-12 md:col-span-7">
+        <div>
+          <h1 class="text-md text-text-500 font-bold">Define properties</h1>
+          <div class="text-text-300 pb-6" style="width: 400px">
+            Please define the properties of the <span class="font-bold">{{ (type$ | async)?.title ?? 'item' }}</span
+            >.
+          </div>
+        </div>
+        <div class="h-[calc(100vh-336px)]">
+          <div>
+            <p-button
+              label="Add property"
+              icon="pi pi-plus"
+              styleClass="p-button-sm"
+              (click)="openPropDialog()"
+            ></p-button>
+          </div>
+          <div class="mt-4 fade-bottom">
+            <p-table [value]="props" [scrollable]="true" scrollHeight="calc(100vh - 408px)" dataKey="id">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th [width]="'20%'">Name</th>
+                  <th [width]="'20%'">Property type</th>
+                  <th [width]="'20%'">Unit type</th>
+                  <th [width]="'20%'">Unit data type</th>
+                  <th [width]="'20%'"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-prop let-expanded="expanded">
+                <tr>
+                  <td [width]="'20%'">
+                    <div class="flex gap-2 items-center">
+                      <button
+                        type="button"
+                        pButton
+                        pRipple
+                        [pRowToggler]="prop"
+                        class="p-button-text p-button-rounded p-button-plain mr-2"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+                      ></button>
+                      {{ prop.name }}
+                    </div>
+                  </td>
+                  <td [width]="'20%'">{{ prop.propType.name }}</td>
+                  <td [width]="'20%'">{{ prop.unitType }}</td>
+                  <td [width]="'20%'">{{ prop.unitDataType.name }}</td>
+                  <td [width]="'20%'">
+                    <div class="flex gap-2 justify-end">
+                      <p-button
+                        (click)="openPropDialog(prop)"
+                        icon="pi pi-pencil"
+                        styleClass="p-button-outlined"
+                      ></p-button>
+                      <p-button
+                        (click)="removeProp($event, prop)"
+                        icon="pi pi-trash"
+                        styleClass="p-button-outlined p-button-danger"
+                      ></p-button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="rowexpansion" let-prop>
+                <tr>
+                  <td colspan="5">
+                    <div class="section mb-4">
+                      <div class="px-12 py-4">
+                        <div class="pb-10">
+                          <div>
+                            <div class="item-label">Description:</div>
+                            <div>
+                              {{ prop.description }}
+                            </div>
+                          </div>
+                          <div class="mt-4">
+                            <div class="item-label">Forms:</div>
+                            <div class="mt-1">
+                              <p-table [value]="prop.forms" styleClass="p-datatable-sm">
+                                <ng-template pTemplate="header">
+                                  <tr>
+                                    <th style="width: 50%">URL</th>
+                                    <th style="width: 50%">Type</th>
+                                  </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-form>
+                                  <tr>
+                                    <td style="width: 50%">
+                                      <div>
+                                        {{ form.url }}
+                                      </div>
+                                    </td>
+                                    <td style="width: 50%">
+                                      <div>
+                                        {{ form.type }}
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </ng-template>
+                              </p-table>
+                            </div>
+                          </div>
+                          <div class="mt-4 flex justify-end">
+                            <p-button
+                              (click)="openPropDialog(prop)"
+                              label="Edit"
+                              styleClass="p-button-outlined"
+                              icon="pi pi-pencil"
+                            ></p-button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="5">
+                    <div class="flex gap-4 items-center text-text-300">
+                      <app-sad-face></app-sad-face>
+                      <div>You don't any properties defined.</div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <p-button label="Skip" styleClass="p-button-outlined" (click)="onSkip()"></p-button>
+          <p-button
+            [label]="(editMode$ | async)?.active ? 'Update & Go Back' : 'Save & Continue'"
+            [disabled]="disabled"
+            (click)="onConfirm()"
+          ></p-button>
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-4">
+        <p-fieldset legend="Your item">
+          <div class="fade-bottom">
+            <div class="h-[calc(100vh-330px)] w-full overflow-y-auto">
+              <app-your-item></app-your-item>
+            </div>
+          </div>
+        </p-fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmPopup></p-confirmPopup>

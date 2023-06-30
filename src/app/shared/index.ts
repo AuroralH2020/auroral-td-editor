@@ -12,7 +12,7 @@ import { MenuItemComponent } from './components/menu/menu-item/menu-item.compone
 import { SparqlEditorComponent } from './components/inputs/sparql-editor/sparql-editor.component'
 import { PictogramComponent } from './components/pictograms/pictogram/pictogram.component'
 import { ItemPictogramComponent } from './components/pictograms/item-pictogram/item-pictogram.component'
-import { NodePictogramComponent } from './components/pictograms/node-pictogram/node-pictogram.component'
+import { EuContribComponent } from './components/misc/eu-contrib/eu-contrib.component'
 
 export const components: any[] = [
   HyperlinkComponent,
@@ -30,7 +30,7 @@ export const components: any[] = [
   SparqlEditorComponent,
   PictogramComponent,
   ItemPictogramComponent,
-  NodePictogramComponent,
+  EuContribComponent,
 ]
 
 export const directives: any[] = []
@@ -52,4 +52,4 @@ export * from './components/menu/menu-item/menu-item.component'
 export * from './components/inputs/sparql-editor/sparql-editor.component'
 export * from './components/pictograms/pictogram/pictogram.component'
 export * from './components/pictograms/item-pictogram/item-pictogram.component'
-export * from './components/pictograms/node-pictogram/node-pictogram.component'
+export * from './components/misc/eu-contrib/eu-contrib.component'

@@ -19,7 +19,7 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
   isalreadyRefreshing: boolean = false
 
   constructor(
-    @Inject('BASE_URL') private _baseUrl: string,
+    // @Inject('BASE_URL') private _baseUrl: string,
     private _broadcaster: BroadcasterService,
     private _snackBar: SnackBarService
   ) {}
@@ -27,15 +27,13 @@ export class HTTPReqResInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this._broadcaster.broadcast(CONSTANTS.SHOW_LOADER, true)
     const newReq = req.clone({
-      url: this._baseUrl + req.url,
+      // url: this._baseUrl + req.url,
+      url: req.url,
       setHeaders: {},
     })
 
     return next.handle(newReq).pipe(
       map((event: HttpEvent<any>) => {
-        if (event instanceof HttpResponse) {
-          event = event.clone({ body: event.body?.message })
-        }
         return event
       }),
       catchError((err) => this.error(err)),

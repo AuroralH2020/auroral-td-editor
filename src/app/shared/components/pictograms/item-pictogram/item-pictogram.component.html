@@ -1,10 +1,10 @@
-<app-pictogram size="small" [pictogramColor]="pictogramColor" [contentColor]="contentColor">
+<app-pictogram size="small" [pictogramColor]="color" [contentColor]="contentColor">
   <ng-template #pictogramRef>
-    <div [ngStyle]="padding">
-      <fa-icon class="text-white" [icon]="itemIcon"></fa-icon>
+    <div>
+      <fa-icon class="text-white" [icon]="icon"></fa-icon>
     </div>
   </ng-template>
   <div class="leading-9 text-text-500">
-    {{ item.name }}
+    {{ title }}
   </div>
 </app-pictogram>

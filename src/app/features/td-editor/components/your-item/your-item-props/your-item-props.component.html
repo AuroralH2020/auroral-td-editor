@@ -1,0 +1,28 @@
+<p-table
+  [value]="props ?? []"
+  [scrollable]="true"
+  [scrollHeight]="summaryMode ? '' : '200px'"
+  styleClass="p-datatable-sm"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th [width]="'50%'">Name</th>
+      <th [width]="'50%'">Property type</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-prop>
+    <tr>
+      <td [width]="'50%'">{{ prop.name }}</td>
+      <td [width]="'50%'">{{ prop.propType.name }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="2">
+        <div class="flex items-center text-text-300">
+          <div>You don't any properties defined.</div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

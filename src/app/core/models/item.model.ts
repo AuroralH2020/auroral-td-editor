@@ -1,100 +1,77 @@
-//------- SERVER -------//
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
-export interface Items {
-  head: Head
-  results: Results
+type FormType = 'readproperty' | 'writeproperty'
+
+export interface Item {
+  type?: ItemType
+  info?: ItemInfo
+  properties?: ItemProp[]
+  events?: ItemEvent[]
 }
 
-export interface Head {
-  vars: string[]
+export interface ItemInfo {
+  title?: string
+  domain?: ItemDomain
+  description?: string
+  manufacturer?: string
+  model?: string
+  serialNumber?: string
+  location?: ItemLocation
 }
 
-export interface Results {
-  bindings: ItemServer[]
+export interface ItemLocation {
+  display_name: string
+  lat?: string
+  lon?: string
 }
 
-export interface ItemServer {
-  oid?: Data
-  itemname?: Data
-  itemtype?: Data
-  itemdesc?:   Data;
-  pid?: Data
-  propname?: Data
-  proptype?: Data
-  propdesc?: Data
-  datatype?: Data
-  dataunits?: Data
+export interface ItemType {
+  id: string
+  title: string
+  icon: IconProp
+  color: string
 }
 
-export interface Data {
-  type?: string
-  value?: string
-  'xml:lang'?: string
+export interface ItemDomain {
+  name: string
+  icon: IconProp
+  color: string
 }
 
-//------- UI -------//
-
-export interface ItemUI {
-  oid: string
-  name?: string
-  type: string
-  desc?: string
-  properties?: PropertyUI[]
+export interface ItemProp {
+  id: string
+  name: string
+  propType: PropType
+  unitType: string
+  unitDataType: PropUnitDataType
+  description: string
+  forms: PropForm[]
 }
 
-export interface PropertyUI {
-  pid: string
-  type?: string
-  name?: string
-  desc?: string
-  datatype?: string
-  dataunits?: string
+export interface PropUnitDataType {
+  name: string
+  icon: string
 }
 
-export class ItemConvert {
-  public static toItemsUI(items: Items): ItemUI[] {
-    let itemsUI: ItemUI[] = []
-    for (const item of items.results.bindings) {
-      const candidate = itemsUI.find((element) => element.oid === item.oid?.value)
-      if (candidate) {
-        const prop = ItemConvert.toPropertyUI(item)
-        if (prop) {
-          candidate.properties ??= []
-          candidate.properties.push(prop)
-        }
-      } else {
-        const itemUI = ItemConvert.toItemUI(item)
-        if (itemUI) {
-          itemsUI.push(itemUI)
-        }
-      }
-    }
-    return itemsUI
-  }
+export interface PropType {
+  name: string
+  url: string
+}
 
-  public static toItemUI(item: ItemServer): ItemUI | null {
-    if (!item.oid) return null
-    if (!item.oid.value) return null
-    const property = ItemConvert.toPropertyUI(item)
-    return {
-      oid: item.oid.value,
-      name: item.itemname?.value,
-      type: item.itemtype?.value ?? 'Device',
-      desc: item.itemdesc?.value,
-      properties: property ? [property] : undefined,
-    }
-  }
+export interface PropForm {
+  id: string
+  url: string
+  type: FormType
+}
 
-  public static toPropertyUI(item: ItemServer): PropertyUI | null {
-    if (!item.pid) return null
-    if (!item.pid.value) return null
-    return {
-      pid: item.pid.value,
-      name: item.propname?.value,
-      type: item.proptype?.value,
-      desc: item.propdesc?.value,
-      datatype: item.datatype?.value,
-      dataunits: item.dataunits?.value,
-    }
-  }
+export interface ItemEvent {
+  id: string
+  name: string
+  description: string
+  data: string
+}
+
+export interface EditMode {
+  active: boolean
+  prevRoute: string
 }

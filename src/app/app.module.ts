@@ -11,13 +11,14 @@ import { AppComponent } from './app.component'
 import { FakeBackendInterceptor } from '@core/services/fake-backend.interceptor'
 import { JwtInterceptor } from '@core/services/jwt.interceptor'
 import { PrimeNgModule } from './prime-ng/prime-ng.module'
-import { MessageService } from 'primeng/api'
+import { ConfirmationService, MessageService } from 'primeng/api'
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { SharedModule } from '@shared/shared.module'
 import { RouteReuseStrategy } from '@angular/router'
-import { CacheRouteReuseStrategy } from '@core/route-strategy/cache-route-reuse.strategy'
+import { CacheRouteReuseStrategy } from '@core/route-strategy/cache-route-reuse.strategy';
+import { EntrypointModule } from './features/entrypoint/entrypoint.module'
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { CacheRouteReuseStrategy } from '@core/route-strategy/cache-route-reuse.
     PrimeNgModule,
     FontAwesomeModule,
     SharedModule,
+    EntrypointModule,
   ],
   providers: [
     { provide: 'BASE_URL', useValue: environment.baseurl },

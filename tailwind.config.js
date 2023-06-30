@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     fontFamily: {
       primary: ['sans-serif'],
-      secondary: ['Open Sans'],
+      secondary: ['Georgia'],
     },
     borderRadius: {
       none: '0',

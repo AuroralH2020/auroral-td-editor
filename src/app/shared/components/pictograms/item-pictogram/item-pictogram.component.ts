@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { ItemUI } from '@core/models/item.model'
-import { valueBasedOnItemType } from 'src/app/utils'
+import { Item } from '@core/models/item.model'
+import { addAlpha, valueBasedOnItemType } from 'src/app/utils'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 @Component({
@@ -9,30 +9,16 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
   styleUrls: ['./item-pictogram.component.scss'],
 })
 export class ItemPictogramComponent implements OnInit {
-  @Input() item!: ItemUI
+  @Input() title!: string
+  @Input() color!: string
+  @Input() icon!: IconProp
 
-  constructor() {}
+  contentColor!: string
 
-  ngOnInit(): void {}
-
-  get pictogramColor(): string {
-    return valueBasedOnItemType(this.item, 'rgb(0, 182, 235)', 'rgb(229, 179, 142)', 'rgb(150, 150, 150)')
+  constructor() {
   }
 
-  get padding(): object {
-    return valueBasedOnItemType(this.item, { 'padding-left': '2px', 'padding-bottom': '1px' }, {}, {})
-  }
-
-  get contentColor(): string {
-    return valueBasedOnItemType(
-      this.item,
-      'rgba(0, 182, 235, 0.2)',
-      'rgba(229, 179, 142, 0.2)',
-      'rgba(150, 150, 150, 0.2)'
-    )
-  }
-
-  get itemIcon(): IconProp {
-    return valueBasedOnItemType(this.item, 'rss', 'cloud', 'circle')
+  ngOnInit(): void {
+    this.contentColor = addAlpha(this.color, 0.2)
   }
 }

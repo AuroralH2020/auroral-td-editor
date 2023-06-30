@@ -1,4 +1,4 @@
-import { ItemUI } from '@core/models/item.model'
+import { Item } from '@core/models/item.model'
 
 export type JsonType<T = any> = {
   [x: string]: T
@@ -50,8 +50,8 @@ export function inflect(num: number, zero: string, one: string, many: string) {
   }
 }
 
-export function valueBasedOnItemType(item: ItemUI, whenDevice: any, whenService: any, whenOther: any): any {
-  switch (item.type.toLowerCase()) {
+export function valueBasedOnItemType(item: Item, whenDevice: any, whenService: any, whenOther: any): any {
+  switch (item.type?.title?.toLowerCase()) {
     case 'device':
       return whenDevice
     case 'service':
@@ -59,4 +59,9 @@ export function valueBasedOnItemType(item: ItemUI, whenDevice: any, whenService:
     default:
       return whenOther
   }
+}
+
+export function addAlpha(color: string, opacity: number): string {
+  const _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255);
+  return color + _opacity.toString(16).toUpperCase();
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { ItemUI } from '@core/models/item.model'
+import { Item } from '@core/models/item.model'
 import { valueBasedOnItemType } from 'src/app/utils'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
@@ -9,7 +9,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
   styleUrls: ['./item-icon.component.scss'],
 })
 export class ItemIconComponent implements OnInit {
-  @Input() item!: ItemUI
+  @Input() item!: Item
 
   constructor() {}
 

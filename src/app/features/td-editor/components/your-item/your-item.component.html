@@ -1,0 +1,68 @@
+<div class="flex justify-start">
+  <p-timeline [value]="sections">
+    <ng-template pTemplate="marker" let-section>
+      <div class="relative">
+        <div class="w-32 mt-2">
+          <div class="text-text-300 text-sm text-start ml-11">
+            {{ section.label }}
+          </div>
+        </div>
+        <div class="absolute" style="top: 3px">
+          <div
+            class="border bg-white border-borderGrey rounded-full w-8 h-8 text-text-300 flex items-center justify-center leading-none"
+          >
+            {{ sections.indexOf(section) + 1 }}
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="content" let-section>
+      <div
+        [ngStyle]="{
+          width: summaryMode ? '600px' : '364px'
+        }"
+      >
+        <div class="mb-4 mt-1">
+          <div class="flex gap-4 justify-start">
+            <div class="grow section">
+              <div *ngIf="section.value | async; else empty">
+                <app-your-item-type *ngIf="section.key === 'type'" [type]="section.value | async"> </app-your-item-type>
+                <app-your-item-info *ngIf="section.key === 'info'" [info]="section.value | async"> </app-your-item-info>
+                <app-your-item-props
+                  *ngIf="section.key === 'props'"
+                  [props]="section.value | async"
+                  [summaryMode]="summaryMode"
+                >
+                </app-your-item-props>
+                <app-your-item-events
+                  *ngIf="section.key === 'events'"
+                  [events]="section.value | async"
+                  [summaryMode]="summaryMode"
+                >
+                </app-your-item-events>
+              </div>
+              <ng-template #empty>
+                <div class="flex items-center text-text-300 h-11">
+                  <div>
+                    Please define
+                    {{ section.label | lowercase }}
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+            <div *ngIf="!summaryMode" class="w-0.5">
+            </div>
+            <div *ngIf="summaryMode">
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-text"
+                (click)="onEdit(section)"
+                [disabled]="!(section.value | async)"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-timeline>
+</div>

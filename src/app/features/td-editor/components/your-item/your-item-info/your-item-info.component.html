@@ -1,0 +1,40 @@
+<div class="text-text-500">
+  <div *ngIf="info">
+    <div *ngIf="info.title" class="flex gap-2">
+      <div class="item-label">Title:</div>
+      <div>{{ info.title }}</div>
+    </div>
+    <div *ngIf="info.domain" class="flex gap-2 mt-4">
+      <div class="item-label">Domain:</div>
+      <div class="flex items-center">
+        <div class="w-6">
+          <fa-icon [icon]="info.domain.icon" [style]="'font-size: 1rem;' + 'color: ' + info.domain.color"></fa-icon>
+        </div>
+        <div>{{ info.domain.name }}</div>
+      </div>
+    </div>
+    <div *ngIf="info.description" class="mt-4">
+      <div class="item-label">Description:</div>
+      <div class="line-clamp-2">{{ info.description }}</div>
+    </div>
+    <div *ngIf="info.location" class="mt-4">
+      <div class="item-label">Location:</div>
+      <div class="flex items-center gap-2">
+        <i class="pi pi pi-map-marker"></i>
+        <div class="line-clamp-2">{{ info.location.display_name }}</div>
+      </div>
+    </div>
+    <div *ngIf="info.manufacturer" class="flex gap-2 mt-4">
+      <div class="item-label">Manufacturer:</div>
+      <div class="line-clamp-2">{{ info.manufacturer }}</div>
+    </div>
+    <div *ngIf="info.model" class="flex gap-2 mt-4">
+      <div class="item-label">Model:</div>
+      <div class="line-clamp-2">{{ info.model }}</div>
+    </div>
+    <div *ngIf="info.serialNumber" class="flex gap-2 mt-4">
+      <div class="item-label">Serial number:</div>
+      <div class="line-clamp-2">{{ info.serialNumber }}</div>
+    </div>
+  </div>
+</div>

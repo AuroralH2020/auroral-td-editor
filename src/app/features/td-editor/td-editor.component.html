@@ -1,0 +1,36 @@
+<div class="w-full h-full">
+  <div class="w-full h-full">
+    <div class="content-wrapper">
+      <div [ngClass]="['h-full']">
+        <div class="px-3 pt-3 h-[calc(100%-70px)] flex flex-col">
+          <div class="section">
+            <div class="flex gap-16 items-center">
+              <div class="grow ml-44">
+                <p-steps [model]="items" [readonly]="false"></p-steps>
+              </div>
+              <p-button label="Reset" icon="pi pi-replay" styleClass="p-button-outlined p-button-danger" (click)="resetApp()"></p-button>
+            </div>
+          </div>
+          <div class="section mt-3 grow">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        <!-- <div class="flex gap-6 justify-between items-center">
+          <app-eu-contrib></app-eu-contrib>
+          <div class="mb-2">
+            <app-logo size="normal"></app-logo>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog #cd [style]="{ width: '800px' }">
+  <ng-template pTemplate="header">
+    <h3 class="font-bold text-md">Reset editor</h3>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button type="button" pButton label="Do nothing" (click)="cd.reject()"></button>
+    <p-button styleClass="p-button-outlined p-button-danger" icon="pi pi-replay" label="Reset editor" (click)="cd.accept()"></p-button>
+  </ng-template>
+</p-confirmDialog>

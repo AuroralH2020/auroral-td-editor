@@ -1,9 +1,9 @@
 <app-toast>
   <div *ngIf="!loading">
     <div>
-      <app-header></app-header>
-      <div class="wrapper h-[calc(100%-58px)]">
+      <div class="w-screen h-[calc(100vh-70px)]">
         <router-outlet></router-outlet>
+        <app-footer></app-footer>
       </div>
     </div>
   </div>

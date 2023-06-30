@@ -1,0 +1,54 @@
+<div class="w-full flex flex-col items-center pt-3">
+  <div [ngClass]="['container', blockUI ? 'pointer-events-none' : '']">
+    <div>
+      <h1 class="text-md text-text-500 font-bold">Select type</h1>
+      <div class="text-text-300 pb-6" style="width: 400px">Plelase select type of the item from list below.</div>
+    </div>
+    <div>
+      <div class="cursor-text" (click)="focusSearch()">
+        <span class="p-input-icon-left mx-2">
+          <i [ngClass]="['pi pi-search']" [style.color]="focus ? 'rgb(55 149 147)' : ''"></i>
+          <input
+            #search
+            type="text"
+            class="ml-10"
+            placeholder="Search for type..."
+            [(ngModel)]="searchValue"
+            (ngModelChange)="onSearch($event)"
+            (blur)="onBlur()"
+            (focus)="onFocus()"
+            style="width: 260px"
+          />
+        </span>
+        <div
+          [ngClass]="['w-full opacity-80 mt-4', focus ? 'bg-primary-500 opacity-40' : 'bg-text-100']"
+          [style.height]="'1px'"
+        ></div>
+      </div>
+      <div class="fade-bottom">
+        <div class="h-[calc(100vh-338px)] overflow-y-auto overflow-x-hidden">
+          <div class="mt-2 pb-20 grid xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2">
+            <div *ngFor="let type of types">
+              <div
+                [ngClass]="[
+                  'px-3 py-2 cursor-pointer border-2 border-transparent pictogram ',
+                  (type$ | async)?.id === type.id ? '' : 'hover:scale-105'
+                ]"
+                [ngStyle]="{ borderColor: (type$ | async)?.id === type.id ? 'rgb(0 182 235)' : 'transparent' }"
+                (click)="onSelect(type)"
+              >
+                <div [ngClass]="[(type$ | async)?.id === type?.id ? 'scale-105' : '']">
+                  <app-item-pictogram
+                    [title]="type.title!"
+                    [icon]="type.icon!"
+                    [color]="type.color!"
+                  ></app-item-pictogram>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

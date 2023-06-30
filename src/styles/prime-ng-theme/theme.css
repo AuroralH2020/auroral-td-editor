@@ -61,7 +61,7 @@ p-table {
 }
 .p-disabled,
 .p-component:disabled {
-  opacity: 0.6;
+  opacity: 0.4;
 }
 .p-error {
   color: #e24c4c;
@@ -268,7 +268,7 @@ p-autocomplete.ng-dirty.ng-invalid > .p-autocomplete > .p-inputtext {
   border-color: #e24c4c;
 }
 .p-autocomplete-panel {
-  background: #fff;
+  background: #F6F8F9;
   color: #495057;
   border: 0 none;
   border-radius: 8px;
@@ -777,7 +777,7 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
   border: 0 none;
 }
 .p-dropdown .p-dropdown-label.p-placeholder {
-  color: #6c757d;
+  color: #a1a6b2;
 }
 .p-dropdown .p-dropdown-label:enabled:focus {
   outline: 0 none;
@@ -795,7 +795,7 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
   right: 3rem;
 }
 .p-dropdown-panel {
-  background: #fff;
+  background: #F6F8F9;
   color: #495057;
   border: 0 none;
   border-radius: 8px;
@@ -3767,7 +3767,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-timeline.p-timeline-vertical .p-timeline-event-opposite,
 .p-timeline.p-timeline-vertical .p-timeline-event-content {
-  padding: 0 1rem;
+  padding: 0 0;
 }
 .p-timeline.p-timeline-vertical .p-timeline-event-connector {
   width: 2px;

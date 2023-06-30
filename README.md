@@ -17,3 +17,8 @@ Generate core component:
 ```
 ng g component core/components/{component_name}  --module core/core.module.ts
 ```
+
+Generate service:
+```
+ng g service core/services/location/location
+```

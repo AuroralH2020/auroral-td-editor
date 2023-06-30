@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule) },
+export const routes: Routes = [
+  { path: '', redirectTo: 'intro', pathMatch: 'full' },
+  { path: 'intro', loadChildren: () => import('./features/entrypoint/entrypoint.module').then(m => m.EntrypointModule) },
+  { path: 'td-editor', loadChildren: () => import('./features/td-editor/td-editor.module').then(m => m.TdEditorModule) },
   { path: 'not-found', loadChildren: () => import('./features/not-found/not-found.module').then(m => m.NotFoundModule) },
   // { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
   { path: '**', redirectTo: 'not-found' },

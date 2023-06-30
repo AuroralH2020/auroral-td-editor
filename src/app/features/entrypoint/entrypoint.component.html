@@ -1,0 +1,55 @@
+<div class="bg-white w-full h-full flex flex-col items-center justify-center relative">
+  <div class="absolute top-0 left-20 z-10">
+    <img src="assets/images/entrypoint.png" alt="" [width]="400" />
+  </div>
+  <div class="pb-10 z-20 wrapper">
+    <div class="text-xl font-secondary text-center">Thing Description Editor</div>
+    <div class="text-center mt-2 text-text-400">
+      Use this editor to generate the TD based on AURORAL and other ontologies
+    </div>
+    <div class="text-center text-text-300 text-xs">
+      All data you provide are anonynous and will be used to improve the experience
+    </div>
+    <div class="mt-10 pr-8">
+      <div class="flex gap-2 items-center justify-center">
+        <div class="dot">1</div>
+        <div class="text">Select a type</div>
+      </div>
+      <div class="flex justify-center pl-8">
+        <div class="h-10 w-0.5 bg-borderGrey"></div>
+      </div>
+      <div class="flex gap-2 items-center justify-center">
+        <div class="dot">2</div>
+        <div class="text">Provide the information</div>
+      </div>
+      <div class="flex justify-center pl-8">
+        <div class="h-10 w-0.5 bg-borderGrey"></div>
+      </div>
+      <div class="flex gap-2 items-center justify-center">
+        <div class="dot">3</div>
+        <div class="text">Define the properties</div>
+      </div>
+      <div class="flex justify-center pl-8">
+        <div class="h-10 w-0.5 bg-borderGrey"></div>
+      </div>
+      <div class="flex gap-2 items-center justify-center">
+        <div class="dot">4</div>
+        <div class="text">Define the events</div>
+      </div>
+      <div class="flex justify-center pl-8">
+        <div class="h-10 w-0.5 bg-borderGrey"></div>
+      </div>
+      <div class="flex items-center justify-center mt-1 ml-16">
+        <div class="text " [innerHTML]="'Generate Thing Description (TD)'"></div>
+      </div>
+    </div>
+  </div>
+  <div class="z-20">
+    <p-button
+      routerLink="/td-editor"
+      label="Let's Start"
+      styleClass="p-button-secondary"
+      [style]="{ width: '180px' }"
+    ></p-button>
+  </div>
+</div>

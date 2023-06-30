@@ -1,0 +1,59 @@
+<div class="w-full">
+    <div>
+      <h1 class="text-md text-text-500 font-bold">Add Event</h1>
+      <div class="text-text-300 pb-6">Plelase provide information about the event.</div>
+    </div>
+    <div [ngClass]="['w-full opacity-80 bg-text-100']" [style.height]="'1px'"></div>
+    <form [formGroup]="form">
+      <div class="fade-bottom">
+        <div [ngClass]="['h-[calc(100vh-336px)]', 'overflow-y-auto']">
+          <div class="pb-10">
+            <div>
+              <div class="h-4"></div>
+              <div class="item-label">Name:</div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="room_temperature_switch"
+                  pInputText
+                  formControlName="name"
+                  style="width: 256px"
+                  pKeyFilter="alphanum"
+                />
+              </div>
+            </div>
+            <div class="mt-6">
+              <div class="item-label">Description:</div>
+              <div>
+                <textarea
+                  rows="5"
+                  cols="68"
+                  pInputTextarea
+                  placeholder="Turns the thermometer on and off"
+                  formControlName="description"
+                ></textarea>
+              </div>
+            </div>
+            <div class="mt-4">
+                <div class="item-label">Data:</div>
+                <div>
+                  <textarea
+                    rows="10"
+                    cols="68"
+                    pInputTextarea
+                    placeholder="Provide data..."
+                    formControlName="data"
+                  ></textarea>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="w-full flex justify-end">
+    <div class="flex items-center gap-4">
+      <p-button (click)="close()" styleClass="p-button-outlined"><div class="font-bold w-24">Close</div></p-button>
+      <p-button (click)="onConfirm()" [disabled]="disabled"><div class="font-bold w-40">{{ editMode ? 'Update' : 'Add' }}</div></p-button>
+    </div>
+  </div>  
