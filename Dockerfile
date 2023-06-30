@@ -10,14 +10,14 @@ FROM $BASE_IMAGE AS build-env
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
 USER node
-COPY --chown=node:node package*.json tsconfig.json ./
+COPY --chown=node:node ./ ./
 
 # INSTALL DEPENDENCIES
 # RUN npm ci --only=production && npm cache clean --force
 RUN npm ci && npm cache clean --force
 
 # Build the application
-RUN npm run build --  --output-path=dist --output-hashing=all
+RUN npm run final-build --  --output-path=dist --output-hashing=all
 
 
 ######  Use NgInx image  ###### 

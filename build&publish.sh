@@ -6,14 +6,14 @@ USAGE="$(basename "$0") [ -h ] [ -v version]
       -v  version [ i.e. 1.0, 2.2,... ]"
 
 # BUILD PLATFORMS 
-PLATFORMS=linux/amd64,linux/arm64,linux/arm/v7
+PLATFORMS=linux/amd64
 VERSION=0
 LATEST=0 # If 1 build image with latest tag
 
 # Default configuration
 ENV=dev
 REGISTRY=registry.bavenir.eu
-IMAGE_NAME=angular14-boilerplate
+IMAGE_NAME=td-editor
 
 # Get configuration
 while getopts 'hd:v:l' OPTION; do
