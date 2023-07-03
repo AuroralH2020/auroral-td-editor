@@ -25,8 +25,8 @@ FROM nginx:stable
 # Remove default nginx website
 RUN rm -rf /usr/share/nginx/html/*
 
-# # Copy nginx config file
-# COPY ./nginx.conf /etc/nginx/nginx.conf
+# Copy nginx config file
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # Copy dist folder fro build stage to nginx public folder
 COPY --from=build-env /app/dist /usr/share/nginx/html

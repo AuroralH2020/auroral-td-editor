@@ -14,7 +14,7 @@
             <div>
               <input
                 type="text"
-                placeholder="room_temperature_measurement"
+                placeholder="RoomTemperatureMeasurement"
                 pInputText
                 formControlName="name"
                 style="width: 256px"
@@ -52,7 +52,7 @@
                 <div class="ml-2">
                   <p-autoComplete
                     type="text"
-                    placeholder="room_temperature"
+                    placeholder="AmbientTemperature"
                     formControlName="propType"
                     [forceSelection]="true"
                     [suggestions]="propTypes"
@@ -134,6 +134,7 @@
                   pInputText
                   formControlName="unitType"
                   style="width: 256px"
+                  (input)="blockUrlUnsafe($event)"
                 />
               </div>
             </div>
@@ -206,6 +207,7 @@
                           placeholder="http://localhost:9000/my-data-in-rdf"
                           pInputText
                           style="width: 328px"
+                          (input)="blockWhitespace($event)"
                         />
                       </div>
                     </div>

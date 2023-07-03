@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
-import { ItemType, PropType } from '@core/models/item.model'
+import { ItemInfo, ItemType, PropType } from '@core/models/item.model'
 import { ItemsService } from '@core/services/item/item.service'
 import { SnackBarService } from '@core/services/snack-bar/snack-bar.service'
 import { Observable } from 'rxjs'
@@ -25,6 +25,7 @@ export class SummaryComponent {
   @ViewChild('op') op!: ConfirmDialog
 
   showTD: boolean = false
+  showMissingSections: boolean = false
   td!: object
 
   constructor(
@@ -41,9 +42,12 @@ export class SummaryComponent {
   }
 
   onGenerate() {
-    this._generateTD()
-    this.showTD = true
-    this._itemsService.updateKafka()
+    const td = this._generateTD()
+    if (td) {
+      this.td = td
+      this.showTD = true
+      this._itemsService.updateKafka()
+    }
   }
 
   onCreateNew() {
@@ -57,17 +61,17 @@ export class SummaryComponent {
     })
   }
 
-  private _generateTD() {
+  private _generateTD(): object | undefined {
     const type = this._itemsService.type
     const info = this._itemsService.info
     const props = this._itemsService.props
     const events = this._itemsService.events
 
     if (!type || !info) {
+      this.showMissingSections = true
       return
     }
-
-    this.td = {
+    return {
       '@context': ['https://www.w3.org/2019/wot/td/v1', imports],
       security: ['nosec_sc'],
       securityDefinitions: {
@@ -108,9 +112,16 @@ export class SummaryComponent {
   get type$(): Observable<ItemType | null> {
     return this._itemsService.type$
   }
+
+  get info$(): Observable<ItemInfo | null> {
+    return this._itemsService.info$
+  }
 }
 
 function _formatType(type: PropType): string {
+  if (type.name === 'Unknown') {
+    return type.name
+  }
   for (const key in imports) {
     const imp = imports[key as keyof typeof imports]
     if (type.url.startsWith(imp)) {

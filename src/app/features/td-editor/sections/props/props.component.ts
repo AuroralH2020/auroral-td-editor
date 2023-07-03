@@ -7,6 +7,7 @@ import { AddPropDialogComponent } from './add-prop-dialog/add-prop-dialog.compon
 import { Observable } from 'rxjs'
 import { ConfirmationService } from 'primeng/api'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import * as lodash from "lodash";
 
 @UntilDestroy()
 @Component({
@@ -33,7 +34,7 @@ export class PropsComponent implements OnInit {
   props: ItemProp[] = []
 
   ngOnInit(): void {
-    this.props = this._itemsService.props ?? []
+    this.props = lodash.cloneDeep(this._itemsService.props) ?? []
   }
 
   onConfirm() {

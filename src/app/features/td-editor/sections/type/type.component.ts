@@ -49,11 +49,18 @@ export class TypeComponent {
     }
   }
 
-  async onSelect(type: ItemType) {
+  async onConfirm(type: ItemType) {
     this._itemsService.updateType(type)
     this.blockUI = true
     await delay(300)
-    await this._router.navigateByUrl('/td-editor/sections/info')
+    let route = '/td-editor/sections/props'
+    let editMode = this._itemsService.editMode
+    if (editMode?.active) {
+      route = editMode.prevRoute
+      this._itemsService.updateEditMode(null)
+    }
+    this._router.navigateByUrl(route)
+    await this._router.navigateByUrl(route)
     this.blockUI = false
   }
 

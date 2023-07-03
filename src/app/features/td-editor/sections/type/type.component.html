@@ -35,7 +35,7 @@
                   (type$ | async)?.id === type.id ? '' : 'hover:scale-105'
                 ]"
                 [ngStyle]="{ borderColor: (type$ | async)?.id === type.id ? 'rgb(0 182 235)' : 'transparent' }"
-                (click)="onSelect(type)"
+                (click)="onConfirm(type)"
               >
                 <div [ngClass]="[(type$ | async)?.id === type?.id ? 'scale-105' : '']">
                   <app-item-pictogram

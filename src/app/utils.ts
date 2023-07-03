@@ -62,6 +62,24 @@ export function valueBasedOnItemType(item: Item, whenDevice: any, whenService: a
 }
 
 export function addAlpha(color: string, opacity: number): string {
-  const _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255);
-  return color + _opacity.toString(16).toUpperCase();
+  const _opacity = Math.round(Math.min(Math.max(opacity || 1, 0), 1) * 255)
+  return color + _opacity.toString(16).toUpperCase()
+}
+
+export function blockUrlUnsafeCharsFromInput(event: Event) {
+  const pattern = /^[a-zA-Z0-9_-]*$/
+  const target = event.target as HTMLTextAreaElement | undefined | null
+  const value  = target?.value
+  if (value && !pattern.test(value)) {
+    target.value = value.replace(/[^a-zA-Z0-9_-]/g, '')
+  }
+}
+
+export function blockWhitespaceCharsFromInput(event: Event) {
+  const pattern = /^[^\s]*$/
+  const target = event.target as HTMLTextAreaElement | undefined | null
+  const value  = target?.value
+  if (value && !pattern.test(value)) {
+    target.value = value.replace(/[\s]/g, '')
+  }
 }

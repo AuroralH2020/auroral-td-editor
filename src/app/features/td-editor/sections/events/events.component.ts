@@ -7,6 +7,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { Observable } from 'rxjs'
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import * as lodash from "lodash";
 
 @UntilDestroy()
 @Component({
@@ -34,7 +35,7 @@ export class EventsComponent {
   events: ItemEvent[] = []
 
   ngOnInit(): void {
-    this.events = this._itemsService.events ?? []
+    this.events = lodash.cloneDeep(this._itemsService.events) ?? []
   }
 
   onConfirm() {

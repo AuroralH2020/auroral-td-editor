@@ -15,10 +15,16 @@
     </div>
     <div class="flex gap-4">
       <p-button label="Generate TD" (click)="onGenerate()"></p-button>
-      <p-button  icon="pi pi-replay" label="Generate New Item" styleClass="p-button-text" (click)="onCreateNew()"></p-button>
+      <p-button
+        icon="pi pi-replay"
+        label="Generate New Item"
+        styleClass="p-button-text"
+        (click)="onCreateNew()"
+      ></p-button>
     </div>
   </div>
 </div>
+
 <p-dialog
   [header]="((type$ | async)?.title ?? 'Item') + '\'s Thing Desctiption'"
   [(visible)]="showTD"
@@ -42,12 +48,61 @@
     </div>
   </ng-template>
 </p-dialog>
+
+<p-dialog
+  [(visible)]="showMissingSections"
+  [modal]="true"
+  [style]="{ width: '600px' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <ng-template pTemplate="header">
+    <div class="flex flex-col gap-4 text-md">
+      <div class="text-text-300"><app-sad-face></app-sad-face></div>
+      <div class=" font-bold">Some information is missing</div>
+    </div>
+  </ng-template>
+  <div>
+    <div class="text-text-300 pb-6" style="width: 400px">
+      The following information is missing to successfully generate the minimum Thing Description:
+    </div>
+    <div class="flex flex-col gap-4">
+      <div *ngIf="!(type$ | async)" class="flex gap-2 items-center">
+        <div
+          class="border bg-white border-borderGrey rounded-full w-8 h-8 text-text-300 flex items-center justify-center leading-none"
+        >
+          1
+        </div>
+        <div>Type</div>
+      </div>
+      <div *ngIf="!(info$ | async)" class="flex gap-2 items-center">
+        <div
+          class="border bg-white border-borderGrey rounded-full w-8 h-8 text-text-300 flex items-center justify-center leading-none"
+        >
+          2
+        </div>
+        <div>Info</div>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex gap-2 justify-end">
+      <p-button label="Close" (click)="showMissingSections = false" styleClass="p-button-outlined"></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
 <p-confirmDialog #cd [style]="{ width: '800px' }">
   <ng-template pTemplate="header">
     <h3 class="font-bold text-md">Generate new item</h3>
   </ng-template>
   <ng-template pTemplate="footer">
-    <button type="button" pButton label="Do nothing" (click)="cd.reject()"></button>
-    <p-button styleClass="p-button-outlined" icon="pi pi-replay" label="Generate new item" (click)="cd.accept()"></p-button>
+    <button type="button" pButton label="Stay here" (click)="cd.reject()"></button>
+    <p-button
+      styleClass="p-button-outlined"
+      icon="pi pi-replay"
+      label="Generate new item"
+      (click)="cd.accept()"
+    ></p-button>
   </ng-template>
 </p-confirmDialog>

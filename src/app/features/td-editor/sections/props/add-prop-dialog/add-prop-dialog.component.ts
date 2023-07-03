@@ -7,6 +7,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { KeyFilter } from 'primeng/keyfilter'
 import { OverlayPanel } from 'primeng/overlaypanel'
 import { ontologies, unitDataTypes } from 'src/app/data'
+import { blockUrlUnsafeCharsFromInput, blockWhitespaceCharsFromInput } from 'src/app/utils'
 import * as uuid from 'uuid'
 
 @UntilDestroy()
@@ -16,7 +17,6 @@ import * as uuid from 'uuid'
   styleUrls: ['./add-prop-dialog.component.scss'],
 })
 export class AddPropDialogComponent implements OnInit {
-
   @ViewChild('op') op!: OverlayPanel
   @ViewChild('op1') op1!: OverlayPanel
 
@@ -88,7 +88,6 @@ export class AddPropDialogComponent implements OnInit {
     })
     this.description = new FormControl(prop?.description ?? '', {
       updateOn: 'change',
-      validators: [Validators.required],
     })
     this.forms = new FormControl<PropForm[]>(prop?.forms ?? [], {
       updateOn: 'change',
@@ -126,7 +125,7 @@ export class AddPropDialogComponent implements OnInit {
         unitType: this.unitType.value,
         unitDataType: this.unitDataType.value,
         description: this.description.value,
-        forms: this.forms.value
+        forms: this.forms.value,
       })
     }
   }
@@ -165,7 +164,7 @@ export class AddPropDialogComponent implements OnInit {
       const newForm: PropForm = {
         id: uuid.v4(),
         url,
-        type
+        type,
       }
       forms.push(newForm)
       this.forms.setValue(forms)
@@ -182,16 +181,22 @@ export class AddPropDialogComponent implements OnInit {
   }
 
   private _loadOntologies() {
+    const propTypes = []
     for (const ontology of ontologies) {
       const name = ontology.split('#').at(-1)
       if (name) {
-        this.allPropTypes.push({
+        propTypes.push({
           name,
           url: ontology,
         })
       }
     }
-    this.propTypes = this.allPropTypes
+    propTypes.unshift({
+      name: 'Unknown',
+      url: 'Select this if you want to edit the type later',
+    })
+    this.allPropTypes = propTypes
+    this.propTypes = propTypes
   }
 
   private _onChanges(): void {
@@ -207,5 +212,13 @@ export class AddPropDialogComponent implements OnInit {
 
   get unitDataTypes(): PropUnitDataType[] {
     return unitDataTypes
+  }
+
+  blockWhitespace(event: Event) {
+    blockWhitespaceCharsFromInput(event)
+  }
+
+  blockUrlUnsafe(event: Event) {
+    blockUrlUnsafeCharsFromInput(event)
   }
 }

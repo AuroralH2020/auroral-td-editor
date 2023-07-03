@@ -4,12 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "ng-new-app": {
-      "i18n": {
-        "sourceLocale": {
-          "code": "en",
-          "baseHref": "/en/"
-        }
-      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -26,7 +20,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": ["en"],
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -58,12 +54,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "3mb",
-                  "maximumError": "3mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "3mb",
-                  "maximumError": "3mb"
+                  "maximumError": "5mb"
                 }
               ],
               "fileReplacements": [

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { EditMode, ItemDomain, ItemInfo, ItemLocation, ItemType } from '@core/models/item.model'
@@ -7,8 +7,9 @@ import { LocationService } from '@core/services/location/location.service'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete'
 import { CheckboxChangeEvent } from 'primeng/checkbox'
-import { Observable, Subscription } from 'rxjs'
+import { Observable } from 'rxjs'
 import { itemDomains } from 'src/app/data'
+import { blockUrlUnsafeCharsFromInput } from 'src/app/utils'
 
 @UntilDestroy()
 @Component({
@@ -17,10 +18,11 @@ import { itemDomains } from 'src/app/data'
   styleUrls: ['./info.component.scss'],
 })
 export class InfoComponent implements OnInit {
+  blockSpace: RegExp = /[^s]/
 
   @Input() editMode: boolean = false
   @Input() prevRoute: string = ''
-  
+
   disabled: boolean = true
 
   locations: any[] = []
@@ -182,6 +184,10 @@ export class InfoComponent implements OnInit {
     } else {
       this.location.enable()
     }
+  }
+
+  blockUrlUnsafe(event: Event) {
+    blockUrlUnsafeCharsFromInput(event)
   }
 
   get type$(): Observable<ItemType | null> {
