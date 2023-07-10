@@ -34,7 +34,7 @@ export class EditTdComponent implements AfterViewInit {
       aceEditor.session.setValue(this.td)
       // aceEditor.setTheme('ace/theme/kuroir')
       aceEditor.container.style.borderRadius = '8px'
-      aceEditor.setOption("printMargin", 99)
+      aceEditor.setOption("printMargin", 100)
       aceEditor.session.setMode('ace/mode/json')
       aceEditor.on("change", () => {
         this.td = aceEditor.getValue()
