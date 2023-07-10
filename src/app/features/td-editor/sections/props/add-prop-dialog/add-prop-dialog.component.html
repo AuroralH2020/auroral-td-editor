@@ -36,9 +36,20 @@
                   field="name"
                   [dropdown]="true"
                 >
-                  <ng-template let-prop pTemplate="item">
-                    <div>{{ prop.name }}</div>
-                    <div class="text-text-300 font-sm">{{ prop.url }}</div>
+                  <ng-template let-type pTemplate="item">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <div>{{ type.name }}</div>
+                        <div class="text-text-300 font-sm">{{ type.url }}</div>
+                      </div>
+                      <div>
+                        <p-button
+                          (click)="openUrl($event, type.url)"
+                          icon="pi pi-external-link"
+                          styleClass="p-button-sm p-button-rounded p-button-text"
+                        ></p-button>
+                      </div>
+                    </div>
                   </ng-template>
                 </p-autoComplete>
               </div>
@@ -125,20 +136,7 @@
               <div class="text-text-300 pb-4">Please provide information about the data returned by the property.</div>
             </div>
             <div>
-              <div class="item-label">Unit type:</div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="degree_Celsius"
-                  pInputText
-                  formControlName="unitType"
-                  style="width: 256px"
-                  (input)="blockUrlUnsafe($event)"
-                />
-              </div>
-            </div>
-            <div class="mt-6">
-              <div class="item-label">Unit data type:</div>
+              <div class="item-label">Data type:</div>
               <div>
                 <p-dropdown
                   [options]="unitDataTypes"
@@ -164,6 +162,38 @@
                     </div>
                   </ng-template>
                 </p-dropdown>
+              </div>
+            </div>
+            <div class="mt-6">
+              <div class="item-label">Unit type:</div>
+              <div>
+                <p-autoComplete
+                  type="text"
+                  placeholder="degree_Celsius"
+                  formControlName="unitType"
+                  [forceSelection]="true"
+                  [suggestions]="propUnitTypes"
+                  (completeMethod)="searchPropertiesUnitTypes($event)"
+                  [inputStyle]="{ width: '256px' }"
+                  field="name"
+                  [dropdown]="true"
+                >
+                  <ng-template let-type pTemplate="item">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <div>{{ type.name }}</div>
+                        <div class="text-text-300 font-sm">{{ type.url }}</div>
+                      </div>
+                      <div>
+                        <p-button
+                          (click)="openUrl($event, type.url)"
+                          icon="pi pi-external-link"
+                          styleClass="p-button-sm p-button-rounded p-button-text"
+                        ></p-button>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-autoComplete>
               </div>
             </div>
           </div>
@@ -310,7 +340,7 @@
                     <td colspan="3">
                       <div class="flex gap-4 items-center text-text-300">
                         <app-sad-face></app-sad-face>
-                        <div>You don't any forms defined yet.</div>
+                        <div>You don't have any forms defined.</div>
                       </div>
                     </td>
                   </tr>

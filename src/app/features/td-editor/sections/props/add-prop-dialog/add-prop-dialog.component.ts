@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
-import { ItemProp, PropForm, PropType, PropUnitDataType } from '@core/models/item.model'
+import { ItemProp, PropForm, PropType, PropUnitDataType, PropUnitType } from '@core/models/item.model'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete'
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog'
-import { KeyFilter } from 'primeng/keyfilter'
 import { OverlayPanel } from 'primeng/overlaypanel'
-import { ontologies, unitDataTypes } from 'src/app/data'
+import { apdaptersOntologyTypes, omOntologyTypes, unitDataTypes } from 'src/app/data'
 import { blockUrlUnsafeCharsFromInput, blockWhitespaceCharsFromInput } from 'src/app/utils'
 import * as uuid from 'uuid'
 
@@ -61,6 +60,9 @@ export class AddPropDialogComponent implements OnInit {
   allPropTypes: PropType[] = []
   propTypes: PropType[] = []
 
+  allPropUnitTypes: PropUnitType[] = []
+  propUnitTypes: PropUnitType[] = []
+
   constructor(private _ref: DynamicDialogRef, private _config: DynamicDialogConfig) {
     const prop: ItemProp | null | undefined = _config.data?.prop
     if (prop) {
@@ -78,7 +80,7 @@ export class AddPropDialogComponent implements OnInit {
       updateOn: 'change',
       validators: [Validators.required],
     })
-    this.unitType = new FormControl(prop?.unitType ?? '', {
+    this.unitType = new FormControl<PropUnitType | null>(prop?.unitType ?? null, {
       updateOn: 'change',
       validators: [Validators.required],
     })
@@ -91,7 +93,6 @@ export class AddPropDialogComponent implements OnInit {
     })
     this.forms = new FormControl<PropForm[]>(prop?.forms ?? [], {
       updateOn: 'change',
-      validators: [Validators.required],
     })
     this.form = new FormGroup({
       name: this.name,
@@ -140,6 +141,12 @@ export class AddPropDialogComponent implements OnInit {
     )
   }
 
+  searchPropertiesUnitTypes(event: AutoCompleteCompleteEvent) {
+    this.propUnitTypes = this.allPropUnitTypes.filter((element) =>
+      element.name.toLowerCase().includes(event.query.toLowerCase())
+    )
+  }
+
   addCustomType() {
     if (this.customTypeForm.valid) {
       const name = this.customTypeName.value
@@ -182,7 +189,7 @@ export class AddPropDialogComponent implements OnInit {
 
   private _loadOntologies() {
     const propTypes = []
-    for (const ontology of ontologies) {
+    for (const ontology of apdaptersOntologyTypes) {
       const name = ontology.split('#').at(-1)
       if (name) {
         propTypes.push({
@@ -197,6 +204,19 @@ export class AddPropDialogComponent implements OnInit {
     })
     this.allPropTypes = propTypes
     this.propTypes = propTypes
+
+    const propUnitTypes = []
+    for (const ontology of omOntologyTypes) {
+      const name = ontology.split('/').at(-1)
+      if (name) {
+        propUnitTypes.push({
+          name,
+          url: ontology,
+        })
+      }
+    }
+    this.allPropUnitTypes = propUnitTypes
+    this.propUnitTypes = propUnitTypes
   }
 
   private _onChanges(): void {
@@ -220,5 +240,10 @@ export class AddPropDialogComponent implements OnInit {
 
   blockUrlUnsafe(event: Event) {
     blockUrlUnsafeCharsFromInput(event)
+  }
+
+  openUrl(event: Event, url: string) {
+    event.stopPropagation();
+    window.open(url, "_blank");
   }
 }

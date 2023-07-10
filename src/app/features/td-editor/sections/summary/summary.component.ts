@@ -1,51 +1,45 @@
 import { Component, ViewChild } from '@angular/core'
-import { Router } from '@angular/router'
-import { ItemInfo, ItemType, PropType } from '@core/models/item.model'
+import { ItemInfo, ItemType, PropType, PropUnitType } from '@core/models/item.model'
 import { ItemsService } from '@core/services/item/item.service'
-import { SnackBarService } from '@core/services/snack-bar/snack-bar.service'
 import { Observable } from 'rxjs'
-import { Clipboard } from '@angular/cdk/clipboard'
 import { ConfirmDialog } from 'primeng/confirmdialog'
-import { ConfirmEventType, ConfirmationService } from 'primeng/api'
-import { routes } from 'src/app/app-routing.module'
+import { ConfirmationService } from 'primeng/api'
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
+import { EditTdComponent } from './edit-td/edit-td.component'
 
 const imports = {
   adp: 'https://auroral.iot.linkeddata.es/def/adapters#',
   om: 'http://www.ontology-of-units-of-measure.org/resource/om-2/',
   geo: 'http://www.w3.org/2003/01/geo/wgs84_pos#',
+  schema: 'https://schema.org/',
 }
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss'],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, DialogService],
 })
 export class SummaryComponent {
   @ViewChild('op') op!: ConfirmDialog
 
-  showTD: boolean = false
+  ref: DynamicDialogRef | undefined
+
   showMissingSections: boolean = false
-  td!: object
 
   constructor(
     private _itemsService: ItemsService,
-    private _router: Router,
-    private _snackbar: SnackBarService,
-    private _clipboard: Clipboard,
-    private _confirmationService: ConfirmationService
+    private _confirmationService: ConfirmationService,
+    private _dialogService: DialogService
   ) {}
-
-  async onCopy() {
-    this._clipboard.copy(JSON.stringify(this.td, null, 2))
-    this._snackbar.showMessage('TD copied to clipboard')
-  }
 
   onGenerate() {
     const td = this._generateTD()
     if (td) {
-      this.td = td
-      this.showTD = true
+      this.ref = this._dialogService.open(EditTdComponent, {
+        header: (this._itemsService.type?.title ?? 'Item') + "'s Thing Desctiption",
+        data: { td },
+      })
       this._itemsService.updateKafka()
     }
   }
@@ -79,14 +73,32 @@ export class SummaryComponent {
           scheme: 'nosec',
         },
       },
-      'geo:location': {
-        'geo:lat': info?.location?.lat,
-        'geo:long': info?.location?.lon,
-      },
+      ...(info?.location && {
+        'geo:location': {
+          'geo:lat': info.location.lat,
+          'geo:long': info.location.lon,
+        },
+      }),
       title: info?.title,
       adapterId: encodeURIComponent(info?.title ?? ''),
       '@type': `adp:${type?.title}`,
+      ...(info?.domain && {
+        domain: info.domain.name,
+      }),
       description: info?.description,
+      ...(info?.serialNumber && {
+        'schema:serialNumber': info.serialNumber,
+      }),
+      ...(info?.model && {
+        'schema:ProductModel': info.model,
+      }),
+      ...(info?.manufacturer && {
+        'schema:manufacturer': {
+          ...(info?.manufacturer && {
+            name: info.manufacturer,
+          }),
+        },
+      }),
       properties: Object.fromEntries(
         (props ?? []).map((prop) => [
           encodeURIComponent(prop.name),
@@ -94,7 +106,7 @@ export class SummaryComponent {
             title: prop.name,
             description: prop.description,
             '@type': _formatType(prop.propType),
-            unit: prop.unitType,
+            unit: _formatType(prop.unitType),
             readOnly: true,
             type: prop.unitDataType.name,
             forms: prop.forms.map((form) => {
@@ -103,6 +115,16 @@ export class SummaryComponent {
                 href: form.url,
               }
             }),
+          },
+        ])
+      ),
+      events: Object.fromEntries(
+        (events ?? []).map((event) => [
+          encodeURIComponent(event.name),
+          {
+            title: event.name,
+            description: event.description,
+            data: event.data,
           },
         ])
       ),
@@ -118,7 +140,7 @@ export class SummaryComponent {
   }
 }
 
-function _formatType(type: PropType): string {
+function _formatType(type: PropType | PropUnitType): string {
   if (type.name === 'Unknown') {
     return type.name
   }

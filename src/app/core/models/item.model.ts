@@ -42,10 +42,15 @@ export interface ItemProp {
   id: string
   name: string
   propType: PropType
-  unitType: string
+  unitType: PropUnitType
   unitDataType: PropUnitDataType
   description: string
   forms: PropForm[]
+}
+
+export interface PropUnitType {
+  name: string
+  url: string
 }
 
 export interface PropUnitDataType {

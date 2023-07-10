@@ -53,7 +53,7 @@ export class TypeComponent {
     this._itemsService.updateType(type)
     this.blockUI = true
     await delay(300)
-    let route = '/td-editor/sections/props'
+    let route = '/td-editor/sections/info'
     let editMode = this._itemsService.editMode
     if (editMode?.active) {
       route = editMode.prevRoute

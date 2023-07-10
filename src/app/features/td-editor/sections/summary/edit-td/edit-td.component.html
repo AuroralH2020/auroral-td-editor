@@ -1,0 +1,12 @@
+<div>
+  <div #editor style="width: 900px; height: calc(100vh - 264px)"></div>
+</div>
+<div class="flex gap-2 justify-end mt-6">
+  <p-button label="Close" (click)="close()" styleClass="p-button-outlined"></p-button>
+  <p-button (click)="onCopy()">
+    <div class="flex items-center justify-center gap-2">
+      <fa-icon icon="copy"></fa-icon>
+      <div class="font-bold">Copy TD</div>
+    </div>
+  </p-button>
+</div>

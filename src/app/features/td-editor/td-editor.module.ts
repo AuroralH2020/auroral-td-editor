@@ -20,6 +20,7 @@ import { YourItemTypeComponent } from './components/your-item/your-item-type/you
 import { YourItemInfoComponent } from './components/your-item/your-item-info/your-item-info.component';
 import { YourItemPropsComponent } from './components/your-item/your-item-props/your-item-props.component';
 import { YourItemEventsComponent } from './components/your-item/your-item-events/your-item-events.component';
+import { EditTdComponent } from './sections/summary/edit-td/edit-td.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { YourItemEventsComponent } from './components/your-item/your-item-events
     YourItemInfoComponent,
     YourItemPropsComponent,
     YourItemEventsComponent,
+    EditTdComponent,
   ],
   imports: [
     CommonModule,

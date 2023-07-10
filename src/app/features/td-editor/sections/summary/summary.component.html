@@ -26,30 +26,6 @@
 </div>
 
 <p-dialog
-  [header]="((type$ | async)?.title ?? 'Item') + '\'s Thing Desctiption'"
-  [(visible)]="showTD"
-  [modal]="true"
-  [style]="{ width: '900px' }"
-  [draggable]="false"
-  [resizable]="false"
->
-  <div>
-    <pre>{{ td | json }}</pre>
-  </div>
-  <ng-template pTemplate="footer">
-    <div class="flex gap-2 justify-end">
-      <p-button label="Close" (click)="showTD = false" styleClass="p-button-outlined"></p-button>
-      <p-button (click)="onCopy()">
-        <div class="flex items-center justify-center gap-2">
-          <fa-icon icon="copy"></fa-icon>
-          <div class="font-bold">Copy TD</div>
-        </div>
-      </p-button>
-    </div>
-  </ng-template>
-</p-dialog>
-
-<p-dialog
   [(visible)]="showMissingSections"
   [modal]="true"
   [style]="{ width: '600px' }"

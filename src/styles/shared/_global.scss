@@ -207,7 +207,6 @@ button, [type='button'], [type='reset'], [type='submit'] {
 
 // Arrow -->
 
-
 .fade-bottom::after {
   content: '';
   display: inline-block;
@@ -218,4 +217,8 @@ button, [type='button'], [type='reset'], [type='submit'] {
   left: 0;
   background: linear-gradient(to top, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
+}
+
+.ace_tooltip {
+  transform: translate(-480px, -80px);
 }
