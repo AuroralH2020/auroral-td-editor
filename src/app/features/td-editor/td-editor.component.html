@@ -4,11 +4,12 @@
       <div [ngClass]="['h-full']">
         <div class="px-3 pt-3 h-[calc(100%-70px)] flex flex-col">
           <div class="section">
-            <div class="flex gap-16 items-center">
-              <div class="grow ml-44">
+            <div class="flex gap-8 items-center">
+              <div class="grow ml-8">
                 <p-steps [model]="items" [readonly]="false"></p-steps>
               </div>
-              <p-button label="Reset" icon="pi pi-replay" styleClass="p-button-outlined p-button-danger" (click)="resetApp()"></p-button>
+              <p-button *ngIf="!nodeUI" label="Reset" icon="pi pi-replay" styleClass="p-button-outlined p-button-danger" (click)="resetApp()"></p-button>
+              <p-button *ngIf="nodeUI" label="Close" icon="pi pi-times" styleClass="p-button-outlined p-button-danger" (click)="resetApp()"></p-button>
             </div>
           </div>
           <div class="section mt-3 grow">
@@ -25,12 +26,14 @@
     </div>
   </div>
 </div>
-<p-confirmDialog #cd [style]="{ width: '800px' }">
+<p-confirmDialog #cd [style]="{ width: '600px' }">
   <ng-template pTemplate="header">
-    <h3 class="font-bold text-md">Reset editor</h3>
+    <h3 *ngIf="!nodeUI" class="font-bold text-md">Reset editor</h3>
+    <h3 *ngIf="nodeUI" class="font-bold text-md">Close editor</h3>
   </ng-template>
   <ng-template pTemplate="footer">
-    <button type="button" pButton label="Do nothing" (click)="cd.reject()"></button>
-    <p-button styleClass="p-button-outlined p-button-danger" icon="pi pi-replay" label="Reset editor" (click)="cd.accept()"></p-button>
+    <p-button label="Do nothing" (click)="cd.reject()"></p-button>
+    <p-button *ngIf="!nodeUI" styleClass="p-button-text p-button-danger" icon="pi pi-replay" label="Reset editor" (click)="cd.accept()"></p-button>
+    <p-button *ngIf="nodeUI" styleClass="p-button-text p-button-danger" icon="pi pi-times" label="Close editor" (click)="cd.accept()"></p-button>
   </ng-template>
 </p-confirmDialog>

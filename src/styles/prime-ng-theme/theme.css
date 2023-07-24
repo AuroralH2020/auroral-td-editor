@@ -4463,6 +4463,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-confirm-popup .p-confirm-popup-icon {
   font-size: 1.5rem;
+  color: #f2900a;
 }
 .p-confirm-popup .p-confirm-popup-message {
   margin-left: 1rem;
@@ -4531,6 +4532,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
   font-size: 2rem;
+  color: #f2900a;
 }
 .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
   margin-left: 1rem;

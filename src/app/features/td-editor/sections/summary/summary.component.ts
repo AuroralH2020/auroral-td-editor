@@ -6,6 +6,8 @@ import { ConfirmDialog } from 'primeng/confirmdialog'
 import { ConfirmationService } from 'primeng/api'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { EditTdComponent } from './edit-td/edit-td.component'
+import { AdminService } from '@core/services/admin/admin.service'
+import { nodeUImode } from 'src/app/app.module'
 
 const imports = {
   adp: 'https://auroral.iot.linkeddata.es/def/adapters#',
@@ -30,16 +32,27 @@ export class SummaryComponent {
   constructor(
     private _itemsService: ItemsService,
     private _confirmationService: ConfirmationService,
-    private _dialogService: DialogService
+    private _dialogService: DialogService,
+    private _admin: AdminService
   ) {}
 
   onGenerate() {
     const td = this._generateTD()
     if (td) {
-      this.ref = this._dialogService.open(EditTdComponent, {
-        header: (this._itemsService.type?.title ?? 'Item') + "'s Thing Desctiption",
-        data: { td },
-      })
+      if (nodeUImode) {
+        parent.postMessage(
+          {
+            name: this._itemsService.type?.title ?? 'Item',
+            td: td,
+          },
+          '*'
+        )
+      } else {
+        this.ref = this._dialogService.open(EditTdComponent, {
+          header: (this._itemsService.type?.title ?? 'Item') + "'s Thing Desctiption",
+          data: { td },
+        })
+      }
       this._itemsService.updateKafka()
     }
   }
@@ -137,6 +150,10 @@ export class SummaryComponent {
 
   get info$(): Observable<ItemInfo | null> {
     return this._itemsService.info$
+  }
+
+  get nodeUI() {
+    return nodeUImode
   }
 }
 

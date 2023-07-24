@@ -16,6 +16,7 @@
     <div class="flex gap-4">
       <p-button label="Generate TD" (click)="onGenerate()"></p-button>
       <p-button
+        *ngIf="!nodeUI"
         icon="pi pi-replay"
         label="Generate New Item"
         styleClass="p-button-text"
@@ -35,7 +36,7 @@
   <ng-template pTemplate="header">
     <div class="flex flex-col gap-4 text-md">
       <div class="text-text-300"><app-sad-face></app-sad-face></div>
-      <div class=" font-bold">Some information is missing</div>
+      <div class="font-bold">Some information is missing</div>
     </div>
   </ng-template>
   <div>
@@ -68,14 +69,14 @@
   </ng-template>
 </p-dialog>
 
-<p-confirmDialog #cd [style]="{ width: '800px' }">
+<p-confirmDialog #cd [style]="{ width: '600px' }">
   <ng-template pTemplate="header">
     <h3 class="font-bold text-md">Generate new item</h3>
   </ng-template>
   <ng-template pTemplate="footer">
     <button type="button" pButton label="Stay here" (click)="cd.reject()"></button>
     <p-button
-      styleClass="p-button-outlined"
+      styleClass="p-button-text"
       icon="pi pi-replay"
       label="Generate new item"
       (click)="cd.accept()"

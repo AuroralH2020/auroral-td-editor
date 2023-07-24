@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ItemsService } from '@core/services/item/item.service'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,10 @@ import { ItemsService } from '@core/services/item/item.service'
 export class AppComponent implements OnInit {
   loading: boolean = false
 
-  constructor(private _itemsService: ItemsService) {
+  constructor() {
     return
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

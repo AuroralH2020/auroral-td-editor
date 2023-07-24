@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
-import { NgModule } from '@angular/core'
+import { APP_INITIALIZER, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { CoreModule } from '@core/core.module'
@@ -17,8 +17,19 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { SharedModule } from '@shared/shared.module'
 import { RouteReuseStrategy } from '@angular/router'
-import { CacheRouteReuseStrategy } from '@core/route-strategy/cache-route-reuse.strategy';
+import { CacheRouteReuseStrategy } from '@core/route-strategy/cache-route-reuse.strategy'
 import { EntrypointModule } from './features/entrypoint/entrypoint.module'
+
+export var nodeUImode = false
+
+function initializeApp(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    nodeUImode = JSON.parse(urlParams.get('nodeUI') ?? 'false') ?? false
+    resolve()
+  })
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +45,11 @@ import { EntrypointModule } from './features/entrypoint/entrypoint.module'
     EntrypointModule,
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => initializeApp,
+      multi: true,
+    },
     { provide: 'BASE_URL', useValue: environment.baseurl },
     {
       provide: HTTP_INTERCEPTORS,
