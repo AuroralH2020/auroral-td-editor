@@ -331,27 +331,27 @@ export const itemTypes: ItemType[] = [
 export const unitDataTypes: PropUnitDataType[] = [
   {
     name: 'number',
-    icon: '123',
+    symbol: '123',
   },
   {
     name: 'integer',
-    icon: 'int',
+    symbol: 'int',
   },
   {
     name: 'boolean',
-    icon: 'bool',
+    symbol: 'bool',
   },
   {
     name: 'string',
-    icon: 'abc',
+    symbol: 'abc',
   },
   {
     name: 'object',
-    icon: '{}',
+    symbol: '{}',
   },
   {
     name: 'array',
-    icon: '[]',
+    symbol: '[]',
   },
 ]
 

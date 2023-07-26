@@ -55,7 +55,7 @@ export interface PropUnitType {
 
 export interface PropUnitDataType {
   name: string
-  icon: string
+  symbol: string
 }
 
 export interface PropType {
