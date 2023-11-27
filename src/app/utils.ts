@@ -15,6 +15,15 @@ export function stringSortListOfObjects(array: any[], key: string) {
 }
 
 export function deepEqual(object1: any, object2: any) {
+  if (object1 === object2) {
+    return true
+  }
+  if (object1 === undefined || object1 === null) {
+    return false
+  }
+  if (object2 === undefined || object2 === null) {
+    return false
+  }
   const keys1 = Object.keys(object1)
   const keys2 = Object.keys(object2)
   if (keys1.length !== keys2.length) {

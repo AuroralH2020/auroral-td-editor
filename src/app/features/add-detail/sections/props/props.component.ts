@@ -1,21 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
-import { FormControl, Validators, FormGroup } from '@angular/forms'
-import { ItemProp, PropForm, PropType, PropUnitDataType, PropUnitType } from '@core/models/item.model'
+import { Component, ViewChild } from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
+import { ItemProp, PropType, PropUnitType, PropUnitDataType, PropForm } from '@core/models/item.model'
+import { ItemsService } from '@core/services/item/item.service'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import lodash from 'lodash'
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete'
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { OverlayPanel } from 'primeng/overlaypanel'
+import { Observable } from 'rxjs'
 import { apdaptersOntologyTypes, omOntologyTypes, unitDataTypes } from 'src/app/data'
-import { blockUrlUnsafeCharsFromInput, blockWhitespaceCharsFromInput } from 'src/app/utils'
+import { blockWhitespaceCharsFromInput, blockUrlUnsafeCharsFromInput } from 'src/app/utils'
 import * as uuid from 'uuid'
 
 @UntilDestroy()
 @Component({
-  selector: 'app-add-prop-dialog',
-  templateUrl: './add-prop-dialog.component.html',
-  styleUrls: ['./add-prop-dialog.component.scss'],
+  selector: 'app-props',
+  templateUrl: './props.component.html',
+  styleUrls: ['./props.component.scss'],
 })
-export class AddPropDialogComponent implements OnInit {
+export class PropsComponent {
   @ViewChild('op') op!: OverlayPanel
   @ViewChild('op1') op1!: OverlayPanel
 
@@ -63,8 +66,14 @@ export class AddPropDialogComponent implements OnInit {
   allPropUnitTypes: PropUnitType[] = []
   propUnitTypes: PropUnitType[] = []
 
-  constructor(private _ref: DynamicDialogRef, private _config: DynamicDialogConfig) {
-    const prop: ItemProp | null | undefined = _config.data?.prop
+  constructor(private _router: Router, private _itemsService: ItemsService, private _route: ActivatedRoute) {
+    const id = this._route.snapshot.queryParams['id']
+    var prop: ItemProp | null | undefined
+    if (id) {
+      prop = this._itemsService.propsCandidates.find((element) => {
+        return element.id === id
+      })
+    }
     if (prop) {
       this.editMode = true
       this._prop = prop
@@ -119,32 +128,46 @@ export class AddPropDialogComponent implements OnInit {
 
   onConfirm() {
     if (this.form.valid) {
-      this._ref.close({
-        id: this.editMode ? this._prop!.id : uuid.v4(),
-        name: this.name.value,
-        propType: this.propType.value,
-        unitType: this.unitType.value,
-        unitDataType: this.unitDataType.value,
-        description: this.description.value,
-        forms: this.forms.value,
+      const id = this.editMode ? this._prop!.id : uuid.v4()
+
+      const props = lodash.cloneDeep(this.propsCandidates)
+
+      let candidate = props.find((element) => {
+        return element.id === id
       })
+      if (candidate) {
+        candidate.name = this.name.value
+        candidate.description = this.description.value
+        candidate.propType = this.propType.value
+        candidate.unitType = this.unitType.value
+        candidate.unitDataType = this.unitDataType.value
+        candidate.forms = this.forms.value
+      } else {
+        props.push({
+          id,
+          name: this.name.value,
+          description: this.description.value,
+          propType: this.propType.value,
+          unitType: this.unitType.value,
+          unitDataType: this.unitDataType.value,
+          forms: this.forms.value,
+        })
+      }
+      this._itemsService.updatePropsCandidates(props)
+      this._router.navigateByUrl('/td-editor/sections/props')
     }
   }
 
   close() {
-    this._ref.close()
+    this._router.navigateByUrl('/td-editor/sections/props')
   }
 
   searchPropertiesTypes(event: AutoCompleteCompleteEvent) {
-    this.propTypes = this.allPropTypes.filter((element) =>
-      element.name.toLowerCase().includes(event.query.toLowerCase())
-    )
+    this.propTypes = this.allPropTypes.filter((element) => element.name.toLowerCase().includes(event.query.toLowerCase()))
   }
 
   searchPropertiesUnitTypes(event: AutoCompleteCompleteEvent) {
-    this.propUnitTypes = this.allPropUnitTypes.filter((element) =>
-      element.name.toLowerCase().includes(event.query.toLowerCase())
-    )
+    this.propUnitTypes = this.allPropUnitTypes.filter((element) => element.name.toLowerCase().includes(event.query.toLowerCase()))
   }
 
   addCustomType() {
@@ -243,7 +266,15 @@ export class AddPropDialogComponent implements OnInit {
   }
 
   openUrl(event: Event, url: string) {
-    event.stopPropagation();
-    window.open(url, "_blank");
+    event.stopPropagation()
+    window.open(url, '_blank')
+  }
+
+  get propsCandidates$(): Observable<ItemProp[]> {
+    return this._itemsService.propsCandidates$
+  }
+
+  get propsCandidates(): ItemProp[] {
+    return this._itemsService.propsCandidates
   }
 }

@@ -8,8 +8,8 @@
               <div class="grow ml-8">
                 <p-steps [model]="items" [readonly]="false"></p-steps>
               </div>
-              <p-button *ngIf="!nodeUI" label="Reset" icon="pi pi-replay" styleClass="p-button-outlined p-button-danger" (click)="resetApp()"></p-button>
-              <p-button *ngIf="nodeUI" label="Close" icon="pi pi-times" styleClass="p-button-outlined p-button-danger" (click)="resetApp()"></p-button>
+              <p-button *ngIf="!nodeUI" label="Reset editor" styleClass="p-button-text p-button-danger" (click)="resetApp()"></p-button>
+              <p-button *ngIf="nodeUI" label="Close editor" styleClass="p-button-text p-button-danger" (click)="resetApp()"></p-button>
             </div>
           </div>
           <div class="section mt-3 grow">
@@ -32,8 +32,8 @@
     <h3 *ngIf="nodeUI" class="font-bold text-md">Close editor</h3>
   </ng-template>
   <ng-template pTemplate="footer">
-    <p-button label="Do nothing" (click)="cd.reject()"></p-button>
-    <p-button *ngIf="!nodeUI" styleClass="p-button-text p-button-danger" icon="pi pi-replay" label="Reset editor" (click)="cd.accept()"></p-button>
-    <p-button *ngIf="nodeUI" styleClass="p-button-text p-button-danger" icon="pi pi-times" label="Close editor" (click)="cd.accept()"></p-button>
+    <p-button label="Continue editing" styleClass="p-button-text" (click)="cd.reject()"></p-button>
+    <p-button *ngIf="!nodeUI" styleClass="p-button-text p-button-danger" label="Reset editor" (click)="cd.accept()"></p-button>
+    <p-button *ngIf="nodeUI" styleClass="p-button-text p-button-danger" label="Close editor" (click)="cd.accept()"></p-button>
   </ng-template>
 </p-confirmDialog>

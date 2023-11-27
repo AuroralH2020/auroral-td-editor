@@ -3,18 +3,17 @@ import { Router } from '@angular/router'
 import { EditMode, ItemEvent, ItemType } from '@core/models/item.model'
 import { ItemsService } from '@core/services/item/item.service'
 import { ConfirmationService } from 'primeng/api'
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { Observable } from 'rxjs'
-import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as lodash from "lodash";
+import { deepEqual } from 'src/app/utils'
 
 @UntilDestroy()
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss'],
-  providers: [DialogService, ConfirmationService],
+  providers: [ConfirmationService],
 })
 export class EventsComponent {
 
@@ -24,18 +23,26 @@ export class EventsComponent {
   constructor(
     private _itemsService: ItemsService,
     private _router: Router,
-    private _dialogService: DialogService,
     private _confirmationService: ConfirmationService
   ) {}
 
-  ref: DynamicDialogRef | undefined
-
   disabled: boolean = true
 
-  events: ItemEvent[] = []
-
   ngOnInit(): void {
-    this.events = lodash.cloneDeep(this._itemsService.events) ?? []
+    this._itemsService.updateEventsCandidates(lodash.cloneDeep(this._itemsService.events) ?? [])
+    this._itemsService.eventsCandidates$.pipe(untilDestroyed(this)).subscribe((value) => {
+      const e1 = this._itemsService.events
+      const e2 = this._itemsService.eventsCandidates
+      if ((e1 === undefined || e1 === null) && e2 && e2.length === 0) {
+        this.disabled = true
+        return
+      }
+      if (!deepEqual(e1, e2)) {
+        this.disabled = false
+      } else {
+        this.disabled = true
+      }
+    })
   }
 
   onConfirm() {
@@ -45,26 +52,21 @@ export class EventsComponent {
       route = editMode.prevRoute
       this._itemsService.updateEditMode(null)
     }
-    this._itemsService.updateEvents(this.events)
+    this._itemsService.updateEvents(this._itemsService.eventsCandidates)
     this.disabled = true
     this._router.navigateByUrl(route)
   }
 
   onSkip() {
-    const events = this._itemsService.events
-    if (!events) {
-      this._itemsService.updateEvents([])
-    }
     this._router.navigateByUrl('/td-editor/sections/summary')
   }
 
-  async openEventDialog(event?: ItemEvent) {
-    this.ref = this._dialogService.open(AddEventDialogComponent, {
-      height: 'calc(100vh - 80px)',
-      width: '800px',
-      data: { event },
-    })
-    this.ref.onClose.pipe(untilDestroyed(this)).subscribe((event?: ItemEvent) => this._updateEvent(event))
+  async openEventDetail(event?: ItemEvent) {
+    if (event) {
+      this._router.navigateByUrl('/add-detail/sections/events?id=' + event.id)
+    } else {
+      this._router.navigateByUrl('/add-detail/sections/events')
+    }
   }
 
   removeEvent(ev: Event, event: ItemEvent) {
@@ -73,26 +75,10 @@ export class EventsComponent {
       message: `Are you sure that you want to delete event ${event.name}?`,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.events = this.events.filter((element) => element.id !== event.id)
-        this.disabled = false
+        const events = this._itemsService.eventsCandidates.filter((element) => element.id !== event.id)
+        this._itemsService.updateEventsCandidates(events)
       },
     })
-  }
-
-  private _updateEvent(event?: ItemEvent) {
-    if (event) {
-      let candidate = this.events.find((element) => {
-        return element.id === event.id
-      })
-      if (candidate) {
-        candidate.name = event.name
-        candidate.description = event.description
-        candidate.data = event.data
-      } else {
-        this.events.push(event)
-      }
-      this.disabled = false
-    }
   }
 
   get type$(): Observable<ItemType | null> {
@@ -105,5 +91,9 @@ export class EventsComponent {
 
   get editMode$(): Observable<EditMode | null> {
     return this._itemsService.editMode$
+  }
+
+  get eventsCandidates$(): Observable<ItemEvent[]> {
+    return this._itemsService.eventsCandidates$
   }
 }

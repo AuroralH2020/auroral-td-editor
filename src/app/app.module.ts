@@ -18,7 +18,8 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { SharedModule } from '@shared/shared.module'
 import { RouteReuseStrategy } from '@angular/router'
 import { CacheRouteReuseStrategy } from '@core/route-strategy/cache-route-reuse.strategy'
-import { EntrypointModule } from './features/entrypoint/entrypoint.module'
+import { EntrypointModule } from './features/entrypoint/entrypoint.module';
+import { AddDetailModule } from './features/add-detail/add-detail.module'
 
 export var nodeUImode = false
 
@@ -43,6 +44,7 @@ function initializeApp(): Promise<void> {
     FontAwesomeModule,
     SharedModule,
     EntrypointModule,
+    AddDetailModule,
   ],
   providers: [
     {

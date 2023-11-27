@@ -3,51 +3,34 @@
     <div class="grid grid-cols-12 gap-10">
       <div class="col-span-12 md:col-span-7">
         <form [formGroup]="form">
-          <div>
+          <div class="h-fit overflow-y-auto">
             <div>
               <h1 class="text-md text-text-500 font-bold">Basic info</h1>
-              <div class="text-text-300 pb-6" style="width: 400px">
+              <div class="text-text-300 pb-6">
                 Plelase provide basic information about the
                 <span class="font-bold">{{ (type$ | async)?.title ?? 'item' }}</span
                 >.
               </div>
             </div>
             <div [ngClass]="['w-full opacity-80 bg-text-100']" [style.height]="'1px'"></div>
-            <div class="fade-bottom">
-              <div [ngClass]="['h-[calc(100vh-358px)]', 'overflow-y-auto']">
+            <div>
+              <div [ngClass]="['h-[calc(100vh-358px)]']">
                 <div class="pb-10">
                   <div>
                     <div class="h-4"></div>
                     <div class="item-label">Title:</div>
                     <div>
-                      <input
-                        type="text"
-                        placeholder="MyRoomTemperature"
-                        pInputText
-                        formControlName="title"
-                        style="width: 256px"
-                        (input)="blockUrlUnsafe($event)"
-                      />
+                      <input type="text" placeholder="MyRoomTemperature" pInputText formControlName="title" style="width: 256px" (input)="blockUrlUnsafe($event)" />
                     </div>
                   </div>
                   <div class="mt-6">
                     <div class="item-label">Domain:</div>
                     <div>
-                      <p-dropdown
-                        [options]="domains"
-                        formControlName="domain"
-                        optionLabel="name"
-                        [showClear]="false"
-                        placeholder="Select a Domain"
-                        [style]="{ width: '256px' }"
-                      >
+                      <p-dropdown [options]="domains" formControlName="domain" optionLabel="name" [showClear]="false" placeholder="Select a Domain" [style]="{ width: '256px' }">
                         <ng-template pTemplate="selectedItem">
                           <div class="flex items-center gap-2" *ngIf="domain.value">
                             <div class="w-6">
-                              <fa-icon
-                                [icon]="domain.value.icon"
-                                [style]="'font-size: 1rem;' + 'color: ' + domain.value.color"
-                              ></fa-icon>
+                              <fa-icon [icon]="domain.value.icon" [style]="'font-size: 1rem;' + 'color: ' + domain.value.color"></fa-icon>
                             </div>
                             <div>{{ domain.value.name }}</div>
                           </div>
@@ -56,10 +39,7 @@
                           <div class="flex align-items-center gap-2">
                             <div class="flex items-center gap-2">
                               <div class="w-12">
-                                <fa-icon
-                                  [icon]="domain.icon"
-                                  [style]="'font-size: 1.5rem;' + 'color: ' + domain.color"
-                                ></fa-icon>
+                                <fa-icon [icon]="domain.icon" [style]="'font-size: 1.5rem;' + 'color: ' + domain.color"></fa-icon>
                               </div>
                               <div>{{ domain.name }}</div>
                             </div>
@@ -93,13 +73,7 @@
                   <div class="mt-6">
                     <div class="item-label">Description:</div>
                     <div>
-                      <textarea
-                        rows="5"
-                        cols="60"
-                        pInputTextarea
-                        placeholder="Room temperature sensor"
-                        formControlName="description"
-                      ></textarea>
+                      <textarea rows="5" cols="60" pInputTextarea placeholder="Room temperature sensor" formControlName="description" [autoResize]="true"></textarea>
                     </div>
                   </div>
                   <div class="mt-10">
@@ -127,14 +101,8 @@
                           </ng-template>
                         </p-autoComplete>
                         <div class="flex gap-2">
-                          <p-checkbox
-                            [binary]="true"
-                            inputId="unknownLocation"
-                            (onChange)="toggleUnknownLocation($event)"
-                          ></p-checkbox>
-                          <label for="unknownLocation" class="text-text-300 font-medium mt-0.5"
-                            >I don't want to provide location</label
-                          >
+                          <p-checkbox [binary]="true" inputId="unknownLocation" (onChange)="toggleUnknownLocation($event)"></p-checkbox>
+                          <label for="unknownLocation" class="text-text-300 font-medium mt-0.5">I don't want to provide location</label>
                         </div>
                       </div>
                     </div>
@@ -143,72 +111,34 @@
                     <div>
                       <div>
                         <h2 class="text-basic text-text-500 font-bold">Technical information</h2>
-                        <div class="text-text-300 pb-4">
-                          Please provide the manufacturer and serial number of the item.
-                        </div>
+                        <div class="text-text-300 pb-4">Please provide the manufacturer and serial number of the item.</div>
                       </div>
                       <div class="item-label">Manufacturer:</div>
                       <div class="flex flex-col gap-3">
-                        <input
-                          type="text"
-                          placeholder="IoT Sensors lt."
-                          pInputText
-                          formControlName="manufacturer"
-                          style="width: 256px"
-                        />
+                        <input type="text" placeholder="IoT Sensors lt." pInputText formControlName="manufacturer" style="width: 256px" />
                         <div class="flex gap-2">
-                          <p-checkbox
-                            [binary]="true"
-                            inputId="unknownManufac"
-                            (onChange)="toggleUnknownManufac($event)"
-                          ></p-checkbox>
-                          <label for="unknownManufac" class="text-text-300 font-medium mt-0.5"
-                            >I don't know the manufacturer</label
-                          >
+                          <p-checkbox [binary]="true" inputId="unknownManufac" (onChange)="toggleUnknownManufac($event)"></p-checkbox>
+                          <label for="unknownManufac" class="text-text-300 font-medium mt-0.5">I don't know the manufacturer</label>
                         </div>
                       </div>
                     </div>
                     <div class="mt-6">
                       <div class="item-label">Model:</div>
                       <div class="flex flex-col gap-3">
-                        <input
-                          type="text"
-                          placeholder="Thermometer 2000"
-                          pInputText
-                          formControlName="model"
-                          style="width: 256px"
-                        />
+                        <input type="text" placeholder="Thermometer 2000" pInputText formControlName="model" style="width: 256px" />
                         <div class="flex gap-2">
-                          <p-checkbox
-                            [binary]="true"
-                            inputId="unknownModel"
-                            (onChange)="toggleUnknownModel($event)"
-                          ></p-checkbox>
-                          <label for="unknownModel" class="text-text-300 font-medium mt-0.5"
-                            >I don't know the model</label
-                          >
+                          <p-checkbox [binary]="true" inputId="unknownModel" (onChange)="toggleUnknownModel($event)"></p-checkbox>
+                          <label for="unknownModel" class="text-text-300 font-medium mt-0.5">I don't know the model</label>
                         </div>
                       </div>
                     </div>
                     <div class="mt-6">
                       <div class="item-label">Serial number:</div>
                       <div class="flex flex-col gap-3">
-                        <input
-                          type="text"
-                          placeholder="S.N:123456"
-                          pInputText
-                          formControlName="serialNumber"
-                          style="width: 256px"
-                        />
+                        <input type="text" placeholder="S.N:123456" pInputText formControlName="serialNumber" style="width: 256px" />
                         <div class="flex gap-2">
-                          <p-checkbox
-                            [binary]="true"
-                            inputId="unknownSN"
-                            (onChange)="toggleUnknownSN($event)"
-                          ></p-checkbox>
-                          <label for="unknownSN" class="text-text-300 font-medium mt-0.5"
-                            >I don't know the serial number</label
-                          >
+                          <p-checkbox [binary]="true" inputId="unknownSN" (onChange)="toggleUnknownSN($event)"></p-checkbox>
+                          <label for="unknownSN" class="text-text-300 font-medium mt-0.5">I don't know the serial number</label>
                         </div>
                       </div>
                     </div>
@@ -217,11 +147,9 @@
               </div>
             </div>
           </div>
-          <p-button
-            [label]="(editMode$ | async)?.active ? 'Update & Go Back' : 'Save & Continue'"
-            [disabled]="disabled"
-            (click)="onConfirm()"
-          ></p-button>
+          <div class="pt-6">
+            <p-button [label]="(editMode$ | async)?.active ? 'Update & Go Back' : 'Save & Continue'" [disabled]="disabled" (click)="onConfirm()" ></p-button>
+          </div>
         </form>
       </div>
       <div class="col-span-12 md:col-span-5">

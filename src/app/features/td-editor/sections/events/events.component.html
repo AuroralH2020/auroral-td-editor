@@ -4,7 +4,7 @@
       <div class="col-span-12 md:col-span-7">
         <div>
           <h1 class="text-md text-text-500 font-bold">Define events</h1>
-          <div class="text-text-300 pb-6" style="width: 400px">
+          <div class="text-text-300 pb-6">
             Please define the events of the <span class="font-bold">{{ (type$ | async)?.title ?? 'item' }}</span
             >.
           </div>
@@ -15,11 +15,11 @@
               label="Add event"
               icon="pi pi-plus"
               styleClass="p-button-sm"
-              (click)="openEventDialog()"
+              (click)="openEventDetail()"
             ></p-button>
           </div>
           <div class="mt-4 fade-bottom">
-            <p-table [value]="events" [scrollable]="true" scrollHeight="calc(100vh - 408px)" dataKey="id">
+            <p-table [value]="(eventsCandidates$ | async) ?? []" [scrollable]="true" scrollHeight="calc(100vh - 408px)" dataKey="id">
               <ng-template pTemplate="header">
                 <tr>
                   <th [width]="'50%'">Name</th>
@@ -44,7 +44,7 @@
                   <td [width]="'50%'">
                     <div class="flex gap-2 justify-end">
                       <p-button
-                        (click)="openEventDialog(event)"
+                        (click)="openEventDetail(event)"
                         icon="pi pi-pencil"
                         styleClass="p-button-outlined"
                       ></p-button>

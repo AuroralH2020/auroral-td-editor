@@ -14,8 +14,6 @@ import { PropsComponent } from './sections/props/props.component';
 import { EventsComponent } from './sections/events/events.component';
 import { SummaryComponent } from './sections/summary/summary.component';
 import { YourItemComponent } from './components/your-item/your-item.component';
-import { AddPropDialogComponent } from './sections/props/add-prop-dialog/add-prop-dialog.component';
-import { AddEventDialogComponent } from './sections/events/add-event-dialog/add-event-dialog.component';
 import { YourItemTypeComponent } from './components/your-item/your-item-type/your-item-type.component';
 import { YourItemInfoComponent } from './components/your-item/your-item-info/your-item-info.component';
 import { YourItemPropsComponent } from './components/your-item/your-item-props/your-item-props.component';
@@ -31,8 +29,6 @@ import { EditTdComponent } from './sections/summary/edit-td/edit-td.component';
     EventsComponent,
     SummaryComponent,
     YourItemComponent,
-    AddPropDialogComponent,
-    AddEventDialogComponent,
     YourItemTypeComponent,
     YourItemInfoComponent,
     YourItemPropsComponent,

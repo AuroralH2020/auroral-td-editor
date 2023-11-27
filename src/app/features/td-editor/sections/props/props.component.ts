@@ -2,19 +2,18 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { EditMode, ItemProp, ItemType } from '@core/models/item.model'
 import { ItemsService } from '@core/services/item/item.service'
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
-import { AddPropDialogComponent } from './add-prop-dialog/add-prop-dialog.component'
 import { Observable } from 'rxjs'
 import { ConfirmationService } from 'primeng/api'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import * as lodash from "lodash";
+import { deepEqual } from 'src/app/utils'
 
 @UntilDestroy()
 @Component({
   selector: 'app-props',
   templateUrl: './props.component.html',
   styleUrls: ['./props.component.scss'],
-  providers: [DialogService, ConfirmationService],
+  providers: [ConfirmationService],
 })
 export class PropsComponent implements OnInit {
   @Input() editMode: boolean = false
@@ -23,18 +22,26 @@ export class PropsComponent implements OnInit {
   constructor(
     private _itemsService: ItemsService,
     private _router: Router,
-    private _dialogService: DialogService,
     private _confirmationService: ConfirmationService
   ) {}
 
-  ref: DynamicDialogRef | undefined
-
   disabled: boolean = true
 
-  props: ItemProp[] = []
-
   ngOnInit(): void {
-    this.props = lodash.cloneDeep(this._itemsService.props) ?? []
+    this._itemsService.updatePropsCandidates(lodash.cloneDeep(this._itemsService.props) ?? [])
+    this._itemsService.propsCandidates$.pipe(untilDestroyed(this)).subscribe((value) => {
+      const p1 = this._itemsService.props
+      const p2 = this._itemsService.propsCandidates
+      if ((p1 === undefined || p1 === null) && p2 && p2.length === 0) {
+        this.disabled = true
+        return
+      }
+      if (!deepEqual(p1, p2)) {
+        this.disabled = false
+      } else {
+        this.disabled = true
+      }
+    })
   }
 
   onConfirm() {
@@ -44,26 +51,21 @@ export class PropsComponent implements OnInit {
       route = editMode.prevRoute
       this._itemsService.updateEditMode(null)
     }
-    this._itemsService.updateProps(this.props)
+    this._itemsService.updateProps(this._itemsService.propsCandidates)
     this.disabled = true
     this._router.navigateByUrl(route)
   }
 
   onSkip() {
-    const props = this._itemsService.props
-    if (!props) {
-      this._itemsService.updateProps([])
-    }
     this._router.navigateByUrl('/td-editor/sections/events')
   }
 
-  async openPropDialog(prop?: ItemProp) {
-    this.ref = this._dialogService.open(AddPropDialogComponent, {
-      height: 'calc(100vh - 80px)',
-      width: '800px',
-      data: { prop },
-    })
-    this.ref.onClose.pipe(untilDestroyed(this)).subscribe((prop?: ItemProp) => this._updateProp(prop))
+  async openPropDetail(prop?: ItemProp) {
+    if (prop) {
+      this._router.navigateByUrl('/add-detail/sections/props?id=' + prop.id)
+    } else {
+      this._router.navigateByUrl('/add-detail/sections/props')
+    }
   }
 
   removeProp(event: Event, prop: ItemProp) {
@@ -72,29 +74,10 @@ export class PropsComponent implements OnInit {
       message: `Are you sure that you want to delete property ${prop.name}?`,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.props = this.props.filter((element) => element.id !== prop.id)
-        this.disabled = false
+        const props = this._itemsService.propsCandidates.filter((element) => element.id !== prop.id)
+        this._itemsService.updatePropsCandidates(props)
       },
     })
-  }
-
-  private _updateProp(prop?: ItemProp) {
-    if (prop) {
-      let candidate = this.props.find((element) => {
-        return element.id === prop.id
-      })
-      if (candidate) {
-        candidate.name = prop.name
-        candidate.description = prop.description
-        candidate.propType = prop.propType
-        candidate.unitType = prop.unitType
-        candidate.unitDataType = prop.unitDataType
-        candidate.forms = prop.forms
-      } else {
-        this.props.push(prop)
-      }
-      this.disabled = false
-    }
   }
 
   get type$(): Observable<ItemType | null> {
@@ -103,6 +86,10 @@ export class PropsComponent implements OnInit {
 
   get props$(): Observable<ItemProp[] | null> {
     return this._itemsService.props$
+  }
+
+  get propsCandidates$(): Observable<ItemProp[]> {
+    return this._itemsService.propsCandidates$
   }
 
   get editMode$(): Observable<EditMode | null> {

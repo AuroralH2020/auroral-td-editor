@@ -48,7 +48,7 @@ export class TdEditorComponent implements OnInit {
     this._confirmationService.confirm({
       message: `You will ${
         this.nodeUI ? 'close' : 'reset'
-      } the editor and lost all the current progress. Are you sure that you want to proceed?`,
+      } the editor and loose all the current progress. Are you sure that you want to proceed?`,
       icon: 'pi pi-exclamation-triangle',
       accept: async () => {
         await this._itemsService.reset()

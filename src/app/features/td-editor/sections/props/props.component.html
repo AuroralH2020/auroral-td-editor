@@ -4,7 +4,7 @@
       <div class="col-span-12 md:col-span-7">
         <div>
           <h1 class="text-md text-text-500 font-bold">Define properties</h1>
-          <div class="text-text-300 pb-6" style="width: 400px">
+          <div class="text-text-300 pb-6">
             Please define the properties of the <span class="font-bold">{{ (type$ | async)?.title ?? 'item' }}</span
             >.
           </div>
@@ -15,11 +15,11 @@
               label="Add property"
               icon="pi pi-plus"
               styleClass="p-button-sm"
-              (click)="openPropDialog()"
+              (click)="openPropDetail()"
             ></p-button>
           </div>
           <div class="mt-4 fade-bottom">
-            <p-table [value]="props" [scrollable]="true" scrollHeight="calc(100vh - 408px)" dataKey="id">
+            <p-table [value]="(propsCandidates$ | async) ?? []" [scrollable]="true" scrollHeight="calc(100vh - 408px)" dataKey="id">
               <ng-template pTemplate="header">
                 <tr>
                   <th [width]="'20%'">Name</th>
@@ -50,7 +50,7 @@
                   <td [width]="'20%'">
                     <div class="flex gap-2 justify-end">
                       <p-button
-                        (click)="openPropDialog(prop)"
+                        (click)="openPropDetail(prop)"
                         icon="pi pi-pencil"
                         styleClass="p-button-outlined"
                       ></p-button>
@@ -114,7 +114,7 @@
                           </div>
                           <div class="mt-4 flex justify-end">
                             <p-button
-                              (click)="openPropDialog(prop)"
+                              (click)="openPropDetail(prop)"
                               label="Edit"
                               styleClass="p-button-outlined"
                               icon="pi pi-pencil"

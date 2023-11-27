@@ -17,6 +17,9 @@ export class ItemsService {
   private _props!: BehaviorSubject<ItemProp[] | null>
   private _events!: BehaviorSubject<ItemEvent[] | null>
 
+  private _propsCandidates!: BehaviorSubject<ItemProp[]>
+  private _eventsCandidates!: BehaviorSubject<ItemEvent[]>
+
   private _editMode!: BehaviorSubject<EditMode | null>
 
   constructor(private _http: HttpClient) {
@@ -35,6 +38,9 @@ export class ItemsService {
     this._info = new BehaviorSubject<ItemInfo | null>(JSON.parse(localStorage.getItem('info') ?? 'null'))
     this._props = new BehaviorSubject<ItemProp[] | null>(JSON.parse(localStorage.getItem('props') ?? 'null'))
     this._events = new BehaviorSubject<ItemEvent[] | null>(JSON.parse(localStorage.getItem('events') ?? 'null'))
+
+    this._propsCandidates = new BehaviorSubject<ItemProp[]>([])
+    this._eventsCandidates = new BehaviorSubject<ItemEvent[]>([])
     
     this._editMode = new BehaviorSubject<EditMode | null>(JSON.parse(localStorage.getItem('editMode') ?? 'null'))
 
@@ -76,6 +82,14 @@ export class ItemsService {
     return this._editMode.asObservable()
   }
 
+  get propsCandidates$() {
+    return this._propsCandidates.asObservable()
+  }
+
+  get eventsCandidates$() {
+    return this._eventsCandidates.asObservable()
+  }
+
   get type() {
     return this._type.value
   }
@@ -96,6 +110,14 @@ export class ItemsService {
     return this._editMode.value
   }
 
+  get propsCandidates() {
+    return this._propsCandidates.value
+  }
+
+  get eventsCandidates() {
+    return this._eventsCandidates.value
+  }
+
   updateType(type: ItemType) {
     this._type.next(type)
   }
@@ -112,6 +134,14 @@ export class ItemsService {
     this._events.next(events)
   }
 
+  updatePropsCandidates(props: ItemProp[]) {
+    this._propsCandidates.next(props)
+  }
+
+  updateEventsCandidates(events: ItemEvent[]) {
+    this._eventsCandidates.next(events)
+  }
+
   updateEditMode(editMode: EditMode | null) {
     this._editMode.next(editMode)
   }
@@ -121,6 +151,8 @@ export class ItemsService {
     this._info.complete()
     this._props.complete()
     this._events.complete()
+    this._propsCandidates.complete()
+    this._eventsCandidates.complete()
     localStorage.clear()
     await delay(500)
     this._init()

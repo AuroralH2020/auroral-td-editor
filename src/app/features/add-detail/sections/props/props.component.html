@@ -1,0 +1,318 @@
+<div class="w-full h-full flex flex-col items-center">
+  <div class="container">
+    <div class="w-full h-fit overflow-y-auto">
+      <div class="w-full h-16 flex items-center gap-2 cursor-pointer text-primary-500 font-semibold" (click)="close()">
+        <i class="pi pi-chevron-left"></i>
+        <div>Back</div>
+      </div>
+      <div class="w-full h-6"></div>
+      <div>
+        <h1 class="text-md text-text-500 font-bold">Add property</h1>
+        <div class="text-text-300 pb-6">Plelase provide information about the property.</div>
+      </div>
+      <div [ngClass]="['w-full opacity-80 bg-text-100']" [style.height]="'1px'"></div>
+      <form [formGroup]="form">
+        <div>
+          <div [ngClass]="['h-[calc(100vh-334px)]', 'pb-20']">
+            <div class="pb-10">
+              <div>
+                <div class="h-4"></div>
+                <div class="item-label">Name:</div>
+                <div>
+                  <input type="text" placeholder="RoomTemperatureMeasurement" pInputText formControlName="name" style="width: 256px" />
+                </div>
+              </div>
+              <div class="mt-6">
+                <div>
+                  <div class="item-label">Property type:</div>
+                  <div>
+                    <p-autoComplete
+                      type="text"
+                      placeholder="AmbientTemperature"
+                      formControlName="propType"
+                      [forceSelection]="true"
+                      [suggestions]="propTypes"
+                      (completeMethod)="searchPropertiesTypes($event)"
+                      [inputStyle]="{ width: '256px' }"
+                      field="name"
+                      [dropdown]="true"
+                    >
+                      <ng-template let-type pTemplate="item">
+                        <div class="flex items-center justify-between">
+                          <div>
+                            <div>{{ type.name }}</div>
+                            <div class="text-text-300 font-sm">{{ type.url }}</div>
+                          </div>
+                          <div>
+                            <p-button (click)="openUrl($event, type.url)" icon="pi pi-external-link" styleClass="p-button-sm p-button-rounded p-button-text"></p-button>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="mt-6">
+                              <div>
+                                <div class="item-label">Property type:</div>
+                                <div class="section flex gap-2 w-fit items-center">
+                                  <div class="ml-2">
+                                    <p-autoComplete
+                                      type="text"
+                                      placeholder="AmbientTemperature"
+                                      formControlName="propType"
+                                      [forceSelection]="true"
+                                      [suggestions]="propTypes"
+                                      (completeMethod)="searchPropertiesTypes($event)"
+                                      [inputStyle]="{ width: '256px' }"
+                                      field="name"
+                                      [dropdown]="true"
+                                    >
+                                      <ng-template let-prop pTemplate="item">
+                                        <div>{{ prop.name }}</div>
+                                        <div class="text-text-300 font-sm">{{ prop.url }}</div>
+                                      </ng-template>
+                                    </p-autoComplete>
+                                  </div>
+                                  <div class="bg-borderGrey w-0.5 h-12 ml-4"></div>
+                                  <div>
+                                    <p-overlayPanel #op>
+                                      <form [formGroup]="customTypeForm">
+                                        <div class="w-fit">
+                                          <div class="flex items-center gap-2">
+                                            <div class="item-label w-14 text-right">Name:</div>
+                                            <div>
+                                              <input
+                                                type="text"
+                                                formControlName="customTypeName"
+                                                placeholder="CustomTypeName"
+                                                pInputText
+                                                style="width: 256px"
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="mt-4 flex items-center gap-2">
+                                            <div class="item-label w-14 text-right">Url:</div>
+                                            <div>
+                                              <input
+                                                type="text"
+                                                formControlName="customTypeUrl"
+                                                placeholder="www.example-ontology.com#CustomTypeName"
+                                                pInputText
+                                                style="width: 328px"
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="mt-6 ml-16">
+                                            <p-button
+                                              (click)="addCustomType()"
+                                              label="Add"
+                                              icon="pi pi-plus"
+                                              styleClass="p-button-sm"
+                                            ></p-button>
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </p-overlayPanel>
+                                    <div class="mt-2 text-center">
+                                      <div class="text-text-300 text-xs pb-1 ml-1">Missing a type?</div>
+                                      <p-button
+                                        (click)="op.toggle($event)"
+                                        label="Add custom type"
+                                        icon="pi pi-plus"
+                                        styleClass="p-button-text p-button-sm"
+                                      ></p-button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div> -->
+              <div class="mt-10">
+                <div>
+                  <h2 class="text-basic text-text-500 font-bold">Data unit information</h2>
+                  <div class="text-text-300 pb-4">Please provide information about the data returned by the property.</div>
+                </div>
+                <div>
+                  <div class="item-label">Data type:</div>
+                  <div>
+                    <p-dropdown
+                      [options]="unitDataTypes"
+                      formControlName="unitDataType"
+                      optionLabel="name"
+                      [showClear]="false"
+                      placeholder="Select a Type"
+                      [style]="{ width: '256px' }"
+                    >
+                      <ng-template pTemplate="selectedItem">
+                        <div *ngIf="unitDataType.value">
+                          {{ unitDataType.value.name }}
+                        </div>
+                      </ng-template>
+                      <ng-template let-unitDataType pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                          <div class="flex items-center gap-2">
+                            <div class="w-10">
+                              <div class="text-text-300 leading-tight">{{ unitDataType.symbol }}</div>
+                            </div>
+                            <div>{{ unitDataType.name }}</div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-dropdown>
+                  </div>
+                </div>
+                <div class="mt-6">
+                  <div class="item-label">Unit type:</div>
+                  <div>
+                    <p-autoComplete
+                      type="text"
+                      placeholder="degree_Celsius"
+                      formControlName="unitType"
+                      [forceSelection]="true"
+                      [suggestions]="propUnitTypes"
+                      (completeMethod)="searchPropertiesUnitTypes($event)"
+                      [inputStyle]="{ width: '256px' }"
+                      field="name"
+                      [dropdown]="true"
+                    >
+                      <ng-template let-type pTemplate="item">
+                        <div class="flex items-center justify-between">
+                          <div>
+                            <div>{{ type.name }}</div>
+                            <div class="text-text-300 font-sm">{{ type.url }}</div>
+                          </div>
+                          <div>
+                            <p-button (click)="openUrl($event, type.url)" icon="pi pi-external-link" styleClass="p-button-sm p-button-rounded p-button-text"></p-button>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-10">
+                <div>
+                  <h2 class="text-basic text-text-500 font-bold">Description</h2>
+                  <div class="text-text-300 pb-4">Please provide description of the property.</div>
+                </div>
+                <div>
+                  <textarea
+                    rows="5"
+                    cols="77"
+                    pInputTextarea
+                    placeholder="Returns the temperature reading from the thermometer"
+                    formControlName="description"
+                    [autoResize]="true"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="mt-10">
+                <div>
+                  <h2 class="text-basic text-text-500 font-bold">Forms</h2>
+                  <div class="text-text-300 pb-4">Please provide the URLs where the data is available.</div>
+                </div>
+                <div class="pb-4">
+                  <p-button (click)="op1.toggle($event)" label="Add form" icon="pi pi-plus" styleClass="p-button-sm"></p-button>
+                  <p-overlayPanel #op1>
+                    <form [formGroup]="newFormForm">
+                      <div class="w-fit">
+                        <div class="flex items-center gap-2">
+                          <div class="item-label w-14 text-right">Url:</div>
+                          <div>
+                            <input
+                              type="text"
+                              formControlName="newFormUrl"
+                              placeholder="http://localhost:9000/my-data-in-rdf"
+                              pInputText
+                              style="width: 328px"
+                              (input)="blockWhitespace($event)"
+                            />
+                          </div>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                          <div class="item-label w-14 text-right">Type:</div>
+                          <div>
+                            <p-dropdown [options]="['readproperty', 'writeproperty']" appendTo="body" formControlName="newFormType"></p-dropdown>
+                          </div>
+                        </div>
+                        <div class="mt-6 ml-16">
+                          <p-button (click)="addNewForm()" label="Add" icon="pi pi-plus" styleClass="p-button-sm"></p-button>
+                        </div>
+                      </div>
+                    </form>
+                  </p-overlayPanel>
+                </div>
+                <div style="width: 700px">
+                  <p-table [value]="forms.value" dataKey="id" editMode="row">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th style="width: 43%">URL</th>
+                        <th style="width: 43%">Type</th>
+                        <th style="width: 14%"></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-form let-editing="editing" let-ri="rowIndex">
+                      <tr [pEditableRow]="form">
+                        <td>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <input [ngModelOptions]="{ standalone: true }" pInputText type="text" [(ngModel)]="form.url" style="width: 328px" />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              {{ form.url }}
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
+                        <td>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <p-dropdown
+                                [options]="['readproperty', 'writeproperty']"
+                                appendTo="body"
+                                [(ngModel)]="form.type"
+                                [style]="{ width: '100%' }"
+                                [ngModelOptions]="{ standalone: true }"
+                              ></p-dropdown>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              {{ form.type }}
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
+                        <td>
+                          <div class="flex items-center justify-end gap-2">
+                            <p-button *ngIf="!editing" pInitEditableRow icon="pi pi-pencil" styleClass="p-button-outlined"></p-button>
+                            <p-button *ngIf="!editing" icon="pi pi-trash" styleClass="p-button-outlined p-button-danger" (click)="removeForm(form)"></p-button>
+                            <p-button *ngIf="editing" pSaveEditableRow icon="pi pi-check" styleClass="p-button-outlined"></p-button>
+                            <p-button *ngIf="editing" pCancelEditableRow icon="pi pi-times" styleClass="p-button-outlined p-button-danger"></p-button>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="3">
+                          <div class="flex gap-4 items-center text-text-300">
+                            <app-sad-face></app-sad-face>
+                            <div>You don't have any forms defined.</div>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="w-full flex justify-start pt-6">
+      <div class="flex items-center gap-4">
+        <p-button (click)="onConfirm()" [disabled]="disabled"
+          ><div class="font-bold w-40">{{ editMode ? 'Update' : 'Add' }}</div></p-button
+        >
+      </div>
+    </div>
+  </div>
+</div>
