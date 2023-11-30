@@ -119,7 +119,9 @@ export class SummaryComponent {
             title: prop.name,
             description: prop.description,
             '@type': _formatType(prop.propType),
-            unit: _formatType(prop.unitType),
+            ...(prop.unitType && {
+              unit: _formatType(prop.unitType),
+            }),
             readOnly: true,
             type: prop.unitDataType.name,
             forms: prop.forms.map((form) => {

@@ -46,7 +46,7 @@
                   </td>
                   <td [width]="'20%'">{{ prop.propType.name }}</td>
                   <td [width]="'20%'">{{ prop.unitDataType.name }}</td>
-                  <td [width]="'20%'">{{ prop.unitType.name }}</td>
+                  <td [width]="'20%'">{{ prop.unitType?.name ?? '-' }}</td>
                   <td [width]="'20%'">
                     <div class="flex gap-2 justify-end">
                       <p-button

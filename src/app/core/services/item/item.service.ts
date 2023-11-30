@@ -171,7 +171,7 @@ export class ItemsService {
             properties: this._props.value?.map((prop) => {
               return {
                 type: prop.propType.url,
-                units: prop.unitType,
+                units: prop.unitType ?? '',
               }
             }),
           },

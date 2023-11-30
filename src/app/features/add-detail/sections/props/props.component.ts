@@ -6,6 +6,7 @@ import { ItemsService } from '@core/services/item/item.service'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import lodash from 'lodash'
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete'
+import { CheckboxChangeEvent } from 'primeng/checkbox'
 import { OverlayPanel } from 'primeng/overlaypanel'
 import { Observable } from 'rxjs'
 import { apdaptersOntologyTypes, omOntologyTypes, unitDataTypes } from 'src/app/data'
@@ -35,6 +36,7 @@ export class PropsComponent {
   protected unitDataType!: FormControl
   protected description!: FormControl
   protected forms!: FormControl
+  protected unspecifiedUnitType!: FormControl
 
   protected form!: FormGroup
 
@@ -65,6 +67,8 @@ export class PropsComponent {
 
   allPropUnitTypes: PropUnitType[] = []
   propUnitTypes: PropUnitType[] = []
+
+  // unspecifiedUnitType: boolean = false
 
   constructor(private _router: Router, private _itemsService: ItemsService, private _route: ActivatedRoute) {
     const id = this._route.snapshot.queryParams['id']
@@ -103,6 +107,12 @@ export class PropsComponent {
     this.forms = new FormControl<PropForm[]>(prop?.forms ?? [], {
       updateOn: 'change',
     })
+    this.unspecifiedUnitType = new FormControl<boolean>(this.editMode && (prop?.unitType === undefined || prop?.unitType === null), {
+      updateOn: 'change',
+    })
+    if (this.unspecifiedUnitType.value) {
+      this.unitType.disable()
+    }
     this.form = new FormGroup({
       name: this.name,
       propType: this.propType,
@@ -110,6 +120,7 @@ export class PropsComponent {
       unitDataType: this.unitDataType,
       description: this.description,
       forms: this.forms,
+      unspecifiedUnitType: this.unspecifiedUnitType,
     })
     this.customTypeForm = new FormGroup({
       customTypeName: this.customTypeName,
@@ -132,23 +143,23 @@ export class PropsComponent {
 
       const props = lodash.cloneDeep(this.propsCandidates)
 
-      let candidate = props.find((element) => {
+      let candidate = props.findIndex((element) => {
         return element.id === id
       })
-      if (candidate) {
-        candidate.name = this.name.value
-        candidate.description = this.description.value
-        candidate.propType = this.propType.value
-        candidate.unitType = this.unitType.value
-        candidate.unitDataType = this.unitDataType.value
-        candidate.forms = this.forms.value
+      if (candidate >= 0) {
+        props[candidate].name = this.name.value
+        props[candidate].description = this.description.value
+        props[candidate].propType = this.propType.value
+        props[candidate].unitType = this.unitType.disabled ? null : this.unitType.value
+        props[candidate].unitDataType = this.unitDataType.value
+        props[candidate].forms = this.forms.value
       } else {
         props.push({
           id,
           name: this.name.value,
           description: this.description.value,
           propType: this.propType.value,
-          unitType: this.unitType.value,
+          unitType: this.unitType.disabled ? null : this.unitType.value,
           unitDataType: this.unitDataType.value,
           forms: this.forms.value,
         })
@@ -268,6 +279,14 @@ export class PropsComponent {
   openUrl(event: Event, url: string) {
     event.stopPropagation()
     window.open(url, '_blank')
+  }
+
+  toggleUnspecifiedUnitType(event: CheckboxChangeEvent) {
+    if (event.checked) {
+      this.unitType.disable()
+    } else {
+      this.unitType.enable()
+    }
   }
 
   get propsCandidates$(): Observable<ItemProp[]> {

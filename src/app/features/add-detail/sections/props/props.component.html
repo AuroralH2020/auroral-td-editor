@@ -14,7 +14,7 @@
       <form [formGroup]="form">
         <div>
           <div [ngClass]="['h-[calc(100vh-334px)]', 'pb-20']">
-            <div class="pb-10">
+            <div class="pb-10 mt-2">
               <div>
                 <div class="h-4"></div>
                 <div class="item-label">Name:</div>
@@ -127,7 +127,7 @@
                                 </div>
                               </div>
                             </div> -->
-              <div class="mt-10">
+              <div class="mt-14">
                 <div>
                   <h2 class="text-basic text-text-500 font-bold">Data unit information</h2>
                   <div class="text-text-300 pb-4">Please provide information about the data returned by the property.</div>
@@ -187,10 +187,14 @@
                         </div>
                       </ng-template>
                     </p-autoComplete>
+                    <div class="flex gap-2 mt-3">
+                      <p-checkbox formControlName="unspecifiedUnitType" [binary]="true" inputId="unspecifiedUnitType" (onChange)="toggleUnspecifiedUnitType($event)"></p-checkbox>
+                      <label for="unspecifiedUnitType" class="text-text-300 font-medium mt-0.5">Unit type is not specified</label>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="mt-10">
+              <div class="mt-14">
                 <div>
                   <h2 class="text-basic text-text-500 font-bold">Description</h2>
                   <div class="text-text-300 pb-4">Please provide description of the property.</div>
@@ -206,7 +210,7 @@
                   ></textarea>
                 </div>
               </div>
-              <div class="mt-10">
+              <div class="mt-14">
                 <div>
                   <h2 class="text-basic text-text-500 font-bold">Forms</h2>
                   <div class="text-text-300 pb-4">Please provide the URLs where the data is available.</div>
