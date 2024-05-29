@@ -8,10 +8,8 @@ import { environment } from '@env'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { FakeBackendInterceptor } from '@core/services/fake-backend.interceptor'
-import { JwtInterceptor } from '@core/services/jwt.interceptor'
 import { PrimeNgModule } from './prime-ng/prime-ng.module'
-import { ConfirmationService, MessageService } from 'primeng/api'
+import { MessageService } from 'primeng/api'
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
@@ -55,17 +53,7 @@ function initializeApp(): Promise<void> {
     { provide: 'BASE_URL', useValue: environment.baseurl },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
       useClass: HTTPReqResInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: FakeBackendInterceptor,
       multi: true,
     },
     {

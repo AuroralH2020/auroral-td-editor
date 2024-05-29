@@ -6,7 +6,6 @@ import { ConfirmDialog } from 'primeng/confirmdialog'
 import { ConfirmationService } from 'primeng/api'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { EditTdComponent } from './edit-td/edit-td.component'
-import { AdminService } from '@core/services/admin/admin.service'
 import { nodeUImode } from 'src/app/app.module'
 
 const imports = {
@@ -29,12 +28,7 @@ export class SummaryComponent {
 
   showMissingSections: boolean = false
 
-  constructor(
-    private _itemsService: ItemsService,
-    private _confirmationService: ConfirmationService,
-    private _dialogService: DialogService,
-    private _admin: AdminService
-  ) {}
+  constructor(private _itemsService: ItemsService, private _confirmationService: ConfirmationService, private _dialogService: DialogService) {}
 
   onGenerate() {
     const td = this._generateTD()
@@ -53,7 +47,6 @@ export class SummaryComponent {
           data: { td },
         })
       }
-      this._itemsService.updateKafka()
     }
   }
 

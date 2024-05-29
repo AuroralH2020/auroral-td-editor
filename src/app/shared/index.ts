@@ -1,33 +1,19 @@
-import { HyperlinkComponent } from './components/misc/hyperlink/hyperlink.component'
-import { LogoComponent } from './components/misc/logo/logo.component'
-import { AvatarComponent } from './components/misc/avatar/avatar.component'
-import { SadFaceComponent } from './components/misc/sad-face/sad-face.component'
-import { CheckboxGroupComponent } from './components/inputs/checkbox-group/checkbox-group.component'
-import { ItemIconComponent } from './components/misc/item-icon/item-icon.component'
-import { SpinnerComponent } from './components/misc/spinner/spinner.component'
-import { MenuComponent } from './components/menu/menu/menu.component'
-import { MenuLabelComponent } from './components/menu/menu-label/menu-label.component'
-import { MenuContentComponent } from './components/menu/menu-content/menu-content.component'
-import { MenuItemComponent } from './components/menu/menu-item/menu-item.component'
-import { SparqlEditorComponent } from './components/inputs/sparql-editor/sparql-editor.component'
+import { HyperlinkComponent } from './components/hyperlink/hyperlink.component'
+import { LogoComponent } from './components/logo/logo.component'
+import { SadFaceComponent } from './components/sad-face/sad-face.component'
+import { ItemIconComponent } from './components/item-icon/item-icon.component'
+import { SpinnerComponent } from './components/spinner/spinner.component'
 import { PictogramComponent } from './components/pictograms/pictogram/pictogram.component'
 import { ItemPictogramComponent } from './components/pictograms/item-pictogram/item-pictogram.component'
-import { EuContribComponent } from './components/misc/eu-contrib/eu-contrib.component'
+import { EuContribComponent } from './components/eu-contrib/eu-contrib.component'
 
 export const components: any[] = [
   HyperlinkComponent,
   LogoComponent,
-  AvatarComponent,
   PictogramComponent,
   SadFaceComponent,
-  CheckboxGroupComponent,
   ItemIconComponent,
   SpinnerComponent,
-  MenuComponent,
-  MenuLabelComponent,
-  MenuContentComponent,
-  MenuItemComponent,
-  SparqlEditorComponent,
   PictogramComponent,
   ItemPictogramComponent,
   EuContribComponent,
@@ -37,19 +23,12 @@ export const directives: any[] = []
 
 export const pipes: any[] = []
 
-export * from './components/misc/spinner/spinner.component'
-export * from './components/misc/hyperlink/hyperlink.component'
-export * from './components/misc/logo/logo.component'
-export * from './components/misc/avatar/avatar.component'
+export * from './components/spinner/spinner.component'
+export * from './components/hyperlink/hyperlink.component'
+export * from './components/logo/logo.component'
 export * from './components/pictograms/pictogram/pictogram.component'
-export * from './components/misc/sad-face/sad-face.component'
-export * from './components/inputs/checkbox-group/checkbox-group.component'
-export * from './components/misc/item-icon/item-icon.component'
-export * from './components/menu/menu/menu.component'
-export * from './components/menu/menu-label/menu-label.component'
-export * from './components/menu/menu-content/menu-content.component'
-export * from './components/menu/menu-item/menu-item.component'
-export * from './components/inputs/sparql-editor/sparql-editor.component'
+export * from './components/sad-face/sad-face.component'
+export * from './components/item-icon/item-icon.component'
 export * from './components/pictograms/pictogram/pictogram.component'
 export * from './components/pictograms/item-pictogram/item-pictogram.component'
-export * from './components/misc/eu-contrib/eu-contrib.component'
+export * from './components/eu-contrib/eu-contrib.component'

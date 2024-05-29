@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { EditMode, ItemEvent, ItemInfo, ItemProp, ItemType } from '@core/models/item.model'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { BehaviorSubject, firstValueFrom, take } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { delay } from 'src/app/utils'
 import * as uuid from 'uuid'
 
@@ -156,33 +156,5 @@ export class ItemsService {
     localStorage.clear()
     await delay(500)
     this._init()
-  }
-
-  async updateKafka(): Promise<void> {
-    await firstValueFrom(
-      this._http
-        .post(
-          'https://kfk.jupiter.bavenir.eu/api/pushTds',
-          {
-            uuid: this._id,
-            type: this._type.value?.title,
-            manufacturer: this._info.value?.manufacturer,
-            serialNumber: this._info.value?.serialNumber,
-            properties: this._props.value?.map((prop) => {
-              return {
-                type: prop.propType.url,
-                units: prop.unitType ?? '',
-              }
-            }),
-          },
-          {
-            headers: {
-              accept: 'application/json',
-            },
-            responseType: 'text',
-          }
-        )
-        .pipe(take(1))
-    )
   }
 }
